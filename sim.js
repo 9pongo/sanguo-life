@@ -212,6 +212,11 @@ function checkEnding(st, r, seedNo) {
   if (!st.children.some((c) => c.alive)) for (const t of [r.text, ...(r.memories || [])]) if (KID_WORDS.test(t || '')) flagIssue(`沒有孩子在世，結局「${r.id}」或往事卻寫到自家孩子`, seedNo, String(t).slice(0, 30));
 }
 
+// 每個人：甲子年選了路線的，看他有沒有活過第一章；死去的人，記在他死的那一章、當時的勢力下
+function countPerson(p) {
+  if (p.route && p.chapter === 1 && !p._routeCounted) { p._routeCounted = true; inc(stats.routes, p.route); if (!p.alive) inc(stats.routeDead, p.route); }
+  if (!p.alive && p.chapter >= 2 && !p._deadCounted) { p._deadCounted = true; stats.fac[p.chapter] ??= { live: {}, dead: {} }; inc(stats.fac[p.chapter].dead, p.faction || 'civ'); }
+}
 for (let i = 0; i < N; i++) {
   const g = E.createGame(data, seed0 * 100003 + i);
   const firedLife = {};
@@ -223,6 +228,7 @@ for (let i = 0; i < N; i++) {
       stats.successions++; for (const id in g.state.fired) firedLife[id] = 1;
       checkEnding(g.state, g.succession, g.seed); noteFamily();
       const dead = g.state;
+      countPerson(dead);
       g.continueAsHeir(0);
       // 接班人的父母：孩子接班時，死去的那一位必須記為已過世
       const h = g.state;
@@ -232,7 +238,7 @@ for (let i = 0; i < N; i++) {
       if (h.parentName === dead.name && !h.flags[dead.gender === 'm' ? 'father_dead' : 'mother_dead']) flagIssue('接班人的父／母剛過世，卻沒有記為已過世', g.seed);
       continue;
     }
-    if (g.interlude) { const ch = g.interlude.chapter; if (ch >= 2) { stats.fac[ch] ??= { live: {}, dead: {} }; inc(stats.fac[ch].live, g.state.faction || 'civ'); } inc(stats.interludes, g.interlude.id); inc(stats.chAlive, g.interlude.chapter); if (g.interlude.chapter === 1) stats.ch1Alive++; g.continueChapter(); continue; }
+    if (g.interlude) { const ch = g.interlude.chapter; countPerson(g.state); if (ch >= 2) { stats.fac[ch] ??= { live: {}, dead: {} }; inc(stats.fac[ch].live, g.state.faction || 'civ'); } inc(stats.interludes, g.interlude.id); inc(stats.chAlive, g.interlude.chapter); if (g.interlude.chapter === 1) stats.ch1Alive++; g.continueChapter(); continue; }
     if (g.pending) {
       const p = g.pending;
       const evId = g.state.log.filter((e) => e.type === 'decision').pop().id;
@@ -271,8 +277,8 @@ for (let i = 0; i < N; i++) {
   if (!s.alive && s.age <= 4) stats.infant++;
   if (s.year >= 184 && (s.alive || s.year > 184 || s.fired.an_184_rise)) stats.reached184++;
   if (!s.alive && s.year < 184) stats.deadBefore184++;
-  if (s.route) { inc(stats.routes, s.route); if (!s.alive) inc(stats.routeDead, s.route); }
-  if (s.chapter >= 2) { stats.fac[s.chapter] ??= { live: {}, dead: {} }; inc(s.alive ? stats.fac[s.chapter].live : stats.fac[s.chapter].dead, s.faction || 'civ'); }
+  countPerson(s);
+  if (s.alive && s.chapter >= 2) { stats.fac[s.chapter] ??= { live: {}, dead: {} }; inc(stats.fac[s.chapter].live, s.faction || 'civ'); }
   inc(stats.endings, g.ended.id);
   if (!s.alive) inc(stats.causes, s.cause);
   for (const id in firedLife) inc(stats.events, id);
@@ -304,8 +310,11 @@ L.push('', '## 家族', '', '| 傳了幾代 | 家族占比 |', '|---|---|');
 for (const k of Object.keys(stats.generations).sort((a, b) => a - b)) L.push(`| ${k} 代 | ${pct(stats.generations[k])} |`);
 L.push('', '| 香火斷在第幾章 | 占比 |', '|---|---|');
 for (const k of Object.keys(stats.extinctCh).sort((a, b) => a - b)) L.push(`| 第${k}章 | ${pct(stats.extinctCh[k])} |`);
-L.push('', '## 路線（甲子年的選擇）', '', '| 路線 | 人數占比 | 該路線死亡率 |', '|---|---|---|');
-for (const r of Object.keys(stats.routes).sort((a, b) => stats.routes[b] - stats.routes[a])) L.push(`| ${r} | ${pct(stats.routes[r])} | ${pct(stats.routeDead[r] || 0, stats.routes[r])} |`);
+{
+  const tot = Object.values(stats.routes).reduce((x, y) => x + y, 0);
+  L.push('', '## 路線（甲子年的選擇）', '', '每個在甲子年選了路線的人，看他有沒有活過第一章（189）。', '', '| 路線 | 占選了路線的人 | 第一章內死亡率 |', '|---|---|---|');
+  for (const r of Object.keys(stats.routes).sort((a, b) => stats.routes[b] - stats.routes[a])) L.push(`| ${r} | ${pct(stats.routes[r], tot)} | ${pct(stats.routeDead[r] || 0, stats.routes[r])} |`);
+}
 function facRows(ch) {
   const F = stats.fac[ch] || { live: {}, dead: {} };
   const keys = [...new Set([...Object.keys(F.live), ...Object.keys(F.dead)])];
@@ -316,6 +325,9 @@ function facRows(ch) {
 for (const c of world.chapters.filter((c) => c.n >= 2)) {
   L.push('', `## 第${c.n}章勢力（以章末或死亡時的勢力計）`, '', '| 勢力 | 占這一章的人數 | 這一章的死亡率 |', '|---|---|---|');
   for (const r of facRows(c.n)) L.push(`| ${r.f} | ${r.share} | ${r.dead} |`);
+  // 國家在這一章亡了：活著的人到章末已經改算新朝或百姓，原本那一欄只剩死在亡國前的人，死亡率會被高估
+  const fell = { 7: 'sun（吳 280 年亡）', 6: 'liu（蜀漢 263 年亡）' }[c.n];
+  if (fell) L.push('', `註：${fell}的活人到章末已改算其他勢力，這一欄只剩亡國前死去的人，死亡率偏高，不代表那條路特別危險。`);
 }
 L.push('', '## 章末（活過某一章的人拿到的章末標題）', '', '| 章末 | 章 | 標題 | 占全部人生 |', '|---|---|---|---|');
 for (const e of endings.endings.filter((x) => x.chapter != null && x.chapter < world.chapters.at(-1).n && x.when === 'alive')) L.push(`| ${e.id} | ${e.chapter} | ${e.title}${e.rare ? '（稀有）' : ''} | ${pct(stats.interludes[e.id] || 0)} |`);
