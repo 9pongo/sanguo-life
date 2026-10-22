@@ -753,9 +753,9 @@ const DATA = /*__DATA__*/;
     }
   }
 
-  // 閱讀節奏：剛剛顯示了多少字，就等多久再往下走（1 倍速約每秒十個字）
+  // 閱讀節奏：剛剛顯示了多少字，就等多久再往下走（1 倍速約每秒二十個字）
   let lastChars = 0;
-  const readMs = (chars, base) => Math.min(20000, base + chars * 100) / speed;
+  const readMs = (chars, base) => Math.min(10000, base + chars * 50) / speed;
   function flush(entries) {
     lastChars = 0;
     for (const e of entries) if (e.type !== 'year' && e.text) lastChars += e.text.length + (e.title ? e.title.length : 0);
@@ -791,7 +791,7 @@ const DATA = /*__DATA__*/;
     card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     const first = card.querySelector('.opt:not(:disabled)');
     if (first && !fate) first.focus({ preventScroll: true });
-    if (fate) { clearTimeout(timer); timer = setTimeout(() => { const ok = p.opts.map((o, i) => (o.ok ? i : -1)).filter((i) => i >= 0); pick(ok[Math.floor(Math.random() * ok.length)]); }, readMs((p.text || '').length + p.opts.reduce((n, o) => n + o.t.length, 0), 1500)); }
+    if (fate) { clearTimeout(timer); timer = setTimeout(() => { const ok = p.opts.map((o, i) => (o.ok ? i : -1)).filter((i) => i >= 0); pick(ok[Math.floor(Math.random() * ok.length)]); }, readMs((p.text || '').length + p.opts.reduce((n, o) => n + o.t.length, 0), 750)); }
   }
 
   function pick(idx) {
@@ -817,7 +817,7 @@ const DATA = /*__DATA__*/;
   function schedule() {
     clearTimeout(timer);
     if (paused || !game || game.pending || game.ended || game.interlude || game.succession) return;
-    timer = setTimeout(tick, readMs(lastChars, 700));
+    timer = setTimeout(tick, readMs(lastChars, 350));
   }
   function tick() {
     if (!game || game.pending || game.ended || game.interlude || game.succession || paused) return;
