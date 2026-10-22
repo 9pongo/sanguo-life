@@ -218,7 +218,7 @@ function countPerson(p) {
   if (!p.alive && p.chapter >= 2 && !p._deadCounted) { p._deadCounted = true; stats.fac[p.chapter] ??= { live: {}, dead: {} }; inc(stats.fac[p.chapter].dead, p.faction || 'civ'); }
 }
 for (let i = 0; i < N; i++) {
-  const g = E.createGame(data, seed0 * 100003 + i);
+  const g = E.createGame(data, seed0 * 100003 + i, { late: Math.random() < ((world.lateStart || {}).chance || 0) });
   const firedLife = {};
   const familyFired = {};
   const noteFamily = () => { for (const id of HOUSEHOLD) if (g.state.fired[id]) { if (familyFired[id]) flagIssue(`全家一起決定的「${id}」被接班人又決定了一次`, g.seed); familyFired[id] = 1; } };

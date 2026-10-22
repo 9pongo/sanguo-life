@@ -2334,5 +2334,12 @@
  "heirPastChildRate": 0.07,
  "heirPastChildSurvive": 0.7,
  "heirWedKidText": "你早已成了家。{spouse}和孩子，跟著你一起接下了這個家。",
- "mingyingIllText": "你病倒了，一連幾天水米不進，家裡人連後事都準備好了。"
+ "mingyingIllText": "你病倒了，一連幾天水米不進，家裡人連後事都準備好了。",
+ "lateStart": {
+  "chance": 0.3,
+  "years": [
+   190,
+   262
+  ]
+ }
 }

@@ -3257,6 +3257,37 @@
    "fallback": true
   },
   {
+   "id": "a6_child_shu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "age": [
+     0,
+     13
+    ],
+    "region": "shu"
+   },
+   "title": "蜀中童年",
+   "text": "{name}還小。這一年大人們說，成都的皇帝投降了。你看見大人們在哭，也跟著哭了。"
+  },
+  {
+   "id": "a6_child_wu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "age": [
+     0,
+     13
+    ],
+    "region": [
+     "wu",
+     "jiangling"
+    ]
+   },
+   "title": "江南童年",
+   "text": "{name}還小。大人們說，北邊的蜀國亡了，吳國還在。你只關心江邊的魚今年多不多。"
+  },
+  {
    "id": "a6_child",
    "when": "alive",
    "chapter": 6,

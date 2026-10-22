@@ -78,6 +78,10 @@
      "farmer",
      "artisan",
      "clerk"
+    ],
+    "year": [
+     150,
+     204
     ]
    },
    "w": 2,

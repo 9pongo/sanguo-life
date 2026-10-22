@@ -49,7 +49,7 @@
 
   // ---------------------------------------------------------------- game
 
-  function createGame(data, seed) {
+  function createGame(data, seed, opts = {}) {
     if (seed == null) seed = Math.floor(Math.random() * 2 ** 31);
     const R = mulberry32(seed);
     const byId = {};
@@ -381,7 +381,7 @@
         stats: Object.assign({ 武: 0, 文: 0, 德: 0, 名: 0, 財: 0 }, cls.stats),
         hp: 70, flags: {}, bonds: {}, focus: null, route: null, faction: null, chapter: 1, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
-        alive: true, cause: null,
+        alive: true, cause: null, firstLife: true,
       };
       const s = g.st;
       const nSib = 1 + Math.floor(R() * 3);
@@ -478,7 +478,7 @@
       const r = R();
       // 還沒有弟妹可以接手的時候一定撐得過去，否則一投胎就結束
       const noBackup = !s.siblings.some((c) => c.alive && c.born <= s.year);
-      const spared = s.generation === 1 && s.age < 5 ? (noBackup ? 1 : plague ? 0 : (W.firstChildSpare ?? 0)) : 0;
+      const spared = s.firstLife && s.age < 5 ? (noBackup ? 1 : plague ? 0 : (W.firstChildSpare ?? 0)) : 0;
       if (r < h && r >= h * (1 - spared)) {
         if (!s.nearlyLost) {
           s.nearlyLost = true;
@@ -731,7 +731,90 @@
       return g.out;
     }
 
-    born();
+    // 投胎到某個家族的後代：先在背後把前幾代的人生真的跑一遍，再讓玩家出生成為這一代當家的孩子
+    function bornLate() {
+      const W = data.world, L = W.lateStart || {};
+      const lr = mulberry32((seed ^ 0x9e3779b9) >>> 0);
+      const here = (p) => !!p.spouse && !p.flags.widowed && !p.flags.spouse_dead_old && !(p.flags.spouse_taken && !p.flags.spouse_returned);
+      const [y0, y1] = L.years || [190, 262];
+      for (let tries = 0; tries < 30; tries++) {
+        const target = y0 + Math.floor(lr() * (y1 - y0 + 1));
+        const anc = createGame(data, Math.floor(lr() * 2 ** 31), { ancestor: true });
+        let k = 0, P = null;
+        while (!anc.ended && k++ < 20000) {
+          const a = anc.state;
+          if (a.year > target + 15) break;
+          if (!anc.pending && !anc.interlude && !anc.succession && a.alive && a.year >= target && a.age >= 18 && a.age <= 40 && here(a)) { P = a; break; }
+          if (anc.interlude) { anc.continueChapter(); continue; }
+          if (anc.succession) { anc.continueAsHeir(0); continue; }
+          if (anc.pending) { const ok = anc.pending.opts.filter((o) => o.ok); anc.choose(anc.pending.opts.indexOf(ok[Math.floor(lr() * ok.length)])); continue; }
+          anc.step();
+        }
+        if (P) return bornAsChildOf(P);
+      }
+      born(); // 很少發生：前幾代一直沒有適合的時機，就照一般方式投胎
+    }
+
+    function bornAsChildOf(P) {
+      const W = data.world;
+      const gender = R() < 0.5 ? 'm' : 'f';
+      const surname = P.gender === 'm' ? P.surname : P.spouse[0];
+      const cls = W.classes.find((c) => c.id === P.cls);
+      const talents = [];
+      while (talents.length < 2) {
+        const t = pickWeighted(R, W.talents.filter((x) => !talents.includes(x.id)), (x) => x.w);
+        talents.push(t.id);
+      }
+      // 傳給後代的東西：住處與全家的決定、祖上（已過世那幾代）的傳說
+      const flags = {};
+      for (const f of W.inheritFlags || []) if (P.flags[f]) flags[f] = true;
+      for (const f of W.parentFlags || []) if (P.flags['p_' + f]) flags['p_' + f] = true;
+      const older = (P.children || []).filter((c) => c.alive && !c.away).map((c) => ({ name: c.name, gender: c.gender, born: c.born, alive: true }));
+      const year = P.year;
+      const stats = Object.assign({ 武: 0, 文: 0, 德: 0, 名: 0, 財: 0 }, cls.stats);
+      stats['名'] = clamp(stats['名'] + Math.round((P.stats['名'] || 0) * 0.2), 0, 100);
+      stats['財'] = clamp(stats['財'] + Math.round((P.stats['財'] || 0) * 0.3), 0, 100);
+      g.st = {
+        name: '', surname, gender, birthYear: year, year, age: 0,
+        children: [], siblings: [...older], generation: P.generation + 1, lineage: P.lineage,
+        region: P.region, regionName: P.regionName, place: P.place,
+        cls: cls.id, clsName: cls.name, talents, stats,
+        hp: 70, flags, bonds: {}, focus: null, route: null, faction: P.faction, chapter: P.chapter, spouse: null,
+        friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
+        alive: true, cause: null, firstLife: true, lateStart: true,
+        chapterEndings: P.chapterEndings || [], familySeen: { ...(P.familySeen || {}) },
+        parentName: P.name, elders: { ...(P.elders || {}) },
+      };
+      const s = g.st;
+      // 名字：不跟兄姊同名，也不用父母的名
+      const avoid = [P.name, P.spouse, ...older.map((c) => c.name)].filter(Boolean);
+      let nm = surname + randomGiven(gender);
+      for (let k = 0; k < 12 && avoid.some((n) => n === nm || n.slice(1) === nm.slice(1)); k++) nm = surname + randomGiven(gender);
+      s.name = nm;
+      // 往後還會有弟妹（接家時的備援）
+      const nYoung = Math.floor(R() * 3);
+      for (let i = 0; i < nYoung; i++) {
+        const sg = R() < 0.5 ? 'm' : 'f';
+        s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: year + 1 + Math.floor(R() * 8), alive: true });
+      }
+      for (const t of talents) { const def = W.talents.find((x) => x.id === t); if (def.eff) apply(def.eff, null); }
+      const first = s.lineage[0];
+      const parentRole = P.gender === 'm' ? '父親' : '母親';
+      let family = `你是${surname}家的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
+      const n = older.length;
+      family += n ? `，你上頭還有${n === 2 ? '兩' : cnNum(n)}個哥哥姊姊。` : '，你是頭一個孩子。';
+      if (first) family += `祖上${first.name}那一輩「${first.title}」的事，家裡的人常常提起。`;
+      s.birth = {
+        era: era(year), ganzhi: ganzhi(year), region: W.regions.find((r) => r.id === s.region), cls,
+        talents: talents.map((t) => W.talents.find((x) => x.id === t)), family, late: true,
+        parent: { gen: P.generation, name: P.name, born: P.birthYear },
+      };
+      emit({ type: 'event', tag: '降生', text: fmt(W.birthText) });
+      emit({ type: 'event', text: family });
+      g.queue = buildYearQueue();
+    }
+
+    if (opts.late && !opts.ancestor) bornLate(); else born();
 
     return {
       seed,

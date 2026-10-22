@@ -187,7 +187,19 @@
    ],
    "req": {
     "noflag": "heir_young"
-   }
+   },
+   "textIf": [
+    {
+     "req": {
+      "year": [
+       205,
+       320
+      ],
+      "noregion": "shu"
+     },
+     "text": "你十五歲了。大人們說你已經不是孩子，往後的路要自己拿主意。"
+    }
+   ]
   },
   {
    "id": "st_marry_m",

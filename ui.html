@@ -142,7 +142,7 @@ button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 .tree div::before { content: ""; position: absolute; left: -6px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--slip); border: 2px solid var(--ink); }
 .tree div.now::before { background: var(--yellow); border-color: var(--yellow); }
 .tree .g { color: var(--muted); font-variant-numeric: tabular-nums; }
-.tree b { font-family: var(--font-display); }
+.tree b { font-family: var(--font-display); white-space: nowrap; }
 .heirs { display: grid; gap: 8px; justify-items: start; }
 .after .card.memory { border-left-color: var(--yellow); }
 .after .card.world { border-left-color: var(--muted); color: var(--muted); }
@@ -233,6 +233,8 @@ a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
 .share-box .fine { margin: 0; }
 .tip { border: 1px dashed var(--yellow); background: var(--yellow-soft); padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; line-height: 1.7; }
 .tip p { margin: 0; }
+.ancestors { display: grid; gap: 6px; background: var(--slip); }
+.ancestors h4 { margin: 0; font-size: 12px; letter-spacing: .15em; color: var(--muted); font-weight: 400; }
 .tip dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 0; }
 .tip dt { font-weight: 600; white-space: nowrap; }
 .tip dd { margin: 0; color: var(--muted); }
@@ -267,7 +269,7 @@ a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
     <div class="intro-body">
       <p class="slogan">蒼天已死，黃天當立。<br>歲在甲子，天下大吉。</p>
       <h2>投胎到東漢末年，一代一代活下去。</h2>
-      <p>你會隨機出生在冀、青、豫、荊、幽、徐六州之一，生在佃農、自耕農、商販、縣吏或士族旁支的家裡。不是每個人都活得到甲子年。</p>
+      <p>你會隨機出生在冀、青、豫、荊、幽、徐六州之一，生在佃農、自耕農、商販、縣吏或士族旁支的家裡。不是每個人都活得到甲子年。也有可能，你投胎在某個家族的後代，祖上幾代的故事已經寫了一半。</p>
       <p>中平元年（184），黃巾起事。你可以綁上黃巾，可以投官軍，可以帶著家人逃難；也可能在長社的火裡、廣宗的河邊，遇見書上寫過的那些人。活下來的話，群雄混戰、官渡、赤壁，一直到漢朝滅亡的那一天，都在等著你。</p>
       <div class="how">
         <div><b>第一章</b>　黃天之下：從出生到中平六年（189）董卓入京。</div>
@@ -503,7 +505,7 @@ const DATA = /*__DATA__*/;
 
   function resume(sv) {
     unpause();
-    game = E.createGame(DATA, sv.seed);
+    game = E.createGame(DATA, sv.seed, { late: !!sv.late });
     lastAge = -1; save = sv;
     $('#intro').hidden = true; $('#end').hidden = true; $('#birth').hidden = true;
     $('#log').innerHTML = ''; $('#game').hidden = false; $('#ctrl').hidden = false;
@@ -548,7 +550,8 @@ const DATA = /*__DATA__*/;
 
   function start() {
     unpause();
-    game = E.createGame(DATA);
+    // 有一部分的投胎，會落在某個家族的後代：祖上幾代的人生，已經在背後跑過一遍
+    game = E.createGame(DATA, undefined, { late: Math.random() < ((DATA.world.lateStart || {}).chance || 0) });
     lastAge = -1;
     $('#intro').hidden = true; $('#end').hidden = true;
     $('#log').innerHTML = '';
@@ -588,19 +591,33 @@ const DATA = /*__DATA__*/;
     reg.append(h('div', 'who', `<span class="name">${esc(s.name)}</span><span class="meta">${s.gender === 'm' ? '男' : '女'}　·　${esc(b.era)}　${esc(b.ganzhi)}　·　西元 ${s.birthYear} 年</span>`));
     const dl = h('dl');
     const items = [
-      ['籍貫', b.region.name], ['家世', b.cls.name], ['到甲子年', `${184 - s.birthYear} 歲`], ['身子', s.hp >= 75 ? '結實' : s.hp >= 55 ? '尋常' : '瘦弱'],
+      ['籍貫', b.region.name], ['家世', b.cls.name], b.late ? ['世代', `第${cnGen(s.generation)}代`] : ['到甲子年', `${184 - s.birthYear} 歲`], ['身子', s.hp >= 75 ? '結實' : s.hp >= 55 ? '尋常' : '瘦弱'],
     ];
     for (const [k, v] of items) { dl.append(h('dt', null, esc(k))); dl.append(h('dd', null, esc(v))); }
     reg.append(dl);
     reg.append(h('p', null, esc(b.region.desc) + ' ' + esc(b.family)));
+    // 投胎在某個家族的後代：祖上幾代是怎麼過的
+    if (b.late && s.lineage.length) {
+      const anc = h('div', 'ancestors');
+      anc.append(h('h4', null, '祖上'));
+      const t = h('div', 'tree');
+      for (const p of s.lineage) t.append(h('div', null, `<span class="g">第${cnGen(p.gen)}代</span><span><b>${esc(p.name)}</b>　${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}　「${esc(p.title)}」</span>`));
+      // 還在世的父母（這一代當家的人）不在家譜的紀錄裡，另外補一行
+      const pa = b.parent;
+      if (pa) t.append(h('div', 'now', `<span class="g">第${cnGen(pa.gen)}代</span><span><b>${esc(pa.name)}</b>　${pa.born}–　如今當家</span>`));
+      anc.append(t);
+      reg.append(anc);
+    }
     const tal = h('div');
     for (const t of b.talents) tal.append(h('span', 'talent', `${esc(t.id)}<small>${esc(t.desc)}</small>`));
     reg.append(tal);
-    reg.append(h('p', 'fine', '在這個模擬裡，東漢末年大約每六個孩子就有一個活不過五歲（推估值）。建寧、熹平、光和年間史書記了四次大疫，都會在你的人生裡發生。'));
+    reg.append(h('p', 'fine', b.late
+      ? '你出生的時候，祖上幾代人已經走過了一段亂世。在這個模擬裡，大約每六個孩子就有一個活不過五歲（推估值）。'
+      : '在這個模擬裡，東漢末年大約每六個孩子就有一個活不過五歲（推估值）。建寧、熹平、光和年間史書記了四次大疫，都會在你的人生裡發生。'));
     sec.append(reg);
     const row = h('div'); row.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-top:16px';
     const go = h('button', 'cta', '展開此生'); go.type = 'button';
-    go.addEventListener('click', () => { save = { v: 1, ver: DATA_VER, seed: game.seed, name: game.state.name, acts: [] }; persist(); $('#birth').hidden = true; $('#game').hidden = false; $('#ctrl').hidden = false; renderHud(); flush(game.state.log); if (!showTips(schedule)) schedule(); });
+    go.addEventListener('click', () => { save = { v: 1, ver: DATA_VER, seed: game.seed, late: !!game.state.lateStart, name: game.state.name, acts: [] }; persist(); $('#birth').hidden = true; $('#game').hidden = false; $('#ctrl').hidden = false; renderHud(); flush(game.state.log); if (!showTips(schedule)) schedule(); });
     const re = h('button', 'ghost ui', '重新投胎'); re.type = 'button'; re.addEventListener('click', start);
     row.append(go, re);
     sec.append(row);
