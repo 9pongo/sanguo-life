@@ -26,6 +26,8 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 
 推送到 `main` 以後，GitHub Actions（`.github/workflows/pages.yml`）會自動跑稽核與打包，把 `dist/dev.html` 發佈成 GitHub Pages 的首頁。稽核有錯誤時不會發佈。
 
+分享連結時的預覽（標題、簡介、封面圖）寫在 `build.js` 產生的 `dev.html` 開頭；封面圖是 `assets/cover.png`（1200×630）。封面上的事件卡、結局數是畫死在圖裡的，數量變很多時記得重畫。
+
 本機預覽請開 `dist/dev.html`（有完整的 doctype、charset、viewport）。`dist/index.html` 是給發佈平台用的，平台會自動補外框。
 
 目標是每次修改後 **錯誤 0、提醒 0**。
