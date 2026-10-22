@@ -1,0 +1,4395 @@
+{
+ "endings": [
+  {
+   "id": "d_infant",
+   "when": "dead",
+   "req": {
+    "age": [
+     0,
+     4
+    ]
+   },
+   "title": "未及五歲",
+   "text": "{name}沒能活過五歲。在那個年代，這並不稀奇。父母後來又生了別的孩子，偶爾還會在吃飯時多擺一雙筷子。"
+  },
+  {
+   "id": "d_changshe",
+   "when": "dead",
+   "cause": "長社大火",
+   "title": "長社之火",
+   "text": "那一夜的風很大。後來的史書只寫了一句「賊驚亂奔走」，沒有寫被燒死的人叫什麼名字。",
+   "chapter": 1
+  },
+  {
+   "id": "d_river",
+   "when": "dead",
+   "cause": "赴河",
+   "title": "赴河者五萬",
+   "text": "史書記載，廣宗一戰，赴河死者五萬許人。{name}是其中之一。",
+   "chapter": 1
+  },
+  {
+   "id": "d_jingguan",
+   "when": "dead",
+   "cause": "下曲陽",
+   "title": "京觀",
+   "text": "下曲陽城南的京觀堆了十幾萬顆首級。過路的人都繞著走。",
+   "chapter": 1
+  },
+  {
+   "id": "d_xiandeng",
+   "when": "dead",
+   "cause": "先登",
+   "title": "先登",
+   "text": "{name}倒在宛城的城頭上。孫堅後來被拜為別部司馬，他記得第二個爬上城的那個人，只是不記得名字了。",
+   "chapter": 1
+  },
+  {
+   "id": "d_hj",
+   "when": "dead",
+   "req": {
+    "route": "huangjin"
+   },
+   "title": "黃天未立",
+   "text": "{name}到死都沒有看見黃天。後來的人說起黃巾，只記得「蛾賊」兩個字。",
+   "chapter": 1
+  },
+  {
+   "id": "d_gj",
+   "when": "dead",
+   "req": {
+    "route": "guanjun"
+   },
+   "title": "無名的官軍",
+   "text": "論功行賞的名冊上，{name}的名字旁邊畫了一個小圈。那是陣亡的記號。",
+   "chapter": 1
+  },
+  {
+   "id": "d2_bianshui",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "汴水",
+   "title": "汴水",
+   "text": "汴水那一仗，曹操差點死了，史書記了曹洪讓馬。跟在馬後面的那些人，史書一個也沒記。"
+  },
+  {
+   "id": "d2_puyang",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "濮陽",
+   "title": "濮陽之火",
+   "text": "濮陽東門的火是曹操自己放的，為了表示不退。{name}沒能從那片火裡走出來。"
+  },
+  {
+   "id": "d2_wancheng",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "宛城之變",
+   "title": "宛城營門",
+   "text": "曹操後來經過淯水，祭典韋，哭得很傷心。那一晚死在營門口的其他人，沒有人一一唸出名字。"
+  },
+  {
+   "id": "d2_xuzhou",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "徐州屠戮",
+   "title": "泗水不流",
+   "text": "「凡殺男女數十萬人，雞犬無餘，泗水為之不流。」{name}是那數十萬分之一。"
+  },
+  {
+   "id": "d2_xianshan",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "峴山",
+   "title": "峴山",
+   "text": "孫堅死在峴山的竹林裡，三十七歲。追著他的那個人，倒在他旁邊不遠。"
+  },
+  {
+   "id": "d2_keng",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "坑殺",
+   "title": "坑卒",
+   "text": "官渡之後，袁軍投降的七萬多人被坑殺。{name}放下兵器的時候，以為投降就能活。"
+  },
+  {
+   "id": "d2_guandu",
+   "when": "dead",
+   "chapter": 2,
+   "cause": [
+    "烏巢",
+    "官渡"
+   ],
+   "title": "官渡",
+   "text": "官渡是曹操一生最險的一仗。這一仗以後，北方姓曹。{name}沒有看到那一天。"
+  },
+  {
+   "id": "d2_jieqiao",
+   "when": "dead",
+   "chapter": 2,
+   "cause": [
+    "界橋",
+    "易京"
+   ],
+   "title": "河北",
+   "text": "袁紹和公孫瓚爭了八年河北。{name}死在這八年裡的某一天。"
+  },
+  {
+   "id": "d2_starve",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "餓死",
+   "title": "興平",
+   "text": "興平元年，一斛穀五十萬錢，人相食。{name}沒有熬過那一年。"
+  },
+  {
+   "id": "d2_bing",
+   "when": "dead",
+   "chapter": 2,
+   "cause": "兵禍",
+   "title": "兵過",
+   "text": "亂兵過境，像蝗蟲一樣。{name}死在自家的田邊，連是誰的兵都不知道。"
+  },
+  {
+   "id": "d2_war",
+   "when": "dead",
+   "chapter": 2,
+   "req": {
+    "faction": [
+     "cao",
+     "liu",
+     "sun",
+     "yuan",
+     "heishan"
+    ],
+    "gender": "m"
+   },
+   "title": "群雄之卒",
+   "text": "群雄逐鹿，鹿死誰手還不知道，逐鹿的士卒倒是先死了一大片。{name}是其中一個。",
+   "cause": [
+    "戰死",
+    "兵禍",
+    "傷病交加"
+   ]
+  },
+  {
+   "id": "d3_changban",
+   "when": "dead",
+   "chapter": 3,
+   "cause": "長坂",
+   "title": "長坂",
+   "text": "長坂那一天，十幾萬人裡死了多少，史書沒有記。史書記的是趙雲救了一個孩子，張飛在橋頭喊了一聲。"
+  },
+  {
+   "id": "d3_chibi",
+   "when": "dead",
+   "chapter": 3,
+   "cause": "赤壁",
+   "title": "赤壁",
+   "text": "赤壁的火燒了一夜，江水都是熱的。{name}死在那一夜，史書說「死者大半」。"
+  },
+  {
+   "id": "d3_bailang",
+   "when": "dead",
+   "chapter": 3,
+   "cause": [
+    "白狼山",
+    "遼東"
+   ],
+   "title": "塞外",
+   "text": "{name}死在盧龍塞以北的荒原上。那裡的風很冷，冷得連屍體都不會腐爛。"
+  },
+  {
+   "id": "d3_ye",
+   "when": "dead",
+   "chapter": 3,
+   "cause": "鄴城",
+   "title": "鄴城",
+   "text": "鄴城被漳水圍了三個月，「城中餓死者過半」。{name}在那一半裡。"
+  },
+  {
+   "id": "d3_war",
+   "when": "dead",
+   "chapter": 3,
+   "req": {
+    "faction": [
+     "cao",
+     "liu",
+     "sun",
+     "yuan",
+     "heishan"
+    ],
+    "gender": "m"
+   },
+   "title": "建安之卒",
+   "text": "建安年間，天下打了十三年的仗。{name}死在其中一場，連名字都沒有留下。",
+   "cause": [
+    "戰死",
+    "兵禍",
+    "傷病交加"
+   ]
+  },
+  {
+   "id": "d3_young",
+   "when": "dead",
+   "chapter": 3,
+   "title": "建安少年",
+   "text": "{name}死在建安年間，才{age}歲。北方剛打完袁家，南方的大仗還沒開打，你走在兩場大仗中間。",
+   "req": {
+    "age": [
+     5,
+     29
+    ]
+   }
+  },
+  {
+   "id": "d3_jing",
+   "when": "dead",
+   "chapter": 3,
+   "title": "荊州歲月",
+   "text": "{name}死在荊州，{age}歲。劉表還在的那些年，荊州是亂世裡少有的太平地方。你沒有看到後來的事。",
+   "req": {
+    "region": [
+     "jing",
+     "jiangling"
+    ]
+   }
+  },
+  {
+   "id": "d3_wu",
+   "when": "dead",
+   "chapter": 3,
+   "title": "江東",
+   "text": "{name}死在江東，{age}歲。孫策死了，十九歲的孫權接下江東，大家都說他守不住。你沒有看到後來的事。",
+   "req": {
+    "region": "wu"
+   }
+  },
+  {
+   "id": "d3_ji",
+   "when": "dead",
+   "chapter": 3,
+   "title": "鄴下",
+   "text": "{name}死在河北，{age}歲。曹操剛平了袁家，鄴城外的田又有人種了，你沒來得及吃上新麥。",
+   "req": {
+    "region": "ji"
+   }
+  },
+  {
+   "id": "d4_maicheng",
+   "when": "dead",
+   "chapter": 4,
+   "cause": "麥城",
+   "title": "麥城",
+   "text": "{name}跟著關羽走到了最後。臨沮的雪地裡，史書只記了關羽和關平的名字。"
+  },
+  {
+   "id": "d4_fan",
+   "when": "dead",
+   "chapter": 4,
+   "cause": "樊城",
+   "title": "漢水",
+   "text": "建安二十四年八月，漢水暴漲，七軍皆沒。{name}和龐德一起，沒有投降。"
+  },
+  {
+   "id": "d4_hefei",
+   "when": "dead",
+   "chapter": 4,
+   "cause": "合肥",
+   "title": "合肥",
+   "text": "合肥一戰，張遼名震江東。{name}死在那一天的晨光裡，沒有人記得是哪一邊先倒下的。"
+  },
+  {
+   "id": "d4_luo",
+   "when": "dead",
+   "chapter": 4,
+   "cause": [
+    "雒城",
+    "定軍山",
+    "潼關",
+    "江陵"
+   ],
+   "title": "沙場",
+   "text": "{name}老了還在打仗，最後死在{place}很遠很遠的地方。"
+  },
+  {
+   "id": "d4_plague",
+   "when": "dead",
+   "chapter": 4,
+   "cause": "疫病",
+   "title": "建安二十二年",
+   "text": "建安二十二年的大疫，「家家有殭屍之痛，室室有號泣之哀」。{name}沒有熬過那一年的春天。"
+  },
+  {
+   "id": "d4_old_pair",
+   "when": "dead",
+   "chapter": 4,
+   "title": "漢末偕老",
+   "text": "{name}活了{age}歲。漢朝還在，可是大家都知道快了。最後那天，{spouse}握著你的手，說：這輩子，跟著你沒白過。",
+   "req": {
+    "age": [
+     55,
+     200
+    ],
+    "married": true
+   }
+  },
+  {
+   "id": "d4_old_lone",
+   "when": "dead",
+   "chapter": 4,
+   "title": "漢末獨老",
+   "text": "{name}活了{age}歲。{spouse}先走了好幾年。你一個人看著天下分成了三塊，看著漢朝一天一天變成別人的。",
+   "req": {
+    "age": [
+     55,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   }
+  },
+  {
+   "id": "d4_old",
+   "when": "dead",
+   "chapter": 4,
+   "req": {
+    "age": [
+     55,
+     120
+    ]
+   },
+   "title": "壽終",
+   "text": "{name}活了{age}歲。在這個人命如草的年代，你見過黃巾、見過董卓、見過曹操。最後，你在自己的床上閉上了眼睛。"
+  },
+  {
+   "id": "d4_young",
+   "when": "dead",
+   "chapter": 4,
+   "title": "漢末少年",
+   "text": "{name}死在建安末年，才{age}歲。天下三分的局面剛剛定下來，你這一輩的人，本來可以過幾年好日子。",
+   "req": {
+    "age": [
+     5,
+     29
+    ]
+   }
+  },
+  {
+   "id": "d4_shu",
+   "when": "dead",
+   "chapter": 4,
+   "title": "入蜀之年",
+   "text": "{name}死在蜀地，{age}歲。劉備入蜀的那幾年，成都的街上全是外地口音，你也是其中一個。",
+   "req": {
+    "region": "shu"
+   }
+  },
+  {
+   "id": "d4_wu",
+   "when": "dead",
+   "chapter": 4,
+   "title": "江北",
+   "text": "{name}死在江東，{age}歲。孫權跟曹操在濡須、在合肥打了好幾年，江東的人家，家家都有人在江北。",
+   "req": {
+    "region": "wu"
+   }
+  },
+  {
+   "id": "d4_jing",
+   "when": "dead",
+   "chapter": 4,
+   "title": "兩岸",
+   "text": "{name}死在荊州，{age}歲。那些年漢水兩岸一邊是曹仁，一邊是關羽，誰也不知道明天歸誰。",
+   "req": {
+    "region": [
+     "jing",
+     "jiangling"
+    ]
+   }
+  },
+  {
+   "id": "d4_ji",
+   "when": "dead",
+   "chapter": 4,
+   "title": "銅雀臺",
+   "text": "{name}死在鄴城一帶，{age}歲。曹操在城西北築了銅雀臺，你遠遠看過一眼，台上的燈火徹夜不熄。",
+   "req": {
+    "region": "ji"
+   }
+  },
+  {
+   "id": "d4_default",
+   "when": "dead",
+   "chapter": 4,
+   "title": "建安末年",
+   "text": "{name}死在建安末年。再過幾年，漢朝就沒有了。你差一點就看到了。"
+  },
+  {
+   "id": "d5_yiling",
+   "when": "dead",
+   "chapter": 5,
+   "cause": "夷陵",
+   "title": "夷陵",
+   "text": "夷陵那一把火，燒了蜀漢四十多個營。{name}死在火裡，史書只寫了「破其四十餘營」。"
+  },
+  {
+   "id": "d5_north",
+   "when": "dead",
+   "chapter": 5,
+   "cause": [
+    "街亭",
+    "祁山",
+    "木門",
+    "南中瘴氣"
+   ],
+   "title": "出師未捷",
+   "text": "{name}死在北伐的路上。丞相說「鞠躬盡瘁，死而後已」，你也是。"
+  },
+  {
+   "id": "d5_wu",
+   "when": "dead",
+   "chapter": 5,
+   "cause": [
+    "石亭",
+    "山越"
+   ],
+   "title": "江淮",
+   "text": "{name}死在江淮之間的某一場仗裡。南北對峙的五十年裡，這樣的人有很多。"
+  },
+  {
+   "id": "d6_yinping",
+   "when": "dead",
+   "chapter": 6,
+   "cause": "陰平",
+   "title": "陰平",
+   "text": "{name}從陰平的山崖上摔了下去。鄧艾滅了蜀，名字寫進了史書；摔下山崖的人，沒有。"
+  },
+  {
+   "id": "d6e_war_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "faction": "sun"
+   },
+   "title": "孫權晚年",
+   "text": "{name}死在孫權晚年。合肥、荊州，吳魏年年交兵，前線的士兵換了一批又一批。你是其中一個。",
+   "cause": [
+    "壽春",
+    "東興",
+    "遼東",
+    "刑殺"
+   ]
+  },
+  {
+   "id": "d6_war_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "faction": "sun",
+    "year": [
+     249,
+     263
+    ]
+   },
+   "cause": [
+    "壽春",
+    "東興",
+    "遼東",
+    "刑殺"
+   ],
+   "title": "吳魏之間",
+   "text": "{name}死在吳魏交兵的那些年。建業城裡的權臣你殺我、我殺你，前線的士兵換了一批又一批。你是其中一個。"
+  },
+  {
+   "id": "d6e_war_shu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "faction": "liu"
+   },
+   "title": "守成之卒",
+   "text": "{name}死在丞相走後的那些年。蔣琬、費禕守著蜀國，北伐停了，可是邊境上的仗沒有停過。",
+   "cause": [
+    "壽春",
+    "東興",
+    "遼東",
+    "刑殺"
+   ]
+  },
+  {
+   "id": "d6_war_shu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "faction": "liu",
+    "year": [
+     249,
+     263
+    ]
+   },
+   "cause": [
+    "壽春",
+    "東興",
+    "遼東",
+    "刑殺"
+   ],
+   "title": "蜀卒",
+   "text": "{name}死在蜀漢的最後那些年。成都城裡，黃皓在宮中弄權，姜維在外頭打仗，誰也顧不上底下的人。"
+  },
+  {
+   "id": "d6e_war",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ]
+   },
+   "title": "明帝朝之卒",
+   "text": "{name}死在魏明帝、曹爽當政的那些年。遼東、淮南、關中，打仗的地方換來換去，死的都是跟你一樣的人。",
+   "cause": [
+    "壽春",
+    "東興",
+    "遼東",
+    "刑殺"
+   ]
+  },
+  {
+   "id": "d6_war",
+   "when": "dead",
+   "chapter": 6,
+   "cause": [
+    "壽春",
+    "東興",
+    "遼東",
+    "刑殺"
+   ],
+   "title": "司馬",
+   "text": "司馬家一步一步拿走了魏國的天下，路上死了很多人。{name}是其中一個。",
+   "req": {
+    "year": [
+     249,
+     263
+    ]
+   }
+  },
+  {
+   "id": "d7_wu",
+   "when": "dead",
+   "chapter": 7,
+   "cause": [
+    "伐吳",
+    "西陵"
+   ],
+   "title": "長江",
+   "text": "天下就要一統了。{name}死在統一的前夕，沒有看到那一天。"
+  },
+  {
+   "id": "d8_war",
+   "when": "dead",
+   "chapter": 8,
+   "cause": [
+    "八王之亂",
+    "兵禍"
+   ],
+   "title": "八王",
+   "text": "{name}死在諸王的混戰裡，到死都不知道自己在替哪一個王打仗。"
+  },
+  {
+   "id": "d_plague_late",
+   "when": "dead",
+   "cause": "疫病",
+   "req": {
+    "year": [
+     221,
+     400
+    ]
+   },
+   "title": "疫",
+   "text": "那一年的疫病帶走了很多人。里中的人說，這病是從外地傳來的，一家傳一家，關起門也擋不住。{name}死的時候{age}歲。"
+  },
+  {
+   "id": "d_plague",
+   "when": "dead",
+   "cause": "疫病",
+   "title": "大疫",
+   "text": "那一年的疫病帶走了很多人。曹植後來寫過：「家家有殭屍之痛，室室有號泣之哀。」那是建安年間的事了，但東漢末年的每一場大疫，都是這個樣子。"
+  },
+  {
+   "id": "d_flee",
+   "when": "dead",
+   "req": {
+    "route": "flee"
+   },
+   "title": "死在路上",
+   "text": "{name}死在逃難的路上。同行的人在路邊挖了一個淺坑，插了一根樹枝當記號。",
+   "chapter": 1
+  },
+  {
+   "id": "d5_old_pair",
+   "text": "{name}活了{age}歲。你出生的時候天下還是漢朝，走的時候已經分成了三個國家。最後那天，{spouse}坐在床邊，跟你說今年的麥子長得好。",
+   "when": "dead",
+   "chapter": 5,
+   "title": "白頭偕老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": true
+   }
+  },
+  {
+   "id": "d5_old_lone",
+   "text": "{name}活了{age}歲。陪了你半輩子的人先走了，你又一個人過了好些年。換了誰當皇帝，田還是要自己種，飯還是要自己煮。",
+   "when": "dead",
+   "chapter": 5,
+   "title": "獨守晚年",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   }
+  },
+  {
+   "id": "d5_old_single",
+   "text": "{name}活了{age}歲，一輩子沒有成家。你走的時候，里中的人替你辦了後事，把你葬在你種了一輩子的那塊地旁邊。",
+   "when": "dead",
+   "chapter": 5,
+   "title": "孤身終老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": false
+   }
+  },
+  {
+   "id": "d5_old",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "age": [
+     60,
+     200
+    ]
+   },
+   "title": "壽終",
+   "text": "{name}活了{age}歲。你出生的時候天下還是漢朝，走的時候已經分成了三個國家。你常說，換了誰當皇帝，田還是要自己種。"
+  },
+  {
+   "id": "d5_young",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "age": [
+     5,
+     29
+    ]
+   },
+   "title": "三分少年",
+   "text": "{name}死在天下三分的那些年，才{age}歲。你生在亂世的尾巴上，本來可以過一輩子不用逃難的日子。"
+  },
+  {
+   "id": "d5_shu",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": "shu"
+   },
+   "title": "蜀中",
+   "text": "{name}死在蜀地，{age}歲。丞相在漢中練兵，年年北伐，蜀地的人家，差不多家家都有人在軍中。"
+  },
+  {
+   "id": "d5_jiangdong",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": [
+     "wu",
+     "jiangling"
+    ]
+   },
+   "title": "江東",
+   "text": "{name}死在吳國，{age}歲。孫權在武昌稱了帝，又把都城搬回建業。你不太關心這些，只記得那幾年的稻子長得好。"
+  },
+  {
+   "id": "d5_luoyang",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": "luoyang"
+   },
+   "title": "魏都",
+   "text": "{name}死在洛陽，{age}歲。曹丕把都城定在這裡，城裡的宮殿一年比一年多，城外的田一年比一年少。"
+  },
+  {
+   "id": "d5_yu",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": "yu"
+   },
+   "title": "許昌",
+   "text": "{name}死在許昌一帶，{age}歲。漢朝的皇帝在這裡住了二十多年。許縣改叫許昌以後，皇帝就住到洛陽去了。"
+  },
+  {
+   "id": "d5_ji",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": "ji"
+   },
+   "title": "鄴城",
+   "text": "{name}死在河北，{age}歲。魏國的宗廟還在鄴城，銅雀臺上的燈也還亮著，可是皇帝已經不常來了。"
+  },
+  {
+   "id": "d5_jing",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": "jing"
+   },
+   "title": "宛城",
+   "text": "{name}死在南陽，{age}歲。南陽成了魏國的南邊門戶，漢水對岸換成了吳國的旗子。"
+  },
+  {
+   "id": "d5_you",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": "you"
+   },
+   "title": "幽州",
+   "text": "{name}死在幽州，{age}歲。北邊的鮮卑人越來越多，軻比能的騎兵常常到邊塞來，有時候做買賣，有時候搶東西。"
+  },
+  {
+   "id": "d5_xu",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": [
+     "xu",
+     "huainan"
+    ]
+   },
+   "title": "淮北",
+   "text": "{name}死在淮北，{age}歲。那幾年曹丕親征到廣陵，望著長江嘆氣：「這是老天用來隔開南北的。」"
+  },
+  {
+   "id": "d6e_old_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "faction": "sun"
+   },
+   "title": "吳中終老",
+   "text": "{name}活了{age}歲。你看著孫權從一個年輕的將軍，變成一個多疑的老皇帝。最後那天，孫子在床邊唸書給你聽。",
+   "noKid": "{name}活了{age}歲。你看著孫權從一個年輕的將軍，變成一個多疑的老皇帝。最後那天，鄰居家的少年在床邊唸書給你聽。"
+  },
+  {
+   "id": "d6_old_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "faction": "sun",
+    "year": [
+     249,
+     263
+    ]
+   },
+   "title": "江東終老",
+   "text": "{name}活了{age}歲。你看著孫權老了、糊塗了，又看著他的子孫你殺我、我殺你。最後那天，孫子在床邊唸書給你聽。",
+   "noKid": "{name}活了{age}歲。你看著孫權老了、糊塗了，又看著他的子孫你殺我、我殺你。最後那天，鄰居家的少年在床邊唸書給你聽。"
+  },
+  {
+   "id": "d6e_old_shu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "faction": "liu"
+   },
+   "title": "蜀中晚年",
+   "text": "{name}活了{age}歲。丞相走了以後，蔣琬、費禕守著蜀國，日子比打仗那幾年好過一點。你走的時候，成都的錦還在織。"
+  },
+  {
+   "id": "d6_old_shu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "faction": "liu",
+    "year": [
+     249,
+     263
+    ]
+   },
+   "title": "蜀中終老",
+   "text": "{name}活了{age}歲。丞相死了以後，蜀國又撐了快三十年。你走的時候，北伐還在打，成都的錦還在織。"
+  },
+  {
+   "id": "d6e_old_pair",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "married": true
+   },
+   "title": "偕老明帝朝",
+   "text": "{name}活了{age}歲。你看著魏明帝蓋了一座又一座宮殿，又看著八歲的小皇帝登基。最後那天，{spouse}握著你的手，說：這輩子，你沒讓我餓過一頓。"
+  },
+  {
+   "id": "d6_old_pair",
+   "text": "{name}活了{age}歲。你看著曹家的天下一點一點變成司馬家的。最後那天，{spouse}握著你的手，說：這輩子，你沒讓我餓過一頓。",
+   "when": "dead",
+   "chapter": 6,
+   "title": "白頭偕老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": true,
+    "year": [
+     249,
+     263
+    ]
+   }
+  },
+  {
+   "id": "d6_old_lone",
+   "text": "{name}活了{age}歲。{spouse}走了以後，你常常一個人坐在門口，看洛陽來的官差騎馬經過。他們一年比一年年輕，你換了一根拐杖。",
+   "when": "dead",
+   "chapter": 6,
+   "title": "獨守晚年",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   }
+  },
+  {
+   "id": "d6_old_single",
+   "text": "{name}活了{age}歲，一輩子沒有成家。你把攢下的一點錢留給了鄰居家的孩子，囑咐他們，清明的時候替你燒一把紙。",
+   "when": "dead",
+   "chapter": 6,
+   "title": "孤身終老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": false
+   }
+  },
+  {
+   "id": "d6e_old",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "age": [
+     60,
+     200
+    ]
+   },
+   "title": "明帝朝壽終",
+   "text": "{name}活了{age}歲。你看著魏明帝蓋了一座又一座宮殿，又看著八歲的小皇帝登基。最後那天，孫子在床邊唸書給你聽。",
+   "noKid": "{name}活了{age}歲。你看著魏明帝蓋了一座又一座宮殿，又看著八歲的小皇帝登基。最後那天，鄰居家的少年在床邊唸書給你聽。"
+  },
+  {
+   "id": "d6_old",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     249,
+     263
+    ]
+   },
+   "title": "壽終",
+   "text": "{name}活了{age}歲。你看著曹家的天下一點一點變成司馬家的。最後那天，孫子在床邊唸書給你聽。",
+   "noKid": "{name}活了{age}歲。你看著曹家的天下一點一點變成司馬家的。最後那天，鄰居家的少年在床邊唸書給你聽。"
+  },
+  {
+   "id": "d7e_old_pair",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "year": [
+     264,
+     274
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "married": true
+   },
+   "title": "兩國之間偕老",
+   "text": "{name}活了{age}歲。蜀漢亡了，吳國還在長江對岸，天下還是兩個朝廷。最後那天，{spouse}替你換上乾淨的衣服，說：這輩子，總算沒白過。"
+  },
+  {
+   "id": "d7_old_pair",
+   "text": "{name}活了{age}歲。你走的時候，天下快要一統了。{spouse}替你換上乾淨的衣服，說：你看，到底等到不打仗的日子了。",
+   "when": "dead",
+   "chapter": 7,
+   "title": "白頭偕老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": true,
+    "year": [
+     275,
+     280
+    ]
+   }
+  },
+  {
+   "id": "d7e_old_lone",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "year": [
+     264,
+     274
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   },
+   "title": "兩國之間獨老",
+   "text": "{name}活了{age}歲。{spouse}先走了好幾年。你一個人看著蜀漢亡了，長江對岸的吳國卻還在。"
+  },
+  {
+   "id": "d7_old_lone",
+   "text": "{name}活了{age}歲。{spouse}先走了好幾年，你一個人等到了天下快要一統的消息。你說，可惜{spouse}沒聽到。",
+   "when": "dead",
+   "chapter": 7,
+   "title": "獨守晚年",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ],
+    "year": [
+     275,
+     280
+    ]
+   }
+  },
+  {
+   "id": "d7_old_single",
+   "text": "{name}活了{age}歲，一輩子沒有成家。你在里中教過很多人做事，你走的那天，來送你的人站滿了整條巷子。",
+   "when": "dead",
+   "chapter": 7,
+   "title": "孤身終老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": false
+   }
+  },
+  {
+   "id": "d7e_old",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "year": [
+     264,
+     274
+    ],
+    "age": [
+     60,
+     200
+    ]
+   },
+   "title": "晉初壽終",
+   "text": "{name}活了{age}歲。你出生的時候是漢朝，後來換了好幾個皇帝。你跟孩子說，皇帝換了一個又一個，田還是那塊田。",
+   "noKid": "{name}活了{age}歲。你出生的時候是漢朝，後來換了好幾個皇帝。你常說，皇帝換了一個又一個，田還是那塊田。",
+   "fallback": true
+  },
+  {
+   "id": "d7_old",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     275,
+     280
+    ]
+   },
+   "title": "壽終",
+   "text": "{name}活了{age}歲。你走的時候，天下快要一統了。你跟孩子說，你們運氣好，以後不用再打仗了。",
+   "noKid": "{name}活了{age}歲。你走的時候，天下快要一統了。你跟里中的年輕人說，你們運氣好，以後不用再打仗了。",
+   "fallback": true
+  },
+  {
+   "id": "d8_old_pair",
+   "text": "{name}活了{age}歲，在太康、元康的太平日子裡走完了一生。{spouse}守在你床邊，你們說起年輕時候的事，說著說著，你就睡著了。",
+   "when": "dead",
+   "chapter": 8,
+   "title": "白頭偕老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     280,
+     299
+    ],
+    "married": true
+   }
+  },
+  {
+   "id": "d8_old_lone",
+   "text": "{name}活了{age}歲，在太平日子裡走完了一生。{spouse}先走了，你把那人的舊衣服疊得整整齊齊，放在自己的枕頭旁邊。",
+   "when": "dead",
+   "chapter": 8,
+   "title": "獨守晚年",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     280,
+     299
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   }
+  },
+  {
+   "id": "d8_old_single",
+   "text": "{name}活了{age}歲，一輩子沒有成家。太康年間天下太平，你在里中過了幾年安穩日子。你沒有看到後來的大亂，這也許是你最大的福氣。",
+   "when": "dead",
+   "chapter": 8,
+   "title": "孤身終老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     280,
+     299
+    ],
+    "married": false
+   }
+  },
+  {
+   "id": "d8_old",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     280,
+     299
+    ]
+   },
+   "title": "壽終",
+   "text": "{name}活了{age}歲，在太康、元康的太平日子裡走完了一生。你沒有看到後來的大亂，這也許是你這一生最大的福氣。",
+   "fallback": true
+  },
+  {
+   "id": "d8_old_late_pair",
+   "text": "{name}活了{age}歲。最後那幾年，諸王的兵在城外來來去去。{spouse}把門頂好，回到床邊坐下，說：外面的事，跟我們沒關係了。",
+   "when": "dead",
+   "chapter": 8,
+   "title": "亂世偕老",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     300,
+     400
+    ],
+    "married": true
+   }
+  },
+  {
+   "id": "d8_old_late",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "year": [
+     300,
+     400
+    ]
+   },
+   "title": "亂世終老",
+   "text": "{name}活了{age}歲。你家的故事從亂世開始，到你這裡，又走回了亂世：最後那幾年，諸王的兵在城外來來去去，你已經分不清誰是誰了。"
+  },
+  {
+   "id": "d8_young",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "age": [
+     5,
+     29
+    ]
+   },
+   "title": "生逢一統",
+   "text": "{name}死的時候才{age}歲。你生在天下一統以後，本來以為一輩子都不會見到亂世。"
+  },
+  {
+   "id": "d8_wu",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "region": [
+     "wu",
+     "jiangling"
+    ]
+   },
+   "title": "江南",
+   "text": "{name}死在江南，{age}歲。吳國亡了以後，江南的大族還是大族；北方派來的官說的話，江南人都聽不太懂。"
+  },
+  {
+   "id": "d8_shu",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "region": "shu"
+   },
+   "title": "蜀地",
+   "text": "{name}死在蜀地，{age}歲。蜀漢亡了幾十年，老人們聚在一起，還是說「我們漢朝」。"
+  },
+  {
+   "id": "d8_luoyang",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "region": "luoyang"
+   },
+   "title": "洛陽",
+   "text": "{name}死在洛陽，{age}歲。城裡的富貴人家比誰的步障長、誰的珊瑚高；你住的那條巷子，跟從前沒什麼兩樣。"
+  },
+  {
+   "id": "d8_you",
+   "when": "dead",
+   "chapter": 8,
+   "req": {
+    "region": "you"
+   },
+   "title": "幽州",
+   "text": "{name}死在幽州，{age}歲。邊塞外的慕容部、段部一天比一天強，邊塞上的人說，北邊遲早要出事。"
+  },
+  {
+   "id": "d_old",
+   "when": "dead",
+   "req": {
+    "age": [
+     60,
+     200
+    ]
+   },
+   "title": "壽終",
+   "text": "{name}活了{age}歲。在這個年代，能活到這個歲數的人不多。最後那天，家裡的人都圍在床邊。",
+   "fallback": true
+  },
+  {
+   "id": "d_young",
+   "when": "dead",
+   "req": {
+    "age": [
+     5,
+     29
+    ]
+   },
+   "title": "早逝",
+   "text": "{name}死的時候才{age}歲。家裡的人說，這孩子命不好。可是在那個年代，命不好的人太多了。"
+  },
+  {
+   "id": "d1_default",
+   "when": "dead",
+   "chapter": 1,
+   "title": "漢末",
+   "text": "{name}死在漢朝還沒亡的時候，{age}歲。那時候大家都說，朝廷爛了，可是誰也想不到，後面還有一百多年的亂世。",
+   "fallback": true
+  },
+  {
+   "id": "d2_default",
+   "when": "dead",
+   "chapter": 2,
+   "title": "群雄之世",
+   "text": "{name}死在群雄混戰的那幾年，{age}歲。外面的人在爭天下，你在爭一口飯、一口氣。"
+  },
+  {
+   "id": "d3_default",
+   "when": "dead",
+   "chapter": 3,
+   "title": "建安",
+   "text": "{name}死在建安年間，{age}歲。北方剛剛安定下來，你沒來得及多過幾年好日子。"
+  },
+  {
+   "id": "d5_default",
+   "when": "dead",
+   "chapter": 5,
+   "title": "三分",
+   "text": "{name}死在天下三分的那些年，{age}歲。你家在哪一國，你就是哪一國的人，可是你從來沒想過這件事。"
+  },
+  {
+   "id": "d6e_default_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "faction": "sun"
+   },
+   "title": "二宮",
+   "text": "{name}死在孫權晚年，{age}歲。太子和魯王爭得朝裡人人自危，里中的日子還是照舊。"
+  },
+  {
+   "id": "d6_default_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "faction": "sun",
+    "year": [
+     249,
+     263
+    ]
+   },
+   "title": "赤烏之後",
+   "text": "{name}死在吳國權臣當道的年月裡，{age}歲。建業城裡換了好幾個掌權的人，里中的日子還是照舊。"
+  },
+  {
+   "id": "d6e_default_shu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ],
+    "faction": "liu"
+   },
+   "title": "蔣費之世",
+   "text": "{name}死在蔣琬、費禕守著蜀國的那些年，{age}歲。北伐停了，蜀國的百姓喘了一口氣。"
+  },
+  {
+   "id": "d6_default_shu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "faction": "liu",
+    "year": [
+     249,
+     263
+    ]
+   },
+   "title": "蜀漢晚年",
+   "text": "{name}死在蜀漢的最後那些年，{age}歲。姜維年年北伐，成都的糧一年比一年緊。"
+  },
+  {
+   "id": "d6e_default",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     235,
+     248
+    ]
+   },
+   "title": "明帝之世",
+   "text": "{name}死在魏明帝、曹爽當政的年月裡，{age}歲。洛陽在大修宮殿，里中的日子還是照舊。"
+  },
+  {
+   "id": "d6_default",
+   "when": "dead",
+   "chapter": 6,
+   "title": "正始嘉平",
+   "text": "{name}死在司馬家掌權的年月裡，{age}歲。洛陽的大人物一個一個倒下，里中的日子還是照舊。",
+   "req": {
+    "year": [
+     249,
+     263
+    ]
+   }
+  },
+  {
+   "id": "d7_default_wu",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "faction": "sun"
+   },
+   "title": "孫皓之世",
+   "text": "{name}死在孫皓當皇帝的年月裡，{age}歲。吳國還在，可是人人都知道，撐不了多久了。"
+  },
+  {
+   "id": "d7e_default",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "year": [
+     264,
+     274
+    ]
+   },
+   "title": "兩國之世",
+   "text": "{name}死在蜀漢亡國以後的那些年，{age}歲。吳國還在長江對岸，北方的皇帝換了一個又一個，里中的日子還是照舊。"
+  },
+  {
+   "id": "d7_default",
+   "when": "dead",
+   "chapter": 7,
+   "title": "咸寧",
+   "text": "{name}死在晉朝初年，{age}歲。天下快要一統了，你沒有等到那一天。",
+   "req": {
+    "year": [
+     275,
+     280
+    ]
+   }
+  },
+  {
+   "id": "d8_default",
+   "when": "dead",
+   "chapter": 8,
+   "title": "太康",
+   "text": "{name}死在晉朝最太平的那些年，{age}歲。你走的時候，還不知道後面會發生什麼。",
+   "req": {
+    "year": [
+     280,
+     299
+    ]
+   }
+  },
+  {
+   "id": "d8_default_late",
+   "when": "dead",
+   "chapter": 8,
+   "title": "諸王之世",
+   "text": "{name}死在諸王混戰的年頭，{age}歲。洛陽的天子換了一個又一個，你只知道今年的糧又不夠了。"
+  },
+  {
+   "id": "d_default",
+   "when": "dead",
+   "title": "亂世一粟",
+   "text": "{name}死的那年{age}歲。這樣的人，那個年代有千千萬萬，史書不會記下任何一個。",
+   "fallback": true
+  },
+  {
+   "id": "a1_child",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。甲子年的事，你只記得大人們夜裡壓低聲音說話，和遠處的火光。"
+  },
+  {
+   "id": "a_liubei",
+   "when": "alive",
+   "rare": true,
+   "req": {
+    "flag": "follow_liubei"
+   },
+   "title": "從玄德",
+   "text": "{name}跟著那個賣草鞋的漢室宗親上了路。前面還有很長的二十年：徐州、新野、長坂、赤壁、成都。這時候，誰也不知道。",
+   "chapter": 1
+  },
+  {
+   "id": "a_caocao",
+   "when": "alive",
+   "rare": true,
+   "req": {
+    "flag": "follow_caocao"
+   },
+   "title": "陳留起兵",
+   "text": "{name}站在陳留的招兵旗下。那個個子不高的人，後來會統一北方。這時候，他只有五千人。",
+   "chapter": 1
+  },
+  {
+   "id": "a_sunjian_n",
+   "when": "alive",
+   "rare": true,
+   "req": {
+    "flag": "follow_sunjian"
+   },
+   "title": "隨破虜北上",
+   "text": "{name}跟著孫堅從長沙北上。路過南陽時，他要殺一個不肯給軍糧的太守；到了魯陽，他要見一個叫袁術的人。江東猛虎，這一年出山了。",
+   "chapter": 1
+  },
+  {
+   "id": "a_sunjian",
+   "when": "alive",
+   "rare": true,
+   "req": {
+    "flag": [
+     "xiandeng",
+     "with_sunjian"
+    ]
+   },
+   "title": "宛城先登",
+   "text": "{name}是宛城第二個登城的人。孫堅帳下的老兵後來都叫你「二登」。江東的事業，才剛剛開始。",
+   "chapter": 1
+  },
+  {
+   "id": "a_heishan_f",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "flag": "heishan",
+    "gender": "f"
+   },
+   "title": "山寨",
+   "text": "{name}在太行山的寨子裡活了下來。男人們下山去搶糧，你在寨子裡開荒、餵豬、替傷兵包紮。官府叫你們黑山賊，你只知道，山裡至少沒有人餓死。"
+  },
+  {
+   "id": "a_heishan",
+   "when": "alive",
+   "req": {
+    "flag": "heishan"
+   },
+   "title": "黑山",
+   "text": "{name}在太行山裡活了下來。官府叫你們黑山賊，你們自己不怎麼叫自己什麼。",
+   "chapter": 1
+  },
+  {
+   "id": "a_hj_rejoin",
+   "when": "alive",
+   "req": {
+    "flag": "rejoined"
+   },
+   "title": "黃巾復起",
+   "text": "{name}第二次綁上了黃巾。大賢良師早就死了，可是餓肚子的人還在。",
+   "chapter": 1
+  },
+  {
+   "id": "a_hj_north",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "anyFlag": [
+     "huangjin_survivor"
+    ],
+    "region": [
+     "ji",
+     "qing",
+     "you"
+    ]
+   },
+   "title": "廣宗之後",
+   "text": "{name}活過了甲子年。廣宗城破的那一夜、下曲陽城南那座京觀，你都見過。那條黃巾埋在哪棵樹下，你一直記得，只是再也沒有去挖。"
+  },
+  {
+   "id": "a_hj_yu",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "anyFlag": [
+     "huangjin_survivor"
+    ],
+    "region": [
+     "yu",
+     "xu"
+    ]
+   },
+   "title": "長社之後",
+   "text": "{name}活過了甲子年。長社那一夜的火，你在很遠的地方都看得見。後來你再也不敢在有風的夜裡睡在草堆上。"
+  },
+  {
+   "id": "a_hj_jing",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "anyFlag": [
+     "huangjin_survivor"
+    ],
+    "region": "jing"
+   },
+   "title": "宛城之後",
+   "text": "{name}活過了甲子年。宛城被圍的那幾個月，城裡的人連皮帶都煮來吃。城破那天你翻牆出去，再也沒有回頭看。"
+  },
+  {
+   "id": "a_hj",
+   "when": "alive",
+   "req": {
+    "anyFlag": [
+     "huangjin_survivor"
+    ]
+   },
+   "title": "黃天已死",
+   "text": "{name}活過了甲子年。那條黃巾埋在哪棵樹下，你一直記得，只是再也沒有去挖。",
+   "chapter": 1,
+   "fallback": true
+  },
+  {
+   "id": "a_official_kind",
+   "when": "alive",
+   "req": {
+    "flag": [
+     "official",
+     "kind_official"
+    ]
+   },
+   "title": "好游徼",
+   "text": "{name}當了幾年游徼。鄉里人背後說，這是個肯替人擔事的官。",
+   "chapter": 1
+  },
+  {
+   "id": "a_official",
+   "when": "alive",
+   "req": {
+    "flag": "official"
+   },
+   "title": "討賊有功",
+   "text": "{name}靠著討黃巾的軍功，有了一個小小的官職。再往上走，就要看天下怎麼亂了。",
+   "chapter": 1
+  },
+  {
+   "id": "a_gj",
+   "when": "alive",
+   "req": {
+    "route": "guanjun"
+   },
+   "title": "解甲歸田",
+   "text": "{name}把那把環首刀掛在牆上。它還會再被拿下來的，只是這時候你還不知道。",
+   "chapter": 1
+  },
+  {
+   "id": "a_wubao_big",
+   "when": "alive",
+   "req": {
+    "flag": "big_wubao"
+   },
+   "title": "塢主",
+   "text": "{name}的塢堡裡住著幾百口人。亂世裡，這樣的塢堡就是一個小小的國。",
+   "chapter": 1
+  },
+  {
+   "id": "a_wubao",
+   "when": "alive",
+   "req": {
+    "route": "wubao"
+   },
+   "title": "守塢",
+   "text": "{name}守住了家。塢牆上的刀痕，留給孩子們去問。",
+   "chapter": 1,
+   "noKid": "{name}守住了家。塢牆上的刀痕，一直沒有補。"
+  },
+  {
+   "id": "a_flee_ji",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "route": "flee",
+    "region": "ji"
+   },
+   "title": "鉅鹿逃人",
+   "text": "{name}一家從鉅鹿逃了出來。張角兄弟就是從這裡起事的，官軍說，鉅鹿來的人個個可疑。你們在太行山腳下躲了一年，回來的時候，村子已經空了一半。"
+  },
+  {
+   "id": "a_flee_qing",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "route": "flee",
+    "region": "qing"
+   },
+   "title": "海邊",
+   "text": "{name}一家沿著海邊逃。青州的黃巾比哪裡都多，你們在一個漁村的破船裡住了一個冬天，吃的是退潮後撿來的蛤蜊。"
+  },
+  {
+   "id": "a_flee_yu",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "route": "flee",
+    "region": "yu"
+   },
+   "title": "潁川流民",
+   "text": "{name}一家逃出了潁川。長社那一場大火之後，路邊到處是燒焦的屍首。你們繞了一大圈才回到家，能活下來，就已經是本事。"
+  },
+  {
+   "id": "a_flee_jing",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "route": "flee",
+    "region": "jing"
+   },
+   "title": "漢水邊",
+   "text": "{name}一家逃出了南陽。宛城被圍了好幾個月，城外的村子一個一個被燒。你們往南逃到了漢水邊，才總算喘了一口氣。"
+  },
+  {
+   "id": "a_flee_you",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "route": "flee",
+    "region": "you"
+   },
+   "title": "三遷",
+   "text": "{name}一家往北邊逃。幽州的黃巾不多，可是後來張純勾結烏桓造反，你們又逃了一次。這幾年，你家搬了三次家。"
+  },
+  {
+   "id": "a_flee_xu",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "route": "flee",
+    "region": "xu"
+   },
+   "title": "下邳之後",
+   "text": "{name}一家從下邳逃到了海邊。後來陶謙當了刺史，打退了這一帶的黃巾，日子總算安定了一點。"
+  },
+  {
+   "id": "a_flee",
+   "when": "alive",
+   "req": {
+    "route": "flee"
+   },
+   "title": "亂世苟全",
+   "text": "{name}逃過了甲子年，也逃過了後來的饑荒和大疫。能活下來，就已經是本事。",
+   "chapter": 1,
+   "fallback": true
+  },
+  {
+   "id": "a_xy",
+   "when": "alive",
+   "req": {
+    "route": "xiangyong"
+   },
+   "title": "涿縣義兵",
+   "text": "{name}當過幾個月的義兵，跟過一個大耳朵的劉玄德。後來人們都知道了他的名字，你也沒跟誰提起過。",
+   "chapter": 1
+  },
+  {
+   "id": "a1_ji",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "region": "ji"
+   },
+   "title": "鉅鹿",
+   "text": "{name}住在冀州。五年前張角兄弟就是從鉅鹿起事的，後來廣宗、下曲陽的屍首被堆成了京觀。這一年冬天，聽說董卓帶兵進了洛陽。"
+  },
+  {
+   "id": "a1_qing",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "region": "qing"
+   },
+   "title": "海濱",
+   "text": "{name}住在青州。黃巾的餘黨還在海邊鬧，官府管不了。里中的老人說，這些人遲早還會再起來。"
+  },
+  {
+   "id": "a1_yu",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "region": "yu"
+   },
+   "title": "長社",
+   "text": "{name}住在潁川。五年前皇甫嵩在長社放火燒了黃巾的營，火光照了半個天。這一年冬天，洛陽的大將軍何進被宦官殺了，董卓帶兵進了京城。"
+  },
+  {
+   "id": "a1_jing",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "region": "jing"
+   },
+   "title": "宛城",
+   "text": "{name}住在南陽。五年前黃巾在宛城被圍了好幾個月，城破的那天殺了很多人。這一年，朝廷換了皇帝，南陽換了太守，日子還是一樣難過。"
+  },
+  {
+   "id": "a1_you",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "region": "you"
+   },
+   "title": "劉幽州",
+   "text": "{name}住在幽州。前兩年張純勾結烏桓造反，燒殺到了青徐。新來的幽州牧劉虞是個寬厚人，總算讓邊塞安靜了下來。"
+  },
+  {
+   "id": "a1_xu",
+   "when": "alive",
+   "chapter": 1,
+   "req": {
+    "region": "xu"
+   },
+   "title": "陶徐州",
+   "text": "{name}住在徐州。新來的刺史陶謙打退了這一帶的黃巾，徐州成了亂世裡少有的富庶地方，北邊逃難的人一批一批往這裡來。"
+  },
+  {
+   "id": "a_default",
+   "when": "alive",
+   "title": "亂世之前",
+   "text": "{name}活到了中平六年的冬天。董卓已經進了洛陽，天下就要亂了。往後的事，下一章再說。",
+   "chapter": 1,
+   "fallback": true
+  },
+  {
+   "id": "a2_child",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。這些年天下換了好幾個主子，你只知道家裡的飯有時候多、有時候少。"
+  },
+  {
+   "id": "a2_qianli",
+   "when": "alive",
+   "chapter": 2,
+   "rare": true,
+   "req": {
+    "flag": "qianli"
+   },
+   "title": "封金掛印",
+   "text": "{name}跟著關羽離開許都，一路往北去找劉備。曹操送的東西，關羽一件也沒帶走。後來的人把這段路說成「過五關斬六將」，你知道其實沒有人攔你們。"
+  },
+  {
+   "id": "a2_wuchao",
+   "when": "alive",
+   "chapter": 2,
+   "rare": true,
+   "req": {
+    "flag": "wuchao"
+   },
+   "title": "烏巢之火",
+   "text": "{name}是那天夜裡跟曹操去烏巢的五千人之一。那把火燒掉了袁紹一萬多車糧，也燒出了曹操的北方。"
+  },
+  {
+   "id": "a2_shenting",
+   "when": "alive",
+   "chapter": 2,
+   "rare": true,
+   "req": {
+    "flag": "shenting"
+   },
+   "title": "神亭十三騎",
+   "text": "{name}是神亭那天跟著孫策的十三騎之一。後來孫策死了，你還常常想起那把手戟和那頂頭盔。"
+  },
+  {
+   "id": "a2_wancheng",
+   "when": "alive",
+   "chapter": 2,
+   "rare": true,
+   "req": {
+    "flag": "wancheng_gate"
+   },
+   "title": "營門三人",
+   "text": "宛城那一夜，營門口活下來三個人。{name}是其中之一。每年典韋的忌日，你都會喝一碗酒，倒一碗酒。"
+  },
+  {
+   "id": "a2_dantu",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "dantu"
+   },
+   "title": "丹徒",
+   "text": "{name}看著孫策把印綬交給孫權。那個十九歲的年輕人哭了很久，張昭讓他換上衣服出去見將士。江東的事，從此是他的了。"
+  },
+  {
+   "id": "a2_liu_hebei",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "liu_hebei"
+   },
+   "title": "寄人籬下",
+   "text": "{name}跟著劉備在河北寄人籬下。他說，等雲長回來，咱們就走。"
+  },
+  {
+   "id": "a2_liu",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "liu"
+   },
+   "title": "徐州舊人",
+   "text": "{name}跟著劉備丟了平原、丟了徐州、丟了下邳。每丟一次，他都說還會再站起來。你信了。"
+  },
+  {
+   "id": "a2_qzb",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "cao",
+    "anyFlag": [
+     "qzb_join",
+     "qzb_old"
+    ]
+   },
+   "title": "青州兵",
+   "text": "{name}在青州兵裡活過了官渡。青州兵打仗不要命，搶東西也不要命。軍中的人說，曹公手上最鋒利的刀，是從黃巾手裡接過來的。"
+  },
+  {
+   "id": "a2_dianong",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "tuntian_officer"
+   },
+   "title": "典農",
+   "text": "{name}在許下管了五年屯田。官渡打仗的那一年，前線的糧，有一部分是你們種出來的。"
+  },
+  {
+   "id": "a2_cao_f",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "cao",
+    "gender": "f"
+   },
+   "title": "曹營家眷",
+   "text": "{name}一家跟著曹營走了十年。男人在前頭打仗，你在後頭縫衣、舂米、等消息。十年前曹操只有五千人，現在他是北方的主人。"
+  },
+  {
+   "id": "a2_cao",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "cao"
+   },
+   "title": "曹營",
+   "text": "{name}跟著曹操打到了官渡。十年前他只有五千人，現在他是北方的主人。"
+  },
+  {
+   "id": "a2_sun",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "sun"
+   },
+   "title": "江東",
+   "text": "{name}跟過孫堅，也跟過孫策。孫家兩代人都死得太早，江東的事落到了一個十九歲的少年肩上。"
+  },
+  {
+   "id": "a2_yuan_keng",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "guandu_surrender"
+   },
+   "title": "坑邊",
+   "text": "那天晚上，七萬多人被推進坑裡。{name}在蘆葦裡躲到天亮，聽著那邊的聲音一點一點停下來。"
+  },
+  {
+   "id": "a2_yuan",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "yuan"
+   },
+   "title": "河北敗卒",
+   "text": "{name}跟著袁紹逃回了河北。袁紹從此一病不起。四世三公的袁家，就要散了。"
+  },
+  {
+   "id": "a2_heishan",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "heishan"
+   },
+   "title": "太行",
+   "text": "{name}在太行山裡又過了十年。山外的天下換了好幾個主子，山裡還是那座山。"
+  },
+  {
+   "id": "a2_med_xu",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "focus": "學醫問藥",
+    "region": "xu"
+   },
+   "title": "泗水醫者",
+   "text": "{name}背著藥箱走了十年。曹操屠徐州以後，你在泗水邊收治過活下來的人，有的人身上沒有傷，可是再也不說話了。"
+  },
+  {
+   "id": "a2_med_yu",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "focus": "學醫問藥",
+    "region": "yu"
+   },
+   "title": "許下醫者",
+   "text": "{name}背著藥箱走了十年。天子遷到許縣以後，城裡人一下子多了起來，病也跟著多了。屯田的人、當兵的人、做官的人，都來敲過你的門。"
+  },
+  {
+   "id": "a2_med_north",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "focus": "學醫問藥",
+    "region": [
+     "ji",
+     "qing",
+     "you"
+    ]
+   },
+   "title": "河北醫者",
+   "text": "{name}背著藥箱走了十年。袁紹和公孫瓚在河北打了好幾年，從界橋到易京，抬下來的傷兵一批又一批。你學會的第一件事，是先救還有救的人。"
+  },
+  {
+   "id": "a2_med",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "focus": "學醫問藥"
+   },
+   "title": "醫者",
+   "text": "{name}背著藥箱走了十年。兵荒馬亂裡，會治病的人比會打仗的人少得多。認得你的人，比認得哪個將軍的都多。"
+  },
+  {
+   "id": "a2_widow",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "widowed"
+   },
+   "title": "未亡人",
+   "text": "{name}一個人把孩子拉拔大。{spouse}留下的那只草鞋，一直掛在門後。",
+   "noKid": "{name}一個人過日子。{spouse}留下的那只草鞋，一直掛在門後。"
+  },
+  {
+   "id": "a2_reunion",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "spouse_legless"
+   },
+   "title": "團圓",
+   "text": "{spouse}回來了，少了一條腿，但人回來了。亂世裡，這已經是天大的福氣。"
+  },
+  {
+   "id": "a2_jingzhou",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "jingzhou"
+   },
+   "title": "荊州避亂",
+   "text": "{name}在襄陽過了十年太平日子。北方打得天昏地暗，荊州的學校裡，讀書聲沒有斷過。"
+  },
+  {
+   "id": "a2_tuntian",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "flag": "tuntian"
+   },
+   "title": "屯田戶",
+   "text": "{name}種了好幾年官田。收成一大半要交出去，可是有飯吃，不用再逃。"
+  },
+  {
+   "id": "a2_ji",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "河北",
+   "text": "{name}住在冀州。這一年袁紹在官渡敗了，逃回河北的兵一路經過你們里中，有的連鞋都沒有。袁家的大旗還插在鄴城，可是誰都看得出來，風向變了。"
+  },
+  {
+   "id": "a2_yu",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "許下",
+   "text": "{name}住在豫州。這幾年天子就住在許縣，離你家不遠。官渡打仗的那一年，徵發的民夫一批一批從里中出發，回來的不到一半。"
+  },
+  {
+   "id": "a2_xu",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "四易其主",
+   "text": "{name}住在徐州。這十年裡，徐州換了陶謙、劉備、呂布、曹操四個主人。每換一次，就死一批人。"
+  },
+  {
+   "id": "a2_qing",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "青州",
+   "text": "{name}住在青州。袁譚在這裡當刺史，北海的孔融早就逃走了。田荒了一大半，里中的老人說，黃巾那年都沒有這麼慘。"
+  },
+  {
+   "id": "a2_you",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "易京之後",
+   "text": "{name}住在幽州。去年公孫瓚在易京的高樓上自焚，幽州歸了袁家。里中的老人說，劉虞在的時候，日子好過多了。"
+  },
+  {
+   "id": "a2_jing",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "宛城",
+   "text": "{name}住在南陽。這幾年張繡駐在宛城，降了曹操又反，反了又降。去年他終於帶著兵去了許都，南陽總算安靜了一點。"
+  },
+  {
+   "id": "a2_wu_civ",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "region": "wu"
+   },
+   "title": "江東百姓",
+   "text": "{name}在江東過日子。這一年孫策死了，接手的孫權才十九歲。北方打得天昏地暗，江東反倒安靜。",
+   "fallback": true
+  },
+  {
+   "id": "a2_default",
+   "when": "alive",
+   "chapter": 2,
+   "title": "建安五年",
+   "text": "{name}活到了建安五年。董卓死了，呂布死了，孫策死了，袁紹也快了。你還活著，這就是你這一生最大的本事。",
+   "fallback": true
+  },
+  {
+   "id": "a3_child",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。大人們說北方是曹丞相的了，南邊燒了一場大火。你在院子裡玩泥巴，聽不太懂。"
+  },
+  {
+   "id": "a3_adou",
+   "when": "alive",
+   "chapter": 3,
+   "rare": true,
+   "req": {
+    "flag": "adou"
+   },
+   "title": "長坂救主",
+   "text": "{name}跟著趙雲在長坂殺了個來回，把劉備的兒子從亂軍裡帶了出來。那孩子後來長大了，從來不知道你的名字。"
+  },
+  {
+   "id": "a3_fireship",
+   "when": "alive",
+   "chapter": 3,
+   "rare": true,
+   "req": {
+    "flag": "fireship"
+   },
+   "title": "火船",
+   "text": "{name}是赤壁那夜點火的人之一。曹操的八十萬大軍，在你身後燒成了一片紅。"
+  },
+  {
+   "id": "a3_bailang",
+   "when": "alive",
+   "chapter": 3,
+   "rare": true,
+   "req": {
+    "flag": "bailang"
+   },
+   "title": "白狼山",
+   "text": "{name}跟著張遼從白狼山衝下去，斬了蹋頓。曹操後來在碣石山上看海，寫了「東臨碣石，以觀滄海」。"
+  },
+  {
+   "id": "a3_duanqiao",
+   "when": "alive",
+   "chapter": 3,
+   "rare": true,
+   "req": {
+    "flag": "duanqiao"
+   },
+   "title": "斷橋",
+   "text": "{name}站在張飛身後，看著曹軍不敢過河。張飛那一聲吼，你耳朵嗡嗡響了三天。"
+  },
+  {
+   "id": "a3_huarong",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "huarong",
+    "faction": "cao"
+   },
+   "title": "華容道",
+   "text": "{name}從華容道的泥裡走了出來。很多年後聽說書人講「關羽義釋曹操」，你笑了：那天路上沒有關羽，只有泥。"
+  },
+  {
+   "id": "a3_liu",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "faction": "liu"
+   },
+   "title": "如魚得水",
+   "text": "{name}跟著劉備，從新野走到赤壁。他四十八歲才遇到諸葛亮，才終於有了自己的地盤。你也老了，但你覺得值得。"
+  },
+  {
+   "id": "a3_sun",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "faction": "sun"
+   },
+   "title": "江東",
+   "text": "{name}看著孫家三代人撐起了江東。赤壁之後，長江南岸，是孫家的了。"
+  },
+  {
+   "id": "a3_cao_f",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "faction": "cao",
+    "gender": "f"
+   },
+   "title": "曹營家眷",
+   "text": "{name}是曹營的家眷。男人們平了河北、北征了烏桓，又在赤壁輸了一場。你數著回來的人，一年比一年少。"
+  },
+  {
+   "id": "a3_cao",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "faction": "cao"
+   },
+   "title": "北方",
+   "text": "{name}跟著曹操平了河北，北征了烏桓，最後在赤壁輸了一場。北方是曹家的，可是天下還沒有。"
+  },
+  {
+   "id": "a3_liaodong",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "liaodong"
+   },
+   "title": "遼東",
+   "text": "{name}是袁家最後的隨從之一。袁氏四世三公，到這一年，什麼都沒有剩下。"
+  },
+  {
+   "id": "a3_heishan",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "faction": "heishan"
+   },
+   "title": "最後的黑山",
+   "text": "張燕下山了，{name}沒有。太行山裡還有幾百個人，守著一座沒有名字的山寨。"
+  },
+  {
+   "id": "a3_flee",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "follow_flee"
+   },
+   "title": "隨劉使君南走",
+   "text": "{name}跟著十幾萬百姓從襄陽走到長坂，又從長坂走到江陵。有人問你為什麼要跟劉備走，你說：大家都走了，總不能一個人留下。"
+  },
+  {
+   "id": "a3_huatuo",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "huatuo"
+   },
+   "title": "五禽",
+   "text": "{name}每天早上練華佗教的五禽戲。鄰里的老人一個一個走了，你的腰還是直的。"
+  },
+  {
+   "id": "a3_jing",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "anyFlag": [
+     "jingzhou"
+    ]
+   },
+   "title": "荊州",
+   "text": "{name}在荊州住了快二十年。這一年，荊州換了三個主人：劉表、曹操、還有一場大火之後的孫權和劉備。"
+  },
+  {
+   "id": "a3_teacher",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "has_student"
+   },
+   "title": "傳燈",
+   "text": "{name}把一輩子學會的東西，都教給了里中的年輕人。亂世裡人命不值錢，可是你教的那些本事，會比你活得久。"
+  },
+  {
+   "id": "a3_tuntian",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "tuntian"
+   },
+   "title": "屯田二十年",
+   "text": "{name}在官田上種了十幾年地。地是官府的，牛是官府的，可是那些年的收成，是你一鋤一鋤種出來的。"
+  },
+  {
+   "id": "a3_med",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "focus": "學醫問藥"
+   },
+   "title": "醫者",
+   "text": "{name}背著藥箱走過黃巾、走過群雄、走到赤壁這一年。你接生過的孩子，有的都當爹娘了。"
+  },
+  {
+   "id": "a3_widow",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "widowed"
+   },
+   "title": "未亡人",
+   "text": "{name}一個人過了十幾年。門後那只草鞋，你一直沒有取下來。"
+  },
+  {
+   "id": "a3_reunion",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "spouse_legless"
+   },
+   "title": "白頭",
+   "text": "{name}和{spouse}都老了。他少了一條腿，你頭髮全白了。冬天的晚上，兩個人坐在火邊，什麼話也不說。"
+  },
+  {
+   "id": "a3_ji",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "玄武池",
+   "text": "{name}住在冀州。鄴城成了曹操的大本營，他在城外挖了玄武池練水軍。這一年冬天，消息傳回來：那些水軍，在赤壁燒光了。"
+  },
+  {
+   "id": "a3_yu",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "丞相",
+   "text": "{name}住在豫州。這一年曹操當了丞相，許都的人私下說，天子只剩下一個名號了。冬天的時候，從南邊回來的兵說，赤壁那邊起了大火。"
+  },
+  {
+   "id": "a3_xu",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "徐州",
+   "text": "{name}住在徐州。這幾年徐州總算沒打仗，地裡又長出了莊稼。南邊赤壁打了一仗，徐州的人只是聽說。"
+  },
+  {
+   "id": "a3_qing",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "青州",
+   "text": "{name}住在青州。袁譚死了以後，青州歸了曹操。這幾年官府來登記戶口、丈量田地，青州又像是一個有王法的地方了。"
+  },
+  {
+   "id": "a3_you",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "烏桓之後",
+   "text": "{name}住在幽州。去年曹操北征烏桓，大軍從你家附近經過，回來的路上挖了很多井。北邊的仗打完了，幽州難得太平了幾年。"
+  },
+  {
+   "id": "a3_wu_civ",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "wu"
+   },
+   "title": "江東百姓",
+   "text": "{name}在江東過日子。這一年冬天，周瑜在赤壁燒了曹操的船。你家門前的江水照樣流，可是里中的人都說，北方的兵，再也過不來了。",
+   "fallback": true
+  },
+  {
+   "id": "a3_nanyang",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "南陽",
+   "text": "{name}住在南陽。這一年劉表死了，他的兒子劉琮把荊州獻給了曹操。曹軍從宛城南下，一路經過你家門口，走了好幾天才走完。"
+  },
+  {
+   "id": "a3_default",
+   "when": "alive",
+   "chapter": 3,
+   "title": "建安十三年",
+   "text": "{name}活到了建安十三年的冬天。從黃巾起事那年算起，已經二十四年了。你見過的人大多不在了，天下也從一個變成了三個。"
+  },
+  {
+   "id": "a4_child",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。這一年大人們說漢朝沒了。你問什麼是漢朝，沒有人答得上來。"
+  },
+  {
+   "id": "a4_guagu",
+   "when": "alive",
+   "chapter": 4,
+   "rare": true,
+   "req": {
+    "flag": "guagu_doctor"
+   },
+   "title": "刮骨",
+   "text": "{name}替關羽刮過骨。那天他一邊吃肉喝酒一邊談笑，只有你知道，他的另一隻手在桌子底下握得很緊。"
+  },
+  {
+   "id": "a4_maicheng",
+   "when": "alive",
+   "chapter": 4,
+   "rare": true,
+   "req": {
+    "flag": "maicheng"
+   },
+   "title": "臨沮",
+   "text": "{name}是跟著關羽走到最後的十幾個人之一，也是少數活下來的人。後來到處都蓋起了關帝廟，你一間也沒有進去過。"
+  },
+  {
+   "id": "a4_babai",
+   "when": "alive",
+   "chapter": 4,
+   "rare": true,
+   "req": {
+    "flag": "babai"
+   },
+   "title": "八百壯士",
+   "text": "{name}是合肥那八百人之一。張遼後來封了晉陽侯，你還是一個老兵，可是每次喝醉，都會說起那天早上。"
+  },
+  {
+   "id": "a4_deathbed",
+   "when": "alive",
+   "chapter": 4,
+   "rare": true,
+   "req": {
+    "flag": "caocao_deathbed"
+   },
+   "title": "分香賣履",
+   "text": "{name}是曹操臨終時握著他手的人之一。三十多年前在長社城外，他還只是一個騎都尉。"
+  },
+  {
+   "id": "a4_xiaoyao",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "xiaoyao"
+   },
+   "title": "逍遙津",
+   "text": "{name}在逍遙津護著孫權跳過了斷橋。孫權後來當了皇帝，他還記得那一鞭。"
+  },
+  {
+   "id": "a4_baiyi",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "baiyi"
+   },
+   "title": "白衣",
+   "text": "{name}穿著白衣搖櫓渡過了長江。荊州從此是東吳的了，關羽也死了。你說不清那是勝利，還是一件讓人難過的事。"
+  },
+  {
+   "id": "a4_dingjun",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "dingjun"
+   },
+   "title": "定軍山",
+   "text": "{name}跟著黃忠從定軍山衝下去。那一年，劉備當上了漢中王，你跟著他走了三十多年。"
+  },
+  {
+   "id": "a4_shu",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "faction": "liu",
+    "region": "shu"
+   },
+   "title": "入蜀",
+   "text": "{name}在蜀中住了下來。從家鄉到成都，你家走了大半個天下。劉備說過，等天下太平，要帶大家回去看看。"
+  },
+  {
+   "id": "a4_liu_west",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "faction": "liu",
+    "region": [
+     "jing",
+     "jiangling"
+    ]
+   },
+   "title": "西望",
+   "text": "{name}一家還在荊州。關將軍死了，荊州丟了，跟著劉備的人家都在想辦法往西走，去蜀中找他。你常常站在江邊往上游看。"
+  },
+  {
+   "id": "a4_pangde",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "pangde"
+   },
+   "title": "漢水",
+   "text": "{name}從漢水裡爬了出來。龐德死了，于禁降了，你回到了魏國。沒有人問你那天站在哪一邊。"
+  },
+  {
+   "id": "a4_cao_f",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "faction": "cao",
+    "gender": "f"
+   },
+   "title": "受禪",
+   "text": "{name}看著曹丕登壇受禪。你家的男人跟著他父親打了半輩子的仗，到頭來，換了一個國號。"
+  },
+  {
+   "id": "a4_cao",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "faction": "cao",
+    "flag": "served"
+   },
+   "title": "魏",
+   "text": "{name}看著曹丕登壇受禪。你跟著他父親打了半輩子的仗，到頭來，換了一個國號。"
+  },
+  {
+   "id": "a4_sun_f",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "faction": "sun",
+    "gender": "f"
+   },
+   "title": "部曲家眷",
+   "text": "{name}跟著孫家的部曲，從長沙到了江東。孫堅死了快三十年，家裡的人還常說起他那頂紅頭巾。"
+  },
+  {
+   "id": "a4_sun",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "faction": "sun"
+   },
+   "title": "吳",
+   "text": "{name}跟著孫家三代人，從長沙打到荊州。孫堅死了快三十年，你還記得他那頂紅頭巾。"
+  },
+  {
+   "id": "a4_plague_doc",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "plague_doctor"
+   },
+   "title": "大疫中的醫者",
+   "text": "{name}在建安二十二年的大疫裡背著藥箱走過一條又一條街。那一年死了很多人，可是也有很多人，因為你活了下來。"
+  },
+  {
+   "id": "a4_teacher",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "has_student"
+   },
+   "title": "傳燈",
+   "text": "{name}教過的孩子們都長大了，有的當了兵，有的當了吏，有的回家種地。漢朝沒了，可是你教他們的東西還在。"
+  },
+  {
+   "id": "a4_lone_young",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "anyFlag": [
+     "spouse_dead_old",
+     "widowed"
+    ],
+    "age": [
+     0,
+     49
+    ]
+   },
+   "title": "獨撐",
+   "text": "{name}一個人撐著這個家。{spouse}走了以後，家裡的活全落在你身上。漢朝沒了，可是明天的田還是要下。"
+  },
+  {
+   "id": "a4_lone_f",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "anyFlag": [
+     "spouse_dead_old",
+     "widowed"
+    ],
+    "age": [
+     50,
+     200
+    ],
+    "gender": "f"
+   },
+   "title": "門前納鞋",
+   "text": "{name}坐在門口納鞋底。{spouse}已經走了好些年，孫兒們在院子裡追著雞跑。漢朝沒了，你手上的針線，一針也沒停。",
+   "noKid": "{name}坐在門口納鞋底。{spouse}已經走了好些年，院子裡很安靜。漢朝沒了，你手上的針線，一針也沒停。"
+  },
+  {
+   "id": "a4_lone",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "anyFlag": [
+     "spouse_dead_old",
+     "widowed"
+    ],
+    "age": [
+     50,
+     200
+    ]
+   },
+   "title": "獨坐",
+   "text": "{name}一個人坐在院子裡曬太陽。{spouse}已經走了好些年，孫子在旁邊玩泥巴。漢朝沒了，你覺得好像也沒那麼重要。",
+   "noKid": "{name}一個人坐在院子裡曬太陽。{spouse}已經走了好些年，院子裡很安靜。漢朝沒了，你覺得好像也沒那麼重要。"
+  },
+  {
+   "id": "a4_tuntian",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "flag": "tuntian",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "屯田戶",
+   "text": "{name}一家是屯田戶。官府的牛、官府的地，收成的六成交給官府。日子不算好，可是這些年，你家沒有餓死過人。漢朝亡了，田照樣要種。"
+  },
+  {
+   "id": "a4_jiangling",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "jiangling"
+   },
+   "title": "江陵",
+   "text": "{name}一家在江陵住了下來。這些年江陵歸劉備，關羽鎮守荊州；去年冬天呂蒙白衣渡江，城頭換成了吳的旗子。今年又聽說，北方的漢朝也沒了。"
+  },
+  {
+   "id": "a4_jing_cellar",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ],
+    "flag": "wan_cellar",
+    "noflag": "jiangling"
+   },
+   "title": "地窖",
+   "text": "{name}在宛城的地窖裡躲過了曹仁的屠城。出來的時候，城裡的街你一條也認不出來了。今年冬天里正說漢朝沒了，你只是點了點頭。"
+  },
+  {
+   "id": "a4_jing_fan",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ],
+    "flag": "fan_porter",
+    "noflag": "jiangling"
+   },
+   "title": "樊城城頭",
+   "text": "{name}這些年替樊城扛過土、送過糧。去年關羽水淹七軍，你站在城頭看過那一片大水。今年冬天，里正說漢朝沒了，從今以後是魏朝。"
+  },
+  {
+   "id": "a4_jing",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ],
+    "noflag": "jiangling"
+   },
+   "title": "南陽",
+   "text": "{name}住在南陽。去年宛城的侯音造反，曹仁打進城，殺了很多人。今年冬天，里正說漢朝沒了，從今以後是魏朝。你只想知道，明年的租會不會少一點。"
+  },
+  {
+   "id": "a4_ji",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "鄴下",
+   "text": "{name}住在冀州。這些年鄴城是魏王的都城，從漳水邊上遠遠就看得見銅雀臺。這一年，魏王的兒子當了皇帝，可是新的都城不在鄴城，在洛陽。"
+  },
+  {
+   "id": "a4_yu",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "繁陽",
+   "text": "{name}住在豫州。這一年十月，漢獻帝在許昌南邊的繁陽，把天下讓給了曹丕。你家離那裡不遠，聽說受禪那天，壇下站了好幾萬人，誰也沒有出聲。"
+  },
+  {
+   "id": "a4_xu",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "徐州",
+   "text": "{name}住在徐州。二十多年前，曹操在這裡殺過很多人，泗水都不流了。現在里中的年輕人已經不知道那件事了。這一年，天下改姓了曹。"
+  },
+  {
+   "id": "a4_qing",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "青州",
+   "text": "{name}住在青州。這些年青州歸臧霸那些豪帥管著，朝廷的話不太算數。曹操一死，洛陽的青州兵就敲著鼓自己走回了家。"
+  },
+  {
+   "id": "a4_you",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "邊塞",
+   "text": "{name}住在幽州。北邊的鮮卑人越來越多，軻比能的騎兵常常到邊塞來互市，也常常來搶。洛陽換了皇帝，消息傳到這裡，已經是第二年春天了。"
+  },
+  {
+   "id": "a4_wu_civ",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "wu"
+   },
+   "title": "江東百姓",
+   "text": "{name}在江東過日子。這些年渡江過來的北方人越來越多，里中到處都是聽不懂的口音。曹丕在北方稱帝的消息傳過來，江東的人只當是遠方的一件事。"
+  },
+  {
+   "id": "a4_shu_civ",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "shu"
+   },
+   "title": "益州",
+   "text": "{name}住在蜀中。劉備當了漢中王，聽說曹丕篡漢的消息以後，成都的人都在說，明年漢中王就要稱帝，接著做漢朝的皇帝。",
+   "fallback": true
+  },
+  {
+   "id": "a4_default",
+   "when": "alive",
+   "chapter": 4,
+   "title": "漢亡",
+   "text": "{name}活到了漢朝的最後一天。你出生的時候，天下還有五千多萬人；現在天下分成了三個國家，每個國家都說自己才是正統。你只知道，你活下來了。",
+   "fallback": true
+  },
+  {
+   "id": "a5_child",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。大人們提起「三國」，你以為是三個村子。"
+  },
+  {
+   "id": "a5_wuzhang",
+   "when": "alive",
+   "chapter": 5,
+   "rare": true,
+   "req": {
+    "flag": "wuzhang"
+   },
+   "title": "五丈原",
+   "text": "{name}在五丈原送走了丞相。蜀漢的人說，丞相在的時候，路上掉了東西都沒人撿。"
+  },
+  {
+   "id": "a5_yizhou",
+   "when": "alive",
+   "chapter": 5,
+   "rare": true,
+   "req": {
+    "flag": "yizhou"
+   },
+   "title": "夷洲",
+   "text": "{name}跟著衛溫的船隊到過海那一邊的夷洲。一萬人去，一兩千人回來。很多年後，你還記得那座島上的高山。"
+  },
+  {
+   "id": "a5_fire",
+   "when": "alive",
+   "chapter": 5,
+   "rare": true,
+   "req": {
+    "flag": "yiling_fire"
+   },
+   "title": "一把茅",
+   "text": "{name}在夷陵點過一把茅草。那一夜之後，劉備再也沒有回過成都。"
+  },
+  {
+   "id": "a5_wangping",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "flag": "wangping"
+   },
+   "title": "街亭",
+   "text": "{name}跟著王平在街亭擂鼓不退。馬謖死了，王平升了官。"
+  },
+  {
+   "id": "a5_shu",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "liu"
+   },
+   "title": "蜀漢",
+   "text": "{name}在蜀中過日子。丞相死了，北伐停了幾年，蜀國的百姓喘了一口氣。"
+  },
+  {
+   "id": "a5_wu_north",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "sun",
+    "flag": "to_wu"
+   },
+   "title": "渡江人",
+   "text": "{name}一家是當年渡江過來的北方人。這些年你學會了吃米、學會了撐船，可是一到冬天，你還是會想起北方的雪。長江是吳國最好的城牆，也隔開了你家的祖墳。"
+  },
+  {
+   "id": "a5_wu_old",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "sun",
+    "anyFlag": [
+     "with_sunjian",
+     "follow_sunjian",
+     "with_ce",
+     "sun_house",
+     "p_follow_sunjian"
+    ]
+   },
+   "title": "孫家舊人",
+   "text": "{name}家跟著孫家，從孫堅那一代就在了。孫堅死在峴山，孫策死在丹徒，到孫權這一代，終於當了皇帝。你家的人提起這件事，總說：我們是看著他長大的。"
+  },
+  {
+   "id": "a5_wu_f",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "sun",
+    "gender": "f"
+   },
+   "title": "江南婦人",
+   "text": "{name}在江南過日子。男人們在濡須、在夷陵打仗，你在家裡養蠶、織布、撐船去市集。北邊打不過來，西邊也打不過來，長江是吳國最好的城牆。"
+  },
+  {
+   "id": "a5_wu",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "sun"
+   },
+   "title": "吳",
+   "text": "{name}在江南過日子。北邊打不過來，西邊也打不過來，長江是吳國最好的城牆。"
+  },
+  {
+   "id": "a5_luoyang",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "luoyang",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "新洛陽",
+   "text": "{name}住在洛陽。城裡到處在蓋房子、修宮殿，從各州搬來的人說著各地的口音。荒了三十年的洛陽，又是天下的中心了。"
+  },
+  {
+   "id": "a5_wei",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "cao"
+   },
+   "title": "魏",
+   "text": "{name}是魏國的士家，世世代代當兵。北方的太平，是你們守出來的。"
+  },
+  {
+   "id": "a5_jiupin",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "flag": [
+     "jiupin_done",
+     "official_late"
+    ]
+   },
+   "title": "九品",
+   "text": "{name}被中正評了上品，在郡裡當了吏。九品官人法剛開始的時候，寒門的人還有機會。"
+  },
+  {
+   "id": "a5_tuntian",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "anyFlag": [
+     "tuntian",
+     "tuntian_long"
+    ]
+   },
+   "title": "屯田",
+   "text": "{name}家還在種官田。從曹操那一代開始，你家就是屯田戶了。"
+  },
+  {
+   "id": "a5_hushi",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "flag": "hushi"
+   },
+   "title": "互市",
+   "text": "{name}在幽州的邊塞上跟鮮卑人做買賣。你家的馬，是全里最好的。"
+  },
+  {
+   "id": "a5_plague",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "flag": "plague223"
+   },
+   "title": "宛許大疫",
+   "text": "{name}在黃初四年的大疫裡留下來照顧病人，自己也活了下來。那條街上的人，後來都叫你一聲恩人。"
+  },
+  {
+   "id": "a5_feud",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "flag": "feud_stopped"
+   },
+   "title": "解仇",
+   "text": "{name}勸住了一個要報仇的人。亂世裡結下的仇，到了你們這一代，總算有人把它放下了。"
+  },
+  {
+   "id": "a5_dragon",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "flag": "saw_dragon"
+   },
+   "title": "見龍",
+   "text": "{name}一輩子都說自己在摩陂看過青龍。孫子問你龍長什麼樣，你說，像井水的光。",
+   "noKid": "{name}一輩子都說自己在摩陂看過青龍。里中的孩子問你龍長什麼樣，你說，像井水的光。"
+  },
+  {
+   "id": "a5_wu_civ",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "wu"
+   },
+   "title": "江東",
+   "text": "{name}在江東過日子。孫權當了皇帝，把都城搬回了建業。北邊打不過來，西邊也打不過來，長江是吳國最好的城牆。",
+   "fallback": true
+  },
+  {
+   "id": "a5_shu_civ",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "shu"
+   },
+   "title": "蜀中",
+   "text": "{name}在蜀中過日子。這一年丞相死在了五丈原。成都的百姓在路邊私自祭他，官府也沒有管。",
+   "fallback": true
+  },
+  {
+   "id": "a5_ji_f",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ],
+    "gender": "f"
+   },
+   "title": "白溝織婦",
+   "text": "{name}住在冀州。這些年冀州是魏國的糧倉，每年秋天運糧的車隊沿著白溝往南走。你在家裡織的絹，也跟著那些車一起送到了洛陽。"
+  },
+  {
+   "id": "a5_ji",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "魏之糧倉",
+   "text": "{name}住在冀州。鄴城不再是都城了，可是銅雀臺還在。這些年冀州是魏國的糧倉，每年秋天，運糧的車隊沿著白溝往南走。"
+  },
+  {
+   "id": "a5_yu",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "許昌",
+   "text": "{name}住在豫州。皇帝這些年常到許昌來，里中有人見過他的車駕。中原已經很久沒有打仗了，你家的田，一年比一年肥。"
+  },
+  {
+   "id": "a5_xu",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "合肥新城",
+   "text": "{name}住在徐州。這一年夏天，孫權又帶兵來圍合肥新城，皇帝親自南征，徐州的民夫又被叫去運糧。孫權聽說皇帝來了，就退兵了。"
+  },
+  {
+   "id": "a5_qing",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "青州",
+   "text": "{name}住在青州。臧霸那些豪帥老的老、死的死，青州終於歸了朝廷。海邊的人家開始曬鹽，日子慢慢好了起來。"
+  },
+  {
+   "id": "a5_you",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "軻比能",
+   "text": "{name}住在幽州。鮮卑的軻比能把漠南的部落都收在了手下，邊塞的人說，他是第二個檀石槐。幽州的人家，晚上睡覺都不脫衣服。"
+  },
+  {
+   "id": "a5_jing",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "南陽",
+   "text": "{name}住在南陽。這裡成了魏國南邊的門戶，宛城裡駐著重兵。對岸的人每隔幾年就打過來一次，又退回去。"
+  },
+  {
+   "id": "a5_civ",
+   "when": "alive",
+   "chapter": 5,
+   "req": {
+    "faction": "civ"
+   },
+   "title": "魏民",
+   "text": "{name}在魏國過了十幾年太平日子。北邊有鮮卑，南邊有吳蜀，可是中原已經很久沒有打仗了。你家的田，一年比一年肥。",
+   "fallback": true
+  },
+  {
+   "id": "a5_default",
+   "when": "alive",
+   "chapter": 5,
+   "title": "青龍二年",
+   "text": "{name}活到了青龍二年。這一年，諸葛亮死在五丈原。三個國家打了十幾年，誰也吃不掉誰。",
+   "fallback": true
+  },
+  {
+   "id": "a6_child",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。大人們說洛陽的皇帝換了好幾個，你只記得那年冬天特別冷。"
+  },
+  {
+   "id": "a6_guangling",
+   "when": "alive",
+   "chapter": 6,
+   "rare": true,
+   "req": {
+    "flag": "guangling"
+   },
+   "title": "廣陵散",
+   "text": "{name}聽過嵇康在東市彈的最後一曲。後來你也學琴，可是〈廣陵散〉，再也沒有人會彈了。"
+  },
+  {
+   "id": "a6_yinping",
+   "when": "alive",
+   "chapter": 6,
+   "rare": true,
+   "req": {
+    "flag": "yinping"
+   },
+   "title": "魚貫而進",
+   "text": "{name}跟著鄧艾從陰平的懸崖上爬下來，滅了蜀國。鄧艾後來被押上囚車，死在路上。"
+  },
+  {
+   "id": "a6_jiange",
+   "when": "alive",
+   "chapter": 6,
+   "rare": true,
+   "req": {
+    "flag": "jiange_stone"
+   },
+   "title": "拔刀砍石",
+   "text": "{name}在劍閣聽到投降的詔書，拔刀砍了石頭。刀砍缺了，石頭上留下一道白痕。"
+  },
+  {
+   "id": "a6_dongxing",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "dongxing"
+   },
+   "title": "雪中",
+   "text": "{name}在東興的大雪裡脫了鎧甲衝上堤。那是吳國最後幾場像樣的勝仗之一。"
+  },
+  {
+   "id": "a6_nanzhong",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "liu",
+    "flag": "nanzhong_trade"
+   },
+   "title": "南中",
+   "text": "{name}走過南中的山路，跟夷人做過買賣。成都的人說南中是蠻荒之地，你知道那裡的人比誰都守信。"
+  },
+  {
+   "id": "a6_qiao",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "liu",
+    "anyFlag": [
+     "qiaozhou",
+     "zhuge_will"
+    ]
+   },
+   "title": "仇國",
+   "text": "{name}看著蜀國在戰與和之間爭了二十年。最後，譙周勸皇帝投降。你不知道誰對誰錯，只知道不用再打了。"
+  },
+  {
+   "id": "a6_temple",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "liu",
+    "flag": "shu_temple"
+   },
+   "title": "沔陽廟",
+   "text": "{name}在丞相廟前上過香。廟立起來的那一年，蜀國亡了。百姓說，丞相總算有個地方住了。"
+  },
+  {
+   "id": "a6_shu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "liu"
+   },
+   "title": "炎興元年",
+   "text": "{name}看著蜀漢亡了。四十三年前劉備在成都稱帝的時候，你家的長輩也在場。"
+  },
+  {
+   "id": "a6_chuantun",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "sun",
+    "flag": "chuantun"
+   },
+   "title": "船屯",
+   "text": "{name}在溫麻的海邊造過船。後來吳國的大船開到了遼東、開到了扶南，其中有幾條，是你一刨一刨刨出來的。"
+  },
+  {
+   "id": "a6_wuschool",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "sun",
+    "flag": "wu_scholar_child"
+   },
+   "title": "學官",
+   "text": "{name}送孩子進了學官。吳國的皇帝換得很快，可是讀書的孩子越來越多了。"
+  },
+  {
+   "id": "a6_daquan",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "sun",
+    "flag": "daquan"
+   },
+   "title": "大泉",
+   "text": "{name}家裡還留著幾枚「大泉五百」。孩子們拿來玩，你說，那是當年用一口銅鍋換來的。"
+  },
+  {
+   "id": "a6_shanyue",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "sun",
+    "flag": "shanyue_ch6"
+   },
+   "title": "山越",
+   "text": "{name}收留過一家山越人。那家的孩子後來成了吳國的兵，逢年過節還會提著一隻雞來看你。"
+  },
+  {
+   "id": "a6_wu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": "sun"
+   },
+   "title": "江東",
+   "text": "{name}在吳國過了大半輩子。皇帝換了三個，權臣殺了一個又一個。長江還是那條長江。"
+  },
+  {
+   "id": "a6_douli",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "douli_cleared"
+   },
+   "title": "申冤",
+   "text": "{name}一路告到廷尉，替死去的丈夫洗清了逃兵的罪名。你保住了孩子，也保住了一個家的名聲。",
+   "noKid": "{name}一路告到廷尉，替死去的丈夫洗清了逃兵的罪名。你保住了一個家的名聲。"
+  },
+  {
+   "id": "a6_nubi",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "guan_nubi"
+   },
+   "title": "官奴婢",
+   "text": "{name}在官府的織室裡織了很多年的布。你織的絹一匹一匹送進宮裡，宮裡的人不會知道織的人是誰。"
+  },
+  {
+   "id": "a6_wandu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "wandu"
+   },
+   "title": "丸都",
+   "text": "{name}爬上過丸都山城，看著石匠在山壁上刻字。一千多年後，那塊石頭被人從土裡挖了出來。"
+  },
+  {
+   "id": "a6_huainan",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "huainan",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "淮南屯田",
+   "text": "{name}一家在淮南屯田。十幾年裡壽春反了三次，每一次都把附近的屯田民拉去打仗，每一次都是司馬家贏。田邊的望樓，一直沒有拆。"
+  },
+  {
+   "id": "a6_huaibei",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "huaibei"
+   },
+   "title": "淮北",
+   "text": "{name}在淮河邊種了二十年的屯田。後來晉朝伐吳的軍糧，有一半是從淮北運去的。"
+  },
+  {
+   "id": "a6_liaodong",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "back_from_liaodong"
+   },
+   "title": "歸鄉",
+   "text": "{name}從遼東回到了老家。你家逃出去的時候是袁家的天下，回來的時候，已經是司馬家的了。"
+  },
+  {
+   "id": "a6_xuanxue",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "xuanxue"
+   },
+   "title": "正始",
+   "text": "{name}在洛陽聽過王弼講《老子》。後來的人說「正始之音」，說的就是那幾年。你記得那個少年說話很快，咳嗽得很厲害。"
+  },
+  {
+   "id": "a6_gpl",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "gpl_seen"
+   },
+   "title": "高平陵",
+   "text": "{name}在洛陽的刑場上看過曹爽一家被殺。從那天起，你就不太相信大人物的誓言了。"
+  },
+  {
+   "id": "a6_fan",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "fan241"
+   },
+   "title": "樊城",
+   "text": "{name}替樊城的守軍送過柴。南陽在魏吳之間夾了幾十年，你家也在這裡住了幾十年。"
+  },
+  {
+   "id": "a6_wangletter",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "wang_letter"
+   },
+   "title": "王府之信",
+   "text": "{name}在鄴城的王府裡替一個被看守的王爺送過一封信。曹家的子孫，到後來連寫一封問安的信，都要靠一個雜役偷偷送出去。"
+  },
+  {
+   "id": "a6_wangfu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "wangfu"
+   },
+   "title": "鄴城王府",
+   "text": "{name}在鄴城的王府裡做了很多年的雜役。那些王爺吃得好、穿得好，可是一步也出不了府門。"
+  },
+  {
+   "id": "a6_boundary",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "boundary_witness"
+   },
+   "title": "爭界",
+   "text": "{name}替平原郡作過證。那塊地到底屬於哪一郡，你家的人說了三代都沒說清楚。"
+  },
+  {
+   "id": "a6_flood",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "flood_rescue"
+   },
+   "title": "景初大水",
+   "text": "{name}在景初元年的大水裡救過鄰居。那家人的孩子長大以後，每年都會送一袋粟到你家門口。"
+  },
+  {
+   "id": "a6_liao",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "flag": "liao_porter"
+   },
+   "title": "北運",
+   "text": "{name}推過車，把軍糧運到遼水邊上。襄平城破的那天，你在泥地裡，離城還有一百里。"
+  },
+  {
+   "id": "a6_ji",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "陰平消息",
+   "text": "{name}住在冀州。曹家的王公都被安置在鄴城，有人看守著，哪裡也不能去。這一年冬天，從西邊傳來消息：鄧艾從陰平小路翻山，蜀漢亡了。"
+  },
+  {
+   "id": "a6_yu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "甘露五年",
+   "text": "{name}住在豫州。三年前，年輕的皇帝曹髦帶著幾百個僮僕衝出宮去討司馬昭，被一戟刺死在車下。里中的人提起這件事，都要先看看左右。"
+  },
+  {
+   "id": "a6_xu",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "淮南三叛",
+   "text": "{name}住在徐州。這十幾年，淮南反了三次：王淩、毌丘儉、諸葛誕，一次比一次大，一次比一次慘。每一次，都是司馬家贏。"
+  },
+  {
+   "id": "a6_qing",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "莊園",
+   "text": "{name}住在青州。這些年大族的莊園越圈越大，種田的人，越來越多是別人家的佃客。蜀漢亡了的消息傳來，里中的人說，那跟我們有什麼關係。"
+  },
+  {
+   "id": "a6_you",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "丸都之後",
+   "text": "{name}住在幽州。將近二十年前，毌丘儉打到了高句麗的丸都山城。後來他死在淮南，邊塞上的老兵提起他，還是叫他一聲毌丘將軍。"
+  },
+  {
+   "id": "a6_jing",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "伐蜀",
+   "text": "{name}住在南陽。這一年鍾會和鄧艾的大軍分路去打蜀國，南陽的民夫被徵去運糧。走了大半年回來，說蜀國亡了，成都的人都在哭。"
+  },
+  {
+   "id": "a6_luoyang",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "region": "luoyang",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "宮門外",
+   "text": "{name}住在洛陽。三年前，二十歲的皇帝帶著幾百個僮僕衝出宮門，死在車下。那天你就在街上，聽見了宮門那邊的喊聲。從那以後，你走路都低著頭。"
+  },
+  {
+   "id": "a6_wei",
+   "when": "alive",
+   "chapter": 6,
+   "req": {
+    "faction": [
+     "cao",
+     "civ"
+    ]
+   },
+   "title": "司馬",
+   "text": "{name}看著曹家的天下變成了司馬家的。當年曹丕怎麼從漢朝手裡拿走天下，司馬家就怎麼拿。",
+   "fallback": true
+  },
+  {
+   "id": "a6_default",
+   "when": "alive",
+   "chapter": 6,
+   "title": "景元四年",
+   "text": "{name}活到了景元四年。蜀漢亡了，三國只剩兩國。",
+   "fallback": true
+  },
+  {
+   "id": "a7_child",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。大人們說天下一統了，以後不用再打仗。你不知道打仗是什麼樣子，大人們也不想告訴你。"
+  },
+  {
+   "id": "a7_wangjun",
+   "when": "alive",
+   "chapter": 7,
+   "rare": true,
+   "req": {
+    "flag": "wangjun"
+   },
+   "title": "樓船",
+   "text": "{name}站在王濬的樓船上，看著鐵鎖熔斷。船到建業的時候，孫皓已經綁好自己，拖著棺材等在城外。"
+  },
+  {
+   "id": "a7_yanglu",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "yanglu_done"
+   },
+   "title": "羊陸",
+   "text": "{name}見過羊祜和陸抗隔著邊界互送酒藥。後來兩個人都死了，晉軍順流而下，吳國就亡了。"
+  },
+  {
+   "id": "a7_palace",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "palace"
+   },
+   "title": "後宮",
+   "text": "{name}在洛陽的後宮裡過了很多年。宮裡有一萬個女子，皇帝坐著羊車，羊停在誰的門口，就在誰那裡過夜。"
+  },
+  {
+   "id": "a7_plague",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "plague275_doc"
+   },
+   "title": "咸寧大疫",
+   "text": "{name}在咸寧元年的大疫裡留在洛陽救人。那一年洛陽死了一大半的人，你救下來的那些，都記得你的名字。"
+  },
+  {
+   "id": "a7_chenqing",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "chenqing"
+   },
+   "title": "陳情",
+   "text": "{name}學李密上表陳情，留在家裡照顧老人。老人走的時候，握著你的手說，這輩子有你，夠了。"
+  },
+  {
+   "id": "a7_huali",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "huali"
+   },
+   "title": "華里",
+   "text": "{name}在華里的大雪裡拉過孫皓的車。你說過，真遇到敵人就倒戈。九年後晉軍來了，很多人真的這樣做了。"
+  },
+  {
+   "id": "a7_porter_back",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "wu_porter",
+    "anyFlag": [
+     "fled_wu",
+     "jiangling",
+     "to_wu"
+    ]
+   },
+   "title": "回到江邊",
+   "text": "{name}推著糧車走到了長江邊。你家當年就是從對岸逃過來的，這一回，你是跟著晉軍回去的。站在江邊，你分不清自己是回家，還是去打別人的家。"
+  },
+  {
+   "id": "a7_porter",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "wu_porter"
+   },
+   "title": "江邊",
+   "text": "{name}推著糧車走到了長江邊，看著對岸的建業。你家祖上一輩子沒能過的江，到你這一代，終於不用再隔著了。"
+  },
+  {
+   "id": "a7_demob",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "anyFlag": [
+     "demob",
+     "wuli"
+    ]
+   },
+   "title": "罷兵",
+   "text": "{name}脫下了軍服。仗打完了，到這一年，天下總算太平了。"
+  },
+  {
+   "id": "a7_wuchang",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "anyFlag": [
+     "wuchang",
+     "zhaoming"
+    ]
+   },
+   "title": "孫皓",
+   "text": "{name}被孫皓折騰了十幾年：搬去武昌、搬回建業、進山伐木。吳國亡的那天，你沒有哭。"
+  },
+  {
+   "id": "a7_flood",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "flood268_share"
+   },
+   "title": "泰始大水",
+   "text": "{name}在泰始四年的大水裡把糧分給了鄰居。那幾家人後來在你家旁邊蓋了新房子，一住就是三代。"
+  },
+  {
+   "id": "a7_learn",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "learn_north"
+   },
+   "title": "吳兒",
+   "text": "{name}一覺醒來成了晉人。北方人叫你們「吳兒」，你的孩子已經能說一口洛陽話了。"
+  },
+  {
+   "id": "a7_hejian",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "hejian"
+   },
+   "title": "河間王府",
+   "text": "{name}在河間王府當差。王爺年輕，待人和氣，你覺得這份差事能做一輩子。"
+  },
+  {
+   "id": "a7_weiguan",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "weiguan_guide"
+   },
+   "title": "離間",
+   "text": "{name}替衛瓘的使者帶過路，把金帛送進了拓跋部。邊塞安靜了好幾年，你知道那是用什麼換來的。"
+  },
+  {
+   "id": "a7_flood277",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "flood277_lead"
+   },
+   "title": "七州大水",
+   "text": "{name}在咸寧三年的大水裡把全村的人帶上了後山。村裡的人後來在山上立了一塊石頭，說那是你救命的地方。"
+  },
+  {
+   "id": "a7_zhengxue",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "anyFlag": [
+     "zhengxue",
+     "wangxue"
+    ]
+   },
+   "title": "經學",
+   "text": "{name}在鄭學和王學之間做過選擇。學問跟著朝廷變，可是書上的字，一個也沒變過。"
+  },
+  {
+   "id": "a7_chenliu",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "saw_chenliu"
+   },
+   "title": "陳留王",
+   "text": "{name}在鄴城看過魏國最後一個皇帝。他坐在車裡往銅雀臺看了一眼，你一直記得那一眼。"
+  },
+  {
+   "id": "a7_exwu",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "ex_wu"
+   },
+   "title": "亡國",
+   "text": "{name}一覺醒來，吳國就沒了。北方來的官吏說，從今天起你們都是晉人。你不知道該哭還是該笑。"
+  },
+  {
+   "id": "a7_exshu",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "flag": "ex_shu"
+   },
+   "title": "此間樂",
+   "text": "{name}在蜀地當了十幾年晉朝的百姓。劉禪在洛陽說「此間樂，不思蜀」，你們在蜀地，倒常常想起漢朝。"
+  },
+  {
+   "id": "a7_ji",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "一統",
+   "text": "{name}住在冀州。這一年吳國亡了，消息傳到鄴城，里中有人燒了一串竹子，劈劈啪啪響了一夜。三國的事，總算說完了。"
+  },
+  {
+   "id": "a7_luoyang",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "luoyang",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "歸命侯",
+   "text": "{name}住在洛陽。這一年孫皓被押到洛陽，皇帝封他為歸命侯。洛陽城裡擠滿了看熱鬧的人，都想看看南邊的皇帝長什麼樣。"
+  },
+  {
+   "id": "a7_xu",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "渡淮",
+   "text": "{name}住在徐州。王渾的大軍從這裡渡淮南下，一直打到長江邊上。仗打完了，回來的兵說，江南的米，比淮北的好吃。"
+  },
+  {
+   "id": "a7_qing",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "裁兵",
+   "text": "{name}住在青州。天下一統的詔書傳到里中，官府說，從今往後州郡都要裁兵，大郡只留一百個武吏。里中的老兵有的說好，有的說不好。"
+  },
+  {
+   "id": "a7_you",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "邊塞",
+   "text": "{name}住在幽州。南邊的仗打完了，北邊的鮮卑和烏桓還在。朝廷裁了州郡的兵，邊塞上的人心裡發慌。"
+  },
+  {
+   "id": "a7_jing",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "邊境不再",
+   "text": "{name}住在南陽。杜預從襄陽出兵，一路打到江陵、打到長江邊上。你家住了幾十年的邊境，從這一年起，不再是邊境了。"
+  },
+  {
+   "id": "a7_yu",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "許昌",
+   "text": "{name}住在豫州。這一年吳國亡了，北方已經二十多年沒有打大仗。許昌的宮殿還在，可是皇帝早就不來了，里中的人說，這樣也好。"
+  },
+  {
+   "id": "a7_huainan",
+   "when": "alive",
+   "chapter": 7,
+   "req": {
+    "region": "huainan",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "壽春",
+   "text": "{name}住在淮南。王渾的大軍從壽春出發南下，打到了長江邊上。打了幾十年仗的淮南，從這一年起，終於不再是邊境了。"
+  },
+  {
+   "id": "a7_default",
+   "when": "alive",
+   "chapter": 7,
+   "title": "太康元年",
+   "text": "{name}活到了天下一統的那一年。從黃巾起事算起，將近一百年。三國的故事，到這裡就說完了。"
+  },
+  {
+   "id": "a8_child",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "age": [
+     0,
+     13
+    ]
+   },
+   "title": "童年",
+   "text": "{name}還小。外面的王打來打去，你家的大人把門閂換了又換。你這一輩子要走的路，還長得很。"
+  },
+  {
+   "id": "a8_dynasty",
+   "when": "alive",
+   "chapter": 8,
+   "rare": true,
+   "req": {
+    "gen": [
+     6,
+     99
+    ]
+   },
+   "title": "六世",
+   "text": "{surname}家從東漢末年傳到你，已經是第{gen}代了。一百多年裡，你家的人當過兵、種過田、逃過難，沒有一個人的名字寫進史書。可是香火一直沒斷。"
+  },
+  {
+   "id": "a8_wuzhu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "wuzhu"
+   },
+   "title": "塢主",
+   "text": "{name}當了塢主，守著幾百口人。天下又回到了一百多年前的樣子：官府管不了，只能靠自己。你家從黃巾那年活到現在，靠的就是這個。"
+  },
+  {
+   "id": "a8_luoyang_fire",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "luoyang_fire"
+   },
+   "title": "洛陽城中",
+   "text": "{name}在洛陽城裡打仗的那三天，衝進火裡救出了一對父女。八王打了十幾年，洛陽燒了一次又一次。"
+  },
+  {
+   "id": "a8_donghai",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "donghai_army"
+   },
+   "title": "東海王",
+   "text": "{name}跟著東海王從徐州打回了洛陽。八個王死了七個，最後剩下的就是你跟的這一個。可是你不覺得這有什麼好高興的。"
+  },
+  {
+   "id": "a8_wangjun",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "wangjun_army"
+   },
+   "title": "易水",
+   "text": "{name}跟著王浚的鮮卑騎兵打過鄴城，也看過易水裡的那些女子。你這一輩子沒有跟任何人說過那天的事。"
+  },
+  {
+   "id": "a8_jiangdong",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "jiangdong_clan"
+   },
+   "title": "江東大族",
+   "text": "{name}跟著顧家、周家的人，看著江東自己保住了自己。再過幾年，北方的晉朝亡了，江東成了新的天下。"
+  },
+  {
+   "id": "a8_luoyang",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "go_luoyang"
+   },
+   "title": "吳兒入洛",
+   "text": "{name}跟著陸機兄弟北上洛陽求仕。十幾年後陸機死在河橋，北方人說起吳人，口氣又冷了幾分。"
+  },
+  {
+   "id": "a8_liumin",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "liumin_help"
+   },
+   "title": "流民",
+   "text": "{name}在荊州教北方來的流民種稻。劉弘在的那幾年，荊州是亂世裡少有的一塊太平地。"
+  },
+  {
+   "id": "a8_dike",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "dike298"
+   },
+   "title": "守堤",
+   "text": "{name}在元康八年的大水裡帶著鄰里守住了河堤。州郡沒有兵、官府不管事的年頭，能靠的只有身邊的人。"
+  },
+  {
+   "id": "a8_hanmen",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "anyFlag": [
+     "hanmen_up",
+     "hanmen_down"
+    ]
+   },
+   "title": "寒門",
+   "text": "{name}讀了一輩子書，在中正的品第裡被排在世家子弟後面。上品無寒門，下品無勢族，劉毅說的話，你一個字一個字都記得。"
+  },
+  {
+   "id": "a8_dianke_wu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "dianke",
+    "region": "wu"
+   },
+   "title": "江東佃客",
+   "text": "{name}一家在江東大族的莊園裡當佃客。北方逃來的人一年比一年多，莊主說，以後這些人都要靠莊園吃飯。顧家、陸家的田，一眼望不到頭。"
+  },
+  {
+   "id": "a8_dianke_shu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "dianke",
+    "region": "shu"
+   },
+   "title": "蜀地佃客",
+   "text": "{name}一家在蜀地大族的莊園裡當佃客。流民首領李雄在成都稱了王，大族們有的投降，有的帶著佃客往南逃。你家跟著莊主，不知道下一站在哪裡。"
+  },
+  {
+   "id": "a8_dianke_you",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "dianke",
+    "region": "you"
+   },
+   "title": "幽州佃客",
+   "text": "{name}一家在幽州大族的莊園裡當佃客。王浚的兵和鮮卑騎兵常常從莊園外經過，莊主每次都要送上糧食和馬。你家種出來的糧，有一半進了兵的肚子。"
+  },
+  {
+   "id": "a8_dianke_ji",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "dianke",
+    "region": "ji"
+   },
+   "title": "冀州佃客",
+   "text": "{name}一家在冀州大族的莊園裡當佃客。鄴城幾次易手，莊主今天向這個王送禮，明天向那個王送禮。莊園的牆，越修越高。"
+  },
+  {
+   "id": "a8_dianke",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "dianke"
+   },
+   "title": "佃客",
+   "text": "{name}一家在大族的莊園裡當佃客。外面的王打來打去，莊園的牆越修越高。你家不用見官府，也見不到別的出路。"
+  },
+  {
+   "id": "a8_murong",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "anyFlag": [
+     "murong_trade",
+     "fuyu"
+    ]
+   },
+   "title": "遼東",
+   "text": "{name}在幽州的邊塞見過慕容廆的部眾。中原亂成一團的時候，遼東的慕容部正在種田、養蠶、學漢人的禮法。"
+  },
+  {
+   "id": "a8_jingu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "jingu"
+   },
+   "title": "金谷",
+   "text": "{name}在金谷園端過酒，看過美人被拖出去。四年後，石崇被趙王倫殺了，金谷園的二十四友，死的死、逃的逃。"
+  },
+  {
+   "id": "a8_zhangchang",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "zhangchang"
+   },
+   "title": "紅巾",
+   "text": "{name}也跟著人頭綁紅巾起過事。一百二十年前，你家的祖先頭上綁的是黃巾。"
+  },
+  {
+   "id": "a8_shu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "ex_shu"
+   },
+   "title": "成漢",
+   "text": "{name}看著李雄在成都稱王。蜀地又有了自己的國家，雖然已經不是當年的漢了。"
+  },
+  {
+   "id": "a8_wu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "ex_wu",
+    "region": "wu"
+   },
+   "title": "江東",
+   "text": "{name}還住在江東。再過十一年，晉朝的琅邪王會在建康重建朝廷。吳國亡了，可是江南的日子，才剛要開始。"
+  },
+  {
+   "id": "a8_south",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "south"
+   },
+   "title": "南渡",
+   "text": "{name}帶著一家人渡過了長江。五年後洛陽陷落，十年後長安陷落，北方的人一批一批往南逃。後來的人把這叫做「衣冠南渡」。"
+  },
+  {
+   "id": "a8_wubao",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "flag": "wubao_late"
+   },
+   "title": "塢堡",
+   "text": "{name}一家躲在塢堡裡。牆外的天下又亂了，就跟一百多年前一樣。歷史好像轉了一個圈。"
+  },
+  {
+   "id": "a8_ji",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "ji",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "冀州塢堡",
+   "text": "{name}住在冀州。鄴城被鮮卑兵劫掠過一次，成都王的兵走了，東海王的兵又來。里中的大族把塢堡修得像一座小城，你家也搬了進去。"
+  },
+  {
+   "id": "a8_luoyang",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "luoyang",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "麥餅",
+   "text": "{name}住在洛陽。洛陽被圍了一次又一次，城裡的米一石賣到一萬錢。這一年冬天，皇帝吃了一塊麥餅就死了，有人說是東海王下的毒。"
+  },
+  {
+   "id": "a8_qing",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "qing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "東萊",
+   "text": "{name}住在青州。東萊的王彌起兵了，青州到處是流民和盜賊。你家把能帶的東西都藏進了地窖，夜裡輪流守著門。"
+  },
+  {
+   "id": "a8_xu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "xu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "徐州壯丁",
+   "text": "{name}住在徐州。東海王在這裡起兵，說要迎皇帝回洛陽。徐州的壯丁跟著他走了，田裡只剩下老人和女人。"
+  },
+  {
+   "id": "a8_jing",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "劉弘",
+   "text": "{name}住在南陽。張昌的亂剛平下去，鎮南將軍劉弘勸農桑、減賦稅，北方逃來的流民一批一批在這裡落了戶。亂世裡，這已經算是好地方了。"
+  },
+  {
+   "id": "a8_you",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "you",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "段部",
+   "text": "{name}住在幽州。王浚和鮮卑段部結成了親家，幽州成了他的地盤。南邊打得天翻地覆，幽州反倒還算安穩，只是街上的鮮卑人越來越多了。"
+  },
+  {
+   "id": "a8_jiangling",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "jiangling"
+   },
+   "title": "江陵",
+   "text": "{name}住在江陵。張昌之亂剛平下去，鎮南將軍劉弘勸農桑、減賦稅，北方逃來的流民一批一批順著漢水南下。江陵城頭的旗子換過好幾次，江水還是那樣流。"
+  },
+  {
+   "id": "a8_yu",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "yu",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "潁川",
+   "text": "{name}住在豫州。洛陽逃來的人一批又一批，許昌也打了起來，豫州刺史劉喬和范陽王你來我往。潁川的大族把子弟一個一個送往江南。"
+  },
+  {
+   "id": "a8_huainan",
+   "when": "alive",
+   "chapter": 8,
+   "req": {
+    "region": "huainan",
+    "faction": [
+     "civ",
+     "cao"
+    ]
+   },
+   "title": "淮南",
+   "text": "{name}住在淮南。北方亂成一團，從淮北逃過來的人越來越多。對岸的江東，聽說已經有人在等一位從北方南下的王爺了。"
+  },
+  {
+   "id": "a8_default",
+   "when": "alive",
+   "chapter": 8,
+   "title": "光熙元年",
+   "text": "{name}活到了光熙元年。晉惠帝死了，八個王死了七個，匈奴人劉淵在北邊稱王。你家的故事，從黃巾起事的那一年，一直說到這裡。"
+  }
+ ]
+}

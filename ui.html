@@ -1,0 +1,1073 @@
+<title>黃天之下</title>
+<script>/* 選過底色的人，一開始就用那個底色，不要先閃一下系統的顏色 */try{var t=localStorage.getItem('sg_theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap">
+<style>
+/* 版面：單欄竹簡卷軸。上方是戶籍與數值，中間是逐年展開的紀錄，抉擇以木牘卡片插在紀錄裡，底部是速度控制。 */
+:root {
+  --bg: #e6e3d3;        /* 乾竹 */
+  --slip: #f0eee2;      /* 簡面 */
+  --ink: #23211a;       /* 墨 */
+  --muted: #5e5a48;     /* 淡墨 */
+  --line: #cdc8b0;      /* 編繩 */
+  --yellow: #b8861a;    /* 黃巾、土德 */
+  --yellow-soft: #efe2b8;
+  --red: #9a2f22;       /* 硃砂：死、印 */
+  --green: #4f6b3a;     /* 增益 */
+  --font-display: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --font-body: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --font-ui: system-ui, -apple-system, "Microsoft JhengHei", "PingFang TC", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #191812; --slip: #23211a; --ink: #e8e3cd; --muted: #a39e86; --line: #3a372c;
+    --yellow: #d9a83a; --yellow-soft: #3b3220; --red: #cf5a44; --green: #93b072; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #191812; --slip: #23211a; --ink: #e8e3cd; --muted: #a39e86; --line: #3a372c;
+  --yellow: #d9a83a; --yellow-soft: #3b3220; --red: #cf5a44; --green: #93b072; color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+/* 捲動定位時，避開頂部的數值列與底部的控制列 */
+html { scroll-padding-top: calc(var(--hud-h, 0px) + 8px); scroll-padding-bottom: calc(var(--ctrl-h, 0px) + 12px); }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 16px; line-height: 1.85; margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 680px; margin: 0 auto; padding-block: 24px 120px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.ui { font-family: var(--font-ui); }
+
+/* ---------- 開場 */
+#intro { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; padding-top: 24px; }
+.vtitle {
+  writing-mode: vertical-rl; font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(56px, 13vw, 96px); line-height: 1; letter-spacing: .08em; margin: 0;
+  color: var(--ink); text-shadow: 0 0 0 transparent;
+}
+.vtitle em { font-style: normal; color: var(--yellow); }
+.intro-body { min-width: 0; display: grid; gap: 16px; padding-top: 8px; }
+.intro-body h2 { font-size: 20px; margin: 0; font-weight: 600; text-wrap: balance; }
+.intro-body p { margin: 0; max-width: 34em; }
+.slogan { border-left: 3px solid var(--yellow); padding-left: 12px; color: var(--muted); }
+.cta {
+  justify-self: start; background: var(--ink); color: var(--slip); border: 0; border-radius: 2px;
+  padding: 12px 28px; font-family: var(--font-display); font-weight: 900; font-size: 20px; letter-spacing: .3em;
+}
+.cta:hover { background: var(--yellow); color: var(--ink); }
+.fine { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.how { display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
+.how b { color: var(--ink); font-weight: 600; }
+@media (max-width: 480px) {
+  #intro { grid-template-columns: 1fr; gap: 12px; padding-top: 8px; }
+  .vtitle { writing-mode: horizontal-tb; font-size: 52px; }
+  /* 手機上先讓人看到「投胎」，章節說明放後面 */
+  .intro-body > * { order: 3; }
+  .intro-body > .slogan { order: 1; }
+  .intro-body > h2 { order: 2; }
+  .intro-body > .cta, .intro-body > .cta-row { order: 4; }
+  .intro-body > .how { order: 5; }
+  .intro-body > .fine, .intro-body > .theme-row { order: 6; }
+  .intro-body > .codex { order: 7; }
+}
+
+/* ---------- 戶籍 */
+.register {
+  background: var(--slip); border: 1px solid var(--line); padding: 20px 20px 16px; display: grid; gap: 14px;
+  background-image: repeating-linear-gradient(90deg, transparent 0 calc(25% - 1px), var(--line) calc(25% - 1px) 25%);
+  background-size: 100% 100%;
+}
+.register .who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; background: var(--slip); }
+.register .name { font-family: var(--font-display); font-weight: 900; font-size: 34px; line-height: 1.2; }
+.register .meta { color: var(--muted); font-size: 15px; }
+.register dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px 16px; margin: 0; background: var(--slip); }
+.register dt { font-size: 12px; color: var(--muted); letter-spacing: .15em; }
+.register dd { margin: 0; font-weight: 600; }
+.codex { font-size: 14px; }
+.codex summary { cursor: pointer; color: var(--muted); font-family: var(--font-ui); padding: 4px 0; }
+.codex summary b { color: var(--ink); }
+.codex h5 { margin: 12px 0 4px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.codex .chip-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.codex .chip-list span { border: 1px solid var(--line); padding: 1px 6px; font-size: 13px; }
+.codex .chip-list span.unseen { color: var(--muted); border-style: dashed; }
+.codex .chip-list span.rare { border-color: var(--yellow); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.talent { display: inline-block; border: 1px solid var(--yellow); color: var(--ink); padding: 0 8px; margin: 2px 6px 2px 0; font-size: 14px; background: var(--yellow-soft); }
+.talent small { color: var(--muted); font-weight: 400; margin-left: 4px; }
+
+/* ---------- 遊戲中頂部 */
+#hud {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 12px 10px; border-bottom: 1px solid var(--line); display: grid; gap: 8px;
+}
+.hud-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.hud-name { font-family: var(--font-display); font-weight: 900; font-size: 22px; }
+.hud-name small { font-family: var(--font-body); font-weight: 400; font-size: 14px; color: var(--muted); margin-left: 8px; }
+.hud-age { font-family: var(--font-display); font-weight: 900; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; }
+.hud-age small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+.hud-era { font-size: 13px; color: var(--muted); text-align: right; }
+.stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.stat { display: grid; gap: 2px; }
+.stat .k { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; font-family: var(--font-ui); font-variant-numeric: tabular-nums; }
+.stat .k b { color: var(--ink); font-weight: 600; }
+.bar { height: 4px; background: var(--line); }
+.bar i { display: block; height: 100%; background: var(--ink); transition: width .4s; }
+.stat.hp .bar i { background: var(--red); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12px; }
+.chip { border: 1px solid var(--line); padding: 0 6px; color: var(--muted); font-family: var(--font-ui); }
+.chip.route { border-color: var(--yellow); color: var(--ink); background: var(--yellow-soft); }
+.chip.bond { border-color: var(--ink); color: var(--ink); }
+
+/* ---------- 紀錄 */
+#log { display: grid; gap: 10px; padding-top: 14px; }
+/* 長家族的紀錄有幾百條：畫面外的舊紀錄先不排版（接續時第一次排版從約 0.6 秒降到 0.07 秒）；最後幾條照常排，捲到底才會準 */
+#log > :not(:nth-last-child(-n+12)) { content-visibility: auto; contain-intrinsic-size: auto 80px; }
+.yr { display: flex; align-items: baseline; gap: 10px; margin-top: 10px; }
+.yr .a { font-family: var(--font-display); font-weight: 900; font-size: 20px; min-width: 2.6em; font-variant-numeric: tabular-nums; }
+.yr .e { font-size: 13px; color: var(--muted); }
+.yr::after { content: ""; flex: 1; border-bottom: 1px dashed var(--line); transform: translateY(-4px); }
+.chap { margin: 28px 0 6px; padding: 14px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); font-family: var(--font-display); font-weight: 900; font-size: 24px; letter-spacing: .12em; }
+.chip.faction { border-color: var(--red); color: var(--ink); }
+.heirline { margin: 26px 0 4px; padding: 10px 0 10px 14px; border-left: 6px solid var(--yellow); font-family: var(--font-display); font-weight: 900; font-size: 22px; letter-spacing: .1em; background: var(--slip); }
+.tree { display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
+.tree div { position: relative; padding: 6px 0 6px 18px; display: grid; grid-template-columns: 4.2em 1fr; gap: 4px 10px; font-size: 14px; }
+.tree div::before { content: ""; position: absolute; left: -6px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--slip); border: 2px solid var(--ink); }
+.tree div.now::before { background: var(--yellow); border-color: var(--yellow); }
+.tree .g { color: var(--muted); font-variant-numeric: tabular-nums; }
+.tree b { font-family: var(--font-display); }
+.heirs { display: grid; gap: 8px; justify-items: start; }
+.after .card.memory { border-left-color: var(--yellow); }
+.after .card.world { border-left-color: var(--muted); color: var(--muted); }
+.after details.more { display: grid; gap: 10px; }
+.after details.more summary { cursor: pointer; font-size: 13px; color: var(--muted); padding-left: 14px; list-style: none; }
+.after details.more summary::before { content: "＋ "; }
+.after details.more[open] summary::before { content: "－ "; }
+.after details.more[open] { gap: 10px; }
+.heirs h4 { margin: 0 0 2px; font-size: 13px; letter-spacing: .2em; color: var(--muted); font-weight: 600; }
+.end-actions { align-items: center; }
+.en { padding-left: 14px; border-left: 2px solid var(--line); display: grid; gap: 4px; }
+.en p { margin: 0; }
+.en .tag { font-size: 12px; letter-spacing: .15em; color: var(--yellow); font-weight: 600; }
+.en.big { border-left-color: var(--yellow); }
+.en.death { border-left-color: var(--red); }
+.en.death p { color: var(--red); }
+.en.choice p { color: var(--muted); }
+.en.choice p b { color: var(--ink); }
+.en.bond p { font-weight: 600; }
+.note { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.note::before { content: "史"; display: inline-block; font-size: 11px; border: 1px solid var(--muted); padding: 0 3px; margin-right: 6px; line-height: 1.4; transform: translateY(-1px); }
+.delta { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; font-family: var(--font-ui); font-variant-numeric: tabular-nums; }
+.delta span { color: var(--green); }
+.delta span.neg { color: var(--red); }
+
+/* ---------- 抉擇木牘 */
+.dec { background: var(--slip); border: 1px solid var(--ink); padding: 18px 18px 14px; display: grid; gap: 10px; margin-top: 6px; }
+.dec .head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.dec h3 { margin: 0; font-family: var(--font-display); font-weight: 900; font-size: 22px; text-wrap: balance; }
+.dec .who { font-size: 13px; color: var(--muted); }
+.dec .who b { color: var(--yellow); }
+.dec p { margin: 0; }
+.opts { display: grid; gap: 8px; margin-top: 4px; }
+.opt {
+  text-align: left; background: transparent; border: 1px solid var(--line); padding: 10px 12px;
+  display: grid; grid-template-columns: 1.6em 1fr; gap: 2px 8px; align-items: baseline; border-radius: 0;
+}
+.opt:hover:not(:disabled) { border-color: var(--ink); background: var(--yellow-soft); }
+.opt .n { font-family: var(--font-display); font-weight: 900; color: var(--yellow); grid-row: span 2; }
+.opt .t { font-weight: 600; }
+.opt .s { font-size: 13px; color: var(--muted); }
+.opt:disabled { cursor: not-allowed; opacity: .55; }
+.opt:disabled .t { text-decoration: line-through; text-decoration-color: var(--muted); }
+.auto-hint { font-size: 12px; color: var(--muted); font-family: var(--font-ui); }
+
+/* ---------- 底部控制 */
+#ctrl {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--bg); border-top: 1px solid var(--line);
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+#ctrl .in { max-width: 680px; margin: 0 auto; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.cb { background: transparent; border: 1px solid var(--line); padding: 4px 10px; font-size: 13px; border-radius: 0; }
+.cb[aria-pressed="true"] { background: var(--ink); color: var(--slip); border-color: var(--ink); }
+.cb.fate[aria-pressed="true"] { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+.sp { flex: 1; }
+.theme-row { display: flex; }
+.theme-row .ghost { padding: 6px 14px; font-size: 14px; }
+@media (pointer: coarse) { .cb { min-height: 42px; min-width: 42px; padding: 6px 12px; } } /* 手指好按 */
+
+/* ---------- 結局 */
+#end { display: grid; gap: 22px; padding-top: 18px; }
+.end-head { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: start; }
+.seal {
+  writing-mode: vertical-rl; font-family: var(--font-display); font-weight: 900; font-size: 34px; line-height: 1.05;
+  color: var(--slip); background: var(--red); padding: 14px 10px; letter-spacing: .12em; border-radius: 3px;
+  box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 5px var(--slip);
+}
+.seal.alive { background: var(--ink); box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--slip); }
+.end-body { min-width: 0; display: grid; gap: 10px; }
+.end-body .rare { font-size: 12px; letter-spacing: .2em; color: var(--yellow); font-weight: 600; }
+.end-body h2 { margin: 0; font-family: var(--font-display); font-weight: 900; font-size: 30px; line-height: 1.3; }
+.end-body .epi { font-size: 15px; color: var(--muted); }
+.end-sec h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: .2em; color: var(--muted); font-weight: 600; }
+.after { display: grid; gap: 10px; }
+.after .card { border-left: 2px solid var(--ink); padding-left: 12px; }
+.after .card b { font-family: var(--font-display); }
+.after .card small { color: var(--muted); margin-left: 6px; }
+.tl { display: grid; gap: 4px; font-size: 14px; }
+.tl div { display: grid; grid-template-columns: 3.4em 1fr; gap: 8px; }
+.tl .y { color: var(--muted); font-variant-numeric: tabular-nums; }
+.tl b { font-weight: 600; }
+.end-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.ghost { background: transparent; border: 1px solid var(--ink); padding: 10px 18px; border-radius: 0; }
+a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
+.share-ov { position: fixed; inset: 0; z-index: 20; background: rgba(0, 0, 0, .6); display: flex; padding: 16px; overflow-y: auto; }
+.share-box { background: var(--bg); border: 1px solid var(--line); padding: 16px; display: grid; gap: 10px; max-width: 560px; width: 100%; margin: auto; } /* 內容比畫面高時從頂端開始捲，不會被切掉 */
+.share-box img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
+.share-box .fine { margin: 0; }
+.tip { border: 1px dashed var(--yellow); background: var(--yellow-soft); padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; line-height: 1.7; }
+.tip p { margin: 0; }
+.tip dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 0; }
+.tip dt { font-weight: 600; white-space: nowrap; }
+.tip dd { margin: 0; color: var(--muted); }
+.tip .ghost { justify-self: start; padding: 6px 16px; font-size: 14px; }
+#transfer { display: grid; gap: 8px; }
+#transfer[open] { padding-bottom: 8px; }
+#transfer textarea { width: 100%; box-sizing: border-box; min-height: 5.5em; font: 12px/1.5 ui-monospace, monospace; background: var(--slip); color: var(--ink); border: 1px solid var(--line); padding: 8px; word-break: break-all; }
+#transfer .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+#transfer .ghost { padding: 6px 14px; font-size: 14px; }
+#transfer .msg { font-size: 13px; color: var(--muted); }
+@media (max-width: 480px) {
+  .end-head { grid-template-columns: 1fr; }
+  .seal { writing-mode: horizontal-tb; justify-self: start; font-size: 26px; padding: 8px 14px; }
+  /* 手機上把頂部壓扁：六項數值一列、標籤一行可橫滑 */
+  #hud { padding-block: 8px 6px; gap: 6px; }
+  .hud-name { font-size: 18px; }
+  .hud-age { font-size: 24px; }
+  .stats { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
+  .stat .k { font-size: 11px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+.fadein { animation: fi .35s ease-out; }
+@keyframes fi { from { opacity: .2; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+</style>
+
+<div class="wrap">
+  <section id="intro">
+    <h1 class="vtitle">黃天<em>之</em>下</h1>
+    <div class="intro-body">
+      <p class="slogan">蒼天已死，黃天當立。<br>歲在甲子，天下大吉。</p>
+      <h2>投胎到東漢末年，一代一代活下去。</h2>
+      <p>你會隨機出生在冀、青、豫、荊、幽、徐六州之一，生在佃農、自耕農、商販、縣吏或士族旁支的家裡。不是每個人都活得到甲子年。</p>
+      <p>中平元年（184），黃巾起事。你可以綁上黃巾，可以投官軍，可以帶著家人逃難；也可能在長社的火裡、廣宗的河邊，遇見書上寫過的那些人。活下來的話，群雄混戰、官渡、赤壁，一直到漢朝滅亡的那一天，都在等著你。</p>
+      <div class="how">
+        <div><b>第一章</b>　黃天之下：從出生到中平六年（189）董卓入京。</div>
+        <div><b>第二章</b>　群雄並起：從關東起兵到建安五年（200）官渡之戰。</div>
+        <div><b>第三章</b>　赤壁：從袁紹之死到建安十三年（208）赤壁之戰。</div>
+        <div><b>第四章</b>　漢亡：從周瑜之死到延康元年（220）曹丕受禪。</div>
+        <div><b>第五章起</b>　三國鼎立、司馬代魏、天下歸晉、八王之亂，一直到光熙元年（306）。</div>
+        <div><b>傳承</b>　你死了，故事不會結束：有孩子就由孩子接下這個家；香火斷了，這一家的故事才算完。</div>
+        <div><b>史實</b>　大事照史書走，標「史」的小字是出處。你的事史書不會記。</div>
+      </div>
+      <button class="cta" id="btnStart" type="button">投胎</button>
+      <p class="fine">八章、約八十張事件卡、{ENDINGS}種結局，七位可結交的歷史人物（劉備、曹操、孫堅、諸葛亮、關羽、姜維、嵇康）。進度會自動存在這個瀏覽器裡。</p>
+      <div class="theme-row ui"><button class="ghost btnTheme" id="btnThemeIntro" type="button">換成黑底</button></div>
+      <details class="codex" id="codex" hidden></details>
+      <details class="codex" id="transfer"><summary>換裝置：存檔碼</summary></details>
+    </div>
+  </section>
+
+  <section id="birth" hidden></section>
+  <section id="game" hidden>
+    <div id="hud"></div>
+    <div id="log" aria-live="polite"></div>
+  </section>
+  <section id="end" hidden></section>
+</div>
+
+<nav id="ctrl" hidden aria-label="播放控制">
+  <div class="in ui">
+    <button class="cb" id="btnPause" type="button" aria-pressed="false">暫停</button>
+    <button class="cb spd" data-s="1" type="button" aria-pressed="true">1×</button>
+    <button class="cb spd" data-s="2" type="button" aria-pressed="false">2×</button>
+    <button class="cb spd" data-s="4" type="button" aria-pressed="false">4×</button>
+    <span class="sp"></span>
+    <button class="cb btnTheme" type="button" aria-label="切換底色" title="切換底色">◐</button>
+    <button class="cb fate" id="btnFate" type="button" aria-pressed="false">交給天命</button>
+  </div>
+</nav>
+
+<script>/*__ENGINE__*/</script>
+<script>
+const DATA = /*__DATA__*/;
+(function () {
+  'use strict';
+  const $ = (s, el = document) => el.querySelector(s);
+  const h = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const E = window.SanguoEngine;
+  const STAT_ORDER = ['武', '文', '德', '名', '財'];
+  const ROUTE_NAME = { huangjin: '黃巾', guanjun: '官軍', flee: '逃難', xiangyong: '鄉勇', wubao: '守塢' };
+  const FACTION_NAME = { cao: '曹操', liu: '劉備', sun: '孫氏', yuan: '袁紹', heishan: '黑山', civ: '百姓' };
+  function factionName(f, ch) {
+    if (f === 'cao') return ch >= 7 ? '晉' : ch >= 5 ? '魏' : '曹操';
+    if (f === 'liu') return ch >= 5 ? '蜀漢' : '劉備';
+    if (f === 'sun') return ch >= 5 ? '吳' : '孫氏';
+    return FACTION_NAME[f] || f;
+  }
+
+  let game = null, speed = 1, paused = false, fate = false, timer = null, lastAge = -1;
+
+  function pref(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  speed = parseInt(pref('sg_speed') || '1', 10) || 1;
+
+  // 底色：黑底或原色底。沒選過就跟著系統，選過就記住
+  const isDark = () => { const t = document.documentElement.dataset.theme; return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
+  function applyTheme(t) {
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+    const label = isDark() ? '換成原色底' : '換成黑底';
+    const intro = document.getElementById('btnThemeIntro');
+    if (intro) intro.textContent = label;
+    document.querySelectorAll('.btnTheme').forEach((b) => { b.title = label; b.setAttribute('aria-label', label); });
+  }
+  applyTheme(pref('sg_theme'));
+  document.querySelectorAll('.btnTheme').forEach((b) => b.addEventListener('click', () => {
+    const t = isDark() ? 'light' : 'dark';
+    pref('sg_theme', t); applyTheme(t);
+  }));
+
+  // ---------------- 存檔：只記種子和每一步操作，重新打開時照著重播一遍
+  // 內容改版（事件或結局數量變了）以後，舊存檔重播可能走樣：照樣接續，對不上的那一步起就由玩家接手
+  const DATA_VER = DATA.events.length + '/' + DATA.endings.length;
+  let save = null;
+  function persist() { if (save) pref('sg_save', JSON.stringify(save)); }
+  function record(a) { if (save) { save.acts.push(a); persist(); } }
+  function loadSave() {
+    try {
+      const v = JSON.parse(pref('sg_save') || 'null');
+      return v && v.v === 1 && Number.isFinite(v.seed) && Array.isArray(v.acts) ? v : null;
+    } catch (e) { return null; }
+  }
+  // ---------------- 結局冊：記住所有遊玩中見過的結局
+  function loadSeen() { try { return new Set(JSON.parse(pref('sg_seen') || '[]')); } catch (e) { return new Set(); } }
+  function markSeen(id) {
+    const seen = loadSeen();
+    if (!id || seen.has(id)) return false;
+    seen.add(id); pref('sg_seen', JSON.stringify([...seen]));
+    return true;
+  }
+  // 人物：每位歷史人物在所有遊玩中達到過的最高交情
+  function loadBonds() { try { return JSON.parse(pref('sg_bonds') || '{}') || {}; } catch (e) { return {}; } }
+  function markBonds(bonds) {
+    const best = loadBonds();
+    let changed = false;
+    for (const id in bonds) if ((bonds[id] || 0) > (best[id] || 0)) { best[id] = bonds[id]; changed = true; }
+    if (changed) pref('sg_bonds', JSON.stringify(best));
+  }
+  function renderCodex() {
+    const seen = loadSeen();
+    const box = $('#codex');
+    if (!box) return;
+    // 保底結局（正常玩法幾乎遇不到）不算進分母，也不佔「？？」的位置；真的遇到了才列出來
+    const all = DATA.endings.filter((e) => !e.fallback || seen.has(e.id));
+    const total = DATA.endings.filter((e) => !e.fallback).length;
+    const got = DATA.endings.filter((e) => !e.fallback && seen.has(e.id)).length;
+    if (!seen.size) { box.hidden = true; return; }
+    box.innerHTML = `<summary>結局冊：已見過 <b>${got}</b> / ${total} 種</summary>`;
+    const best = loadBonds();
+    const ids = Object.keys(DATA.bonds);
+    const met = ids.filter((id) => best[id] > 0).length;
+    box.append(h('h5', null, `人物　${met} / ${ids.length}`));
+    const brow = h('div', 'chip-list');
+    for (const id of ids) {
+      const d = DATA.bonds[id], v = Math.max(0, Math.min(Math.floor(Number(best[id])) || 0, d.tiers.length - 1)), top = v >= d.tiers.length - 1;
+      brow.append(h('span', v ? (top ? 'rare' : '') : 'unseen', v ? `${esc(d.name)}・${esc(d.tiers[v])}${top ? '★' : ''}` : '？？'));
+    }
+    box.append(brow);
+    const groups = new Map();
+    for (const e of all) {
+      const key = e.chapter == null ? '不分章' : `第${CN[e.chapter]}章・${e.when === 'alive' ? '章末' : '身故'}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(e);
+    }
+    // 依章節排：每一章先章末、再身故；不分章的放最後
+    const rank = (e) => (e.chapter == null ? 99 : e.chapter) * 2 + (e.when === 'alive' ? 0 : 1);
+    const ordered = [...groups].sort((x, y) => rank(x[1][0]) - rank(y[1][0]));
+    for (const [key, list] of ordered) {
+      const n = list.filter((e) => seen.has(e.id)).length;
+      box.append(h('h5', null, `${esc(key)}　${n} / ${list.length}`));
+      const row = h('div', 'chip-list');
+      for (const e of list) {
+        const ok = seen.has(e.id);
+        row.append(h('span', ok ? (e.rare ? 'rare' : '') : 'unseen', ok ? esc(e.title) + (e.rare ? '★' : '') : '？？'));
+      }
+      box.append(row);
+    }
+    box.hidden = false;
+  }
+  const CN = '〇一二三四五六七八九十';
+  function clearSave() { save = null; try { localStorage.removeItem('sg_save'); } catch (e) { /* 無痕視窗等情況 */ } }
+
+  // ---------------- 換裝置：把進行中的家族、結局冊、人物紀錄打包成一串文字
+  // 讀入時結局冊與人物紀錄是「合併」（只會變多），進行中的家族則換成存檔碼裡的那一家
+  const CODE_HEAD = 'HTZX1.';
+  function exportCode() {
+    const json = JSON.stringify({ s: loadSave(), e: [...loadSeen()], b: loadBonds() });
+    const bytes = new TextEncoder().encode(json);
+    let bin = ''; for (const c of bytes) bin += String.fromCharCode(c);
+    return CODE_HEAD + btoa(bin);
+  }
+  function parseCode(code) {
+    const t = String(code || '').replace(/\s+/g, '');
+    if (!t.startsWith(CODE_HEAD)) return null;
+    try {
+      const bin = atob(t.slice(CODE_HEAD.length));
+      const d = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0))));
+      if (!d || !Array.isArray(d.e) || typeof d.b !== 'object') return null;
+      const sv = d.s && d.s.v === 1 && Number.isFinite(d.s.seed) && Array.isArray(d.s.acts) ? d.s : null;
+      // 只收真的結局與人物，交情限制在 0 到最高一級之間（偽造或來自別的版本的資料不會讓結局冊出現怪字）
+      const known = new Set(DATA.endings.map((x) => x.id));
+      const b = {};
+      for (const id in d.b || {}) {
+        const def = DATA.bonds[id], v = Math.floor(Number(d.b[id]));
+        if (def && Number.isFinite(v) && v > 0) b[id] = Math.min(v, def.tiers.length - 1);
+      }
+      return { s: sv, e: d.e.filter((x) => typeof x === 'string' && known.has(x)), b };
+    } catch (e) { return null; }
+  }
+  function renderTransfer() {
+    const box = $('#transfer');
+    if (!box) return;
+    box.append(h('p', 'fine', '在原本的裝置按「產生存檔碼」並複製，到新的裝置（或另一個瀏覽器）貼上後按「讀入」。進行中的家族、結局冊和人物紀錄都會搬過去。'));
+    const out = h('textarea'); out.readOnly = true; out.hidden = true; out.setAttribute('aria-label', '這台裝置的存檔碼');
+    const mk = h('button', 'ghost ui', '產生存檔碼'); mk.type = 'button';
+    const cp = h('button', 'ghost ui', '複製'); cp.type = 'button'; cp.hidden = true;
+    const r1 = h('div', 'row'); r1.append(mk, cp);
+    mk.addEventListener('click', () => { out.value = exportCode(); out.hidden = false; cp.hidden = false; out.select(); });
+    cp.addEventListener('click', async () => {
+      let ok = false;
+      try { await navigator.clipboard.writeText(out.value); ok = true; } catch (e) { out.select(); try { ok = document.execCommand('copy'); } catch (e2) { ok = false; } }
+      cp.textContent = ok ? '已複製' : '請手動選取複製';
+      setTimeout(() => { cp.textContent = '複製'; }, 2000);
+    });
+    const inp = h('textarea'); inp.placeholder = '把存檔碼貼在這裡'; inp.setAttribute('aria-label', '貼上存檔碼');
+    const go = h('button', 'ghost ui', '讀入'); go.type = 'button';
+    const msg = h('span', 'msg');
+    const r2 = h('div', 'row'); r2.append(go, msg);
+    let armed = false;
+    inp.addEventListener('input', () => { armed = false; go.textContent = '讀入'; msg.textContent = ''; });
+    go.addEventListener('click', () => {
+      const d = parseCode(inp.value);
+      if (!d) { msg.textContent = '這不是有效的存檔碼，請確認有完整複製。'; return; }
+      const here = loadSave();
+      // 這台裝置也有一個沒玩完的家族，而且跟存檔碼裡的不是同一家：先提醒一次
+      if (d.s && here && (here.seed !== d.s.seed || here.acts.length !== d.s.acts.length) && !armed) {
+        armed = true; go.textContent = '確定讀入';
+        msg.textContent = `這台裝置上還有「${here.name || '未完成'}」一家沒玩完，讀入後會換成「${d.s.name || '存檔碼裡'}」一家。`;
+        return;
+      }
+      const seen = loadSeen(); for (const id of d.e) seen.add(id);
+      pref('sg_seen', JSON.stringify([...seen]));
+      markBonds(d.b);
+      if (d.s) pref('sg_save', JSON.stringify(d.s));
+      msg.textContent = '讀入完成，重新載入中…';
+      setTimeout(() => location.reload(), 600);
+    });
+    box.append(r1, out, h('p', 'fine', '從別的裝置搬過來：'), inp, r2);
+  }
+
+  // ---------------- 開場與戶籍
+  $('#btnStart').addEventListener('click', start);
+  renderCodex();
+  renderTransfer();
+  const saved = loadSave();
+  if (saved) {
+    const r = h('button', 'ghost ui', saved.name ? `接續上次的家族（${esc(saved.name)}）` : '接續上次的家族');
+    if (saved.ver !== DATA_VER) r.title = '遊戲內容更新過，接續後的劇情可能跟上次略有不同';
+    r.type = 'button'; r.id = 'btnResume';
+    r.addEventListener('click', () => resume(saved));
+    // 跟「投胎」包在同一列，手機版重新排序時才會一起移動
+    const row = h('div', 'cta-row');
+    $('#btnStart').before(row);
+    row.append($('#btnStart'), r);
+  }
+
+  function resume(sv) {
+    unpause();
+    game = E.createGame(DATA, sv.seed);
+    lastAge = -1; save = sv;
+    $('#intro').hidden = true; $('#end').hidden = true; $('#birth').hidden = true;
+    $('#log').innerHTML = ''; $('#game').hidden = false; $('#ctrl').hidden = false;
+    const all = [...game.state.log];
+    const run = () => { let n = 0; while (!game.pending && !game.ended && !game.interlude && !game.succession && n++ < 3000) all.push(...game.step()); };
+    // 一步一步照紀錄重播；哪一步對不上（內容改版後選項變了），就停在那裡交還給玩家
+    let done = 0;
+    try {
+      for (const a of sv.acts) {
+        run();
+        if (a[0] === 'c' && game.pending && game.pending.opts[a[1]] && game.pending.opts[a[1]].ok) all.push(...game.choose(a[1]));
+        else if (a[0] === 'h' && game.succession && game.succession.heirs[a[1]]) all.push(...game.continueAsHeir(a[1]));
+        else if (a[0] === 'n' && game.interlude) all.push(...game.continueChapter());
+        else break;
+        done++;
+      }
+    } catch (e) { clearSave(); start(); return; }
+    const diverged = done < sv.acts.length || sv.ver !== DATA_VER;
+    sv.acts = sv.acts.slice(0, done); sv.ver = DATA_VER; persist();
+    const frag = document.createDocumentFragment();
+    renderTarget = frag; quiet = true;
+    try { for (const e of all) renderEntry(e); } finally { renderTarget = null; quiet = false; }
+    $('#log').append(frag);
+    // 重播了一整局，紀錄很長：先直接跳到底，不用平滑捲動（距離太長會捲不到位）
+    window.scrollTo(0, document.documentElement.scrollHeight);
+    if (diverged) renderEntry({ type: 'event', tag: '改版', text: '（遊戲內容更新過。從這裡開始，故事可能跟你上次玩的不太一樣。）' });
+    renderHud();
+    if (game.ended) return showEnd();
+    if (game.succession) return showEnd('heir');
+    if (game.interlude) return showEnd(true);
+    if (game.pending) renderDecision(game.pending);
+    else scrollEnd();
+    schedule();
+  }
+
+  // 新的一局（或接續）一律從「播放中」開始，不沿用上一局的暫停
+  function unpause() {
+    paused = false;
+    const b = $('#btnPause');
+    if (b) { b.setAttribute('aria-pressed', 'false'); b.textContent = '暫停'; }
+  }
+
+  function start() {
+    unpause();
+    game = E.createGame(DATA);
+    lastAge = -1;
+    $('#intro').hidden = true; $('#end').hidden = true;
+    $('#log').innerHTML = '';
+    renderBirth();
+    $('#birth').hidden = false; $('#game').hidden = true; $('#ctrl').hidden = true;
+    window.scrollTo(0, 0);
+  }
+
+  // 新手提示：第一次開局時插在紀錄裡，看完按「知道了」日子才開始走，之後不再出現
+  function showTips(then) {
+    if (pref('sg_tips')) return false;
+    const touch = matchMedia('(pointer: coarse)').matches;
+    const tip = h('div', 'tip ui');
+    tip.append(h('b', null, '怎麼玩'));
+    tip.append(h('p', null, `日子會自己一年一年往下走。遇到要拿主意的事，會停下來等你選${touch ? '' : '（也可以按鍵盤的數字鍵）'}。`));
+    const dl = h('dl');
+    for (const [k, v] of [['暫停', '停在這一年，想慢慢看的時候用'], ['1×　2×　4×', '日子過得多快'], ['◐', '換成黑底或原色底'], ['交給天命', '開著的時候，抉擇會自動替你選']]) {
+      dl.append(h('dt', null, esc(k)), h('dd', null, esc(v)));
+    }
+    tip.append(dl);
+    tip.append(h('p', null, '你死了，故事不會結束：由孩子或弟妹接下這個家。進度會自動存下來。'));
+    const ok = h('button', 'ghost', '知道了'); ok.type = 'button';
+    ok.addEventListener('click', () => { pref('sg_tips', '1'); tip.remove(); then(); });
+    tip.append(ok);
+    $('#log').append(tip);
+    tip.scrollIntoView({ block: 'nearest' });
+    ok.focus({ preventScroll: true });
+    return true;
+  }
+
+  function renderBirth() {
+    const s = game.state, b = s.birth;
+    const W = DATA.world;
+    const sec = $('#birth');
+    sec.innerHTML = '';
+    const reg = h('div', 'register fadein');
+    reg.append(h('div', 'who', `<span class="name">${esc(s.name)}</span><span class="meta">${s.gender === 'm' ? '男' : '女'}　·　${esc(b.era)}　${esc(b.ganzhi)}　·　西元 ${s.birthYear} 年</span>`));
+    const dl = h('dl');
+    const items = [
+      ['籍貫', b.region.name], ['家世', b.cls.name], ['到甲子年', `${184 - s.birthYear} 歲`], ['身子', s.hp >= 75 ? '結實' : s.hp >= 55 ? '尋常' : '瘦弱'],
+    ];
+    for (const [k, v] of items) { dl.append(h('dt', null, esc(k))); dl.append(h('dd', null, esc(v))); }
+    reg.append(dl);
+    reg.append(h('p', null, esc(b.region.desc) + ' ' + esc(b.family)));
+    const tal = h('div');
+    for (const t of b.talents) tal.append(h('span', 'talent', `${esc(t.id)}<small>${esc(t.desc)}</small>`));
+    reg.append(tal);
+    reg.append(h('p', 'fine', '在這個模擬裡，東漢末年大約每六個孩子就有一個活不過五歲（推估值）。建寧、熹平、光和年間史書記了四次大疫，都會在你的人生裡發生。'));
+    sec.append(reg);
+    const row = h('div'); row.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;margin-top:16px';
+    const go = h('button', 'cta', '展開此生'); go.type = 'button';
+    go.addEventListener('click', () => { save = { v: 1, ver: DATA_VER, seed: game.seed, name: game.state.name, acts: [] }; persist(); $('#birth').hidden = true; $('#game').hidden = false; $('#ctrl').hidden = false; renderHud(); flush(game.state.log); if (!showTips(schedule)) schedule(); });
+    const re = h('button', 'ghost ui', '重新投胎'); re.type = 'button'; re.addEventListener('click', start);
+    row.append(go, re);
+    sec.append(row);
+  }
+
+  // ---------------- 頂部
+  function renderHud() {
+    const s = game.state;
+    const hud = $('#hud');
+    const era = game.eraLabel(s.year) + '　' + game.ganzhi(s.year);
+    let html = `<div class="hud-top"><div class="hud-name">${esc(s.name)}<small>${esc(s.regionName)}・${esc(s.clsName)}</small></div>
+      <div style="text-align:right"><div class="hud-age">${s.age}<small>歲</small></div><div class="hud-era">${esc(era)}・${s.year}</div></div></div>`;
+    html += '<div class="stats">';
+    for (const k of STAT_ORDER) html += `<div class="stat"><div class="k">${k}<b>${s.stats[k]}</b></div><div class="bar"><i style="width:${s.stats[k]}%"></i></div></div>`;
+    html += `<div class="stat hp"><div class="k">健<b>${s.hp}</b></div><div class="bar"><i style="width:${s.hp}%"></i></div></div></div>`;
+    const chips = [];
+    if (s.route && s.generation === 1) chips.push(`<span class="chip route">甲子年・${ROUTE_NAME[s.route] || s.route}</span>`);
+    const kids = (s.children || []).filter((c) => c.alive && !c.away).length;
+    if (kids) chips.push(`<span class="chip">子女 ${kids}</span>`);
+    if (s.chapter >= 2 && s.faction) chips.push(`<span class="chip faction">${factionName(s.faction, s.chapter)}</span>`);
+    if (s.generation > 1) chips.push(`<span class="chip">第${cnGen(s.generation)}代</span>`);
+    if (s.focus) chips.push(`<span class="chip">${esc(s.focus)}</span>`);
+    for (const t of s.talents) chips.push(`<span class="chip">${esc(t)}</span>`);
+    for (const id in s.bonds) if (s.bonds[id] > 0) chips.push(`<span class="chip bond">${esc(DATA.bonds[id].name)}・${esc(DATA.bonds[id].tiers[s.bonds[id]])}</span>`);
+    if (s.spouse) chips.push(`<span class="chip">配偶 ${esc(s.spouse)}</span>`);
+    if (s.injuries.length) chips.push(`<span class="chip">舊傷 ${s.injuries.length}</span>`);
+    html += `<div class="chips">${chips.join('')}</div>`;
+    hud.innerHTML = html;
+    syncBars();
+  }
+
+  function syncBars() {
+    const root = document.documentElement.style;
+    const hud = $('#hud'), ctrl = $('#ctrl');
+    root.setProperty('--hud-h', (hud && !$('#game').hidden ? hud.offsetHeight : 0) + 'px');
+    root.setProperty('--ctrl-h', (ctrl && !ctrl.hidden ? ctrl.offsetHeight : 0) + 'px');
+  }
+  window.addEventListener('resize', syncBars);
+
+  // ---------------- 紀錄
+  function deltaHtml(d) {
+    if (!d) return '';
+    const parts = Object.entries(d).map(([k, v]) => `<span class="${v < 0 ? 'neg' : ''}">${k} ${v > 0 ? '+' : '−'}${Math.abs(v)}</span>`);
+    return parts.length ? `<div class="delta">${parts.join('')}</div>` : '';
+  }
+
+  // 接續時把整局紀錄先組在記憶體裡、一次放進頁面，也不播淡入動畫（幾百條同時動畫，慢的手機會卡）
+  let renderTarget = null, quiet = false;
+  function renderEntry(e) {
+    const log = renderTarget || $('#log');
+    const fade = quiet ? '' : ' fadein';
+    if (e.type === 'heir') {
+      log.append(h('div', 'heirline' + fade, esc(e.text)));
+      return;
+    }
+    if (e.type === 'chapter') {
+      log.append(h('div', 'chap' + fade, esc(e.text)));
+      return;
+    }
+    if (e.type === 'year') {
+      const s = game.state;
+      log.append(h('div', 'yr' + fade, `<span class="a">${e.age}歲</span><span class="e">${esc(e.era)}・${esc(e.ganzhi)}・${e.year}</span>`));
+      return;
+    }
+    if (e.type === 'decision' || e.type === 'event' || e.type === 'note' || e.type === 'bond' || e.type === 'choice') {
+      if (e.age !== lastAge && e.type !== 'choice' && log.children.length === 0) {
+        log.append(h('div', 'yr', `<span class="a">${e.age}歲</span><span class="e">${esc(game.eraLabel(e.year))}・${esc(game.ganzhi(e.year))}・${e.year}</span>`));
+      }
+      lastAge = e.age;
+      let cls = 'en' + fade;
+      if (e.kind === 'anchor' || e.kind === 'bond' || e.type === 'decision') cls += ' big';
+      if (e.death) cls += ' death';
+      if (e.type === 'choice') cls += ' choice';
+      if (e.type === 'bond') cls += ' bond';
+      let html = '';
+      if (e.tag && e.type !== 'choice') html += `<span class="tag">${esc(e.tag)}</span>`;
+      if (e.type === 'choice') html += `<p>${e.title ? esc(e.title) + '｜' : ''}你選了<b>「${esc(e.text)}」</b></p>`;
+      else html += `<p>${esc(e.text)}</p>`;
+      html += deltaHtml(e.delta);
+      if (e.note) html += `<div class="note">${esc(e.note)}</div>`;
+      log.append(h('div', cls, html));
+    }
+  }
+
+  function flush(entries) {
+    for (const e of entries) renderEntry(e);
+    renderHud();
+    const p = game.pending;
+    if (p) renderDecision(p);
+    if (!game.pending && !game.ended) scrollEnd();
+  }
+
+  function scrollEnd() {
+    const el = $('#log').lastElementChild;
+    if (el) el.scrollIntoView({ block: 'end', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+
+  // ---------------- 抉擇
+  function renderDecision(p) {
+    const card = h('div', 'dec fadein');
+    card.id = 'decision';
+    const who = p.who ? `<span class="who">人物　<b>${esc(p.who)}</b></span>` : '';
+    card.append(h('div', 'head', `<h3>${esc(p.title || p.tag || '抉擇')}</h3>${who}`));
+    const opts = h('div', 'opts');
+    p.opts.forEach((o, idx) => {
+      const b = h('button', 'opt', `<span class="n">${idx + 1}</span><span class="t">${esc(o.t)}</span><span class="s">${esc(o.ok ? (o.sub || '') : (o.lock || '條件不足'))}</span>`);
+      b.type = 'button';
+      b.disabled = !o.ok;
+      b.addEventListener('click', () => pick(idx));
+      opts.append(b);
+    });
+    card.append(opts);
+    if (fate) card.append(h('div', 'auto-hint', '交給天命中：稍後會自動替你選一條路。點任何選項可以自己決定。'));
+    $('#log').append(card);
+    card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    const first = card.querySelector('.opt:not(:disabled)');
+    if (first && !fate) first.focus({ preventScroll: true });
+    if (fate) { clearTimeout(timer); timer = setTimeout(() => { const ok = p.opts.map((o, i) => (o.ok ? i : -1)).filter((i) => i >= 0); pick(ok[Math.floor(Math.random() * ok.length)]); }, 1400 / speed); }
+  }
+
+  function pick(idx) {
+    const card = $('#decision');
+    if (card) card.remove();
+    clearTimeout(timer);
+    record(['c', idx]);
+    const out = game.choose(idx);
+    flush(out);
+    if (game.ended) return showEnd();
+    if (game.succession) return showEnd('heir');
+    if (game.interlude) return showEnd(true);
+    schedule();
+  }
+
+  document.addEventListener('keydown', (ev) => {
+    if (!game || !game.pending || !$('#decision')) return;
+    const n = parseInt(ev.key, 10);
+    if (n >= 1 && n <= game.pending.opts.length && game.pending.opts[n - 1].ok) pick(n - 1);
+  });
+
+  // ---------------- 推進
+  function schedule() {
+    clearTimeout(timer);
+    if (paused || !game || game.pending || game.ended || game.interlude || game.succession) return;
+    timer = setTimeout(tick, 1100 / speed);
+  }
+  function tick() {
+    if (!game || game.pending || game.ended || game.interlude || game.succession || paused) return;
+    const out = game.step();
+    flush(out);
+    if (game.ended) return showEnd();
+    if (game.succession) return showEnd('heir');
+    if (game.interlude) return showEnd(true);
+    if (!game.pending) schedule();
+  }
+
+  $('#btnPause').addEventListener('click', (ev) => {
+    paused = !paused;
+    ev.currentTarget.setAttribute('aria-pressed', String(paused));
+    ev.currentTarget.textContent = paused ? '繼續' : '暫停';
+    if (!paused) schedule(); else clearTimeout(timer);
+  });
+  document.querySelectorAll('.spd').forEach((b) => {
+    b.setAttribute('aria-pressed', String(+b.dataset.s === speed));
+    b.addEventListener('click', () => {
+      pref('sg_tips', '1'); // 會用控制列的人，就不必再看新手提示了
+      speed = +b.dataset.s; pref('sg_speed', String(speed));
+      document.querySelectorAll('.spd').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      if (!game.pending) schedule();
+    });
+  });
+  $('#btnFate').addEventListener('click', (ev) => {
+    pref('sg_tips', '1');
+    fate = !fate;
+    ev.currentTarget.setAttribute('aria-pressed', String(fate));
+    if (game && !game.pending && !paused) schedule(); // 第一局還停在新手提示時，按交給天命也就開始了
+    if (fate && game && game.pending) { const c = $('#decision'); if (c) c.remove(); renderDecision(game.pending); }
+  });
+
+  // ---------------- 結局
+  function familyText(s, e) {
+    const L = [`《黃天之下》${s.surname}家的故事`, ''];
+    for (const p of e.lineage || []) L.push(`第${cnGen(p.gen)}代　${p.name}（${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}）「${p.title}」`);
+    if (s.chapterEndings && s.chapterEndings.length) {
+      L.push('', '走過的章：');
+      for (const c of s.chapterEndings) L.push(`第${c.chapter}章・${c.name}「${c.title}」`);
+    }
+    L.push('', `結局「${e.title}」：${e.text}`);
+    if (e.memories && e.memories.length) { L.push('', '往事：'); for (const m of e.memories) L.push('・' + m); }
+    return L.join('\n');
+  }
+
+  // ---------------- 分享圖：把結局畫成一張 1080×1080 的卡片，顏色跟著目前的底色
+  function wrapText(ctx, text, maxW) {
+    const NO_HEAD = '，。、；：！？」』）》…—';
+    const lines = []; let cur = '';
+    for (const ch of [...text]) {
+      if (ctx.measureText(cur + ch).width > maxW && cur && !NO_HEAD.includes(ch)) { lines.push(cur); cur = ch; }
+      else cur += ch;
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  }
+  function drawLines(ctx, lines, x, y, lh, max) {
+    const out = lines.slice(0, max);
+    if (lines.length > max) out[max - 1] = out[max - 1].slice(0, -1) + '…';
+    out.forEach((l, i) => ctx.fillText(l, x, y + i * lh));
+    return y + out.length * lh;
+  }
+  async function shareCard(s, e, kicker) {
+    const css = getComputedStyle(document.documentElement);
+    const C = (k) => css.getPropertyValue(k).trim();
+    const col = { bg: C('--bg'), slip: C('--slip'), ink: C('--ink'), muted: C('--muted'), line: C('--line'), red: C('--red'), yellow: C('--yellow') };
+    const SERIF = '"Noto Serif TC", "Songti TC", "PMingLiU", serif';
+    const SANS = 'system-ui, -apple-system, "Microsoft JhengHei", "PingFang TC", sans-serif';
+    const L = e.lineage || [];
+    const gender = s.gender === 'm' ? '男' : '女';
+    const detail = `${s.name}，${gender}，${s.birthYear}年生於${s.regionName}，${s.clsName}。` +
+      (e.alive ? `${s.year}年時${s.age}歲，還活著。` : `卒於${s.year}年，享年${s.age}歲。`);
+    const fam = L.length > 1
+      ? `${s.surname}家${cnGen(L.length)}代人，從${L[0].born}年走到${s.year}年：${L.slice(-5).map((p) => p.name).join(' → ')}`
+      : `第${cnGen(s.generation)}代當家・${s.surname}家`;
+    const all = e.title + kicker + s.name + e.text + detail + fam + e.cause + '黃天之下投胎到東漢末年一代一代活下去死因家族武文德名財健歲0123456789→…・，。大事依三國志後漢書晉書';
+    try { await Promise.race([Promise.all([document.fonts.load(`900 80px ${SERIF}`, all), document.fonts.load(`400 30px ${SERIF}`, all)]), new Promise((r) => setTimeout(r, 2500))]); } catch (err) { /* 字型載不到就用系統字 */ }
+
+    const W = 1080, H = 1080, cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const x = cv.getContext('2d');
+    x.fillStyle = col.bg; x.fillRect(0, 0, W, H);
+    // 外框與四角
+    x.strokeStyle = col.muted; x.lineWidth = 2; x.strokeRect(40, 40, W - 80, H - 80);
+    x.strokeStyle = col.line; x.lineWidth = 1; x.strokeRect(54, 54, W - 108, H - 108);
+    x.strokeStyle = col.muted; x.lineWidth = 3;
+    for (const [cx, cy, dx, dy] of [[64, 64, 1, 1], [W - 64, 64, -1, 1], [64, H - 64, 1, -1], [W - 64, H - 64, -1, -1]]) {
+      x.beginPath(); x.moveTo(cx, cy + 36 * dy); x.lineTo(cx, cy); x.lineTo(cx + 36 * dx, cy); x.stroke();
+    }
+    // 左邊的印：結局標題直排
+    const chars = [...e.title].slice(0, 7);
+    const fs = Math.min(96, Math.floor(600 / chars.length));
+    const sw = fs + 56, sh = chars.length * (fs * 1.1) + 64, sx = 96, sy = 130;
+    x.save(); x.translate(sx + sw / 2, sy + sh / 2); x.rotate(-0.025); x.translate(-sw / 2, -sh / 2);
+    x.fillStyle = e.alive ? col.ink : col.red; x.fillRect(0, 0, sw, sh);
+    x.strokeStyle = col.slip; x.lineWidth = 3; x.strokeRect(10, 10, sw - 20, sh - 20);
+    x.fillStyle = col.slip; x.font = `900 ${fs}px ${SERIF}`; x.textAlign = 'center'; x.textBaseline = 'middle';
+    chars.forEach((c, i) => x.fillText(c, sw / 2, 32 + fs * 0.55 + i * fs * 1.1));
+    x.restore();
+    // 右欄
+    const rx = sx + sw + 50, rw = W - 90 - rx;
+    x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+    let y = 160;
+    x.fillStyle = col.red; x.font = `400 28px ${SANS}`; x.fillText(kicker, rx, y);
+    y += 92;
+    x.fillStyle = col.ink; x.font = `900 84px ${SERIF}`;
+    let nameW = x.measureText(s.name).width;
+    x.fillText(s.name, rx, y);
+    x.font = `900 50px ${SERIF}`; x.fillText(` ${s.age}歲`, rx + nameW, y);
+    y += 70;
+    x.font = `400 36px ${SERIF}`; x.fillStyle = col.ink;
+    y = drawLines(x, wrapText(x, e.text, rw), rx, y, 58, 6) + 10;
+    x.font = `400 27px ${SERIF}`; x.fillStyle = col.muted;
+    y = drawLines(x, wrapText(x, detail, rw), rx, y, 44, 3) + 20;
+    // 框：死因或家族
+    const boxLines = [];
+    x.font = `400 27px ${SERIF}`;
+    if (!e.alive && e.cause) boxLines.push(['死因', e.cause]);
+    boxLines.push(['家族', fam]);
+    const wrapped = boxLines.map(([k, v]) => [k, wrapText(x, v, rw - 150).slice(0, 2)]);
+    const bh = 30 + wrapped.reduce((n, [, ls]) => n + ls.length * 42, 0) + 14;
+    x.fillStyle = col.slip; x.fillRect(rx, y, rw, bh);
+    let by = y + 52;
+    for (const [k, ls] of wrapped) {
+      x.fillStyle = col.red; x.font = `900 30px ${SERIF}`; x.fillText(k, rx + 26, by);
+      x.fillStyle = col.ink; x.font = `400 27px ${SERIF}`;
+      ls.forEach((l, i) => x.fillText(l, rx + 120, by + i * 42));
+      by += ls.length * 42;
+    }
+    // 數值不畫上去：死的時候「健」還很高之類的數字，放在結局卡上反而突兀
+    // 頁尾
+    x.textAlign = 'center';
+    x.fillStyle = col.ink; x.font = `900 52px ${SERIF}`; x.fillText('黃天之下', W / 2, H - 170);
+    x.fillStyle = col.muted; x.font = `400 26px ${SERIF}`; x.fillText('投胎到東漢末年，一代一代活下去。', W / 2, H - 122);
+    x.fillStyle = col.red; x.font = `900 22px ${SERIF}`; x.fillText('大事依《後漢書》《三國志》《晉書》', W / 2, H - 84);
+    return cv;
+  }
+  // 第幾代：跟遊戲裡「第五代　余貞」的寫法一致，用中文數字
+  function cnGen(n) { return n <= 10 ? CN[n] : n < 20 ? '十' + CN[n % 10] : String(n); }
+
+  function openShare(cv, fileName) {
+    const url = cv.toDataURL('image/png');
+    const ov = h('div', 'share-ov');
+    ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', '分享圖');
+    const box = h('div', 'share-box');
+    const img = h('img'); img.src = url; img.alt = '這一生的結局卡';
+    box.append(img, h('p', 'fine', '手機請長按圖片存下來；電腦請在圖片上按右鍵，選「另存圖片」。如果「下載圖片」按了沒反應（有些分享連結不允許下載），也請用這個方法。'));
+    const row = h('div', 'end-actions');
+    const dl = h('a', 'ghost ui', '下載圖片'); dl.href = url; dl.download = fileName;
+    row.append(dl);
+    cv.toBlob((blob) => {
+      if (!blob) return;
+      // 複製圖片：分享連結不允許下載時，還可以直接貼到聊天軟體
+      if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem) {
+        const cp = h('button', 'ghost ui', '複製圖片'); cp.type = 'button';
+        cp.addEventListener('click', async () => {
+          // 有些嵌入的頁面不准寫圖片進剪貼簿，請求會一直沒有回應：三秒沒成功就請玩家改用右鍵或長按
+          const timeout = new Promise((_, no) => setTimeout(() => no(new Error('timeout')), 3000));
+          try { await Promise.race([navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]), timeout]); cp.textContent = '已複製，可以直接貼上'; }
+          catch (err) { cp.textContent = '這裡不能複製，請用右鍵或長按'; }
+          setTimeout(() => { cp.textContent = '複製圖片'; }, 2500);
+        });
+        dl.after(cp);
+      }
+      const file = new File([blob], fileName, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        const sh = h('button', 'cta', '分享'); sh.type = 'button';
+        sh.addEventListener('click', () => navigator.share({ files: [file], title: '黃天之下' }).catch(() => {}));
+        row.prepend(sh);
+      }
+    }, 'image/png');
+    const close = h('button', 'ghost ui', '關閉'); close.type = 'button';
+    const done = () => { ov.remove(); document.removeEventListener('keydown', onKey); };
+    const onKey = (ev) => { if (ev.key === 'Escape') done(); };
+    close.addEventListener('click', done);
+    ov.addEventListener('click', (ev) => { if (ev.target === ov) done(); });
+    document.addEventListener('keydown', onKey);
+    row.append(close);
+    box.append(row);
+    ov.append(box);
+    document.body.append(ov);
+    close.focus({ preventScroll: true });
+  }
+
+  function showEnd(mode) {
+    clearTimeout(timer);
+    const heirMode = mode === 'heir';
+    const interlude = mode === true;
+    const s = game.state, e = heirMode ? game.succession : interlude ? game.interlude : game.ended;
+    if (!heirMode && !interlude) clearSave(); // 這一家的故事說完了
+    const fresh = markSeen(e.id);
+    markBonds(s.bonds || {});
+    $('#ctrl').hidden = true;
+    const sec = $('#end');
+    sec.innerHTML = '';
+    const sealText = e.title.length > 6 ? e.title.slice(0, 6) : e.title;
+    const head = h('div', 'end-head fadein');
+    head.append(h('div', 'seal' + (e.alive ? ' alive' : ''), esc(sealText)));
+    const chName = (e.chapterTitle || '').replace(/^\S+\s+/, '');
+    const life = e.alive ? `${s.birthYear}年生，${interlude ? '這一章結束時' : '活到'} ${s.age} 歲` : `${s.birthYear}–${s.year}，享年 ${s.age} 歲，${esc(e.cause || '')}`;
+    const first = fresh ? '・初見' : '';
+    const kicker = interlude ? `<span class="rare">${esc(e.chapterTitle || '')}・章末${e.rare ? '・稀有' : ''}${first}</span>`
+      : heirMode ? `<span class="rare">第${cnGen(s.generation)}代・一生${e.rare ? '・稀有' : ''}${first}</span>`
+      : (e.rare || fresh ? `<span class="rare">${e.rare ? '稀有結局' : '結局'}${first}</span>` : '');
+    head.append(h('div', 'end-body', `${kicker}<h2>${esc(s.name)}</h2><div class="epi">${esc(s.regionName)}・${esc(s.clsName)}・${life}</div><p>${esc(e.text)}</p>`));
+    sec.append(head);
+
+    const st = h('div', 'end-sec');
+    st.append(h('h4', null, '最後的樣子'));
+    st.append(h('div', 'delta', STAT_ORDER.map((k) => `<span style="color:var(--ink)">${k} ${s.stats[k]}</span>`).join('') + `<span style="color:var(--ink)">健 ${s.hp}</span>` + (s.route ? `<span style="color:var(--ink)">甲子年：${ROUTE_NAME[s.route]}</span>` : '')));
+    sec.append(st);
+
+    const extinct = !heirMode && !interlude && e.extinct;
+    const mem = e.memories || [];
+    if (e.after.length || e.epilogue.length || mem.length || extinct) {
+      const af = h('div', 'end-sec');
+      af.append(h('h4', null, interlude ? '這時候，天下的另一頭' : e.alive ? '後來' : '你走之後'));
+      const box = h('div', 'after');
+      for (const a of e.after) box.append(h('div', 'card', `<b>${esc(a.who)}</b><small>${esc(a.tier)}</small><p style="margin:4px 0 0">${esc(a.text)}</p>`));
+      // 往事：先放三件，其餘收起來
+      const SHOW = 3;
+      for (const t of mem.slice(0, SHOW)) box.append(h('div', 'card memory', `<p style="margin:0">${esc(t)}</p>`));
+      if (mem.length > SHOW) {
+        const more = h('details', 'more');
+        more.append(h('summary', 'ui', `還有 ${mem.length - SHOW} 件往事`));
+        for (const t of mem.slice(SHOW)) more.append(h('div', 'card memory', `<p style="margin:0">${esc(t)}</p>`));
+        box.append(more);
+      }
+      // 天下的收尾放最後，永遠看得見
+      if (extinct) box.append(h('div', 'card', `<p style="margin:0">沒有人能接下這個家了。香火，就斷在這裡。</p>`));
+      for (const t of e.epilogue) box.append(h('div', 'card world', `<p style="margin:0">${esc(t)}</p>`));
+      af.append(box);
+      sec.append(af);
+    }
+
+    if (s.choices.length) {
+      const tl = h('div', 'end-sec');
+      tl.append(h('h4', null, '這一生的抉擇'));
+      const list = h('div', 'tl');
+      for (const c of s.choices) list.append(h('div', null, `<span class="y">${c.age}歲</span><span>${esc(c.title)}：<b>${esc(c.pick)}</b></span>`));
+      tl.append(list);
+      sec.append(tl);
+    }
+
+    // 家譜
+    if ((e.lineage || []).length > 1 || heirMode) {
+      const tr = h('div', 'end-sec');
+      tr.append(h('h4', null, '家譜'));
+      const t = h('div', 'tree');
+      for (const p of e.lineage || []) t.append(h('div', null, `<span class="g">第${cnGen(p.gen)}代</span><span><b>${esc(p.name)}</b>　${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}　「${esc(p.title)}」</span>`));
+      tr.append(t);
+      sec.append(tr);
+    }
+    const act = h('div', 'end-actions');
+    if (heirMode) {
+      const hs = h('div', 'heirs');
+      hs.append(h('h4', null, '由誰接下這個家'));
+      e.heirs.forEach((x, i) => {
+        const b = h('button', i === 0 ? 'cta' : 'ghost ui', `${esc(x.rel)}　${esc(x.name)}（${x.age}歲）`);
+        b.type = 'button';
+        b.addEventListener('click', () => {
+          sec.hidden = true; $('#ctrl').hidden = false;
+          record(['h', i]);
+          if (save) { save.name = x.name; persist(); }
+          flush(game.continueAsHeir(i));
+          if (game.interlude) return showEnd(true);
+          if (game.ended) return showEnd();
+          schedule();
+        });
+        hs.append(b);
+      });
+      const hsec = h('div', 'end-sec');
+      hsec.append(hs);
+      sec.append(hsec);
+    }
+    if (interlude && e.next) {
+      const go = h('button', 'cta', '繼續活下去'); go.type = 'button';
+      go.title = e.next.title;
+      go.addEventListener('click', () => {
+        sec.hidden = true; $('#ctrl').hidden = false;
+        record(['n']);
+        flush(game.continueChapter());
+        schedule();
+      });
+      act.append(go, h('span', 'fine', esc(e.next.title)));
+    }
+    if (!interlude && s.chapterEndings && s.chapterEndings.length > 1) {
+      st.append(h('div', 'fine', '這一家走過的章：' + s.chapterEndings.map((c) => `第${c.chapter}章${c.name ? '・' + esc(c.name) : ''}「${esc(c.title)}」`).join('　')));
+    }
+    const again = h('button', interlude || heirMode ? 'ghost ui' : 'cta', '再投一次胎'); again.type = 'button'; again.addEventListener('click', start);
+    const back = h('button', 'ghost ui', '回到這一生的紀錄'); back.type = 'button'; back.addEventListener('click', () => $('#log').scrollIntoView({ behavior: 'smooth' }));
+    act.append(again, back);
+    // 分享圖：每一生的結局都可以存成一張圖
+    const card = h('button', 'ghost ui', '產生分享圖'); card.type = 'button';
+    card.addEventListener('click', async () => {
+      card.disabled = true; card.textContent = '畫圖中…';
+      const plain = (kicker.replace(/<[^>]+>/g, '') || (e.rare ? '稀有結局' : '結局')).replace(/&amp;/g, '&');
+      try { openShare(await shareCard(s, e, plain), `黃天之下_${s.name}_${e.title}.png`); }
+      finally { card.disabled = false; card.textContent = '產生分享圖'; }
+    });
+    act.append(card);
+    // 最終結局：把這一家的故事整理成一段文字，方便分享
+    if (!interlude && !heirMode) {
+      const share = h('button', 'ghost ui', '複製這一家的故事'); share.type = 'button';
+      share.addEventListener('click', async () => {
+        const text = familyText(s, e);
+        let ok = false;
+        try { await navigator.clipboard.writeText(text); ok = true; } catch (err) {
+          const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.append(ta); ta.select();
+          try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+          ta.remove();
+        }
+        share.textContent = ok ? '已複製' : '複製失敗，請手動選取';
+        setTimeout(() => { share.textContent = '複製這一家的故事'; }, 2000);
+      });
+      act.append(share);
+    }
+    sec.append(act);
+    sec.hidden = false;
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+})();
+</script>
