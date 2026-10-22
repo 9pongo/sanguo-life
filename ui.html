@@ -595,6 +595,7 @@ const DATA = /*__DATA__*/;
   // 新的一局（或接續）一律從「播放中」開始，不沿用上一局的暫停
   function unpause() {
     paused = false;
+    stopLater(); // 上一局排著的下一步不要帶過來
     const b = $('#btnPause');
     if (b) { b.setAttribute('aria-pressed', 'false'); b.textContent = '暫停'; }
   }
@@ -753,17 +754,50 @@ const DATA = /*__DATA__*/;
     }
   }
 
-  // 閱讀節奏：剛剛顯示了多少字，就等多久再往下走。前 60 字每字 0.05 秒（約每秒二十字），超過的部分減半，最長 7 秒
+  // 播放節奏（參考《江湖千萬人》）：一條一條出，年紀標題跟著當年的第一條一起出；
+  // 每條依自己的字數停一下：0.6 秒＋前 40 字每字 0.04 秒、之後每字 0.02 秒，最長 6 秒
+  const lineMs = (chars) => Math.min(6000, 600 + Math.min(chars, 40) * 40 + Math.max(0, chars - 40) * 20) / speed;
+  const textLen = (e) => (e.type === 'year' || !e.text ? 0 : e.text.length + (e.title ? e.title.length : 0));
+  // 唯一的計時器：記住下一步要做什麼，暫停、換速度時才能接著做
+  let nextFn = null, nextChars = 0;
+  function later(fn, chars) {
+    clearTimeout(timer);
+    nextFn = fn; nextChars = chars;
+    timer = setTimeout(() => { nextFn = null; fn(); }, lineMs(chars));
+  }
+  function stopLater() { clearTimeout(timer); nextFn = null; }
+  // 一次全部顯示（出生、接班、換章、接續）
   let lastChars = 0;
-  const readMs = (chars, base) => Math.min(7000, base + Math.min(chars, 60) * 50 + Math.max(0, chars - 60) * 25) / speed;
   function flush(entries) {
     lastChars = 0;
-    for (const e of entries) if (e.type !== 'year' && e.text) lastChars += e.text.length + (e.title ? e.title.length : 0);
+    for (const e of entries) lastChars += textLen(e);
     for (const e of entries) renderEntry(e);
     renderHud();
     const p = game.pending;
     if (p) renderDecision(p);
     if (!game.pending && !game.ended) scrollEnd();
+  }
+  // 一條一條顯示；都出完了再看要結局、抉擇，還是排下一年
+  function reveal(entries) {
+    const list = entries.slice();
+    const nextLine = () => {
+      const batch = [];
+      while (list.length) { const e = list.shift(); batch.push(e); if (e.type !== 'year' && e.type !== 'chapter' && e.type !== 'heir') break; }
+      for (const e of batch) renderEntry(e);
+      renderHud();
+      const chars = batch.reduce((n, e) => n + textLen(e), 0);
+      if (list.length) { scrollEnd(); return later(nextLine, chars); }
+      afterReveal(chars);
+    };
+    nextLine();
+  }
+  function afterReveal(chars) {
+    if (game.ended) return showEnd();
+    if (game.succession) return showEnd('heir');
+    if (game.interlude) return showEnd(true);
+    if (game.pending) return renderDecision(game.pending);
+    scrollEnd();
+    later(tick, chars);
   }
 
   function scrollEnd() {
@@ -791,20 +825,15 @@ const DATA = /*__DATA__*/;
     card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     const first = card.querySelector('.opt:not(:disabled)');
     if (first && !fate) first.focus({ preventScroll: true });
-    if (fate) { clearTimeout(timer); timer = setTimeout(() => { const ok = p.opts.map((o, i) => (o.ok ? i : -1)).filter((i) => i >= 0); pick(ok[Math.floor(Math.random() * ok.length)]); }, readMs((p.text || '').length + p.opts.reduce((n, o) => n + o.t.length, 0), 750)); }
+    if (fate) later(() => { const ok = p.opts.map((o, i) => (o.ok ? i : -1)).filter((i) => i >= 0); pick(ok[Math.floor(Math.random() * ok.length)]); }, (p.text || '').length + p.opts.reduce((n, o) => n + o.t.length, 0));
   }
 
   function pick(idx) {
     const card = $('#decision');
     if (card) card.remove();
-    clearTimeout(timer);
+    stopLater();
     record(['c', idx]);
-    const out = game.choose(idx);
-    flush(out);
-    if (game.ended) return showEnd();
-    if (game.succession) return showEnd('heir');
-    if (game.interlude) return showEnd(true);
-    schedule();
+    reveal(game.choose(idx));
   }
 
   document.addEventListener('keydown', (ev) => {
@@ -814,26 +843,23 @@ const DATA = /*__DATA__*/;
   });
 
   // ---------------- 推進
+  // 繼續往下走：剛才停在哪一步（暫停、換速度），就從那一步接著做
   function schedule() {
-    clearTimeout(timer);
-    if (paused || !game || game.pending || game.ended || game.interlude || game.succession) return;
-    timer = setTimeout(tick, readMs(lastChars, 350));
+    if (paused || !game || game.ended || game.interlude || game.succession) { clearTimeout(timer); return; }
+    if (nextFn) return later(nextFn, nextChars);
+    if (game.pending) return;
+    later(tick, lastChars);
   }
   function tick() {
     if (!game || game.pending || game.ended || game.interlude || game.succession || paused) return;
-    const out = game.step();
-    flush(out);
-    if (game.ended) return showEnd();
-    if (game.succession) return showEnd('heir');
-    if (game.interlude) return showEnd(true);
-    if (!game.pending) schedule();
+    reveal(game.step());
   }
 
   $('#btnPause').addEventListener('click', (ev) => {
     paused = !paused;
     ev.currentTarget.setAttribute('aria-pressed', String(paused));
     ev.currentTarget.textContent = paused ? '繼續' : '暫停';
-    if (!paused) schedule(); else clearTimeout(timer);
+    if (!paused) schedule(); else clearTimeout(timer); // 暫停只停計時器，下一步記在 nextFn
   });
   document.querySelectorAll('.spd').forEach((b) => {
     b.setAttribute('aria-pressed', String(+b.dataset.s === speed));
@@ -841,7 +867,7 @@ const DATA = /*__DATA__*/;
       pref('sg_tips', '1'); // 會用控制列的人，就不必再看新手提示了
       speed = +b.dataset.s; pref('sg_speed', String(speed));
       document.querySelectorAll('.spd').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      if (!game.pending) schedule();
+      if (!paused) schedule();
     });
   });
   $('#btnFate').addEventListener('click', (ev) => {
@@ -849,7 +875,8 @@ const DATA = /*__DATA__*/;
     fate = !fate;
     ev.currentTarget.setAttribute('aria-pressed', String(fate));
     if (game && !game.pending && !paused) schedule(); // 第一局還停在新手提示時，按交給天命也就開始了
-    if (fate && game && game.pending) { const c = $('#decision'); if (c) c.remove(); renderDecision(game.pending); }
+    // 抉擇卡還在的時候切換：重畫一次（開了就排上自動選，關了就取消已經排好的自動選）
+    if (game && game.pending && $('#decision')) { stopLater(); $('#decision').remove(); renderDecision(game.pending); }
   });
 
   // ---------------- 結局
@@ -1005,7 +1032,7 @@ const DATA = /*__DATA__*/;
   }
 
   function showEnd(mode) {
-    clearTimeout(timer);
+    stopLater();
     let afterAct = null;
     const heirMode = mode === 'heir';
     const interlude = mode === true;
