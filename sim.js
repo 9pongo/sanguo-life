@@ -87,6 +87,11 @@ for (const ev of data.events) {
     for (const b of [c.ok, c.fail]) if (b) { checkEff(b.eff, cw); checkText(b.out, cw); }
     for (const n of [c.next, c.ok && c.ok.next, c.fail && c.fail.next]) for (const id of arr(n)) if (!ids.has(id)) errors.push(`${cw}：next 指向不存在的事件 ${id}`);
     if (c.chk && !(c.ok && c.fail) && c.chk.base !== 1) warns.push(`${cw}：有 chk 但缺 ok 或 fail 分支`);
+    // 可能當場死的選項，結果文字卻寫成活下來：死了的時候要有另一段 deathOut
+    checkText(c.deathOut, cw);
+    if (c.deathOut && !(c.eff && c.eff.risk)) warns.push(`${cw}：有 deathOut 但這個選項不會當場死`);
+    if (c.eff && c.eff.risk && !c.deathOut && /爬出|撿回|活下來|活了下來|逃回|回到家|回到成都|才敢出來|找到了|回來|過了門|人都還在|醒過來/.test(c.out || ''))
+      errors.push(`${cw}：可能當場死，但結果寫成活下來，要補 deathOut`);
   });
   if (ev.kind !== 'flavor' && !ev.year && !ev.age) {
     // 沒有年份也沒有年齡的，只能靠 later 排程叫出來

@@ -316,8 +316,9 @@
       const s = S();
       const head = emit({ type: 'choice', id: ev.id, text: c.t, title: ev.title ? fmt(ev.title) : null });
       apply(c.eff, head);
+      // 這一下沒活過去：不能再接「你第三天夜裡才爬出來」那種寫活下來的結果
       const ov = (c.outIf || []).find((v) => meets(v.req));
-      const out = ov ? ov.out : c.out;
+      const out = !s.alive && c.deathOut ? c.deathOut : ov ? ov.out : c.out;
       if (out) emit({ type: 'event', text: out });
       let branch = null;
       if (s.alive && c.chk) {
