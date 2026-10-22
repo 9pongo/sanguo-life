@@ -198,7 +198,8 @@ button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 .cb[aria-pressed="true"] { background: var(--ink); color: var(--slip); border-color: var(--ink); }
 .cb.fate[aria-pressed="true"] { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
 .sp { flex: 1; }
-.theme-row { display: flex; }
+.theme-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.theme-row a.ghost { padding: 6px 14px; font-size: 14px; }
 .theme-row .ghost { padding: 6px 14px; font-size: 14px; }
 @media (pointer: coarse) { .cb { min-height: 42px; min-width: 42px; padding: 6px 12px; } } /* 手指好按 */
 
@@ -282,7 +283,7 @@ a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
       </div>
       <button class="cta" id="btnStart" type="button">投胎</button>
       <p class="fine">八章、約八十張事件卡、{ENDINGS}種結局，七位可結交的歷史人物（劉備、曹操、孫堅、諸葛亮、關羽、姜維、嵇康）。進度會自動存在這個瀏覽器裡。</p>
-      <div class="theme-row ui"><button class="ghost btnTheme" id="btnThemeIntro" type="button">換成黑底</button></div>
+      <div class="theme-row ui"><button class="ghost btnTheme" id="btnThemeIntro" type="button">換成黑底</button><a class="ghost" id="lnkFeedback" href="https://github.com/9pongo/sanguo-life/issues" target="_blank" rel="noopener">意見回饋</a></div>
       <details class="codex" id="codex" hidden></details>
       <details class="codex" id="transfer"><summary>換裝置：存檔碼</summary></details>
     </div>
@@ -422,6 +423,54 @@ const DATA = /*__DATA__*/;
   // ---------------- 換裝置：把進行中的家族、結局冊、人物紀錄打包成一串文字
   // 讀入時結局冊與人物紀錄是「合併」（只會變多），進行中的家族則換成存檔碼裡的那一家
   const CODE_HEAD = 'HTZX1.';
+  // ---------------- 意見回饋：把這一局的資訊整理好，帶到 GitHub Issues，或複製下來傳給作者
+  const FEEDBACK_REPO = 'https://github.com/9pongo/sanguo-life/issues/new';
+  function feedbackInfo(e, sv) {
+    const s = game && game.state;
+    const lines = ['【黃天之下・這一局的資訊】', `內容版本：${DATA_VER}`];
+    if (s) {
+      lines.push(`種子：${game.seed}${s.lateStart ? '（後代投胎）' : ''}`);
+      lines.push(`人物：第${cnGen(s.generation)}代 ${s.name}，${s.regionName}・${s.clsName}，${s.year} 年 ${s.age} 歲`);
+      if (e) lines.push(`結局：「${e.title}」（${e.id}）`);
+    }
+    lines.push(`裝置：${matchMedia('(pointer: coarse)').matches ? '手機或平板' : '電腦'}，${innerWidth}×${innerHeight}`);
+    const code = sv ? exportCodeOf(sv) : '';
+    if (code && code.length < 3000) lines.push(`存檔碼：${code}`);
+    return lines.join('\n');
+  }
+  function exportCodeOf(sv) {
+    const bytes = new TextEncoder().encode(JSON.stringify({ s: sv, e: [], b: {} }));
+    let bin = ''; for (const c of bytes) bin += String.fromCharCode(c);
+    return CODE_HEAD + btoa(bin);
+  }
+  function feedbackButtons(e, sv) {
+    const row = h('div', 'end-actions');
+    const info = feedbackInfo(e, sv);
+    const title = '回饋：' + (e ? `「${e.title}」` : '');
+    const body = info + '\n\n## 想說的話\n（哪裡不合理、哪裡好玩、哪裡看不懂，都可以寫在這裡）\n';
+    const gh = h('a', 'ghost ui', '到 GitHub 回饋');
+    gh.href = `${FEEDBACK_REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+    gh.target = '_blank'; gh.rel = 'noopener';
+    const cp = h('button', 'ghost ui', '複製這一局的資訊'); cp.type = 'button';
+    cp.addEventListener('click', async () => {
+      let ok = false;
+      try { await navigator.clipboard.writeText(info); ok = true; } catch (err) {
+        const ta = document.createElement('textarea'); ta.value = info; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.append(ta); ta.select();
+        try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+        ta.remove();
+      }
+      cp.textContent = ok ? '已複製，貼給作者就好' : '複製失敗';
+      setTimeout(() => { cp.textContent = '複製這一局的資訊'; }, 2500);
+    });
+    row.append(gh, cp);
+    const box = h('div', 'end-sec feedback');
+    box.append(h('h4', null, '覺得哪裡怪、哪裡好玩？'));
+    box.append(h('p', 'fine', '回饋會附上這一局的種子與存檔碼，作者可以照著重現你看到的劇情。沒有 GitHub 帳號的話，按「複製這一局的資訊」，貼到 LINE 或訊息裡傳給作者就好。'));
+    box.append(row);
+    return box;
+  }
+
   function exportCode() {
     const json = JSON.stringify({ s: loadSave(), e: [...loadSeen()], b: loadBonds() });
     const bytes = new TextEncoder().encode(json);
@@ -950,9 +999,11 @@ const DATA = /*__DATA__*/;
 
   function showEnd(mode) {
     clearTimeout(timer);
+    let afterAct = null;
     const heirMode = mode === 'heir';
     const interlude = mode === true;
     const s = game.state, e = heirMode ? game.succession : interlude ? game.interlude : game.ended;
+    const lastSave = save; // 回饋要附存檔碼：家族結束時存檔會被清掉，先留一份
     if (!heirMode && !interlude) clearSave(); // 這一家的故事說完了
     const fresh = markSeen(e.id);
     markBonds(s.bonds || {});
@@ -1065,6 +1116,7 @@ const DATA = /*__DATA__*/;
       finally { card.disabled = false; card.textContent = '產生分享圖'; }
     });
     act.append(card);
+    afterAct = feedbackButtons(e, lastSave);
     // 最終結局：把這一家的故事整理成一段文字，方便分享
     if (!interlude && !heirMode) {
       const share = h('button', 'ghost ui', '複製這一家的故事'); share.type = 'button';
@@ -1083,6 +1135,7 @@ const DATA = /*__DATA__*/;
       act.append(share);
     }
     sec.append(act);
+    if (afterAct) sec.append(afterAct);
     sec.hidden = false;
     sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
