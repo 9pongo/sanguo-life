@@ -17,11 +17,22 @@ const engine = fs.readFileSync(path.join(__dirname, 'engine.js'), 'utf8');
 const ui = fs.readFileSync(path.join(__dirname, 'ui.html'), 'utf8');
 
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
+// 版本號：建置日期＋git 提交號（工作目錄有未提交的修改就加「+」）。玩家回饋時附上，才知道是哪一版
+function buildId() {
+  const day = new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10); // 台灣時間的日期
+  try {
+    const hash = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: __dirname }).toString().trim();
+    const dirty = execFileSync('git', ['status', '--porcelain', '--', 'engine.js', 'ui.html', 'data'], { cwd: __dirname }).toString().trim();
+    return `${day} ${hash}${dirty ? '+' : ''}`;
+  } catch (e) { return day; }
+}
+const BUILD = buildId();
 const html = ui
   .replace('/*__ENGINE__*/', () => engine.replace(/<\/script/gi, '<\\/script'))
   .replace('/*__DATA__*/', () => json)
   .replace('約八十張事件卡', () => `${data.events.length} 張事件卡`)
-  .replace('{ENDINGS}', () => `${data.endings.length} `);
+  .replace('{ENDINGS}', () => `${data.endings.length} `)
+  .replace(/__BUILD__/g, () => BUILD);
 
 // 頁面裡的每一段腳本先編譯一次：有語法錯誤就不產生檔案，免得發佈出一個打不開的頁面
 const vm = require('vm');
@@ -56,4 +67,4 @@ const head = [
 ].join('');
 fs.writeFileSync(path.join(__dirname, 'dist', 'dev.html'),
   '<!doctype html><html lang="zh-Hant"><head>' + head + '</head><body>' + html + '</body></html>', 'utf8');
-console.log(`dist/index.html：${data.events.length} 張事件卡、${data.endings.length} 種結局、${(html.length / 1024).toFixed(0)} KB`);
+console.log(`dist/index.html：${data.events.length} 張事件卡、${data.endings.length} 種結局、${(html.length / 1024).toFixed(0)} KB，版本 ${BUILD}`);
