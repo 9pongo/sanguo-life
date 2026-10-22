@@ -77,6 +77,7 @@ for (const ev of data.events) {
   if (ev.kind === 'flavor' && ev.age) errors.push(`${w}：隨機小事的 age 要寫在 req 裡，寫在外層會被忽略`);
   checkReq(ev.req, w); checkEff(ev.eff, w);
   checkText(ev.text, w); checkText(ev.title, w); checkText(ev.tag, w);
+  if (ev.choices && !ev.title) errors.push(`${w}：抉擇卡沒有 title（結局頁的「這一生的抉擇」會沒有名字）`);
   for (const t of ev.alt || []) checkText(t, w);
   for (const v of ev.textIf || []) { checkReq(v.req, w + ' textIf'); checkText(v.text, w + ' textIf'); }
   (ev.choices || []).forEach((c, i) => {

@@ -329,7 +329,8 @@
       }
       const next = (branch && branch.next) || c.next;
       if (next && s.alive) g.queue.unshift(...arr(next).map((id) => ({ id, force: true })));
-      s.choices.push({ age: s.age, year: s.year, title: ev.title ? fmt(ev.title) : ev.id, pick: fmt(c.t), id: ev.id });
+      // 「這一生的抉擇」給玩家看：沒有標題就用分類名，不要露出英文代號
+      s.choices.push({ age: s.age, year: s.year, title: ev.title ? fmt(ev.title) : (ev.tag || '抉擇'), pick: fmt(c.t), id: ev.id });
     }
 
     // ---------- 出生

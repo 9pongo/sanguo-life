@@ -753,9 +753,9 @@ const DATA = /*__DATA__*/;
     }
   }
 
-  // 閱讀節奏：剛剛顯示了多少字，就等多久再往下走（1 倍速約每秒二十個字）
+  // 閱讀節奏：剛剛顯示了多少字，就等多久再往下走。前 60 字每字 0.05 秒（約每秒二十字），超過的部分減半，最長 7 秒
   let lastChars = 0;
-  const readMs = (chars, base) => Math.min(10000, base + chars * 50) / speed;
+  const readMs = (chars, base) => Math.min(7000, base + Math.min(chars, 60) * 50 + Math.max(0, chars - 60) * 25) / speed;
   function flush(entries) {
     lastChars = 0;
     for (const e of entries) if (e.type !== 'year' && e.text) lastChars += e.text.length + (e.title ? e.title.length : 0);
