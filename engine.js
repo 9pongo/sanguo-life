@@ -699,8 +699,10 @@
     // ---------- 對外介面
     function step() {
       // 一路往前跑，直到需要玩家抉擇、或這一生結束。回傳這段期間新增的紀錄。
+      // 一次走一年：年紀標題和這一年發生的事一起出來，再停下來讓人看（不是先出標題、停一下才出事）
       g.out = [];
-      let guard = 0;
+      let guard = 0, advanced = false;
+      const before = g.out.length;
       while (!g.pending && !g.ended && !g.interlude && !g.succession && guard++ < 500) {
         const s = S();
         if (!s.alive) { evaluateEnding(); break; }
@@ -710,11 +712,15 @@
           if (ev) fire(ev);
           continue;
         }
+        // 這一年剩下的事都出完了：已經換過年、或這一步本來就有東西出來，就停在這裡
+        // （背後跑祖上幾代時沿用舊的停法：換年後就停。後代投胎選定出生時機靠這個停點，改了舊存檔會對不上）
+        if (!opts.ancestor && (advanced || g.out.length > before)) break;
         endYear();
         if (!s.alive) { evaluateEnding(); break; }
         if (s.year >= chapterOf(s.chapter).end) { evaluateEnding(); break; }
         beginYear();
-        break; // 一次只往前走一年，讓介面有節奏
+        if (opts.ancestor) break;
+        advanced = true;
       }
       return g.out;
     }
