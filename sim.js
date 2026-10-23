@@ -67,6 +67,9 @@ function checkEff(eff, where) {
 }
 function checkText(t, where) {
   if (!t) return;
+  // 同一段話的幾種寫法（陣列）：每一種都要檢查，也不能是空陣列
+  if (Array.isArray(t)) { if (!t.length) errors.push(`${where}：寫法陣列是空的`); for (const x of t) checkText(x, where); return; }
+  if (typeof t !== 'string') { errors.push(`${where}：文字欄位不是字串`); return; }
   for (const m of t.matchAll(/\{(\w+)\}/g)) if (!VARS.has(m[1])) errors.push(`${where}：未知的模板變數 {${m[1]}}`);
 }
 
@@ -82,7 +85,7 @@ for (const ev of data.events) {
   for (const v of ev.textIf || []) { checkReq(v.req, w + ' textIf'); checkText(v.text, w + ' textIf'); }
   (ev.choices || []).forEach((c, i) => {
     const cw = `${w} 選項${i + 1}「${c.t}」`;
-    checkReq(c.req, cw); checkReq(c.show, cw); checkEff(c.eff, cw); checkText(c.t, cw); checkText(c.out, cw); for (const v of c.outIf || []) { checkReq(v.req, cw + ' outIf'); checkText(v.out, cw + ' outIf'); }
+    checkReq(c.req, cw); checkReq(c.show, cw); checkEff(c.eff, cw); checkText(c.t, cw); checkText(c.out, cw); checkText(c.tAlt, cw + ' tAlt'); checkText(c.outAlt, cw + ' outAlt'); for (const v of c.outIf || []) { checkReq(v.req, cw + ' outIf'); checkText(v.out, cw + ' outIf'); }
     if (c.req && !c.lock) warns.push(`${cw}：有條件但沒寫 lock 文字，鎖住時玩家看不到原因`);
     for (const b of [c.ok, c.fail]) if (b) { checkEff(b.eff, cw); checkText(b.out, cw); }
     for (const n of [c.next, c.ok && c.ok.next, c.fail && c.fail.next]) for (const id of arr(n)) if (!ids.has(id)) errors.push(`${cw}：next 指向不存在的事件 ${id}`);
@@ -90,7 +93,7 @@ for (const ev of data.events) {
     // 可能當場死的選項，結果文字卻寫成活下來：死了的時候要有另一段 deathOut
     checkText(c.deathOut, cw);
     if (c.deathOut && !(c.eff && c.eff.risk)) warns.push(`${cw}：有 deathOut 但這個選項不會當場死`);
-    if (c.eff && c.eff.risk && !c.deathOut && /爬出|撿回|活下來|活了下來|逃回|回到家|回到成都|才敢出來|找到了|回來|過了門|人都還在|醒過來/.test(c.out || ''))
+    if (c.eff && c.eff.risk && !c.deathOut && [c.out, ...(c.outAlt || [])].some((o) => /爬出|撿回|活下來|活了下來|逃回|回到家|回到成都|才敢出來|找到了|回來|過了門|人都還在|醒過來/.test(o || '')))
       errors.push(`${cw}：可能當場死，但結果寫成活下來，要補 deathOut`);
   });
   if (ev.kind !== 'flavor' && !ev.year && !ev.age) {
@@ -101,6 +104,7 @@ for (const ev of data.events) {
   }
 }
 for (const t of world.talents) checkEff(t.eff, `天賦 ${t.id}`);
+for (const k of ['birthText', 'heirText', 'childText', 'nearlyLostText', 'mingyingText', 'mingyingIllText', 'plagueDeathText', 'heirWedText', 'heirWedKidText', 'heirWedKidsText', 'spouseDeathTexts']) checkText(world[k], `world.${k}`);
 // 年齡上不可能達到的結局：這一章結束時最老的人也不夠那個年紀
 {
   const minBirth = Math.min(...world.birthYears.map((b) => b.y));

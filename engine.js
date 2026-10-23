@@ -92,6 +92,19 @@
         son: s._son || '兒子', kid: s._kid || '孩子',
       };
     }
+    // 同一段話有好幾種寫法：這一局的種子決定從哪一種開始，同一家族再碰到就換下一種
+    // 不動用亂數，所以加寫法不會讓舊存檔重播走樣
+    function variant(list, key) {
+      if (!Array.isArray(list)) return list;
+      if (list.length < 2) return list[0];
+      const s = S(), fam = s.familySeen || (s.familySeen = {});
+      const k = '~' + key, n = fam[k] || 0;
+      fam[k] = n + 1;
+      let h = 2166136261 >>> 0;
+      for (const ch of seed + ':' + key) h = Math.imul(h ^ ch.codePointAt(0), 16777619) >>> 0;
+      return list[(h + n) % list.length];
+    }
+    const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
     function fmt(t) {
       if (!t) return t;
       const v = vars();
@@ -165,7 +178,7 @@
       if (s.talents.includes('命硬') && !s.flags._mingying) {
         s.flags._mingying = true;
         s.hp = Math.max(10, s.hp - 25);
-        emit({ type: 'event', tag: '命', text: data.world.mingyingText });
+        emit({ type: 'event', tag: '命', text: fmt(variant(data.world.mingyingText, 'mingyingText')) });
         return;
       }
       s.alive = false;
@@ -283,14 +296,11 @@
       s._elder = pf ? (s.elders || {})[pf] || null : null;
       // 同一件小事在家族裡第二次發生時，換一種寫法
       // 同一件人生大事（接家、四十、六十）每一代都會碰到：依時代與家境換一段開場
-      let text = ev.text;
-      const tv = (ev.textIf || []).find((v) => meets(v.req));
-      if (tv) text = tv.text;
+      const tvi = (ev.textIf || []).findIndex((v) => meets(v.req));
+      const text = tvi >= 0 ? variant(ev.textIf[tvi].text, ev.id + '@' + tvi) : variant(withAlt(ev.text, ev.alt), ev.id);
       if (ev.kind === 'flavor') {
         const fam = s.familySeen || (s.familySeen = {});
-        const seen = fam[ev.id] || 0;
-        if (ev.alt && seen) { const all = [ev.text, ...ev.alt]; text = all[seen % all.length]; }
-        fam[ev.id] = seen + 1;
+        fam[ev.id] = (fam[ev.id] || 0) + 1;
       }
       const entry = emit({
         type: ev.choices ? 'decision' : 'event', id: ev.id, kind: ev.kind,
@@ -304,7 +314,7 @@
           .map((c, i) => ({ c, i }))
           .filter(({ c }) => meets(c.show))
           .map(({ c, i }) => ({
-            i, t: fmt(c.t), sub: c.sub ? fmt(c.sub) : null,
+            i, t: fmt(variant(withAlt(c.t, c.tAlt), ev.id + '#' + i)), sub: c.sub ? fmt(c.sub) : null,
             ok: meets(c.req), lock: c.lock ? fmt(c.lock) : null,
           }));
         if (!opts.some((o) => o.ok)) opts[opts.length - 1].ok = true; // 保底：至少一條路
@@ -312,13 +322,13 @@
       }
     }
 
-    function resolve(c, ev) {
+    function resolve(c, ev, label) {
       const s = S();
-      const head = emit({ type: 'choice', id: ev.id, text: c.t, title: ev.title ? fmt(ev.title) : null });
+      const head = emit({ type: 'choice', id: ev.id, text: label || c.t, title: ev.title ? fmt(ev.title) : null });
       apply(c.eff, head);
       // 這一下沒活過去：不能再接「你第三天夜裡才爬出來」那種寫活下來的結果
       const ov = (c.outIf || []).find((v) => meets(v.req));
-      const out = !s.alive && c.deathOut ? c.deathOut : ov ? ov.out : c.out;
+      const out = !s.alive && c.deathOut ? c.deathOut : ov ? variant(ov.out, ev.id + '#' + c.t + '@') : variant(withAlt(c.out, c.outAlt), ev.id + '#' + c.t);
       if (out) emit({ type: 'event', text: out });
       let branch = null;
       if (s.alive && c.chk) {
@@ -331,7 +341,7 @@
       const next = (branch && branch.next) || c.next;
       if (next && s.alive) g.queue.unshift(...arr(next).map((id) => ({ id, force: true })));
       // 「這一生的抉擇」給玩家看：沒有標題就用分類名，不要露出英文代號
-      s.choices.push({ age: s.age, year: s.year, title: ev.title ? fmt(ev.title) : (ev.tag || '抉擇'), pick: fmt(c.t), id: ev.id });
+      s.choices.push({ age: s.age, year: s.year, title: ev.title ? fmt(ev.title) : (ev.tag || '抉擇'), pick: label || fmt(c.t), id: ev.id });
     }
 
     // ---------- 出生
@@ -484,16 +494,16 @@
       if (r < h && r >= h * (1 - spared)) {
         if (!s.nearlyLost) {
           s.nearlyLost = true;
-          emit({ type: 'event', tag: '險', text: fmt(W.nearlyLostText) });
+          emit({ type: 'event', tag: '險', text: fmt(variant(W.nearlyLostText, 'nearlyLostText')) });
         }
       } else if (r < h) {
         const cause = plague ? '疫病' : band.cause;
         // 命硬的人這一次撐得過去：先寫病倒，不要先寫「沒有再醒來」再讓他活過來
         if (s.talents.includes('命硬') && !s.flags._mingying && W.mingyingIllText) {
-          emit({ type: 'event', tag: '險', text: fmt(W.mingyingIllText) });
+          emit({ type: 'event', tag: '險', text: fmt(variant(W.mingyingIllText, 'mingyingIllText')) });
           die(cause, null);
         } else {
-          const entry = emit({ type: 'event', tag: '終', text: fmt(plague ? W.plagueDeathText : band.text) });
+          const entry = emit({ type: 'event', tag: '終', text: fmt(plague ? variant(W.plagueDeathText, 'plagueDeathText') : variant(band.text, 'band' + band.age[0])) });
           die(cause, entry);
         }
       }
@@ -506,7 +516,7 @@
       // 成了家的人，每年有一定機會添一個孩子
       if (s.alive && spouseHere() && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2)) {
         apply({ child: true }, null);
-        emit({ type: 'event', tag: '添丁', text: fmt(W.childText) });
+        emit({ type: 'event', tag: '添丁', text: fmt(variant(W.childText, 'childText')) });
       }
       if (s.alive && s.age >= 1) s.hp = clamp(s.hp + (s.age < 40 ? 2 : -1), 0, 100);
     }
@@ -690,8 +700,8 @@
       g.succession = null;
       g.out = [];
       emit({ type: 'heir', text: `第${cnNum(s.generation)}代　${s.name}`, gen: s.generation, rel: h.rel });
-      emit({ type: 'event', tag: '傳承', text: fmt(W.heirText) });
-      if (wedText) emit({ type: 'event', tag: '成家', text: fmt(wedText) });
+      emit({ type: 'event', tag: '傳承', text: fmt(variant(W.heirText, 'heirText')) });
+      if (wedText) emit({ type: 'event', tag: '成家', text: fmt(variant(wedText, 'heirWed')) });
       g.queue = [];
       if (s.year >= chapterOf(s.chapter).end) evaluateEnding();
       else beginYear();
@@ -734,7 +744,7 @@
       if (!o || !o.ok) return [];
       g.out = [];
       g.pending = null;
-      resolve(ev.choices[o.i], ev);
+      resolve(ev.choices[o.i], ev, o.t);
       if (!S().alive) evaluateEnding();
       return g.out;
     }
