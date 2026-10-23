@@ -261,10 +261,47 @@ a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
   .chip { white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+/* ---------- 桌機兩側：固定不捲動的竹簡邊飾，只有中間的紀錄往下長 */
+.side { display: none; }
+@media (min-width: 1100px) {
+  .side {
+    display: flex; position: fixed; top: 0; bottom: 0; width: calc((100vw - 680px) / 2 - 40px);
+    align-items: center; justify-content: center; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .side-l { left: 0; } .side-r { right: 0; }
+  /* 編繩與竹片的縱紋，上下淡出 */
+  .side::before {
+    content: ""; position: absolute; inset: 0 auto 0 50%; width: min(220px, 70%); transform: translateX(-50%);
+    background: repeating-linear-gradient(90deg, transparent 0 27px, var(--line) 27px 28px);
+    -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+    mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent); opacity: .55;
+  }
+  .side-in { position: relative; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+  .side-big {
+    writing-mode: vertical-rl; font-family: var(--font-display); font-weight: 900; line-height: 1;
+    font-size: clamp(30px, 3vw, 46px); letter-spacing: .32em; color: var(--ink); opacity: .13;
+    background: var(--bg); padding: 14px 8px; white-space: nowrap; transition: opacity .6s;
+  }
+  .side-small {
+    writing-mode: vertical-rl; font-family: var(--font-display); font-size: 15px; letter-spacing: .4em;
+    color: var(--muted); background: var(--bg); padding: 10px 4px; white-space: nowrap;
+  }
+  .side-seal {
+    width: 44px; height: 44px; border: 2px solid var(--red); color: var(--red); border-radius: 3px;
+    display: grid; grid-template: 1fr 1fr / 1fr 1fr; place-items: center; font-family: var(--font-display);
+    font-weight: 900; font-size: 16px; line-height: 1; padding: 3px; opacity: .75; background: var(--bg);
+  }
+  /* 印文由右行讀起，上而下：黃天／之下 */
+  .side-seal span:nth-child(1) { grid-area: 1 / 2; } .side-seal span:nth-child(2) { grid-area: 2 / 2; }
+  .side-seal span:nth-child(3) { grid-area: 1 / 1; } .side-seal span:nth-child(4) { grid-area: 2 / 1; }
+  .wrap { position: relative; z-index: 1; }
+}
 .fadein { animation: fi .35s ease-out; }
 @keyframes fi { from { opacity: .2; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 </style>
 
+<aside class="side side-l" aria-hidden="true"><div class="side-in"><div class="side-big" id="sideL">蒼天已死</div><div class="side-seal"><span>黃</span><span>天</span><span>之</span><span>下</span></div></div></aside>
+<aside class="side side-r" aria-hidden="true"><div class="side-in"><div class="side-small" id="sideR2">中平元年　甲子</div><div class="side-big" id="sideR">黃天當立</div></div></aside>
 <div class="wrap">
   <section id="intro">
     <h1 class="vtitle">黃天<em>之</em>下</h1>
@@ -698,9 +735,18 @@ const DATA = /*__DATA__*/;
     if (s.injuries.length) chips.push(`<span class="chip">舊傷 ${s.injuries.length}</span>`);
     html += `<div class="chips">${chips.join('')}</div>`;
     hud.innerHTML = html;
+    syncSides(s);
     syncBars();
   }
 
+  // 桌機兩側的大字跟著這一局走：左邊是第幾章，右邊是今年的年號
+  function syncSides(s) {
+    const ch = DATA.world.chapters.find((c) => c.n === s.chapter);
+    const [no, name] = (ch ? ch.title : '').split('　');
+    if (name) $('#sideL').textContent = name;
+    $('#sideR').textContent = game.eraLabel(s.year).replace(/[（(].*$/, '');
+    $('#sideR2').textContent = (no || '') + '　' + game.ganzhi(s.year) + '年';
+  }
   function syncBars() {
     const root = document.documentElement.style;
     const hud = $('#hud'), ctrl = $('#ctrl');
