@@ -202,6 +202,8 @@ button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 .theme-row a.ghost { padding: 6px 14px; font-size: 14px; }
 .theme-row .ghost { padding: 6px 14px; font-size: 14px; }
 @media (pointer: coarse) { .cb { min-height: 42px; min-width: 42px; padding: 6px 12px; } } /* 手指好按 */
+/* 手機上一列要擺下暫停、三種速度、音樂、底色、天命：按鈕收窄一點，不要擠成兩行 */
+@media (max-width: 480px) { #ctrl .in { gap: 3px; } .cb { min-width: 34px; padding: 6px 7px; } }
 
 /* ---------- 結局 */
 #end { display: grid; gap: 22px; padding-top: 18px; }
@@ -321,7 +323,7 @@ a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
       </div>
       <button class="cta" id="btnStart" type="button">投胎</button>
       <p class="fine">八章、約八十張事件卡、{ENDINGS}種結局，七位可結交的歷史人物（劉備、曹操、孫堅、諸葛亮、關羽、姜維、嵇康）。進度會自動存在這個瀏覽器裡。<span class="ver">版本 __BUILD__</span></p>
-      <div class="theme-row ui"><button class="ghost btnTheme" id="btnThemeIntro" type="button">換成黑底</button><a class="ghost" id="lnkFeedback" href="https://github.com/9pongo/sanguo-life/issues" target="_blank" rel="noopener">意見回饋</a></div>
+      <div class="theme-row ui"><button class="ghost btnTheme" id="btnThemeIntro" type="button">換成黑底</button><button class="ghost btnMusic" type="button" aria-pressed="false">開啟音樂</button><a class="ghost" id="lnkFeedback" href="https://github.com/9pongo/sanguo-life/issues" target="_blank" rel="noopener">意見回饋</a></div>
       <details class="codex" id="codex" hidden></details>
       <details class="codex" id="transfer"><summary>換裝置：存檔碼</summary></details>
     </div>
@@ -342,6 +344,7 @@ a.ghost { color: var(--ink); text-decoration: none; display: inline-block; }
     <button class="cb spd" data-s="2" type="button" aria-pressed="false">2×</button>
     <button class="cb spd" data-s="4" type="button" aria-pressed="false">4×</button>
     <span class="sp"></span>
+    <button class="cb btnMusic" type="button" aria-pressed="false" title="開啟音樂">♪</button>
     <button class="cb btnTheme" type="button" aria-label="切換底色" title="切換底色">◐</button>
     <button class="cb fate" id="btnFate" type="button" aria-pressed="false">交給天命</button>
   </div>
@@ -385,6 +388,82 @@ const DATA = /*__DATA__*/;
     const t = isDark() ? 'light' : 'dark';
     pref('sg_theme', t); applyTheme(t);
   }));
+
+  // ---------------- 背景音樂：不用音檔，當場合成。撥弦（Karplus-Strong）彈五聲音階，底下一層很輕的低音持續音
+  // 預設關閉；開過的人下次點任何按鈕就接著響（瀏覽器規定聲音要等使用者先點過）
+  const music = (() => {
+    let ctx = null, out = null, on = pref('sg_music') === '1', timer = null, step = 0, last = 5;
+    const SCALE = [146.83, 164.81, 185.0, 220.0, 246.94]; // D 宮五聲：宮商角徵羽
+    const notes = [];
+    for (let o = 0; o < 3; o++) for (const f of SCALE) notes.push(f * 2 ** (o - 1));
+    const bufs = {};
+    function pluck(f) {
+      if (bufs[f]) return bufs[f];
+      const sr = ctx.sampleRate, n = Math.floor(sr * 4), N = Math.round(sr / f);
+      const b = ctx.createBuffer(1, n, sr), d = b.getChannelData(0), ring = new Float32Array(N);
+      for (let i = 0; i < N; i++) ring[i] = Math.random() * 2 - 1;
+      let p = 0, prev = 0;
+      for (let i = 0; i < n; i++) {
+        const v = ring[p]; const nv = 0.4985 * (v + prev); prev = v; ring[p] = nv; p = (p + 1) % N;
+        d[i] = v * 0.5;
+      }
+      return (bufs[f] = b);
+    }
+    function play(f, t, vol) {
+      const src = ctx.createBufferSource(); src.buffer = pluck(f);
+      const g = ctx.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + 3.8);
+      src.connect(g); g.connect(out); src.start(t); src.stop(t + 4);
+    }
+    function setup() {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      out = ctx.createGain(); out.gain.value = 0;
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+      // 簡單的殘響：兩條回授延遲
+      const dl = ctx.createDelay(), fb = ctx.createGain(), wet = ctx.createGain();
+      dl.delayTime.value = 0.33; fb.gain.value = 0.35; wet.gain.value = 0.3;
+      out.connect(lp); lp.connect(ctx.destination); lp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(ctx.destination);
+      for (const [f, v] of [[73.42, 0.05], [110, 0.03]]) {
+        const o = ctx.createOscillator(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+        o.frequency.value = f; g.gain.value = v; lfo.frequency.value = 0.05 + Math.random() * 0.05; lg.gain.value = v * 0.6;
+        lfo.connect(lg); lg.connect(g.gain); o.connect(g); g.connect(out); o.start(); lfo.start();
+      }
+    }
+    // 旋律：在音階上隨機小步走，偶爾兩音同彈、偶爾停一拍
+    function phrase() {
+      if (!on || !ctx) return;
+      const t = ctx.currentTime + 0.05;
+      if (Math.random() < 0.18) { timer = setTimeout(phrase, 1800); return; }
+      last = Math.max(2, Math.min(notes.length - 2, last + [-2, -1, -1, 1, 1, 2, 0][Math.floor(Math.random() * 7)]));
+      play(notes[last], t, 0.5);
+      if (Math.random() < 0.25) play(notes[Math.max(0, last - 3)], t + 0.02, 0.3);
+      if (++step % 8 === 0) play(notes[0], t, 0.35); // 每隔一段落回宮音
+      timer = setTimeout(phrase, 1100 + Math.random() * 1600);
+    }
+    function start() {
+      if (!ctx) setup();
+      ctx.resume();
+      out.gain.cancelScheduledValues(ctx.currentTime);
+      out.gain.setTargetAtTime(0.18, ctx.currentTime, 1.2);
+      clearTimeout(timer); phrase();
+    }
+    function stop() {
+      clearTimeout(timer);
+      if (ctx) out.gain.setTargetAtTime(0, ctx.currentTime, 0.4);
+    }
+    function label() {
+      document.querySelectorAll('.btnMusic').forEach((b) => {
+        b.setAttribute('aria-pressed', on); b.title = on ? '關掉音樂' : '開啟音樂';
+        b.textContent = b.classList.contains('cb') ? '♪' : (on ? '關掉音樂' : '開啟音樂');
+      });
+    }
+    function toggle() { on = !on; pref('sg_music', on ? '1' : '0'); on ? start() : stop(); label(); }
+    // 開過音樂的人：第一次點畫面就接著放
+    document.addEventListener('pointerdown', () => { if (on && (!ctx || ctx.state !== 'running')) start(); }, { once: false });
+    document.addEventListener('visibilitychange', () => { if (!ctx) return; document.hidden ? ctx.suspend() : on && ctx.resume(); });
+    document.querySelectorAll('.btnMusic').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); toggle(); }));
+    label();
+    return { toggle };
+  })();
 
   // ---------------- 存檔：只記種子和每一步操作，重新打開時照著重播一遍
   // 內容改版（事件或結局數量變了）以後，舊存檔重播可能走樣：照樣接續，對不上的那一步起就由玩家接手
