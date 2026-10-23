@@ -314,7 +314,7 @@
           .map((c, i) => ({ c, i }))
           .filter(({ c }) => meets(c.show))
           .map(({ c, i }) => ({
-            i, t: fmt(variant(withAlt(c.t, c.tAlt), ev.id + '#' + i)), sub: c.sub ? fmt(c.sub) : null,
+            i, t: fmt(variant(withAlt(c.t, c.tAlt), ev.id + '#' + i)), sub: fmt(subOf(c, ev.id + '#' + i)) || null,
             ok: meets(c.req), lock: c.lock ? fmt(c.lock) : null,
           }));
         if (!opts.some((o) => o.ok)) opts[opts.length - 1].ok = true; // 保底：至少一條路
@@ -322,6 +322,11 @@
       }
     }
 
+    // 選項底下的小字：先看有沒有依條件（例如性別）換的寫法，再從幾種寫法裡輪一種
+    function subOf(c, key) {
+      const si = (c.subIf || []).findIndex((v) => meets(v.req));
+      return si >= 0 ? variant(c.subIf[si].sub, key + 's' + si) : variant(withAlt(c.sub, c.subAlt), key + 's');
+    }
     function resolve(c, ev, label) {
       const s = S();
       const head = emit({ type: 'choice', id: ev.id, text: label || c.t, title: ev.title ? fmt(ev.title) : null });

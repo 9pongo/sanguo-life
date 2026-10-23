@@ -48,7 +48,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 - 有年份或年齡的 anchor／stage／bond 每年自動排入；沒有的只能由別的事件用 `later` 或 `next` 叫出來。
 - `flavor`：用 `w` 權重、`p` 每年進候選的機率、`repeat` 一生可發生幾次。年齡要寫在 `req.age`（寫在外層會被忽略，稽核會報錯）。
 - `alt`：同一段本文的其他寫法（任何 kind 都可以用）。從哪一種開始由這一局的種子決定，同一家族再碰到就換下一種，所以重玩的人不會每次都讀到同一句。不動用亂數，加寫法不會讓舊存檔走樣。
-- 選項的 `tAlt` / `outAlt`：選項文字與結果文字的其他寫法，規則同 `alt`。`textIf` 的 `text`、`outIf` 的 `out` 也可以直接寫成陣列。
+- 選項的 `tAlt` / `outAlt`：選項文字與結果文字的其他寫法，規則同 `alt`。 選項底下的小字也一樣：`subAlt` 是其他寫法，`subIf: [{ req, sub }]` 依條件換（例如女孩練武寫成女孩的樣子），`sub` 也可以是陣列。`textIf` 的 `text`、`outIf` 的 `out` 也可以直接寫成陣列。
 - 選項的 `deathOut`：這個選項的 `risk` 當場致死時改用的結果文字（`out` 寫成活下來的選項一定要有，稽核會擋）。
 - `world.json` 裡引擎套用的句子（`childText`、`heirText`、`nearlyLostText`、`mingyingText`、`plagueDeathText`、`heirWed*Text`、`mortality[].text`）也都可以是陣列。
 - `group`（flavor 專用）：同一組一年只會發生一件，例如 `weather`（豐收、旱、澇、蝗）。
