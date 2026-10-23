@@ -340,7 +340,7 @@
         branch = R() < chance(c.chk) ? c.ok : c.fail;
       }
       if (branch && s.alive) {
-        const e = branch.out ? emit({ type: 'event', text: branch.out }) : head;
+        const e = branch.out ? emit({ type: 'event', text: variant(withAlt(branch.out, branch.outAlt), ev.id + '#' + c.t + (branch === c.ok ? '+' : '-')) }) : head;
         apply(branch.eff, e);
       }
       const next = (branch && branch.next) || c.next;

@@ -87,7 +87,7 @@ for (const ev of data.events) {
     const cw = `${w} 選項${i + 1}「${c.t}」`;
     checkReq(c.req, cw); checkReq(c.show, cw); checkEff(c.eff, cw); checkText(c.t, cw); checkText(c.out, cw); checkText(c.tAlt, cw + ' tAlt'); checkText(c.sub, cw); checkText(c.subAlt, cw + ' subAlt'); for (const v of c.subIf || []) { checkReq(v.req, cw + ' subIf'); checkText(v.sub, cw + ' subIf'); } checkText(c.outAlt, cw + ' outAlt'); for (const v of c.outIf || []) { checkReq(v.req, cw + ' outIf'); checkText(v.out, cw + ' outIf'); }
     if (c.req && !c.lock) warns.push(`${cw}：有條件但沒寫 lock 文字，鎖住時玩家看不到原因`);
-    for (const b of [c.ok, c.fail]) if (b) { checkEff(b.eff, cw); checkText(b.out, cw); }
+    for (const b of [c.ok, c.fail]) if (b) { checkEff(b.eff, cw); checkText(b.out, cw); checkText(b.outAlt, cw + ' outAlt'); }
     for (const n of [c.next, c.ok && c.ok.next, c.fail && c.fail.next]) for (const id of arr(n)) if (!ids.has(id)) errors.push(`${cw}：next 指向不存在的事件 ${id}`);
     if (c.chk && !(c.ok && c.fail) && c.chk.base !== 1) warns.push(`${cw}：有 chk 但缺 ok 或 fail 分支`);
     // 可能當場死的選項，結果文字卻寫成活下來：死了的時候要有另一段 deathOut
