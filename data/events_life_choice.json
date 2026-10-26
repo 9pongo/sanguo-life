@@ -1337,7 +1337,8 @@
      ]
     }
    ],
-   "p": 0.2
+   "p": 0.2,
+   "familyRepeat": true
   },
   {
    "id": "lx_grudge",
