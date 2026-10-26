@@ -125,6 +125,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 | `familyRepeatWeight` | 祖上經歷過的隨機小事，接班人再抽到的權重 |
 | `familyRepeatStage` | 按年齡排程的抉擇（`p` + `age`），祖上碰過的話每年機會乘上這個數，最後一年也不保底（目前 0.15，未設定時 0.3）；標 `familyOnce` 的一個家族只碰一次 |
 | `familyRepeatGap` | 按年齡排程的抉擇，祖上在這麼多年內碰過就不再出現（預設 25），超過才照 `familyRepeatStage` 打折 |
+| `familyRepeatChild`／`familyRepeatGapChild` | 年齡上限 15 歲以下的童年抉擇改用這兩個數（預設 0.6、15 年）：小時候接家的孩子能挑的卡少，父母小時候碰過的卡，孩子也還碰得到（會換一種開場） |
 | `plagueYears` | 疫年；數字為天下大疫，`{year, regions}` 為地區性疫病 |
 
 ## 投胎到家族的後代（`world.lateStart`）

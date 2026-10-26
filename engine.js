@@ -447,9 +447,10 @@
           if (e.p == null || !e.age || s.fired[e.id]) return true;
           // 排入時就要符合條件：否則年中剛成親、剛添丁，限定條件的幾張會在同一年一起湧上來
           // 家族裡有人碰過的：機會打折，最後一年也不保底；familyOnce 的一個家族只碰一次
+          // 童年的抉擇打折少一點（familyRepeatChild）：小時候接家的孩子能挑的卡本來就少，再碰到也會換一種開場
           const rep = !e.familyRepeat && (s.familySeen || {})[e.id], last = !rep && s.age >= e.age[1];
-          if (rep && (e.familyOnce || s.year - (s.familySeen['@' + e.id] ?? -999) < (data.world.familyRepeatGap ?? 25))) return false;
-          if (!meets(e.req) || (pTaken && !last) || (!last && R() >= e.p * (rep ? (data.world.familyRepeatStage ?? 0.3) : 1))) return false;
+          if (rep && (e.familyOnce || s.year - (s.familySeen['@' + e.id] ?? -999) < (e.age[1] <= 15 ? (data.world.familyRepeatGapChild ?? 15) : (data.world.familyRepeatGap ?? 25)))) return false;
+          if (!meets(e.req) || (pTaken && !last) || (!last && R() >= e.p * (rep ? (e.age[1] <= 15 ? (data.world.familyRepeatChild ?? 0.6) : (data.world.familyRepeatStage ?? 0.3)) : 1))) return false;
           pTaken = true;
           return true;
         })
