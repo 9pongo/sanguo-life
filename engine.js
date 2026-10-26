@@ -480,6 +480,8 @@
       const s = S();
       if (!e.repeat && s.fired[e.id]) return false;
       if (e.repeat && s.fired[e.id] >= e.repeat) return false;
+      // 可重複的小事：同一個人碰過以後，至少隔 repeatGap 年才會再碰到
+      if (e.repeat && e.repeatGap && s.fired[e.id] && s.year - ((s.familySeen || {})['@' + e.id] ?? -999) < e.repeatGap) return false;
       // 祖上傳說這類只該說一次的小事：家族裡誰聽過了，後代就不再重複
       if (e.familyOnce && (s.familySeen || {})[e.id]) return false;
       if (e.year && !(s.year >= e.year[0] && s.year <= e.year[1])) return false;
