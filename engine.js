@@ -435,6 +435,14 @@
     }
 
     // ---------- 年度流程
+    // 祖上碰過的排程抉擇，再碰到的機會：童年的卡打折少；隔得很久（曾祖那一輩）的也放寬一些
+    function repeatRate(e) {
+      const W = data.world;
+      if (e.age[1] <= 15) return W.familyRepeatChild ?? 0.6;
+      const ago = S().year - ((S().familySeen || {})['@' + e.id] ?? -999);
+      if (ago >= (W.familyRepeatOldGap ?? 45)) return W.familyRepeatOld ?? 0.5;
+      return W.familyRepeatStage ?? 0.3;
+    }
     function buildYearQueue() {
       const s = S();
       const q = [];
@@ -459,7 +467,7 @@
           // 童年的抉擇打折少一點（familyRepeatChild）：小時候接家的孩子能挑的卡本來就少，再碰到也會換一種開場
           const rep = !e.familyRepeat && (s.familySeen || {})[e.id], last = !rep && s.age >= e.age[1];
           if (rep && (e.familyOnce || s.year - (s.familySeen['@' + e.id] ?? -999) < (e.age[1] <= 15 ? (data.world.familyRepeatGapChild ?? 15) : (data.world.familyRepeatGap ?? 25)))) return false;
-          if (!meets(e.req) || (pTaken && !last) || (!last && R() >= e.p * (rep ? (e.age[1] <= 15 ? (data.world.familyRepeatChild ?? 0.6) : (data.world.familyRepeatStage ?? 0.3)) : 1))) return false;
+          if (!meets(e.req) || (pTaken && !last) || (!last && R() >= e.p * (rep ? repeatRate(e) : 1))) return false;
           pTaken = true;
           return true;
         })
