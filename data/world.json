@@ -3108,5 +3108,419 @@
    190,
    262
   ]
- }
+ },
+ "arcBook": [
+  {
+   "name": "行醫",
+   "items": [
+    {
+     "id": "af_med_taught",
+     "title": "傾囊相授"
+    },
+    {
+     "id": "af_med_halftaught",
+     "title": "留了一手"
+    },
+    {
+     "id": "af_med_nodisc",
+     "title": "不收徒弟"
+    },
+    {
+     "id": "af_med_cleared",
+     "title": "對簿得直"
+    },
+    {
+     "id": "af_med_fined",
+     "title": "百口莫辯"
+    },
+    {
+     "id": "af_med_settled",
+     "title": "賠布息事"
+    },
+    {
+     "id": "af_med_moved",
+     "title": "遷居鄰鄉"
+    }
+   ]
+  },
+  {
+   "name": "行商",
+   "items": [
+    {
+     "id": "af_trade_rich",
+     "title": "一夜致富"
+    },
+    {
+     "id": "af_trade_ruin",
+     "title": "血本無歸"
+    },
+    {
+     "id": "af_trade_gain",
+     "title": "添了兩間屋"
+    },
+    {
+     "id": "af_trade_loss",
+     "title": "棗樹下的一半"
+    }
+   ]
+  },
+  {
+   "name": "任俠",
+   "items": [
+    {
+     "id": "af_xia_burned",
+     "title": "夜燒穀倉"
+    },
+    {
+     "id": "af_xia_jailed",
+     "title": "代主受過"
+    },
+    {
+     "id": "af_xia_refused",
+     "title": "拂衣而去"
+    },
+    {
+     "id": "af_xia_warned",
+     "title": "暗中報信"
+    },
+    {
+     "id": "af_xia_beaten",
+     "title": "報信被逐"
+    },
+    {
+     "id": "af_xia_rest",
+     "title": "刀上生鏽"
+    }
+   ]
+  },
+  {
+   "name": "遊學",
+   "items": [
+    {
+     "id": "af_study_forged",
+     "title": "改帳升官"
+    },
+    {
+     "id": "af_study_scapegoat",
+     "title": "替人頂罪"
+    },
+    {
+     "id": "af_study_honest",
+     "title": "照實上報"
+    },
+    {
+     "id": "af_study_ousted",
+     "title": "直道見黜"
+    },
+    {
+     "id": "af_study_resigned",
+     "title": "辭吏歸鄉"
+    },
+    {
+     "id": "af_study_visit",
+     "title": "學生回門"
+    }
+   ]
+  },
+  {
+   "name": "開荒",
+   "items": [
+    {
+     "id": "af_farm_confess",
+     "title": "自首報戶"
+    },
+    {
+     "id": "af_farm_hidden",
+     "title": "託庇大族"
+    },
+    {
+     "id": "af_farm_caught",
+     "title": "隱戶被查"
+    },
+    {
+     "id": "af_farm_moved",
+     "title": "連夜他遷"
+    },
+    {
+     "id": "af_farm_ripe",
+     "title": "荒地成田"
+    }
+   ]
+  },
+  {
+   "name": "匠戶",
+   "items": [
+    {
+     "id": "af_craft_mark",
+     "title": "立了記號"
+    },
+    {
+     "id": "af_craft_scorn",
+     "title": "告官無門"
+    },
+    {
+     "id": "af_craft_let",
+     "title": "由他仿冒"
+    },
+    {
+     "id": "af_craft_sold",
+     "title": "賣了秘方"
+    },
+    {
+     "id": "af_craft_kin",
+     "title": "只傳自家"
+    },
+    {
+     "id": "af_craft_relearn",
+     "title": "從頭學起"
+    },
+    {
+     "id": "af_craft_rough",
+     "title": "改做粗活"
+    }
+   ]
+  },
+  {
+   "name": "夫妻",
+   "items": [
+    {
+     "id": "am_rift_talked",
+     "title": "把話說開"
+    },
+    {
+     "id": "am_rift_held",
+     "title": "握著手不說"
+    },
+    {
+     "id": "am_rift_apart",
+     "title": "分房到老"
+    }
+   ]
+  },
+  {
+   "name": "孩子的婚事",
+   "items": [
+    {
+     "id": "am_kw_bend",
+     "title": "添一份厚禮",
+     "all": [
+      "am_kw_done",
+      "am_kw_bend"
+     ]
+    },
+    {
+     "id": "am_kw_firm",
+     "title": "禮輕情重",
+     "all": [
+      "am_kw_done",
+      "am_kw_firm"
+     ]
+    },
+    {
+     "id": "am_kw_help",
+     "title": "借穀給親家",
+     "all": [
+      "am_kw_done",
+      "am_kw_help"
+     ]
+    },
+    {
+     "id": "am_kw_half",
+     "title": "只借一半",
+     "all": [
+      "am_kw_done",
+      "am_kw_half"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "想闖蕩的孩子",
+   "items": [
+    {
+     "id": "am_wild_go",
+     "title": "放他遠行",
+     "all": [
+      "am_wild_done",
+      "am_wild_go"
+     ]
+    },
+    {
+     "id": "am_wild_stay",
+     "title": "留在身邊",
+     "all": [
+      "am_wild_done",
+      "am_wild_stay"
+     ]
+    },
+    {
+     "id": "am_wild_hid",
+     "title": "藏在地窖",
+     "all": [
+      "am_wild_done",
+      "am_wild_hid"
+     ]
+    },
+    {
+     "id": "am_wild_turnin",
+     "title": "帶去見官",
+     "all": [
+      "am_wild_done",
+      "am_wild_turnin"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "鄰家寡婦",
+   "items": [
+    {
+     "id": "am_wd_grown",
+     "title": "交還田契"
+    },
+    {
+     "id": "am_wd_left",
+     "title": "改嫁鄰鄉"
+    }
+   ]
+  },
+  {
+   "name": "娘家",
+   "items": [
+    {
+     "id": "am_nt_open",
+     "title": "夫妻同心",
+     "all": [
+      "am_nt_done",
+      "am_nt_open"
+     ]
+    },
+    {
+     "id": "am_nt_confess",
+     "title": "說了實話",
+     "all": [
+      "am_nt_done",
+      "am_nt_confess"
+     ]
+    },
+    {
+     "id": "am_nt_lie",
+     "title": "一個謊",
+     "all": [
+      "am_nt_done",
+      "am_nt_lie"
+     ]
+    },
+    {
+     "id": "am_nt_refused",
+     "title": "沒能幫上",
+     "all": [
+      "am_nt_done"
+     ],
+     "any": [
+      "am_nt_refused",
+      "am_nt_no"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "族裡的祭田",
+   "items": [
+    {
+     "id": "am_cl_kind",
+     "title": "照應孤寡",
+     "all": [
+      "am_cl_done",
+      "am_cl_kind"
+     ]
+    },
+    {
+     "id": "am_cl_count",
+     "title": "按丁分糧",
+     "all": [
+      "am_cl_done",
+      "am_cl_count"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "人生抉擇",
+   "items": [
+    {
+     "id": "lx_blame_repaid",
+     "title": "堂兄還情"
+    },
+    {
+     "id": "lx_blame_led",
+     "title": "陪他認錯"
+    },
+    {
+     "id": "lx_blame_sour",
+     "title": "兄弟生分"
+    },
+    {
+     "id": "lx_purse_ret",
+     "title": "拾金不昧"
+    },
+    {
+     "id": "lx_purse_kept",
+     "title": "私藏錢囊"
+    },
+    {
+     "id": "lx_lend_back",
+     "title": "借錢歸還"
+    },
+    {
+     "id": "lx_lend_gone",
+     "title": "有借無還"
+    },
+    {
+     "id": "lx_split_yield",
+     "title": "分家讓產"
+    },
+    {
+     "id": "lx_law_true",
+     "title": "照實作證"
+    },
+    {
+     "id": "lx_law_bent",
+     "title": "替強作證"
+    },
+    {
+     "id": "lx_guar_paid",
+     "title": "作保得信"
+    },
+    {
+     "id": "lx_guar_lost",
+     "title": "替人賠穀"
+    },
+    {
+     "id": "lx_tomb_cypress",
+     "title": "墳邊柏樹"
+    },
+    {
+     "id": "lx_land_rich",
+     "title": "薄田變沃"
+    },
+    {
+     "id": "lx_buyland_half",
+     "title": "留地給孤"
+    },
+    {
+     "id": "lx_adopted",
+     "title": "收養孤兒"
+    },
+    {
+     "id": "lx_grudge_made",
+     "title": "臨終和解"
+    },
+    {
+     "id": "lx_grudge_no",
+     "title": "終究沒去"
+    }
+   ]
+  }
+ ]
 }

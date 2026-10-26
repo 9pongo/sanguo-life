@@ -99,6 +99,9 @@ button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 .codex .chip-list span { border: 1px solid var(--line); padding: 1px 6px; font-size: 13px; }
 .codex .chip-list span.unseen { color: var(--muted); border-style: dashed; }
 .codex .chip-list span.rare { border-color: var(--yellow); }
+.codex details.arcs { margin: 10px 0 4px; display: grid; gap: 6px; }
+.codex details.arcs summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+.codex .chip-list span.arc-name { border: 0; padding-left: 0; color: var(--muted); min-width: 5.5em; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .talent { display: inline-block; border: 1px solid var(--yellow); color: var(--ink); padding: 0 8px; margin: 2px 6px 2px 0; font-size: 14px; background: var(--yellow-soft); }
 .talent small { color: var(--muted); font-weight: 400; margin-left: 4px; }
@@ -493,6 +496,15 @@ const DATA = /*__DATA__*/;
     seen.add(id); pref('sg_seen', JSON.stringify([...seen]));
     return true;
   }
+  // 人生故事：故事線走到的結局，跟結局一起記在 sg_seen（前面加 arc:）
+  const arcItems = () => (DATA.world.arcBook || []).flatMap((a) => a.items.map((it) => ({ ...it, arc: a.name })));
+  const arcGot = (it, flags) => (it.all || [it.id]).every((f) => flags[f]) && (!it.any || it.any.some((f) => flags[f]));
+  function markArcs(s) {
+    const seen = loadSeen(), fresh = [];
+    for (const it of arcItems()) if (!seen.has('arc:' + it.id) && arcGot(it, s.flags || {})) { seen.add('arc:' + it.id); fresh.push(it); }
+    if (fresh.length) pref('sg_seen', JSON.stringify([...seen]));
+    return fresh;
+  }
   // 人物：每位歷史人物在所有遊玩中達到過的最高交情
   function loadBonds() { try { return JSON.parse(pref('sg_bonds') || '{}') || {}; } catch (e) { return {}; } }
   function markBonds(bonds) {
@@ -521,6 +533,20 @@ const DATA = /*__DATA__*/;
       brow.append(h('span', v ? (top ? 'rare' : '') : 'unseen', v ? `${esc(d.name)}・${esc(d.tiers[v])}${top ? '★' : ''}` : '？？'));
     }
     box.append(brow);
+    // 人生故事：收在一個小抽屜裡，一條故事線一列
+    const arcs = DATA.world.arcBook || [];
+    if (arcs.length) {
+      const items = arcItems(), gotN = items.filter((it) => seen.has('arc:' + it.id)).length;
+      const ad = h('details', 'arcs');
+      ad.append(h('summary', null, `人生故事　${gotN} / ${items.length}`));
+      for (const a of arcs) {
+        const row = h('div', 'chip-list');
+        row.append(h('span', 'arc-name', esc(a.name)));
+        for (const it of a.items) { const ok = seen.has('arc:' + it.id); row.append(h('span', ok ? '' : 'unseen', ok ? esc(it.title) : '？？')); }
+        ad.append(row);
+      }
+      box.append(ad);
+    }
     const groups = new Map();
     for (const e of all) {
       const key = e.chapter == null ? '不分章' : `第${CN[e.chapter]}章・${e.when === 'alive' ? '章末' : '身故'}`;
@@ -611,7 +637,7 @@ const DATA = /*__DATA__*/;
       if (!d || !Array.isArray(d.e) || typeof d.b !== 'object') return null;
       const sv = d.s && d.s.v === 1 && Number.isFinite(d.s.seed) && Array.isArray(d.s.acts) ? d.s : null;
       // 只收真的結局與人物，交情限制在 0 到最高一級之間（偽造或來自別的版本的資料不會讓結局冊出現怪字）
-      const known = new Set(DATA.endings.map((x) => x.id));
+      const known = new Set([...DATA.endings.map((x) => x.id), ...arcItems().map((it) => 'arc:' + it.id)]);
       const b = {};
       for (const id in d.b || {}) {
         const def = DATA.bonds[id], v = Math.floor(Number(d.b[id]));
@@ -915,6 +941,7 @@ const DATA = /*__DATA__*/;
     const e = game.interlude, s = game.state;
     const fresh = markSeen(e.id);
     markBonds(s.bonds || {});
+    markArcs(s);
     const tags = [e.chapterTitle || '', '章末', e.rare ? '稀有' : '', fresh ? '初見' : ''].filter(Boolean).join('・');
     const world = (e.epilogue || []).map((t) => `<p class="w">${esc(t)}</p>`).join('');
     $('#log').append(h('div', 'chap-end fadein', `<span class="k ui">${esc(tags)}</span><b>「${esc(e.title)}」</b><p>${esc(e.text)}</p>${world}`));
@@ -1199,6 +1226,7 @@ const DATA = /*__DATA__*/;
     if (!heirMode && !interlude) clearSave(); // 這一家的故事說完了
     const fresh = markSeen(e.id);
     markBonds(s.bonds || {});
+    const freshArcs = markArcs(s);
     $('#ctrl').hidden = true;
     const sec = $('#end');
     sec.innerHTML = '';
@@ -1235,6 +1263,7 @@ const DATA = /*__DATA__*/;
         for (const t of mem.slice(SHOW)) more.append(h('div', 'card memory', `<p style="margin:0">${esc(t)}</p>`));
         box.append(more);
       }
+      if (freshArcs.length) box.append(h('p', 'fine arc-new', `結局冊收進新的人生故事：${freshArcs.map((it) => esc(it.arc) + '・' + esc(it.title)).join('、')}`));
       // 天下的收尾放最後，永遠看得見
       if (extinct) box.append(h('div', 'card', `<p style="margin:0">沒有人能接下這個家了。香火，就斷在這裡。</p>`));
       for (const t of e.epilogue) box.append(h('div', 'card world', `<p style="margin:0">${esc(t)}</p>`));

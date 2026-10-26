@@ -162,6 +162,13 @@ for (const [f, where] of flagsRead) if (!flagsSet.has(f) && !f.startsWith('_')) 
 const reserved = new Set((world.reservedFlags && world.reservedFlags.flags) || []);
 for (const f of [...(world.inheritFlags || []), ...(world.parentFlags || [])]) if (!flagsSet.has(f) && f !== 'heir') errors.push(`繼承名單裡的旗標「${f}」在資料裡沒有任何地方設定`);
 for (const f of reserved) if (!flagsSet.has(f)) errors.push(`保留旗標「${f}」在資料裡沒有任何地方設定，名單過期了`);
+// 結局冊「人生故事」：每一格要靠得到的旗標，id 不能重複
+const arcIds = new Set();
+for (const a of world.arcBook || []) for (const it of a.items) {
+  if (arcIds.has(it.id)) errors.push(`人生故事「${a.name}」的「${it.title}」id 重複：${it.id}`);
+  arcIds.add(it.id);
+  for (const f of [...(it.all || [it.id]), ...(it.any || [])]) if (!flagsSet.has(f)) errors.push(`人生故事「${a.name}」的「${it.title}」要的旗標「${f}」沒有任何地方設定`);
+}
 for (const [f, where] of flagsSet) if (!flagsRead.has(f) && !reserved.has(f)) warns.push(`旗標「${f}」設定了但沒有任何地方讀它（${where[0]}）`);
 
 // ------------------------------------------------------------ 模擬
