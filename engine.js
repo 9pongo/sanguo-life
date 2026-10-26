@@ -145,6 +145,8 @@
       if (req.bondMax) for (const k in req.bondMax) if ((s.bonds[k] || 0) > req.bondMax[k]) return false;
       if (req.gen && (s.generation < req.gen[0] || s.generation > (req.gen[1] ?? 99))) return false;
       // 子女：在某個年齡範圍內、還活著、沒有送走的孩子（son 只看兒子）
+      // 故事線的後續：認當初用 tagKid 標記的那個孩子，不靠年齡猜（家裡有好幾個同齡上下的孩子時才不會認錯人）
+      if (req.kidTag) { const c = (s.children || []).find((x) => x.alive && !x.away && x.tag === req.kidTag); if (!c) return false; s._kid = c.name; if (c.gender === 'm') s._son = c.name; }
       if (req.child) { const c = findKid(null, req.child, req.kidUnwed); if (!c) return false; s._kid = c.name; }
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       if (req.married === true && !spouseHere()) return false;
@@ -428,11 +430,21 @@
       for (const sc of s.scheduled.filter((x) => x.year === s.year)) q.push({ id: sc.id, force: true });
       s.scheduled = s.scheduled.filter((x) => x.year !== s.year);
       // 主線、羈絆、人生階段：照順序，執行時才判斷條件
-      const cand = scheduledPool
+      const due = scheduledPool
         .filter((e) => !e.year || (s.year >= arr(e.year)[0] && s.year <= (arr(e.year)[1] ?? arr(e.year)[0])))
-        .filter((e) => !e.age || (s.age >= e.age[0] && s.age <= e.age[1]))
+        .filter((e) => !e.age || (s.age >= e.age[0] && s.age <= e.age[1]));
+      // 這一年本來就有兩張以上的大事抉擇（例如甲子年），與史實無關的人生抉擇就讓一讓
+      let pTaken = due.filter((e) => e.p == null && e.choices && !s.fired[e.id] && meets(e.req)).length >= 2;
+      const cand = due
         // 有 p 的人生抉擇：在年齡範圍裡每年只有 p 的機會，不會人人都在同一歲碰上；範圍的最後一年一定輪到
-        .filter((e) => e.p == null || !e.age || s.fired[e.id] || s.age >= e.age[1] || !meets(e.req) || R() < e.p)
+        // 同一年最多一張這種抉擇，其餘順延到之後的年份（接家那年常會一口氣湧上好幾張）
+        .filter((e) => {
+          if (e.p == null || !e.age || s.fired[e.id]) return true;
+          // 排入時就要符合條件：否則年中剛成親、剛添丁，限定條件的幾張會在同一年一起湧上來
+          if (!meets(e.req) || (pTaken && s.age < e.age[1]) || (s.age < e.age[1] && R() >= e.p)) return false;
+          pTaken = true;
+          return true;
+        })
         .sort((a, b) => (a.order ?? 50) - (b.order ?? 50));
       for (const e of cand) q.push({ id: e.id });
       // 隨機小事：每年一到三件，多數年份兩件

@@ -47,8 +47,8 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 - `kind`：`anchor`（史實大事）、`stage`（人生階段與劇情）、`bond`（歷史人物羈絆）、`flavor`（隨機小事）。
 - 有年份或年齡的 anchor／stage／bond 每年自動排入；沒有的只能由別的事件用 `later` 或 `next` 叫出來。
 - `flavor`：用 `w` 權重、`p` 每年進候選的機率、`repeat` 一生可發生幾次。年齡要寫在 `req.age`（寫在外層會被忽略，稽核會報錯）。每年抽一到三件（多數年份兩件）。
-- 有外層 `age` 的 stage 也可以寫 `p`：在年齡範圍裡每年只有 `p` 的機會觸發，範圍的最後一年一定輪到。用在與史實無關的人生抉擇（`events_life_choice.json` 的 `lx_*`），不會人人都在同一歲碰上。
-- 日常內容分檔：`events_life_child.json`（`lc_*` 童年少年）、`events_life_adult.json`（`la_*` 成年）、`events_life_old.json`（`lo_*` 中老年）、`events_life_choice.json`（`lx_*` 個人抉擇與後續）。
+- 有外層 `age` 的 stage 也可以寫 `p`：在年齡範圍裡每年只有 `p` 的機會觸發，範圍的最後一年一定輪到。用在與史實無關的人生抉擇（`events_life_choice.json` 的 `lx_*`），不會人人都在同一歲碰上。排入當年時就要符合條件；同一年最多一張，當年若已有兩張以上的大事抉擇（例如甲子年）就順延。
+- 日常內容分檔：`events_life_child.json`（`lc_*` 童年少年）、`events_life_adult.json`（`la_*` 成年）、`events_life_old.json`（`lo_*` 中老年）、`events_life_choice.json`（`lx_*` 個人抉擇與後續）、`events_arc_focus.json`（`af_*` 依人生重心的故事線：行醫、行商、任俠、遊學、開荒、匠戶）、`events_arc_family.json`（`am_*` 家庭鄰里的故事線：夫妻失和、孩子婚事、遊俠少年、鄰家寡婦、娘家夫家、族長）。
 - `alt`：同一段本文的其他寫法（任何 kind 都可以用）。從哪一種開始由這一局的種子決定，同一家族再碰到就換下一種，所以重玩的人不會每次都讀到同一句。不動用亂數，加寫法不會讓舊存檔走樣。
 - 選項的 `tAlt` / `outAlt`：選項文字與結果文字的其他寫法，規則同 `alt`。 選項底下的小字也一樣：`subAlt` 是其他寫法，`subIf: [{ req, sub }]` 依條件換（例如女孩練武寫成女孩的樣子），`sub` 也可以是陣列。`textIf` 的 `text`、`outIf` 的 `out` 也可以直接寫成陣列。
 - 選項的 `deathOut`：這個選項的 `risk` 當場致死時改用的結果文字（`out` 寫成活下來的選項一定要有，稽核會擋）。
@@ -68,6 +68,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 - `faction` 含 `civ` 時，身在曹、袁、黑山陣營的女性也算符合（她們不上陣，但也是當地百姓）；孫、劉兩家不適用。
 - `married: true` 代表配偶此刻在身邊（喪偶、配偶被抓走未歸都不算）。
 - `child: [最小, 最大]`／`son: [...]`：家裡要有這個年紀、還在身邊的孩子；文字裡用 `{kid}`／`{son}` 指那個孩子。加 `kidUnwed: true` 只挑還沒成親的孩子。
+- `kidTag`：故事線的後續節點用，指定先前用 `eff.tagKid` 標記過的那個孩子（不看年齡），`{kid}`／`{son}` 就是那個孩子，家裡孩子多的時候不會認錯人。
 
 ### 效果 `eff`
 
