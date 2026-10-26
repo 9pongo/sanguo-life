@@ -105,10 +105,18 @@
       return list[(h + n) % list.length];
     }
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
+    // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
+    let histText = false;
+    function localize(t) {
+      const words = histText ? null : (data.world.regionWords || {})[S().region];
+      if (!words) return t;
+      for (const [a, b] of words) t = t.split(a).join(b);
+      return t;
+    }
     function fmt(t) {
       if (!t) return t;
       const v = vars();
-      return t.replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m));
+      return localize(t.replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m)));
     }
 
     function findKid(gender, range, unwed) {
@@ -289,6 +297,7 @@
     // ---------- 事件
     function fire(ev) {
       const s = S();
+      histText = !!ev.year;
       s.fired[ev.id] = (s.fired[ev.id] || 0) + 1;
       if (ev.kind !== 'flavor' && isCampaign(ev)) {
         s.campaignYear = s.year;
@@ -620,6 +629,7 @@
     // 結局：死了就是這一生的結局（有後人就傳下去）；活著走到章末，若還有下一章就是「章末」，否則是最終結局
     function evaluateEnding() {
       const s = S();
+      histText = false;
       const list = data.endings;
       const heirs = !s.alive ? findHeirs() : [];
       const personEnded = !s.alive || !chapterOf(s.chapter + 1);
