@@ -378,6 +378,9 @@
     "age": [
      20,
      50
+    ],
+    "notFired": [
+     "lx_lend"
     ]
    },
    "w": 2,
@@ -794,6 +797,9 @@
     "cls": [
      "farmer",
      "gentry"
+    ],
+    "notFired": [
+     "lx_lawsuit"
     ]
    },
    "w": 2,
@@ -853,6 +859,9 @@
     "age": [
      18,
      50
+    ],
+    "notFired": [
+     "lx_purse"
     ]
    },
    "w": 2,

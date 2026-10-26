@@ -527,6 +527,9 @@
     "age": [
      50,
      80
+    ],
+    "notFired": [
+     "ly_lasttrip"
     ]
    },
    "eff": {

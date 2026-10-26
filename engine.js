@@ -126,6 +126,7 @@
       if (req.year && (s.year < req.year[0] || s.year > req.year[1])) return false;
       if (req.region && !arr(req.region).includes(s.region)) return false;
       if (req.noregion && arr(req.noregion).includes(s.region)) return false;
+      if (req.notFired && arr(req.notFired).some((id) => s.fired[id])) return false; // 這輩子碰過內容相近的事
       if (req.cls && !arr(req.cls).includes(s.cls)) return false;
       if (req.gender && s.gender !== req.gender) return false;
       if (req.talent && !arr(req.talent).some((t) => s.talents.includes(t))) return false;
@@ -300,9 +301,11 @@
       // 同一件人生大事（接家、四十、六十）每一代都會碰到：依時代與家境換一段開場
       const tvi = (ev.textIf || []).findIndex((v) => meets(v.req));
       const text = tvi >= 0 ? variant(ev.textIf[tvi].text, ev.id + '@' + tvi) : variant(withAlt(ev.text, ev.alt), ev.id);
-      if (ev.kind === 'flavor' || (ev.p != null && ev.age)) {
+      // 家族記得每件事發生過幾次、最近一次是哪一年：後代少碰重複的事
+      {
         const fam = s.familySeen || (s.familySeen = {});
         fam[ev.id] = (fam[ev.id] || 0) + 1;
+        fam['@' + ev.id] = s.year;
       }
       const entry = emit({
         type: ev.choices ? 'decision' : 'event', id: ev.id, kind: ev.kind,
@@ -432,7 +435,9 @@
       // 主線、羈絆、人生階段：照順序，執行時才判斷條件
       const due = scheduledPool
         .filter((e) => !e.year || (s.year >= arr(e.year)[0] && s.year <= (arr(e.year)[1] ?? arr(e.year)[0])))
-        .filter((e) => !e.age || (s.age >= e.age[0] && s.age <= e.age[1]));
+        .filter((e) => !e.age || (s.age >= e.age[0] && s.age <= e.age[1]))
+        // 有年份的時代大事，家族裡有人經歷過就不再重演（familyRepeat 例外）
+        .filter((e) => !e.year || e.familyRepeat || !ancestorsSaw(e.id));
       // 這一年本來就有兩張以上的大事抉擇（例如甲子年），與史實無關的人生抉擇就讓一讓
       let pTaken = due.filter((e) => e.p == null && e.choices && !s.fired[e.id] && meets(e.req)).length >= 2;
       const cand = due
@@ -443,7 +448,7 @@
           // 排入時就要符合條件：否則年中剛成親、剛添丁，限定條件的幾張會在同一年一起湧上來
           // 家族裡有人碰過的：機會打折，最後一年也不保底；familyOnce 的一個家族只碰一次
           const rep = (s.familySeen || {})[e.id], last = !rep && s.age >= e.age[1];
-          if (rep && e.familyOnce) return false;
+          if (rep && (e.familyOnce || s.year - (s.familySeen['@' + e.id] ?? -999) < (data.world.familyRepeatGap ?? 25))) return false;
           if (!meets(e.req) || (pTaken && !last) || (!last && R() >= e.p * (rep ? (data.world.familyRepeatStage ?? 0.3) : 1))) return false;
           pTaken = true;
           return true;
@@ -465,6 +470,12 @@
       return q;
     }
 
+    // 祖上（不是自己）碰過這件事：家族記錄的次數比自己這輩子的多
+    function ancestorsSaw(id) {
+      const s = S();
+      return ((s.familySeen || {})[id] || 0) > (s.fired[id] || 0);
+    }
+
     function okFlavor(e) {
       const s = S();
       if (!e.repeat && s.fired[e.id]) return false;
@@ -472,6 +483,7 @@
       // 祖上傳說這類只該說一次的小事：家族裡誰聽過了，後代就不再重複
       if (e.familyOnce && (s.familySeen || {})[e.id]) return false;
       if (e.year && !(s.year >= e.year[0] && s.year <= e.year[1])) return false;
+      if (e.year && !e.familyRepeat && ancestorsSaw(e.id)) return false;
       if (e.p != null && R() >= e.p) return false; // 稀有小事：每年只有 p 的機會進候選
       return meets(e.req);
     }
