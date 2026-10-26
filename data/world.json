@@ -3598,6 +3598,70 @@
    },
    "text": "老了以後，縣裡來人問當年的事，你只說了些熱鬧的。他記得很高興，你自己倒覺得有些空。",
    "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_jar_owned"
+   },
+   "text": "小時候你摔破了鄰家的陶甕，沒人看見，你還是去認了錯。那家的老人後來常說，這孩子實在。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_jar_hid"
+   },
+   "text": "小時候你摔破過鄰家的一隻陶甕，把碎片埋在了牆根下。那堵牆後來塌了，碎片你一直沒去找。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_ox_found"
+   },
+   "text": "小時候你替人放牛，丟了一頭，自己摸黑進山找了回來。那一夜狼叫的聲音，你老了還記得。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_window_learn"
+   },
+   "text": "你小時候蹲在學舍窗外偷聽過書。先生扔給你的那卷舊竹簡，你留了一輩子。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_bully_fought"
+   },
+   "text": "小時候你為了一個被欺負的孩子，跟里中最兇的大孩子打過一架，鼻子流了血也沒鬆口。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_harvest_helped"
+   },
+   "text": "十來歲那年，你叫上玩伴替鄰里一戶沒人幫的人家割了麥子。那鍋麥飯的味道，你記了很多年。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_gamble_lost"
+   },
+   "text": "小時候你上市換鹽，在路邊猜豆子輸了兩文錢。回家路上哭的那一場，你一輩子沒跟人說過。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lk_friend_visit"
+   },
+   "text": "{friend}小時候病得厲害，大人不許去看，你翻牆進去塞給他兩顆棗子，自己也病了一場。",
+   "life": true
   }
  ],
  "heirText": [
@@ -4450,6 +4514,43 @@
     {
      "id": "lz_record_true",
      "title": "照實說"
+    }
+   ]
+  },
+  {
+   "name": "童年",
+   "items": [
+    {
+     "id": "lk_jar_owned",
+     "title": "摔甕認錯"
+    },
+    {
+     "id": "lk_jar_hid",
+     "title": "埋了碎片"
+    },
+    {
+     "id": "lk_ox_found",
+     "title": "摸黑找牛"
+    },
+    {
+     "id": "lk_window_learn",
+     "title": "窗外聽書"
+    },
+    {
+     "id": "lk_bully_fought",
+     "title": "打抱不平"
+    },
+    {
+     "id": "lk_harvest_helped",
+     "title": "幫人割麥"
+    },
+    {
+     "id": "lk_gamble_lost",
+     "title": "猜豆輸錢"
+    },
+    {
+     "id": "lk_friend_visit",
+     "title": "翻牆探病"
     }
    ]
   }

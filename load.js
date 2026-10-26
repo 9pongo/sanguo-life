@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const E = require('./engine.js');
 
-const EVENT_FILES = ['events_main.json', 'events_bonds.json', 'events_flavor.json', 'events_ch2.json', 'events_ch3.json', 'events_ch4.json', 'events_ch5.json', 'events_ch6.json', 'events_ch7.json', 'events_ch8.json', 'events_life_child.json', 'events_life_adult.json', 'events_life_old.json', 'events_life_choice.json', 'events_life_choice2.json', 'events_life_choice3.json', 'events_arc_focus.json', 'events_arc_family.json'];
+const EVENT_FILES = ['events_main.json', 'events_bonds.json', 'events_flavor.json', 'events_ch2.json', 'events_ch3.json', 'events_ch4.json', 'events_ch5.json', 'events_ch6.json', 'events_ch7.json', 'events_ch8.json', 'events_life_child.json', 'events_life_adult.json', 'events_life_old.json', 'events_life_choice.json', 'events_life_choice2.json', 'events_life_choice3.json', 'events_life_choice4.json', 'events_arc_focus.json', 'events_arc_family.json'];
 
 function readJson(f) {
   return JSON.parse(fs.readFileSync(path.join(__dirname, 'data', f), 'utf8'));
