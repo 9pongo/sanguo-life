@@ -247,7 +247,12 @@ for (let i = 0; i < N; i++) {
       checkEnding(g.state, g.succession, g.seed); noteFamily();
       const dead = g.state;
       countPerson(dead);
-      g.continueAsHeir(0);
+      // 有長孫可選時，三次裡挑一次長孫，讓隔代接班也跑得到
+      const hs = g.succession.heirs, gi = hs.findIndex((x) => x.via);
+      const pickGrand = gi >= 0 && Math.random() < 1 / 3;
+      if (pickGrand) stats.grandHeirs = (stats.grandHeirs || 0) + 1;
+      g.continueAsHeir(pickGrand ? gi : 0);
+      if (pickGrand && (g.state.generation !== dead.generation + 2 || g.state.parentName !== hs[gi].via || g.state.flags.father_dead || g.state.flags.mother_dead)) flagIssue('長孫接班的代數或爹娘不對', g.seed, g.state.name);
       // 接班人的父母：孩子接班時，死去的那一位必須記為已過世
       const h = g.state;
       // 上一代時已經成親的孩子，接家時必須是成了家的人
@@ -381,7 +386,7 @@ console.log(`靜態檢查：錯誤 ${errors.length}，提醒 ${warns.length}`);
 for (const e of errors) console.log('  ❌ ' + e);
 for (const w of warns) console.log('  ⚠️  ' + w);
 console.log(`模擬 ${stats.lives} 條：夭折 ${pct(stats.infant)}，` + world.chapters.slice(0, -1).map((c) => `活到 ${c.end} 年 ${pct(stats.chAlive[c.n] || 0)}`).join('，') + `，活到 ${world.chapters.at(-1).end} 年 ${pct(stats.alive)}，平均抉擇 ${(stats.choicesPerLife / stats.lives).toFixed(1)} 次`);
-console.log(`家族：平均傳承 ${(stats.successions / stats.lives).toFixed(2)} 次；傳到最後一章結束的家族 ${pct(stats.alive)}；代數分布 ` + Object.entries(stats.generations).sort((a, b) => a[0] - b[0]).map(([k, n]) => `${k}代 ${pct(n)}`).join('、'));
+console.log(`家族：平均傳承 ${(stats.successions / stats.lives).toFixed(2)} 次（長孫接班 ${stats.grandHeirs || 0} 次）；傳到最後一章結束的家族 ${pct(stats.alive)}；代數分布 ` + Object.entries(stats.generations).sort((a, b) => a[0] - b[0]).map(([k, n]) => `${k}代 ${pct(n)}`).join('、'));
 for (const c of world.chapters.filter((c) => c.n >= 2)) console.log(`第${c.n}章勢力（占比／死亡率）：` + facRows(c.n).map((r) => `${r.f} ${r.share}／${r.dead}`).join('、'));
 console.log('路線：' + Object.entries(stats.routes).map(([r, n]) => `${r} ${pct(n)}（死 ${pct(stats.routeDead[r] || 0, n)}）`).join('、'));
 console.log('從未觸發：' + (never.map((e) => e.id).join('、') || '無'));

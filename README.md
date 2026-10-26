@@ -116,6 +116,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 |---|---|
 | `inheritFlags` | 會傳給接班人的旗標（住在哪、全家做過的決定，例如 `dianke_done`） |
 | `parentFlags` | 上一代的經歷，接班人得到 `p_` 開頭的旗標，用來觸發祖上傳說（`{elder}`） |
+| `grandHeirAge`／`heirGrandText` | 長子女滿這個歲數，接班名單最後多一位長孫（長子的孩子，沒有兒子就是長女的孩子），代數跳兩代、爹娘都還在（`grand_heir` 旗標）。長孫的名字和年紀用另一條亂數，不影響舊存檔重播 |
 | `heirMarried`／`heirPastChildRate`／`heirPastChildSurvive` | 成年接班人已成家的機率、接班前每年添丁率、那些孩子養大的機率（影響難度） |
 | `childChance` | 有配偶在身邊時每年添丁的機率 |
 | `spouseMortality` | 配偶死亡率相對於玩家同齡死亡率的倍數 |
@@ -132,7 +133,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 
 是不是後代投胎由介面在開新局時決定，記在存檔的 `late` 欄位。舊存檔沒有這個欄位，照第一代處理。
 
-接班時未滿 14 歲的人會帶 `heir_young` 旗標，長大後改看 `st_heir_focus_young`。
+接班時未滿 14 歲的人會帶 `heir_young` 旗標，長大後改看 `st_heir_focus_young`。`st_heir_focus` 的「從軍」限 45 歲、「讀書求仕」限 50 歲以下。
 
 ## 稽核會擋下的事（`sim.js`）
 

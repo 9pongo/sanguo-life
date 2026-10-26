@@ -1294,7 +1294,7 @@ const DATA = /*__DATA__*/;
       const hs = h('div', 'heirs');
       hs.append(h('h4', null, '由誰接下這個家'));
       e.heirs.forEach((x, i) => {
-        const b = h('button', i === 0 ? 'cta' : 'ghost ui', `${esc(x.rel)}　${esc(x.name)}（${x.age}歲）`);
+        const b = h('button', i === 0 ? 'cta' : 'ghost ui', `${esc(x.rel)}　${esc(x.name)}（${x.age}歲${x.via ? `，${esc(x.via)}的孩子` : ''}）`);
         b.type = 'button';
         b.addEventListener('click', () => {
           sec.hidden = true; $('#ctrl').hidden = false;

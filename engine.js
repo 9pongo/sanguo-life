@@ -592,7 +592,24 @@
     function findHeirs() {
       const s = S();
       const own = survivors(s.children).sort((a, b) => a.born - b.born);
-      if (own.length) return own.map((c) => ({ ...c, rel: c.gender === 'm' ? '子' : '女' }));
+      if (own.length) {
+        const list = own.map((c) => ({ ...c, rel: c.gender === 'm' ? '子' : '女' }));
+        // 長子女上了年紀，也可以把家交給長孫。名字、年紀用另一條亂數算，不動主線亂數，舊存檔重播不走樣
+        const W = data.world;
+        if (s.year - own[0].born >= (W.grandHeirAge ?? 40)) {
+          const via = own.find((c) => c.gender === 'm') || own[0];
+          const lr = mulberry32((g.seed ^ Math.imul(s.year, 2654435761)) + s.generation);
+          const gg = lr() < 0.5 ? 'm' : 'f', N = W.names;
+          const sur = via.gender === 'm' ? via.name[0] : N.surnames[Math.floor(lr() * N.surnames.length)];
+          const pool = gg === 'm' ? N.male : N.female;
+          const taken = [s.name, s.spouse, ...own.map((c) => c.name)].filter(Boolean).map((x) => x.slice(1));
+          let nm = sur + pool[Math.floor(lr() * pool.length)];
+          for (let k = 0; k < 12 && taken.includes(nm.slice(1)); k++) nm = sur + pool[Math.floor(lr() * pool.length)];
+          const born = Math.min(via.born + 20 + Math.floor(lr() * 8), s.year - 16);
+          list.push({ name: nm, gender: gg, born, alive: true, rel: gg === 'm' ? '孫' : '孫女', via: via.name });
+        }
+        return list;
+      }
       const sib = survivors(s.siblings).sort((a, b) => a.born - b.born);
       return sib.map((c) => ({ ...c, rel: c.gender === 'm' ? '弟' : '妹' }));
     }
@@ -652,7 +669,7 @@
       s.chapterEndings = (s.chapterEndings || []).concat([{ chapter: s.chapter, id: result.id, title: result.title, name: s.name }]);
       if (personEnded) s.lineage = s.lineage.concat([{ gen: s.generation, name: s.name, gender: s.gender, born: s.birthYear, died: s.alive ? null : s.year, age: s.age, cause: s.cause, title: result.title, memo: memories[0] }]); // 家譜上每一代留一句往事
       result.lineage = s.lineage;
-      if (!s.alive && heirs.length) { result.heirs = heirs.map((h) => ({ name: h.name, gender: h.gender, age: s.year - h.born, rel: h.rel })); g.succession = { result, heirs }; return; }
+      if (!s.alive && heirs.length) { result.heirs = heirs.map((h) => ({ name: h.name, gender: h.gender, age: s.year - h.born, rel: h.rel, via: h.via })); g.succession = { result, heirs }; return; }
       if (last) { result.extinct = !s.alive; g.ended = result; } else g.interlude = result;
     }
 
@@ -690,6 +707,8 @@
       if (h.rel === '弟' || h.rel === '妹') {
         if (p.flags.father_dead) flags.father_dead = true;
         if (p.flags.mother_dead) flags.mother_dead = true;
+      } else if (h.via) {
+        flags.grand_heir = true; // 長孫接班：過世的是祖父母，爹娘都還在
       } else {
         flags[p.gender === 'm' ? 'father_dead' : 'mother_dead'] = true;
         // 另一位家長就是上一代的配偶
@@ -702,19 +721,19 @@
         if (p.flags[f]) { flags['p_' + f] = true; elders[f] = p.name; }
         else if (p.flags['p_' + f]) flags['p_' + f] = true;
       }
-      const siblings = heirs.filter((x) => x !== h).map((x) => ({ name: x.name, gender: x.gender, born: x.born, alive: true, checked: false }));
+      const siblings = h.via ? [] : heirs.filter((x) => x !== h && !x.via).map((x) => ({ name: x.name, gender: x.gender, born: x.born, alive: true, checked: false }));
       const surname = h.name[0];
       g.st = {
         name: h.name, surname, gender: h.gender, birthYear: h.born, year: p.year, age,
         // 兄弟姊妹接班還是同一代
-        children: [], siblings, generation: (h.rel === '弟' || h.rel === '妹') ? p.generation : p.generation + 1, lineage: p.lineage,
+        children: [], siblings, generation: (h.rel === '弟' || h.rel === '妹') ? p.generation : p.generation + (h.via ? 2 : 1), lineage: p.lineage,
         region: p.region, regionName: p.regionName, place: p.place,
         cls: clsId, clsName: ncls.name, talents, stats, hp: 70, flags, bonds: {},
         focus: null, route: null, faction: p.faction, chapter: p.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
         alive: true, cause: null, chapterEndings: p.chapterEndings, familySeen: { ...(p.familySeen || {}) },
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同
-        parentName: (h.rel === '弟' || h.rel === '妹') ? (p.parentName || null) : p.name,
+        parentName: h.via || ((h.rel === '弟' || h.rel === '妹') ? (p.parentName || null) : p.name),
         elders,
       };
       const s = g.st;
@@ -739,6 +758,7 @@
       g.out = [];
       emit({ type: 'heir', text: `第${cnNum(s.generation)}代　${s.name}`, gen: s.generation, rel: h.rel });
       emit({ type: 'event', tag: '傳承', text: fmt(variant(W.heirText, 'heirText')) });
+      if (h.via) emit({ type: 'event', tag: '傳承', text: fmt(variant(W.heirGrandText, 'heirGrand')) });
       if (wedText) emit({ type: 'event', tag: '成家', text: fmt(variant(wedText, 'heirWed')) });
       g.queue = [];
       if (s.year >= chapterOf(s.chapter).end) evaluateEnding();

@@ -4449,5 +4449,11 @@
    ]
   }
  ],
- "familyRepeatStage": 0.15
+ "familyRepeatStage": 0.15,
+ "grandHeirAge": 40,
+ "heirGrandText": [
+  "{parent}也上了年紀，說這個家該交給年輕人了。祖輩一走，裡裡外外的事，就落到了你的肩上。",
+  "{parent}把你叫到跟前，說自己老了，管不動了。從今往後，這個家由你來當。",
+  "族裡的長輩商量過了，{parent}也點了頭：當家的擔子，直接交到孫輩手上。"
+ ]
 }
