@@ -609,7 +609,8 @@
       const noKid = !s.children.some((c) => c.alive);
       // 往事只算這輩子親身經歷的：從上一代繼承來的旗標沒有取得的年份
       const fy = s.flagYear || {};
-      const memories = shown.filter(isMemory).map((e) => {
+      // pri 高的排前面（故事線的結局比零碎小事更像「這一生」），同級照資料順序
+      const memories = shown.filter(isMemory).sort((a, b) => (b.pri || 0) - (a.pri || 0)).map((e) => {
         const f = typeof e.req?.flag === 'string' ? e.req.flag : arr(e.req?.anyFlag).find((x) => s.flags[x] && x in fy);
         if (f && !(f in fy)) return null;
         const since = s.year - (fy[f] ?? s.year);

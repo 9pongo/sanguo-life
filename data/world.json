@@ -2160,6 +2160,712 @@
    "text": "你在姜維家幫過忙。後來的人爭論他是忠臣還是窮兵黷武，你只記得那堵塌了一角的院牆，和那包他收進懷裡的當歸。",
    "minYears": 3,
    "short": "你在成都的姜家幫過忙。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_taught"
+   },
+   "text": "你收過一個徒弟，從認藥教起，一味一味地嚐。後來鄉里有人病了，先去找的是你的徒弟，再來才是你。你聽了，一點也不生氣。",
+   "minYears": 3,
+   "short": "你收過一個徒弟，把會的都教了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_halftaught"
+   },
+   "text": "你教過一個徒弟認藥，始終沒教下針。徒弟臨走磕的那三個頭，你記了很多年，也想了很多年，當初是不是該多教一點。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_nodisc"
+   },
+   "text": "有戶人家領著孩子來拜師，你推了。後來你常想，那孩子若是跟了你，現在也該是個大夫了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_cleared"
+   },
+   "text": "有人告你見死不救，你抱著一捆方子去縣裡對質。狀子被駁了，那捆木牘你一直留著，邊角都摸得發亮。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_fined"
+   },
+   "text": "那年你被人告了，縣吏只看誰哭得兇。你被罰了錢，好幾年少有人上門，可後來有人半夜敲門求醫，你還是背起藥箱就走。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_settled"
+   },
+   "text": "那年有人告你，你托里正去說和，賠了幾匹布。那家人在路上碰見你，一輩子都沒再開口。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_moved"
+   },
+   "text": "你帶著藥箱搬到了鄰鄉，從頭來過。新的鄉里不知道你的過去，只知道你是那個肯半夜出診的大夫。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_med_cured",
+    "noflag": [
+     "af_med_taught",
+     "af_med_halftaught",
+     "af_med_nodisc",
+     "af_med_cleared",
+     "af_med_fined",
+     "af_med_settled",
+     "af_med_moved"
+    ]
+   },
+   "text": "那年疫病，你守在病人家裡熬了好幾夜的藥，把人救了回來。從那以後，你就成了鄉里人口中的大夫。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_trade_rich"
+   },
+   "text": "你把家底全押在一趟貨上，貨回來了。那一夜你把錢倒在席上，數到天亮，一家人誰也沒睡。",
+   "minYears": 3,
+   "short": "你押上全部家底跑了一趟貨，賺回了一大筆。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_trade_ruin"
+   },
+   "text": "你把家底全押在一趟貨上，貨沒有回來。後來的日子很苦，可你從沒在孩子面前說過一句後悔。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_trade_gain"
+   },
+   "text": "你只押了一半家底去跑貨，分到的錢夠家裡添兩間屋。你常說，人不能貪，剩下的那一半，是給自己留的後路。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_trade_loss"
+   },
+   "text": "那趟押出去的一半錢沒了回來。好在棗樹下還埋著另一半，你一家靠著它熬過了那幾年。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_trade_detour",
+    "noflag": [
+     "af_trade_rich",
+     "af_trade_ruin",
+     "af_trade_gain",
+     "af_trade_loss"
+    ]
+   },
+   "text": "跑貨那些年，你寧可多繞幾天路，也不肯走那條有關卡、有盜匪的近道。家裡人笑你膽小，你說膽小的人才回得了家。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_xia_burned"
+   },
+   "text": "你替豪強燒過一戶人家的穀倉。重賞你拿了，可往後在路上碰見那家的人，你總是先低下頭。這件事你到最後也沒跟人說過。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_xia_jailed"
+   },
+   "text": "你替主家做過一件見不得人的事，主家推得一乾二淨，你在獄裡關了半年。出來以後，你再也沒佩過刀。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_xia_refused"
+   },
+   "text": "主人要你去燒人家的穀倉，你說這件事你不做，第二天就離開了莊子。那是你這輩子最窮的一年，也是你最不後悔的一年。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_xia_warned"
+   },
+   "text": "主人要你去燒人家的穀倉，你半夜繞到那家後門去報信。那家人到現在也不知道是誰救了他們一年的口糧。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_xia_beaten"
+   },
+   "text": "你替一戶不相識的人家通風報信，被主人打了一頓趕出莊子。身上的傷好了，心裡倒是舒坦了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_xia_rest"
+   },
+   "text": "年輕時你也提過刀、結過仇。後來刀在牆上生了鏽，當年的仇人路過你家門口，站了一會兒，點點頭走了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_study_forged"
+   },
+   "text": "你在郡府改過一回帳。上官拍了拍你的肩，你升了官、蓋了新屋。可那天手抖的樣子，你一直沒忘。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_study_scapegoat"
+   },
+   "text": "你在郡府照上官的意思改了帳，出事後被推出去頂罪。從那以後，你教孩子寫字，總要先教「正」字。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_study_honest"
+   },
+   "text": "上官要你改帳，你照實上報。虧空查了出來，你反倒記了一功。同僚都說你傻，傻人卻有傻福。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_study_ousted"
+   },
+   "text": "上官要你改帳，你照實上報，沒多久就被打發回家。那天來送你的只有一個同僚，你們後來通了一輩子的信。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_study_resigned"
+   },
+   "text": "你在郡府做了幾年書佐，最後辭職回鄉。那身吏服疊好放在箱底，再也沒拿出來穿過。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_study_visit"
+   },
+   "text": "你開館教過書。當年最頑皮的那個學生，後來穿著吏服回來，在院門口給你行了大禮。你嘴上罵他多禮，轉身卻紅了眼眶。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_farm_confess"
+   },
+   "text": "官府清查隱戶那年，你自己去縣裡報了戶，補交了好幾年的稅。家裡的倉空了，可往後的日子，你夜裡都睡得安穩。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_farm_hidden"
+   },
+   "text": "你家寄在大族名下，躲過了清查。吏員在大族家吃了幾頓酒，簿子上什麼也沒有，你家也就跟著過了好些年。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_farm_caught"
+   },
+   "text": "你家寄在大族名下，清查那年還是被查了出來。補了稅、挨了板子，大族的人一句話也沒替你說。你從此只信自己手裡的地。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_farm_moved"
+   },
+   "text": "清查隱戶那年，你帶著一家人連夜走了，在幾十里外從頭租地種。你常說，這輩子搬過的家，比種過的地還多。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_farm_ripe"
+   },
+   "text": "你開過一塊荒地，種了十來年，地一年比一年肥。豐收那年，你在田頭祭了社神，把地界的石頭一塊一塊重新擺正。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_mark"
+   },
+   "text": "你的東西上有一個記號，郡裡的人都認得。市上那些仿冒的攤子，是你去找市吏掀掉的。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_scorn"
+   },
+   "text": "市上到處是冒你名號的器物，你去告，市吏卻說名字誰都能寫。你氣了好幾天，後來也就想通了，手藝是搶不走的。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_let"
+   },
+   "text": "市上有人冒你的名號，你沒去管。過了幾年，仿冒的都散了，買過假貨的人又回頭來找你。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_sold"
+   },
+   "text": "你把幾個秘方賣了，換回一大袋錢。後來市上到處都是同樣的東西，誰也不記得最早是誰做的。你有時候會想，這樣到底值不值。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_kin"
+   },
+   "text": "有人出大價錢要買你的秘方，你推了。那年冬天，你把家裡的後生叫到身邊，一樣一樣地教。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_relearn"
+   },
+   "text": "你砸過自己的招牌，後來到別縣的作坊，跟十幾歲的學徒一起掃地，從頭學起。那是你這輩子做過最難、也最對的一件事。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "af_craft_rough"
+   },
+   "text": "你的手藝出過差錯，後來你只做些農具、木桶。賺得不多，用過你那些木桶的人家，倒是一用就是好多年。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_rift_talked"
+   },
+   "text": "你們夫妻年輕時吵過很兇的一架。很多年後你病了一場，把那些年的話說開了，對方笑著說早忘了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_rift_held"
+   },
+   "text": "你們夫妻吵過一架，誰也沒再提。後來你病了，對方守在床邊熬藥、餵粥。那一夜窗外下雪，你握著那隻手，什麼也沒說。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_rift_apart",
+    "noflag": [
+     "am_rift_talked",
+     "am_rift_held"
+    ]
+   },
+   "text": "你們夫妻吵過那一架以後，分房睡了好些年。那道坎，到最後也沒有真正跨過去。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_kw_done",
+    "anyFlag": [
+     "am_kw_bend"
+    ]
+   },
+   "text": "孩子成親那年，親家嫌聘禮薄，你把攢了兩年的細布都包了送去。小兩口的日子不寬，可孩子的臉色一年比一年開朗。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_kw_done",
+    "anyFlag": [
+     "am_kw_firm"
+    ]
+   },
+   "text": "孩子成親那年，親家嫌聘禮薄，你託人帶話：就這個家底，禮輕情不輕。親家好些日子沒動靜，後來還是把親結了，兩家倒也處得實在。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_kw_done",
+    "anyFlag": [
+     "am_kw_help"
+    ]
+   },
+   "text": "孩子成親以後，親家遇上荒年，你量了三石穀子親自送去。親家站在門口搓著手，說不出話來。從那以後，兩家走得比親戚還近。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_kw_done",
+    "anyFlag": [
+     "am_kw_half"
+    ]
+   },
+   "text": "孩子成親以後，親家來借穀子，你只借了一半。親家臉上的笑有點僵，可小兩口的日子，終究是和和氣氣地過了下去。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_wild_done",
+    "anyFlag": [
+     "am_wild_go"
+    ]
+   },
+   "text": "家裡那個想去外頭闖的孩子，你最後放走了。走的那天早上下著霧，往後每年，你都要在里門口往大路上看好一陣子。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_wild_done",
+    "anyFlag": [
+     "am_wild_stay"
+    ]
+   },
+   "text": "家裡那個想去外頭闖的孩子，被你留了下來，脾氣也慢慢磨平了。只有喝醉的時候，才會說起那年要是走了，如今會在哪裡。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_wild_done",
+    "anyFlag": [
+     "am_wild_hid"
+    ]
+   },
+   "text": "家裡那個孩子年輕時闖過禍，是你把人藏在地窖裡，對亭長說孩子兩年沒回家了。這件事，你守了一輩子。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_wild_done",
+    "anyFlag": [
+     "am_wild_turnin"
+    ]
+   },
+   "text": "家裡那個孩子年輕時闖過禍，天一亮，是你親手帶去見亭長的。孩子後來原諒了你，你自己卻一直沒有。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_wd_grown"
+   },
+   "text": "隔壁的孤兒寡母，你幫襯了好些年，替那孩子收著田契。孩子長大了，把第一袋新穀扛到你家門口。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_wd_left"
+   },
+   "text": "隔壁的孫氏帶著阿禾改嫁到鄰鄉去了。搬走那天，她走到你家門口時停了一下，還是行了個禮。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_nt_done",
+    "anyFlag": [
+     "am_nt_open"
+    ]
+   },
+   "text": "那年娘家的兄弟來求救，你們夫妻在灶邊商量到半夜，答應了。後來兄弟趕著一車穀子來還人情，跟你們喝到半夜。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_nt_done",
+    "anyFlag": [
+     "am_nt_confess"
+    ]
+   },
+   "text": "那年你瞞著家裡接濟了娘家，後來自己說了出來。那一夜很難熬，可話說開了，往後再沒有什麼是瞞著的。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_nt_done",
+    "anyFlag": [
+     "am_nt_lie"
+    ]
+   },
+   "text": "那年你瞞著家裡接濟了娘家，被問起時撒了謊。娘家後來還了人情，那個謊，你卻一直揣在心裡。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_nt_done",
+    "anyFlag": [
+     "am_nt_refused",
+     "am_nt_no"
+    ]
+   },
+   "text": "那年娘家的兄弟摸黑來求救，最後沒能幫上。後來娘家緩了過來，兩家又走動了，只是每次見面，你總覺得欠了一句話。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_cl_done",
+    "anyFlag": [
+     "am_cl_kind"
+    ]
+   },
+   "text": "族裡分祭田的穀子那年，你主張先照應孤寡。人丁多的那幾房背地裡罵了幾句，叔母卻記了你一輩子。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "am_cl_done",
+    "anyFlag": [
+     "am_cl_count"
+    ]
+   },
+   "text": "族裡分祭田的穀子那年，你沒有替孤寡說話。叔母扶著牆走的那個背影，你後來想起過好幾回。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_blame_repaid"
+   },
+   "text": "小時候你替堂兄認過一回偷割麥子的罪，挨了一頓打。很多年後他扛著一袋穀子來，只說了一句：那年的事，我記著。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_covered",
+    "noflag": [
+     "lx_blame_repaid"
+    ]
+   },
+   "text": "小時候你替堂兄認過一回偷割麥子的罪，挨了一頓打。堂兄一聲不吭，這件事，你們誰也沒再提起。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_blame_led"
+   },
+   "text": "小時候堂兄偷割了鄰家的麥子，是你陪著他去認錯的。後來他成了里中最講信用的人。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_blame_sour"
+   },
+   "text": "小時候堂兄偷割了鄰家的麥子，你勸他自己去認，他甩手走了，後來還說都是你害的。那以後，你們做了一輩子不冷不熱的親戚。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_lend_back"
+   },
+   "text": "{friend}家裡老人病了，你借了一千錢。後來那袋錢一文不少地還了回來，你們的交情，也一直到了最後。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_lend_gone"
+   },
+   "text": "你借給{friend}的那一千錢，始終沒有還。你從沒去要，只是在路上遠遠看見，他總是繞到別的巷子裡去。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_guar_paid"
+   },
+   "text": "你替同里的一戶人家作過保。那年他們還清了豪家的穀子，家裡的孩子見了你，總要遠遠地作揖。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_guar_lost"
+   },
+   "text": "你替人作過保，那家人還不上穀子，連夜逃走了。你拿自家的穀子去賠，可下回有人求你，你還是按了指印。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_land_rich"
+   },
+   "text": "隔壁那十幾畝地，是你攢了多年的錢買下的。你一車一車地往裡送糞肥，後來那塊地，比家裡原來的田還好。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_buyland_half"
+   },
+   "text": "隔壁的寡母要賣地，你只買了一半，剩下的留給那家的孩子。後來那孩子長大了，自己種著那塊地，見了你總要遠遠地作揖。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_adopted"
+   },
+   "text": "鄰村那個沒人要的孩子，是你收養的。夜裡孩子哭，你抱著在屋裡走來走去，一走就是半夜。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_adopt_clan"
+   },
+   "text": "那年有個沒爹沒娘的孩子，你陪著里正去族裡的大戶家，好說歹說，總算有人收下了。你偶爾會繞路，去看那孩子一眼。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_purse_ret"
+   },
+   "text": "你在路邊撿過一個錢囊，原封不動地還給了失主。這件事不大，可你一直記得那人提著酒來道謝的樣子。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_purse_kept"
+   },
+   "text": "你在路邊撿過一個錢囊，悄悄收了起來。好些天，聽見有人敲門你就心跳。那串錢早就花掉了，那陣心跳卻一直留著。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_grudge_made"
+   },
+   "text": "年輕時跟你打過架的那個鄰人，臨走前想見你一面。你們說起當年的事，說著說著都笑了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_grudge_no"
+   },
+   "text": "年輕時跟你打過架的那個鄰人，臨走前想見你一面，你沒有去。他走的那天，你在田裡停下鋤頭，站了好一會兒。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_law_true"
+   },
+   "text": "族裡爭墳地，你在縣廷上照實說了。輸的那一房從此不上你家的門，你也不後悔。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_law_bent"
+   },
+   "text": "族裡爭墳地，你替有勢的那一房說了話，得了兩匹帛。那兩匹帛你一直沒捨得用，也一直不想看見。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_split_yield"
+   },
+   "text": "分家那年，你讓別房先挑，剩下最薄的一塊地。族裡的長輩拍了拍你的肩，你覺得那比一塊好地值錢。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_tomb_cypress"
+   },
+   "text": "祖墳塌了的那年，你自己挑土封好，在旁邊種了一棵小柏樹。後來那棵柏樹，比你還高了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_appr_wood"
+   },
+   "text": "小時候你跟著里中的老匠人學過手藝。頭一年只是劈柴、磨鑿子，第二年他才肯讓你碰那把刨子。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_appr_silk"
+   },
+   "text": "小時候你幫織婦理過絲。她說你的手比她女兒的穩，有時塞給你一塊碎布帶回家。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_appr_read"
+   },
+   "text": "小時候家裡咬著牙送你去書師那裡認了幾個字。往後算帳，從來不怕人騙。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_loom_ok"
+   },
+   "text": "你跟里中幾家婦人湊錢買過一架織機。分錢那天，幾家人坐在一起數錢，笑得像過年。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_loom_bad"
+   },
+   "text": "你拿陪嫁的銀釵換錢，跟里中婦人合買了一架織機，最後鬧得不歡而散。那對銀釵，你想了好些年。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lx_loom_dye"
+   },
+   "text": "你替里中的婦人染過布。你染的那種青色，後來布商指名要。"
   }
  ],
  "heirText": [
