@@ -632,7 +632,7 @@
         name: s.name, generation: s.generation,
       };
       s.chapterEndings = (s.chapterEndings || []).concat([{ chapter: s.chapter, id: result.id, title: result.title, name: s.name }]);
-      if (personEnded) s.lineage = s.lineage.concat([{ gen: s.generation, name: s.name, gender: s.gender, born: s.birthYear, died: s.alive ? null : s.year, age: s.age, cause: s.cause, title: result.title }]);
+      if (personEnded) s.lineage = s.lineage.concat([{ gen: s.generation, name: s.name, gender: s.gender, born: s.birthYear, died: s.alive ? null : s.year, age: s.age, cause: s.cause, title: result.title, memo: memories[0] }]); // 家譜上每一代留一句往事
       result.lineage = s.lineage;
       if (!s.alive && heirs.length) { result.heirs = heirs.map((h) => ({ name: h.name, gender: h.gender, age: s.year - h.born, rel: h.rel })); g.succession = { result, heirs }; return; }
       if (last) { result.extinct = !s.alive; g.ended = result; } else g.interlude = result;
@@ -814,7 +814,7 @@
       stats['財'] = clamp(stats['財'] + Math.round((P.stats['財'] || 0) * 0.3), 0, 100);
       g.st = {
         name: '', surname, gender, birthYear: year, year, age: 0,
-        children: [], siblings: [...older], generation: P.generation + 1, lineage: P.lineage,
+        children: [], siblings: [...older], generation: P.generation + 1, lineage: P.lineage.map(({ memo, ...x }) => x), // 自動跑過的祖上不是你親身活過的，不留「你」的往事
         region: P.region, regionName: P.regionName, place: P.place,
         cls: cls.id, clsName: cls.name, talents, stats,
         hp: 70, flags, bonds: {}, focus: null, route: null, faction: P.faction, chapter: P.chapter, spouse: null,

@@ -149,6 +149,7 @@ button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 .tree div.now::before { background: var(--yellow); border-color: var(--yellow); }
 .tree .g { color: var(--muted); font-variant-numeric: tabular-nums; }
 .tree b { font-family: var(--font-display); white-space: nowrap; }
+.tree .memo { grid-column: 2; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .heirs { display: grid; gap: 8px; justify-items: start; }
 .after .card.memory { border-left-color: var(--yellow); }
 .after .card.world { border-left-color: var(--muted); color: var(--muted); }
@@ -775,7 +776,7 @@ const DATA = /*__DATA__*/;
       const anc = h('div', 'ancestors');
       anc.append(h('h4', null, '祖上'));
       const t = h('div', 'tree');
-      for (const p of s.lineage) t.append(h('div', null, `<span class="g">第${cnGen(p.gen)}代</span><span><b>${esc(p.name)}</b>　${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}　「${esc(p.title)}」</span>`));
+      for (const p of s.lineage) t.append(treeRow(p));
       // 還在世的父母（這一代當家的人）不在家譜的紀錄裡，另外補一行
       const pa = b.parent;
       if (pa) t.append(h('div', 'now', `<span class="g">第${cnGen(pa.gen)}代</span><span><b>${esc(pa.name)}</b>　${pa.born}–　如今當家</span>`));
@@ -1034,7 +1035,7 @@ const DATA = /*__DATA__*/;
   // ---------------- 結局
   function familyText(s, e) {
     const L = [`《黃天之下》${s.surname}家的故事`, ''];
-    for (const p of e.lineage || []) L.push(`第${cnGen(p.gen)}代　${p.name}（${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}）「${p.title}」`);
+    for (const p of e.lineage || []) { L.push(`第${cnGen(p.gen)}代　${p.name}（${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}）「${p.title}」`); if (p.memo) L.push('　　' + p.memo); }
     if (s.chapterEndings && s.chapterEndings.length) {
       L.push('', '走過的章：');
       for (const c of s.chapterEndings) L.push(`第${c.chapter}章・${c.name}「${c.title}」`);
@@ -1138,6 +1139,11 @@ const DATA = /*__DATA__*/;
   }
   // 第幾代：跟遊戲裡「第五代　余貞」的寫法一致，用中文數字
   function cnGen(n) { return n <= 10 ? CN[n] : n < 20 ? '十' + CN[n % 10] : String(n); }
+  // 家譜的一行：名字、生卒、結局，底下一句這一代最難忘的往事
+  function treeRow(p) {
+    return h('div', null, `<span class="g">第${cnGen(p.gen)}代</span><span><b>${esc(p.name)}</b>　${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}　「${esc(p.title)}」</span>` +
+      (p.memo ? `<span class="memo">${esc(p.memo)}</span>` : ''));
+  }
 
   function openShare(cv, fileName) {
     const url = cv.toDataURL('image/png');
@@ -1250,7 +1256,7 @@ const DATA = /*__DATA__*/;
       const tr = h('div', 'end-sec');
       tr.append(h('h4', null, '家譜'));
       const t = h('div', 'tree');
-      for (const p of e.lineage || []) t.append(h('div', null, `<span class="g">第${cnGen(p.gen)}代</span><span><b>${esc(p.name)}</b>　${p.born}–${p.died ?? ''}${p.died ? `，${p.age}歲` : ''}　「${esc(p.title)}」</span>`));
+      for (const p of e.lineage || []) t.append(treeRow(p));
       tr.append(t);
       sec.append(tr);
     }
