@@ -3726,6 +3726,70 @@
    },
    "text": "晚年你殺了一頭豬，把全族的人請來吃了一頓飯。有一半的人你叫不出名字，可個個都來給你敬了酒。",
    "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_bribed_zhongzheng"
+   },
+   "text": "孩子評品那年，你送了中正一車絹帛。孩子評了中品，那一車絹，你一直不太願意提起。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_no_bribe"
+   },
+   "text": "孩子評品那年，你什麼也沒送，孩子只得了下品。你說，品第是人給的，本事是自己的。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_yinke"
+   },
+   "text": "占田令下來那年，你帶著一家人投到大族門下當了佃客。不用再服官府的役，可往後見了莊主的管事，要先彎腰。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_ate_hanshi"
+   },
+   "text": "你跟著名士吃過一回五石散，在院子裡脫了衣服走了一夜，從此聽人提起那東西就皺眉。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_bought_land"
+   },
+   "text": "太康年間你攢了點錢，在村東買了幾畝地，立了界石。那塊地，後來傳給了後人。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_took_refugees"
+   },
+   "text": "關中的流民逃過來那年，你讓一家人在柴房裡住了半個月。他們走的時候，在門口磕了三個頭。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_son_levied"
+   },
+   "text": "王爺們打仗那年，你讓兒子跟著招兵的走了。你在路口站到看不見人影，才回家。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "v9_let_xuan"
+   },
+   "text": "孩子年輕時迷上了老莊，整天跟人談有談無，你由著他去。後來他自己把頭髮梳好了，那幾年讀的書，倒都派上了用場。",
+   "life": true
   }
  ],
  "heirText": [
@@ -4652,6 +4716,43 @@
     {
      "id": "lw_gathered",
      "title": "全族團圓"
+    }
+   ]
+  },
+  {
+   "name": "魏晉年間",
+   "items": [
+    {
+     "id": "v9_bribed_zhongzheng",
+     "title": "送禮評品"
+    },
+    {
+     "id": "v9_no_bribe",
+     "title": "不送一物"
+    },
+    {
+     "id": "v9_yinke",
+     "title": "投為蔭客"
+    },
+    {
+     "id": "v9_ate_hanshi",
+     "title": "服五石散"
+    },
+    {
+     "id": "v9_let_xuan",
+     "title": "由他談玄"
+    },
+    {
+     "id": "v9_bought_land",
+     "title": "太康買地"
+    },
+    {
+     "id": "v9_took_refugees",
+     "title": "收留流民"
+    },
+    {
+     "id": "v9_son_levied",
+     "title": "送子從軍"
     }
    ]
   }
