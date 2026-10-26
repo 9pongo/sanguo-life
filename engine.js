@@ -431,10 +431,12 @@
       const cand = scheduledPool
         .filter((e) => !e.year || (s.year >= arr(e.year)[0] && s.year <= (arr(e.year)[1] ?? arr(e.year)[0])))
         .filter((e) => !e.age || (s.age >= e.age[0] && s.age <= e.age[1]))
+        // 有 p 的人生抉擇：在年齡範圍裡每年只有 p 的機會，不會人人都在同一歲碰上；範圍的最後一年一定輪到
+        .filter((e) => e.p == null || !e.age || s.fired[e.id] || s.age >= e.age[1] || !meets(e.req) || R() < e.p)
         .sort((a, b) => (a.order ?? 50) - (b.order ?? 50));
       for (const e of cand) q.push({ id: e.id });
-      // 隨機小事：每年一到兩件
-      const n = R() < 0.55 ? 1 : 2;
+      // 隨機小事：每年一到三件，多數年份兩件
+      const n = R() < 0.25 ? 1 : R() < 0.7 ? 2 : 3;
       const picked = [];
       for (let i = 0; i < n; i++) {
         // 同一組的小事一年只會有一件（例如豐收和蝗災不會同一年發生）
