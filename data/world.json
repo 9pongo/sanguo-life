@@ -3205,6 +3205,241 @@
     "flag": "ly_trip_kid"
    },
    "text": "你夢見年輕時走過的那條河，讓孩子替你去看了一眼。孩子回來說廟還在、柳樹也還在，你閉著眼睛聽，像是自己又去了一回。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_ox_back"
+   },
+   "text": "你家的牛被偷過一回，是你在鄰縣的市上把牠認回來的。市吏讓你叫牠的名字，牠真的朝你走了過來。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_ox_lost"
+   },
+   "text": "你家的牛被偷了，你在鄰縣的市上認出牠，卻被人推倒在地，眼睜睜看著牠被牽走。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_wall_yield"
+   },
+   "text": "鄰家的牆基佔了你家半尺地，你讓了。後來鄰家自己往回挪了一尺，兩家中間多了一條窄巷。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_wall_right"
+   },
+   "text": "鄰家的牆基佔了你家半尺地，你拿著地契去理論，要了回來。只是兩家的話，從那以後少了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_wall_feud"
+   },
+   "text": "你跟鄰家為了半尺牆基吵翻了臉，兩家從此不相往來。很多年以後，你有時也會想，那半尺地到底值不值。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_debt_burned"
+   },
+   "text": "有個欠你錢的人病得快不行了，你當著他兒子的面，把借據燒了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_debt_repaid"
+   },
+   "text": "欠你錢的人走了以後，他的兒子把錢一文不少地還了回來，說是他爹臨走前交代的。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_debt_slow",
+    "noflag": [
+     "lz_debt_repaid"
+    ]
+   },
+   "text": "有個欠你錢的人病倒了，你讓他兒子慢慢還。那筆錢後來沒有回來，你也沒再去問。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_debt_land"
+   },
+   "text": "有個人還不起你的錢，你讓他拿田來抵。那家人搬走的那天，里中沒有人跟你說話。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_hide_safe"
+   },
+   "text": "你把逃役的表親藏在柴房的草堆裡，躲過了亭長兩回搜查，又送他往山裡去了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_hide_caught"
+   },
+   "text": "你藏過一個逃役的表親，被亭長搜了出來。他被押走了，你也挨了一頓板子。你從沒後悔過。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_hide_sent"
+   },
+   "text": "有個逃役的表親半夜來投奔你，你塞給他幾個餅，送他出了里門。後來再也沒聽到他的消息。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_hide_reported"
+   },
+   "text": "有個逃役的表親躲到你家，你去報了官。他被押走時看你的那一眼，你一直忘不掉。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_plague_helped"
+   },
+   "text": "鄰家一家人染了疫病，誰也不敢靠近，是你每天送飯送水。那家活下來的老人，跪在你家門口不肯起來。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_plague_sick"
+   },
+   "text": "鄰家染了疫病，你去照顧他們，自己也病倒了，差點沒挺過來。可那家人，總算有兩個活了下來。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_plague_door"
+   },
+   "text": "鄰家染了疫病，你每天把一罐粥放在他們門口，敲兩下門就走。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_rent_won"
+   },
+   "text": "荒年那年，你領著十幾戶佃戶去求田主減租，跪了一個上午，田主減了三成。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_rent_marked"
+   },
+   "text": "荒年那年，你帶頭去求田主減租，沒求成，倒被管事記下了名字，好田換成了爛泥地。你說，總要有人去求。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_rent_hid"
+   },
+   "text": "荒年那年，你偷偷把幾斗穀子埋在屋後，交租的時候心一直在跳。那幾斗穀子，讓一家人熬過了冬天。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_enemy_fed"
+   },
+   "text": "當年欺負過你家的那戶豪強敗了，他家的後人淪落到上門討飯，你給那孩子盛了一大碗。孩子一邊吃一邊哭。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_enemy_shut"
+   },
+   "text": "當年欺負過你家的那戶豪強敗了，他家的後人淪落到上門討飯，你關上了門。那孩子的眼睛，你後來常常想起。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_match_good"
+   },
+   "text": "你替里中一對年輕人做過媒。他們日子過得和美，頭一個孩子抱來給你看，要認你做乾親。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_match_bad"
+   },
+   "text": "你替里中一對年輕人做過媒，兩人三天兩頭吵架，兩家都來找你。從那以後，誰再請你做媒，你都推了。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_appr_grown"
+   },
+   "text": "你收過一個徒弟，從最粗的活教起。他出師以後，逢人就說，他的本事都是師傅給的。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_appr_taken",
+    "noflag": [
+     "lz_appr_grown"
+    ]
+   },
+   "text": "你收過一個徒弟，從最粗的活教起。他學得慢，可從不偷懶。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_sold_land"
+   },
+   "text": "荒年的時候，你賣了河邊那塊地。走出門時回頭看了一眼，地上的麥茬還是你割的。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_kept_land"
+   },
+   "text": "荒年的時候，有人來買你家河邊那塊地，你咬著牙沒賣。那個冬天一家人一天只吃一頓，可地還在。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_robber_stop"
+   },
+   "text": "你半夜撞見有人盜墓，叫醒了鄰居，十幾個人打著火把把盜墓的人趕跑了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_robber_saw"
+   },
+   "text": "你半夜躲在樹後看人盜墓，撿到了一枚他們掉在草裡的舊錢。那枚錢，你一直留著。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_record_true"
+   },
+   "text": "老了以後，縣裡來人問當年的事，你從甲子年說起，把餓過的、逃過的、死過的人都說了。記下來的人，眼睛是紅的。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_record_nice"
+   },
+   "text": "老了以後，縣裡來人問當年的事，你只說了些熱鬧的。他記得很高興，你自己倒覺得有些空。"
   }
  ],
  "heirText": [
@@ -3959,6 +4194,99 @@
     {
      "id": "ly_trip_sick",
      "title": "河在夢裡"
+    }
+   ]
+  },
+  {
+   "name": "鄰里長短",
+   "items": [
+    {
+     "id": "lz_ox_back",
+     "title": "叫一聲牛的名字"
+    },
+    {
+     "id": "lz_wall_yield",
+     "title": "讓出半尺"
+    },
+    {
+     "id": "lz_wall_feud",
+     "title": "半尺結仇"
+    },
+    {
+     "id": "lz_debt_burned",
+     "title": "燒了借據"
+    },
+    {
+     "id": "lz_debt_repaid",
+     "title": "父債子還"
+    },
+    {
+     "id": "lz_debt_land",
+     "title": "拿田抵債"
+    },
+    {
+     "id": "lz_hide_safe",
+     "title": "柴房裡的表親"
+    },
+    {
+     "id": "lz_hide_reported",
+     "title": "報了官"
+    },
+    {
+     "id": "lz_plague_helped",
+     "title": "送飯到病家"
+    },
+    {
+     "id": "lz_plague_sick",
+     "title": "染了病"
+    },
+    {
+     "id": "lz_rent_won",
+     "title": "減了三成租"
+    },
+    {
+     "id": "lz_rent_marked",
+     "title": "被記下名字"
+    },
+    {
+     "id": "lz_enemy_fed",
+     "title": "一碗飯"
+    },
+    {
+     "id": "lz_enemy_shut",
+     "title": "關上的門"
+    },
+    {
+     "id": "lz_match_good",
+     "title": "乾親"
+    },
+    {
+     "id": "lz_match_bad",
+     "title": "兩頭勸"
+    },
+    {
+     "id": "lz_appr_grown",
+     "title": "徒弟出師"
+    },
+    {
+     "id": "lz_sold_land",
+     "title": "賣了河邊地"
+    },
+    {
+     "id": "lz_kept_land",
+     "title": "地還在"
+    },
+    {
+     "id": "lz_robber_stop",
+     "title": "趕跑盜墓人"
+    },
+    {
+     "id": "lz_robber_saw",
+     "title": "草裡的舊錢"
+    },
+    {
+     "id": "lz_record_true",
+     "title": "照實說"
     }
    ]
   }
