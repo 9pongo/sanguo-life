@@ -752,7 +752,7 @@
           s.children.push({ name: nm, gender: cg, born: y, alive: true });
           s.flags.has_child = true;
         }
-        wedText = s.children.length > 1 ? W.heirWedKidsText : s.children.length ? W.heirWedKidText : W.heirWedText;
+        wedText = age >= 45 && W.heirWedOldText && s.children.some((c) => s.year - c.born >= 20) ? W.heirWedOldText : s.children.length > 1 ? W.heirWedKidsText : s.children.length ? W.heirWedKidText : W.heirWedText;
       }
       g.succession = null;
       g.out = [];

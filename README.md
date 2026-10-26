@@ -52,7 +52,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 - `alt`：同一段本文的其他寫法（任何 kind 都可以用）。從哪一種開始由這一局的種子決定，同一家族再碰到就換下一種，所以重玩的人不會每次都讀到同一句。不動用亂數，加寫法不會讓舊存檔走樣。
 - 選項的 `tAlt` / `outAlt`：選項文字與結果文字的其他寫法，規則同 `alt`。 選項底下的小字也一樣：`subAlt` 是其他寫法，`subIf: [{ req, sub }]` 依條件換（例如女孩練武寫成女孩的樣子），`sub` 也可以是陣列。`textIf` 的 `text`、`outIf` 的 `out` 也可以直接寫成陣列。
 - 選項的 `deathOut`：這個選項的 `risk` 當場致死時改用的結果文字（`out` 寫成活下來的選項一定要有，稽核會擋）。
-- `world.json` 裡引擎套用的句子（`childText`、`heirText`、`nearlyLostText`、`mingyingText`、`plagueDeathText`、`heirWed*Text`、`mortality[].text`）也都可以是陣列。
+- `world.json` 裡引擎套用的句子（`childText`、`heirText`、`nearlyLostText`、`mingyingText`、`plagueDeathText`、`heirWed*Text`（45 歲以上、有成年孩子的接班人用 `heirWedOldText`）、`heirGrandText`、`mortality[].text`）也都可以是陣列。
 - `group`（flavor 專用）：同一組一年只會發生一件，例如 `weather`（豐收、旱、澇、蝗）。
 - `familyOnce`（flavor 專用）：整個家族只發生一次，例如祖上傳說（`pt_*`），不會每一代都講同一個故事。
 - `textIf: [{ req, text }]`：依條件換開場，第一個符合的生效，都不符合就用 `text`。用在每一代都會碰到的人生大事（接家、四十、花甲），讓不同時代、不同家境讀起來不一樣。
@@ -133,7 +133,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 
 是不是後代投胎由介面在開新局時決定，記在存檔的 `late` 欄位。舊存檔沒有這個欄位，照第一代處理。
 
-接班時未滿 14 歲的人會帶 `heir_young` 旗標，長大後改看 `st_heir_focus_young`。`st_heir_focus` 的「從軍」限 45 歲、「讀書求仕」限 50 歲以下。
+接班時未滿 14 歲的人會帶 `heir_young` 旗標，長大後改看 `st_heir_focus_young`。`st_heir_focus` 的「從軍」限 45 歲、「讀書求仕」限 50 歲以下；55 歲以上的接班人多一個「讓孩子們去忙」（用 `show` 只對他們顯示，排在最後，舊存檔的選項順序不變）。
 
 ## 稽核會擋下的事（`sim.js`）
 
