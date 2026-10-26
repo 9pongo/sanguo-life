@@ -136,6 +136,12 @@ button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 .yr::after { content: ""; flex: 1; border-bottom: 1px dashed var(--line); transform: translateY(-4px); }
 .chap { margin: 28px 0 6px; padding: 14px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); font-family: var(--font-display); font-weight: 900; font-size: 24px; letter-spacing: .12em; }
 .chip.faction { border-color: var(--red); color: var(--ink); }
+/* 章末：人還活著就不停下來，在紀錄裡夾一張章末卡，接著往下活 */
+.chap-end { margin: 22px 0 6px; padding: 14px 16px; background: var(--slip); border: 1px solid var(--line); border-left: 6px solid var(--red); display: grid; gap: 6px; }
+.chap-end .k { font-size: 13px; color: var(--red); letter-spacing: .08em; }
+.chap-end b { font-family: var(--font-display); font-weight: 900; font-size: 20px; letter-spacing: .06em; }
+.chap-end p { margin: 0; }
+.chap-end .w { font-size: 14px; color: var(--muted); }
 .heirline { margin: 26px 0 4px; padding: 10px 0 10px 14px; border-left: 6px solid var(--yellow); font-family: var(--font-display); font-weight: 900; font-size: 22px; letter-spacing: .1em; background: var(--slip); }
 .tree { display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
 .tree div { position: relative; padding: 6px 0 6px 18px; display: grid; grid-template-columns: 4.2em 1fr; gap: 4px 10px; font-size: 14px; }
@@ -702,7 +708,7 @@ const DATA = /*__DATA__*/;
     renderHud();
     if (game.ended) return showEnd();
     if (game.succession) return showEnd('heir');
-    if (game.interlude) return showEnd(true);
+    if (game.interlude) return goOnChapter();
     if (game.pending) renderDecision(game.pending);
     else scrollEnd();
     schedule();
@@ -902,6 +908,27 @@ const DATA = /*__DATA__*/;
     if (p) renderDecision(p);
     if (!game.pending && !game.ended) scrollEnd();
   }
+  // 章末：人還活著，就不跳出結算頁。在紀錄裡放一張章末卡（照樣收進圖鑑），然後直接往下一章活
+  // 回傳章末卡的字數，讓下一步照字數停一下
+  function passChapter() {
+    const e = game.interlude, s = game.state;
+    const fresh = markSeen(e.id);
+    markBonds(s.bonds || {});
+    const tags = [e.chapterTitle || '', '章末', e.rare ? '稀有' : '', fresh ? '初見' : ''].filter(Boolean).join('・');
+    const world = (e.epilogue || []).map((t) => `<p class="w">${esc(t)}</p>`).join('');
+    $('#log').append(h('div', 'chap-end fadein', `<span class="k ui">${esc(tags)}</span><b>「${esc(e.title)}」</b><p>${esc(e.text)}</p>${world}`));
+    record(['n']);
+    return (e.title + e.text + (e.epilogue || []).join('')).length;
+  }
+  // 停在章末的時候：還有下一章就自動接下去；沒有了才出結算頁
+  function goOnChapter() {
+    if (!game.interlude.next) return showEnd(true);
+    const chars = passChapter();
+    scrollEnd();
+    const next = game.continueChapter();
+    later(() => reveal(next), chars);
+  }
+
   // 一條一條顯示；都出完了再看要結局、抉擇，還是排下一年
   function reveal(entries) {
     const list = entries.slice();
@@ -919,7 +946,7 @@ const DATA = /*__DATA__*/;
   function afterReveal(chars) {
     if (game.ended) return showEnd();
     if (game.succession) return showEnd('heir');
-    if (game.interlude) return showEnd(true);
+    if (game.interlude) return goOnChapter();
     if (game.pending) return renderDecision(game.pending);
     scrollEnd();
     later(tick, chars);
@@ -1239,7 +1266,7 @@ const DATA = /*__DATA__*/;
           record(['h', i]);
           if (save) { save.name = x.name; persist(); }
           flush(game.continueAsHeir(i));
-          if (game.interlude) return showEnd(true);
+          if (game.interlude) return goOnChapter();
           if (game.ended) return showEnd();
           schedule();
         });
