@@ -2119,7 +2119,12 @@
     "健": 2
    },
    "text": "那年冬天，{spouse}回來了，瘦了一大圈，腳上全是血泡。他說官渡打完了，曹操贏了，河北的兵投降了好幾萬人，後來都被坑殺了。他說這話的時候，手一直在抖。",
-   "req": {}
+   "req": {
+    "noflag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   }
   },
   {
    "id": "v_med",
@@ -2307,7 +2312,12 @@
      }
     }
    ],
-   "req": {}
+   "req": {
+    "noflag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   }
   },
   {
    "id": "an_192_dongzhuo",
