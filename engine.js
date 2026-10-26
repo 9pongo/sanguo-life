@@ -300,7 +300,7 @@
       // 同一件人生大事（接家、四十、六十）每一代都會碰到：依時代與家境換一段開場
       const tvi = (ev.textIf || []).findIndex((v) => meets(v.req));
       const text = tvi >= 0 ? variant(ev.textIf[tvi].text, ev.id + '@' + tvi) : variant(withAlt(ev.text, ev.alt), ev.id);
-      if (ev.kind === 'flavor') {
+      if (ev.kind === 'flavor' || (ev.p != null && ev.age)) {
         const fam = s.familySeen || (s.familySeen = {});
         fam[ev.id] = (fam[ev.id] || 0) + 1;
       }
@@ -441,7 +441,10 @@
         .filter((e) => {
           if (e.p == null || !e.age || s.fired[e.id]) return true;
           // 排入時就要符合條件：否則年中剛成親、剛添丁，限定條件的幾張會在同一年一起湧上來
-          if (!meets(e.req) || (pTaken && s.age < e.age[1]) || (s.age < e.age[1] && R() >= e.p)) return false;
+          // 家族裡有人碰過的：機會打折，最後一年也不保底；familyOnce 的一個家族只碰一次
+          const rep = (s.familySeen || {})[e.id], last = !rep && s.age >= e.age[1];
+          if (rep && e.familyOnce) return false;
+          if (!meets(e.req) || (pTaken && !last) || (!last && R() >= e.p * (rep ? (data.world.familyRepeatStage ?? 0.3) : 1))) return false;
           pTaken = true;
           return true;
         })

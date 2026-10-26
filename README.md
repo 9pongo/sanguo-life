@@ -47,8 +47,8 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 - `kind`：`anchor`（史實大事）、`stage`（人生階段與劇情）、`bond`（歷史人物羈絆）、`flavor`（隨機小事）。
 - 有年份或年齡的 anchor／stage／bond 每年自動排入；沒有的只能由別的事件用 `later` 或 `next` 叫出來。
 - `flavor`：用 `w` 權重、`p` 每年進候選的機率、`repeat` 一生可發生幾次。年齡要寫在 `req.age`（寫在外層會被忽略，稽核會報錯）。每年抽一到三件（多數年份兩件）。
-- 有外層 `age` 的 stage 也可以寫 `p`：在年齡範圍裡每年只有 `p` 的機會觸發，範圍的最後一年一定輪到。用在與史實無關的人生抉擇（`events_life_choice.json` 的 `lx_*`），不會人人都在同一歲碰上。排入當年時就要符合條件；同一年最多一張，當年若已有兩張以上的大事抉擇（例如甲子年）就順延。
-- 日常內容分檔：`events_life_child.json`（`lc_*` 童年少年）、`events_life_adult.json`（`la_*` 成年）、`events_life_old.json`（`lo_*` 中老年）、`events_life_choice.json`（`lx_*` 個人抉擇與後續）、`events_arc_focus.json`（`af_*` 依人生重心的故事線：行醫、行商、任俠、遊學、開荒、匠戶）、`events_arc_family.json`（`am_*` 家庭鄰里的故事線：夫妻失和、孩子婚事、遊俠少年、鄰家寡婦、娘家夫家、族長）。
+- 有外層 `age` 的 stage 也可以寫 `p`：在年齡範圍裡每年只有 `p` 的機會觸發，範圍的最後一年一定輪到（家族裡有人碰過的除外，見 `familyRepeatStage`）。用在與史實無關的人生抉擇（`events_life_choice.json` 的 `lx_*`），不會人人都在同一歲碰上。排入當年時就要符合條件；同一年最多一張，當年若已有兩張以上的大事抉擇（例如甲子年）就順延。
+- 日常內容分檔：`events_life_child.json`（`lc_*` 童年少年）、`events_life_adult.json`（`la_*` 成年）、`events_life_old.json`（`lo_*` 中老年）、`events_life_choice.json`（`lx_*` 個人抉擇與後續）、`events_life_choice2.json`（`ly_*` 第二批：落水、過路人、黃狗、賣身葬親、修橋、賭債、評戶等、雪夜旅人、取名、壽材等）、`events_arc_focus.json`（`af_*` 依人生重心的故事線：行醫、行商、任俠、遊學、開荒、匠戶）、`events_arc_family.json`（`am_*` 家庭鄰里的故事線：夫妻失和、孩子婚事、遊俠少年、鄰家寡婦、娘家夫家、族長）。
 - `alt`：同一段本文的其他寫法（任何 kind 都可以用）。從哪一種開始由這一局的種子決定，同一家族再碰到就換下一種，所以重玩的人不會每次都讀到同一句。不動用亂數，加寫法不會讓舊存檔走樣。
 - 選項的 `tAlt` / `outAlt`：選項文字與結果文字的其他寫法，規則同 `alt`。 選項底下的小字也一樣：`subAlt` 是其他寫法，`subIf: [{ req, sub }]` 依條件換（例如女孩練武寫成女孩的樣子），`sub` 也可以是陣列。`textIf` 的 `text`、`outIf` 的 `out` 也可以直接寫成陣列。
 - 選項的 `deathOut`：這個選項的 `risk` 當場致死時改用的結果文字（`out` 寫成活下來的選項一定要有，稽核會擋）。
@@ -122,6 +122,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 | `firstChildSpare` | 第一代主角五歲前死裡逃生的機率（還沒有弟妹時一定撐得過去） |
 | `minChoiceAge` | 沒寫年齡的抉擇卡，預設要幾歲以上才會出現（年幼接班人不會被問要不要上陣） |
 | `familyRepeatWeight` | 祖上經歷過的隨機小事，接班人再抽到的權重 |
+| `familyRepeatStage` | 按年齡排程的抉擇（`p` + `age`），祖上碰過的話每年機會乘上這個數，最後一年也不保底（預設 0.3）；標 `familyOnce` 的一個家族只碰一次 |
 | `plagueYears` | 疫年；數字為天下大疫，`{year, regions}` 為地區性疫病 |
 
 ## 投胎到家族的後代（`world.lateStart`）

@@ -2866,6 +2866,345 @@
     "flag": "lx_loom_dye"
    },
    "text": "你替里中的婦人染過布。你染的那種青色，後來布商指名要。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_river_grown"
+   },
+   "text": "你小時候從河裡拉上來過一個孩子。那孩子後來成親，請你坐在上席，當著滿屋子的人說，沒有你就沒有他。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_river_saved",
+    "noflag": [
+     "ly_river_grown"
+    ]
+   },
+   "text": "你小時候從河裡拉上來過一個孩子。上岸以後，他娘抱著你們兩個一起哭。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_river_tried"
+   },
+   "text": "你小時候為了救一個落水的孩子，自己也差點淹死。後來每次走過那個河灣，你都會停下來看一眼。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_river_ran"
+   },
+   "text": "小時候有個孩子在河裡落水，你嚇得跑回了家。孩子後來被大人救了上來，可那天的事，你一直沒跟人說過。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_wander_learned"
+   },
+   "text": "少年時，有個過路的讀書人教過你算術。他走的時候留下一卷翻爛的竹簡，你留了一輩子。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_wander_fed"
+   },
+   "text": "少年時你給一個過路的讀書人送過幾塊餅。他在你手心寫了一個「仁」字，你到老都記得那個筆畫。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_dog_good"
+   },
+   "text": "你年輕時撿過一條瘸腿的小黃狗。後來有一夜，是牠把全家叫醒的。牠老死的時候，你把牠埋在了院子後頭。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_dog_kept",
+    "noflag": [
+     "ly_dog_good"
+    ]
+   },
+   "text": "你年輕時撿過一條瘸腿的小黃狗，每頓分牠一口飯。牠跟在你腳邊跑的樣子，你一直記得。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_burial_repaid"
+   },
+   "text": "你在市上給過一個賣身葬父的孩子錢，沒要他的人。幾年後，那孩子扛著犁來，替你犁了三天的地。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_burial_paid",
+    "noflag": [
+     "ly_burial_repaid"
+    ]
+   },
+   "text": "你在市上給過一個賣身葬父的孩子錢，沒要他的人。那孩子磕破的額頭，你很多年都忘不掉。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_burial_bought"
+   },
+   "text": "你在市上買下過一個賣身葬父的孩子。他在你家做了很多年的活，話一直很少。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_burial_passed"
+   },
+   "text": "你在市上見過一個賣身葬父的孩子，搖搖頭走開了。那卷草蓆，你後來想起過好幾回。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_lost_walked"
+   },
+   "text": "你背著一個迷路的孩子走了大半夜，挨村去問，總算把孩子交回了他娘手上。那天你的背痠了好幾天。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_lost_ting"
+   },
+   "text": "你在路邊撿到過一個迷路的孩子，送去了亭舍。後來聽說孩子的家人找來了，你才放下心。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_bridge_more"
+   },
+   "text": "里口那座石墩橋，你家多出了一份錢、搬了半個月的石頭。橋頭的石頭上，刻著你家的名字。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_bridge_shirk"
+   },
+   "text": "里口修橋那年，你推說家裡忙。後來每回走過那座橋，你總覺得有人在背後看你。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_fortune_paid"
+   },
+   "text": "你給過一個算命的瞎子五百錢消災。那一年家裡什麼事也沒出，你到最後也說不清是不是他的功勞。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_fortune_fed"
+   },
+   "text": "有個算命的瞎子說你家有血光之災，你沒給錢，只給了他一碗飯。他說你命裡不缺吃的，倒是說準了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_gamble_reformed"
+   },
+   "text": "你替一個賭輸了的堂弟還過債。他後來真的再沒碰過賭具，還把錢一點一點地湊齊還給了你。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_gamble_relapse"
+   },
+   "text": "你替一個賭輸了的堂弟還過債。他沒過幾年又賭上了。那筆錢，你就當是買了一個教訓。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_gamble_paid",
+    "noflag": [
+     "ly_gamble_reformed",
+     "ly_gamble_relapse"
+    ]
+   },
+   "text": "你替一個賭輸了的堂弟還過債。他跪在你家地上發的誓，你一直記著。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_gamble_half"
+   },
+   "text": "堂弟賭輸了錢，你替他還了一半，剩下的讓他自己去做工抵。他臉上掛不住，可那一年過後，他再也沒賭過。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_gamble_no"
+   },
+   "text": "堂弟賭輸了錢來求你，你沒有開門。他家的田被拿走了兩畝，兩家從此不太來往。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_bribe_won"
+   },
+   "text": "鄉嗇夫評戶等時索賄，是你挨家挨戶湊了名字告到縣裡。他被撤了職，里中的人說起這件事，都說是你帶的頭。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_bribe_lost"
+   },
+   "text": "鄉嗇夫評戶等時索賄，你帶頭告到縣裡，狀子卻沒了下文。那年你家的徭役派得最重，可你從沒後悔過。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_bribe_paid"
+   },
+   "text": "評戶等那年，你給鄉嗇夫送過一匹帛，你家降了一等，隔壁卻升了一等。這件事，你一直沒跟隔壁說。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_bribe_refused"
+   },
+   "text": "評戶等那年，鄉嗇夫暗示你送禮，你沒送。你家升了一等，徭役多了好幾天，可你走路的時候腰桿是直的。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_guest_repaid"
+   },
+   "text": "一個大雪夜，你留一個陌生的旅人在灶邊睡了一夜。兩年後，他托人捎來一匹細布，說一直記著那碗熱湯。",
+   "pri": 1
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_guest_good",
+    "noflag": [
+     "ly_guest_repaid"
+    ]
+   },
+   "text": "一個大雪夜，你留一個陌生的旅人在灶邊睡了一夜，給他煮了一碗熱湯。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_guest_thief"
+   },
+   "text": "一個大雪夜，你留過一個陌生的旅人，天亮時他帶走了你一件冬衣。你說那件衣服他比你更用得著，後來下雪天，你還是會給敲門的人開門。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_kid_apology"
+   },
+   "text": "孩子跟人打架那年，你領著孩子上門賠了不是。孩子回來以後，自己把鄰家孩子的竹馬修好了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_kid_shield"
+   },
+   "text": "孩子跟人打架那年，你護著孩子跟鄰家吵了一架。兩家好幾年沒來往，孩子倒是從此很聽你的話。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_kid_beat"
+   },
+   "text": "孩子跟人打架那年，你當著鄰家的面打了孩子一頓。那天夜裡給孩子上藥的時候，你的手一直在抖。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_tree_kept"
+   },
+   "text": "里口那棵老槐樹，是你主張留下來的。後來才知道那晚的火光是孩子在樹洞裡烤雀，大家笑了好一陣。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_tree_cut"
+   },
+   "text": "里口那棵老槐樹，是你主張砍掉的。後來夏天里口曬得發燙，你也有點後悔。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_oldpal_stay"
+   },
+   "text": "少年時一起放牛的伙伴，闖了二十多年，什麼也沒闖出來，回到你家門口。你留他住了一個冬天，兩個人在火邊說那些只有你們記得的事。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_oldpal_sent"
+   },
+   "text": "少年時一起放牛的伙伴回來看過你一次。臨走時他在路口回頭揮手，跟少年時一模一樣。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_name_lucky"
+   },
+   "text": "你替孫輩取過一個又長命又富貴的名字。孩子們笑說太大了，你說撐得住。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_name_ancestor"
+   },
+   "text": "你從祖上的名字裡取了一個字，給孫輩當名字，還把那個字的來歷講給襁褓裡的孩子聽。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_name_theirs"
+   },
+   "text": "孫輩的名字，你讓年輕人自己取。那個你從沒想過的名字，唸了幾遍，你也覺得好聽。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_coffin_fine"
+   },
+   "text": "你給自己備了一口好柏木的壽材，沒事就去後屋摸一摸，像是摸一件新衣服。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_coffin_none"
+   },
+   "text": "你沒給自己備壽材，把錢分給了孩子們。你說，死都不怕了，還怕什麼不吉利。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_trip_went"
+   },
+   "text": "老了以後，你拄著拐杖，又去看了一次年輕時走過的那條河。回來以後，好些天臉上都帶著笑。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_trip_sick"
+   },
+   "text": "老了以後，你想再去看一次年輕時走過的那條河，走到半路就病倒了。你說那條河，大概就在夢裡吧。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "ly_trip_kid"
+   },
+   "text": "你夢見年輕時走過的那條河，讓孩子替你去看了一眼。孩子回來說廟還在、柳樹也還在，你閉著眼睛聽，像是自己又去了一回。"
   }
  ],
  "heirText": [
@@ -3519,6 +3858,107 @@
     {
      "id": "lx_grudge_no",
      "title": "終究沒去"
+    }
+   ]
+  },
+  {
+   "name": "人情世故",
+   "items": [
+    {
+     "id": "ly_river_grown",
+     "title": "救起的孩子"
+    },
+    {
+     "id": "ly_river_ran",
+     "title": "跑回了家"
+    },
+    {
+     "id": "ly_wander_learned",
+     "title": "過路人的竹簡"
+    },
+    {
+     "id": "ly_dog_good",
+     "title": "黃狗看家"
+    },
+    {
+     "id": "ly_burial_repaid",
+     "title": "來犁地的人"
+    },
+    {
+     "id": "ly_burial_bought",
+     "title": "買了僮僕"
+    },
+    {
+     "id": "ly_lost_walked",
+     "title": "背著孩子找娘"
+    },
+    {
+     "id": "ly_bridge_more",
+     "title": "橋頭刻名"
+    },
+    {
+     "id": "ly_bridge_shirk",
+     "title": "沒出修橋錢"
+    },
+    {
+     "id": "ly_fortune_fed",
+     "title": "一碗飯的命"
+    },
+    {
+     "id": "ly_gamble_reformed",
+     "title": "浪子回頭"
+    },
+    {
+     "id": "ly_gamble_relapse",
+     "title": "又賭上了"
+    },
+    {
+     "id": "ly_bribe_won",
+     "title": "告倒鄉吏"
+    },
+    {
+     "id": "ly_bribe_lost",
+     "title": "狀子石沉"
+    },
+    {
+     "id": "ly_bribe_paid",
+     "title": "降了一等"
+    },
+    {
+     "id": "ly_guest_repaid",
+     "title": "雪夜熱湯"
+    },
+    {
+     "id": "ly_guest_thief",
+     "title": "少了一件冬衣"
+    },
+    {
+     "id": "ly_kid_apology",
+     "title": "上門賠禮"
+    },
+    {
+     "id": "ly_tree_kept",
+     "title": "樹洞裡烤雀"
+    },
+    {
+     "id": "ly_oldpal_stay",
+     "title": "故人回來"
+    },
+    {
+     "id": "ly_name_ancestor",
+     "title": "祖上的一個字"
+    },
+    {
+     "id": "ly_coffin_none",
+     "title": "不備壽材"
+    },
+    {
+     "id": "ly_trip_went",
+     "title": "再看一眼那條河"
+    },
+    {
+     "id": "ly_trip_sick",
+     "title": "河在夢裡"
     }
    ]
   }
