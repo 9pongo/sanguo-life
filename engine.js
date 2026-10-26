@@ -625,7 +625,7 @@
       // 往事只算這輩子親身經歷的：從上一代繼承來的旗標沒有取得的年份
       const fy = s.flagYear || {};
       // pri 高的排前面（故事線的結局比零碎小事更像「這一生」），同級照資料順序
-      const memories = shown.filter(isMemory).sort((a, b) => (b.pri || 0) - (a.pri || 0)).map((e) => {
+      const picked = shown.filter(isMemory).sort((a, b) => (b.pri || 0) - (a.pri || 0)).map((e) => {
         const f = typeof e.req?.flag === 'string' ? e.req.flag : arr(e.req?.anyFlag).find((x) => s.flags[x] && x in fy);
         if (f && !(f in fy)) return null;
         const since = s.year - (fy[f] ?? s.year);
@@ -635,8 +635,11 @@
         if (t && s.alive && e.aliveText) t = e.aliveText;                   // 活著走到最後一章
         if (t && s.alive && /你走(的|以後|之後)/.test(t)) t = null;           // 活著的人不能說「你走以後」
         if (t && e.noKid && noKid) t = e.noKid;                              // 膝下沒有孩子
-        return t ? fmt(t) : null;
+        return t ? { life: !!e.life, t: fmt(t) } : null;
       }).filter(Boolean);
+      // 日常故事（life）與歷史經歷輪流排，前三件裡兩種都看得到
+      const lifeM = picked.filter((m) => m.life), histM = picked.filter((m) => !m.life), memories = [];
+      for (let i = 0; i < Math.max(lifeM.length, histM.length); i++) { if (lifeM[i]) memories.push(lifeM[i].t); if (histM[i]) memories.push(histM[i].t); }
       const epilogue = shown.filter((e) => !isMemory(e)).map((e) => fmt(e.text));
       const result = {
         id: ending.id, title: ending.title, rare: !!ending.rare, text: fmt(noKid && ending.noKid ? ending.noKid : ending.text),
