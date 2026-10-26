@@ -122,7 +122,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 | `firstChildSpare` | 第一代主角五歲前死裡逃生的機率（還沒有弟妹時一定撐得過去） |
 | `minChoiceAge` | 沒寫年齡的抉擇卡，預設要幾歲以上才會出現（年幼接班人不會被問要不要上陣） |
 | `familyRepeatWeight` | 祖上經歷過的隨機小事，接班人再抽到的權重 |
-| `familyRepeatStage` | 按年齡排程的抉擇（`p` + `age`），祖上碰過的話每年機會乘上這個數，最後一年也不保底（預設 0.3）；標 `familyOnce` 的一個家族只碰一次 |
+| `familyRepeatStage` | 按年齡排程的抉擇（`p` + `age`），祖上碰過的話每年機會乘上這個數，最後一年也不保底（目前 0.15，未設定時 0.3）；標 `familyOnce` 的一個家族只碰一次 |
 | `familyRepeatGap` | 按年齡排程的抉擇，祖上在這麼多年內碰過就不再出現（預設 25），超過才照 `familyRepeatStage` 打折 |
 | `plagueYears` | 疫年；數字為天下大疫，`{year, regions}` 為地區性疫病 |
 
