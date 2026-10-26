@@ -3662,6 +3662,70 @@
    },
    "text": "{friend}小時候病得厲害，大人不許去看，你翻牆進去塞給他兩顆棗子，自己也病了一場。",
    "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_tree_planted"
+   },
+   "text": "你老了還在院子裡種了一棵棗樹。家裡人說你等不到結果，你說，總有人等得到。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_coffin_lent"
+   },
+   "text": "鄰家的老人走的時候沒有棺木，你把自己備下的壽材讓了出去。那家人逢年過節，總會在你家門口放一籃東西。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_secret_told"
+   },
+   "text": "臨老，你把藏了幾十年的一件心事說給了家裡人聽。說完那天夜裡，你睡得特別沉。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_secret_kept"
+   },
+   "text": "你心裡有一件事，到老也沒跟任何人說過。那件事，跟著你一起走了。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_harvest_cut"
+   },
+   "text": "七十多歲那年秋收，你還下田割了兩把麥子。孩子們扶著你回家，你把麥子抱在懷裡，笑了一路。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_gave_keepsake"
+   },
+   "text": "孫輩出遠門那天，你把跟了自己一輩子的舊物塞進了他手裡。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_medicine_refused"
+   },
+   "text": "病重那年，你不肯拿家裡的地去換藥，說地要留給後人種。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lw_gathered"
+   },
+   "text": "晚年你殺了一頭豬，把全族的人請來吃了一頓飯。有一半的人你叫不出名字，可個個都來給你敬了酒。",
+   "life": true
   }
  ],
  "heirText": [
@@ -4551,6 +4615,43 @@
     {
      "id": "lk_friend_visit",
      "title": "翻牆探病"
+    }
+   ]
+  },
+  {
+   "name": "晚年",
+   "items": [
+    {
+     "id": "lw_tree_planted",
+     "title": "老來種樹"
+    },
+    {
+     "id": "lw_coffin_lent",
+     "title": "讓出壽材"
+    },
+    {
+     "id": "lw_secret_told",
+     "title": "說出心事"
+    },
+    {
+     "id": "lw_secret_kept",
+     "title": "帶進土裡"
+    },
+    {
+     "id": "lw_harvest_cut",
+     "title": "最後的秋收"
+    },
+    {
+     "id": "lw_gave_keepsake",
+     "title": "舊物送行"
+    },
+    {
+     "id": "lw_medicine_refused",
+     "title": "不肯換藥"
+    },
+    {
+     "id": "lw_gathered",
+     "title": "全族團圓"
     }
    ]
   }
