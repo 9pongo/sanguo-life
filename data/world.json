@@ -996,7 +996,9 @@
     "flag": "friend_spared"
    },
    "text": "{friend}後來在屯田裡安了家。他的孩子叫你「叔父」。",
-   "final": true
+   "final": true,
+   "minYears": 10,
+   "short": "你在俘虜堆裡割斷了{friend}手上的繩子。他走的時候，只說了一句：家裡的事，拜託你了。"
   },
   {
    "req": {
