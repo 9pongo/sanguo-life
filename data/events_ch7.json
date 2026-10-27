@@ -231,7 +231,11 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "noflag": [
+     "wu_civ",
+     "to_wu"
+    ]
    },
    "tag": "西陵",
    "title": "西陵",
@@ -342,7 +346,11 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "noflag": [
+     "wu_civ",
+     "to_wu"
+    ]
    },
    "tag": "長江",
    "title": "鐵鎖",

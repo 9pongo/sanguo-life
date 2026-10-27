@@ -2361,7 +2361,8 @@
    "req": {
     "flag": "af_farm_open",
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": "xuwu",
+    "stayed": "af_farm_open"
    },
    "tag": "農事",
    "title": "爭地",
@@ -2506,7 +2507,8 @@
      "af_farm_tenant"
     ],
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": "xuwu",
+    "stayed": "af_farm_open"
    },
    "tag": "農事",
    "title": "寄田",
@@ -2641,7 +2643,8 @@
    "req": {
     "flag": "af_farm_lodged",
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": "xuwu",
+    "stayed": "af_farm_open"
    },
    "tag": "農事",
    "title": "清查",
@@ -2736,7 +2739,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "af_farm_honest"
+    "flag": "af_farm_honest",
+    "stayed": "af_farm_open"
    },
    "tag": "農事",
    "text": "那塊地，你種了十來年。這年秋天收成好，穀子堆滿了倉，你帶著家裡人在田頭祭了社神，把地界上的石頭一塊一塊重新擺正。",

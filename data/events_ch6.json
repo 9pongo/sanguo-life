@@ -740,7 +740,11 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "noflag": [
+     "wu_civ",
+     "to_wu"
+    ]
    },
    "tag": "東興",
    "title": "雪中短兵",
@@ -781,7 +785,11 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "noflag": [
+     "wu_civ",
+     "to_wu"
+    ]
    },
    "tag": "新城",
    "title": "新城",

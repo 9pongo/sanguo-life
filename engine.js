@@ -166,6 +166,8 @@
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
+      // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）
+      if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.married === true && !spouseHere()) return false;
       if (req.married === false && s.spouse) return false;
       return true;

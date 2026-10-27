@@ -619,7 +619,11 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "noflag": [
+     "wu_civ",
+     "to_wu"
+    ]
    },
    "tag": "夷陵",
    "title": "一把茅",
@@ -660,7 +664,11 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "noflag": [
+     "wu_civ",
+     "to_wu"
+    ]
    },
    "tag": "夷洲",
    "title": "浮海",
