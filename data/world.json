@@ -1218,7 +1218,17 @@
   {
    "final": true,
    "req": {
-    "flag": "huatuo"
+    "flag": "huatuo_med"
+   },
+   "text": "華佗教過你幾個方子，又教你怎麼下針。後來他的書在獄裡燒了，你記得的那幾個方子，一直用到老。",
+   "minYears": 10,
+   "short": "你跟華佗學過幾個方子。那幾手下針的法子，你一直記得。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "huatuo",
+    "noflag": "huatuo_med"
    },
    "text": "華佗教你的五禽戲，你練到老。華佗的醫書燒了，可是他的徒弟吳普照著練五禽戲，活到九十多歲。",
    "minYears": 10,
@@ -3842,8 +3852,8 @@
   "{prev}埋在了祖墳旁邊的一個小土堆裡。從那以後，家裡的人看{name}的眼神，跟從前不一樣了。"
  ],
  "heirYoungText": [
-  "{prev}走的時候，{name}還不懂事，被大人抱著在靈前磕了頭。往後這個家，要等{name}長大。",
-  "{prev}出殯那天，{name}還小，跟在大人身後，不知道大家為什麼哭。這個家，往後要等{name}來撐。"
+  "{prev}走的時候，{name}還小，是大人扶著在靈前磕的頭。往後這個家，要等{name}長大。",
+  "{prev}出殯那天，{name}還小，看著滿屋子的人，不知道大家為什麼哭。這個家，往後要等{name}來撐。"
  ],
  "inheritFlags": [
   "jingzhou",
@@ -3899,7 +3909,8 @@
   "jkx_friend",
   "jiangwei_friend",
   "hejian",
-  "guangling"
+  "guangling",
+  "huatuo_med"
  ],
  "factionEras": {
   "liu": [

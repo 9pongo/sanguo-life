@@ -719,9 +719,9 @@
     {
      "t": "用華佗教你的法子動刀",
      "req": {
-      "flag": "huatuo"
+      "flag": "huatuo_med"
      },
-     "lock": "你沒跟華佗學過",
+     "lock": "你沒跟華佗學過醫術",
      "eff": {
       "bond": {
        "guanyu": 2

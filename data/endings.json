@@ -1000,7 +1000,9 @@
      60,
      200
     ],
-    "married": true
+    "married": true,
+    "noregion": "wu",
+    "nofaction": "sun"
    },
    "title": "兩國之間偕老",
    "text": "{name}活了{age}歲。蜀漢亡了，吳國還在長江對岸，天下還是兩個朝廷。最後那天，{spouse}替你換上乾淨的衣服，說：這輩子，總算沒白過。"
@@ -1446,6 +1448,16 @@
    "text": "{name}死在孫皓當皇帝的年月裡，{age}歲。吳國還在，可是人人都知道，撐不了多久了。"
   },
   {
+   "id": "d7_default_wu_civ",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "region": "wu"
+   },
+   "title": "吳末",
+   "text": "{name}死在吳國最後的那些年，{age}歲。長江對岸的晉朝一年比一年強，里中的人嘴上不說，心裡都在等著那一天。"
+  },
+  {
    "id": "d7e_default",
    "when": "dead",
    "chapter": 7,
@@ -1453,7 +1465,9 @@
     "year": [
      264,
      274
-    ]
+    ],
+    "noregion": "wu",
+    "nofaction": "sun"
    },
    "title": "兩國之世",
    "text": "{name}死在蜀漢亡國以後的那些年，{age}歲。吳國還在長江對岸，北方的皇帝換了一個又一個，里中的日子還是照舊。"
@@ -2376,11 +2390,22 @@
    "text": "{name}跟著十幾萬百姓從襄陽走到長坂，又從長坂走到江陵。有人問你為什麼要跟劉備走，你說：大家都走了，總不能一個人留下。"
   },
   {
+   "id": "a3_huatuo_med",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "flag": "huatuo_med"
+   },
+   "title": "方子",
+   "text": "{name}跟華佗學過幾個方子、幾手下針的法子。華佗死在獄裡，他的書燒了，你記得的那幾個方子，一直用到老。"
+  },
+  {
    "id": "a3_huatuo",
    "when": "alive",
    "chapter": 3,
    "req": {
-    "flag": "huatuo"
+    "flag": "huatuo",
+    "noflag": "huatuo_med"
    },
    "title": "五禽",
    "text": "{name}每天早上練華佗教的五禽戲。鄰里的老人一個一個走了，你的腰還是直的。"

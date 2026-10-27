@@ -342,6 +342,7 @@
    "id": "lc_ji_whisper",
    "kind": "flavor",
    "req": {
+    "married": false,
     "age": [
      6,
      16

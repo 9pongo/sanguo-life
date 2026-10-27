@@ -417,7 +417,8 @@
     "cls": [
      "tenant",
      "farmer"
-    ]
+    ],
+    "noflag": "tuntian"
    }
   },
   {

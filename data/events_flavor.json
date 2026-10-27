@@ -1211,13 +1211,33 @@
     "age": [
      8,
      80
-    ]
+    ],
+    "noflag": "p_huatuo_med"
    },
    "eff": {
     "德": 1,
     "名": 1
    },
    "text": "{elder}教過你五禽戲，說是華佗傳下來的。你每天早上都練，練完全身發熱。",
+   "tag": "家傳",
+   "familyOnce": true
+  },
+  {
+   "id": "pt_huatuo_med",
+   "kind": "flavor",
+   "w": 5,
+   "req": {
+    "flag": "p_huatuo_med",
+    "age": [
+     8,
+     80
+    ]
+   },
+   "eff": {
+    "德": 1,
+    "名": 1
+   },
+   "text": "{elder}年輕時跟華佗學過幾個方子。那幾張方子寫在一片舊木牘上，家裡誰病了，都要先拿出來看一看。",
    "tag": "家傳",
    "familyOnce": true
   },

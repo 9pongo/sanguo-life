@@ -767,7 +767,8 @@
      10,
      80
     ],
-    "region": "wu"
+    "region": "wu",
+    "home": false
    },
    "eff": {
     "財": 1
