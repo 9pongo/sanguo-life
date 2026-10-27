@@ -17,7 +17,8 @@
      "farmer",
      "artisan",
      "clerk"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "textIf": [
     {
@@ -861,7 +862,8 @@
    "req": {
     "notFired": [
      "la_clan_dispute"
-    ]
+    ],
+    "nofaction": "heishan"
    }
   },
   {
@@ -879,7 +881,8 @@
     "child": [
      6,
      9
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "textIf": [
     {
@@ -1076,7 +1079,10 @@
    "alt": [
     "里中一戶人家要向豪家借糧過冬，豪家說要有人作保，還不上就由保人賠。那家的當家來了你家三回，最後一回是帶著孩子來的。",
     "鄰家的穀子吃完了，要向縣裡的豪家借三石穀，豪家說，得找個有田有屋的人作保。那家的人提著一隻雞站在你家門口，話還沒說出口，臉先紅了。"
-   ]
+   ],
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "lx_tomb",

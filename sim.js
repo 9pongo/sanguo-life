@@ -42,7 +42,7 @@ function checkReq(req, where) {
   for (const id of arr(req.notFired)) if (!ids.has(id)) errors.push(`${where}：notFired 指向不存在的事件 ${id}`);
   for (const c of arr(req.cls)) if (!CLASSES.has(c)) errors.push(`${where}：未知的家世 ${c}`);
   for (const r of arr(req.route)) if (!ROUTES.has(r)) errors.push(`${where}：未知的路線 ${r}`);
-  for (const f of arr(req.faction)) if (!FACTIONS.has(f)) errors.push(`${where}：未知的勢力 ${f}`);
+  for (const f of [...arr(req.faction), ...arr(req.nofaction)]) if (!FACTIONS.has(f)) errors.push(`${where}：未知的勢力 ${f}`);
   for (const f of arr(req.focus)) if (!FOCI.has(f)) errors.push(`${where}：未知的人生重心 ${f}`);
   for (const k of Object.keys(req.stat || {})) if (!STAT_KEYS.has(k)) errors.push(`${where}：未知的數值 ${k}`);
   for (const k of Object.keys(req.statMax || {})) if (!STAT_KEYS.has(k)) errors.push(`${where}：未知的數值 ${k}`);

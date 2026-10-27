@@ -292,7 +292,8 @@
      18,
      50
     ],
-    "focus": "行商走販"
+    "focus": "行商走販",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -432,7 +433,8 @@
      "tenant",
      "farmer",
      "artisan"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -820,7 +822,8 @@
      20,
      50
     ],
-    "cls": "gentry"
+    "cls": "gentry",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -840,7 +843,8 @@
      20,
      50
     ],
-    "cls": "clerk"
+    "cls": "clerk",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -862,7 +866,8 @@
     ],
     "notFired": [
      "lx_purse"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {

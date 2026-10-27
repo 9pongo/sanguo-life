@@ -63,7 +63,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 
 ### 條件 `req`
 
-`age` `year` `chapter` `region` `noregion`（排除某些地區，例如外地人視角的小事不給住在洛陽的人）`cls` `gender` `faction` `route` `focus` `talent` `flag` `anyFlag` `noflag` `stat` `statMax` `bond` `bondMax` `married` `gen` `child` `son` `notFired`（這輩子碰過列出的事件就不出現，用在內容相近的一對，例如撿錢囊的抉擇與撿錢袋的小事）
+`age` `year` `chapter` `region` `noregion`（排除某些地區，例如外地人視角的小事不給住在洛陽的人）`cls` `gender` `faction` `nofaction`（排除某些勢力，例如黑山山寨裡的人碰不到亭長、縣吏、徭役、戶等這些官府的事）`route` `focus` `talent` `flag` `anyFlag` `noflag` `stat` `statMax` `bond` `bondMax` `married` `gen` `child` `son` `notFired`（這輩子碰過列出的事件就不出現，用在內容相近的一對，例如撿錢囊的抉擇與撿錢袋的小事）
 
 - `faction` 含 `civ` 時，身在曹、袁、黑山陣營的女性也算符合（她們不上陣，但也是當地百姓）；孫、劉兩家不適用。
 - `married: true` 代表配偶此刻在身邊（喪偶、配偶被抓走未歸都不算）。

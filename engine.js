@@ -144,6 +144,8 @@
       if (req.anyFlag && !arr(req.anyFlag).some((f) => s.flags[f])) return false;
       if (req.noflag && arr(req.noflag).some((f) => s.flags[f])) return false;
       if (req.route && !arr(req.route).includes(s.route)) return false;
+      // 身在官府管不到的地方（黑山的山寨）：碰不到亭長、縣吏、徭役、戶等這些事
+      if (req.nofaction && arr(req.nofaction).includes(s.faction || 'civ')) return false;
       // 身在軍中陣營的女子不上陣，但她也是那片土地上的百姓：平民的劇情同樣算她一份
       if (req.faction && !arr(req.faction).includes(s.faction || 'civ') &&
         !(s.gender === 'f' && arr(req.faction).includes('civ') && s.faction !== 'sun' && s.faction !== 'liu')) return false;

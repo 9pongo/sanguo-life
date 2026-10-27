@@ -146,7 +146,8 @@
      "af_med_cured",
      "af_med_cautious",
      "af_med_lost"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "學醫",
    "title": "出診",
@@ -266,7 +267,8 @@
     "anyFlag": [
      "af_med_rich",
      "af_med_plain"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "學醫",
    "title": "疫",
@@ -462,7 +464,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "af_med_fled"
+    "flag": "af_med_fled",
+    "nofaction": "heishan"
    },
    "tag": "學醫",
    "title": "誣告",
@@ -690,7 +693,8 @@
      "af_trade_salt",
      "af_trade_cloth",
      "af_trade_caravan"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "行商",
    "title": "過關",
@@ -1106,7 +1110,8 @@
     "focus": [
      "習武任俠",
      "結交豪傑"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "text": "市上，縣裡豪強家的幾個奴客掀了一個老人的菜攤，還要他賠撞壞的車轅。老人跪在地上磕頭，四下的人都低著頭走開。",
    "alt": [
@@ -1355,7 +1360,8 @@
      "af_xia_settled",
      "af_xia_hid",
      "af_xia_talk"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "任俠",
    "title": "門下",
@@ -1946,7 +1952,8 @@
      "af_study_loyal",
      "af_study_split",
      "af_study_home"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "讀書",
    "title": "出路",
@@ -2075,7 +2082,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "af_study_clerk"
+    "flag": "af_study_clerk",
+    "nofaction": "heishan"
    },
    "tag": "讀書",
    "title": "改帳",
@@ -2192,7 +2200,8 @@
     "anyFlag": [
      "af_study_teacher",
      "af_study_author"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "讀書",
    "text": "館裡教過的孩子，有的回去種田，有的去縣裡做了小吏。這年冬天，一個當年最頑皮的學生穿著吏服回來看你，在院門口行了大禮。",
@@ -2337,7 +2346,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "af_farm_open"
+    "flag": "af_farm_open",
+    "nofaction": "heishan"
    },
    "tag": "農事",
    "title": "爭地",
@@ -2480,7 +2490,8 @@
      "af_farm_kept",
      "af_farm_lost",
      "af_farm_tenant"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "農事",
    "title": "寄田",
@@ -2613,7 +2624,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "af_farm_lodged"
+    "flag": "af_farm_lodged",
+    "nofaction": "heishan"
    },
    "tag": "農事",
    "title": "清查",
@@ -2740,7 +2752,8 @@
    "tag": "手藝",
    "title": "大活",
    "req": {
-    "cls": "artisan"
+    "cls": "artisan",
+    "nofaction": "heishan"
    },
    "text": "縣裡一戶大族要嫁女，訂了一整套漆器：食案、耳杯、奩盒，要在三個月內做好，工錢給得很足。可好漆要一層一層地上，三個月實在太趕。",
    "alt": [
@@ -2865,7 +2878,8 @@
     "anyFlag": [
      "af_craft_true",
      "af_craft_cheat"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "手藝",
    "title": "驗貨",
@@ -3026,7 +3040,8 @@
      "af_craft_famed",
      "af_craft_redeem",
      "af_craft_bad"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "手藝",
    "title": "名號",

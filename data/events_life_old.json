@@ -475,7 +475,8 @@
     "age": [
      70,
      90
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "eff": {
     "名": 1,
@@ -496,7 +497,8 @@
     "age": [
      60,
      90
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "eff": {
     "名": 1
@@ -516,7 +518,8 @@
     "age": [
      80,
      90
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "eff": {
     "名": 2
@@ -773,7 +776,8 @@
      55,
      88
     ],
-    "cls": "clerk"
+    "cls": "clerk",
+    "nofaction": "heishan"
    },
    "eff": {
     "名": 1
@@ -885,7 +889,8 @@
     "year": [
      208,
      263
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "text": "官府又來點戶口。小吏問你的年紀，你報了，他抬頭看了你一眼，在簡上寫了一個「免」字。",
    "alt": [

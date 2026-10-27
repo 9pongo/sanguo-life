@@ -91,7 +91,8 @@
     "year": [
      150,
      204
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -420,7 +421,8 @@
      20,
      56
     ],
-    "gender": "m"
+    "gender": "m",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -573,7 +575,8 @@
     "focus": [
      "習武任俠",
      "結交豪傑"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 4,
    "eff": {
@@ -594,7 +597,8 @@
      15,
      40
     ],
-    "focus": "遊學求師"
+    "focus": "遊學求師",
+    "nofaction": "heishan"
    },
    "w": 4,
    "eff": {
