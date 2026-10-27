@@ -3790,6 +3790,38 @@
    },
    "text": "孩子年輕時迷上了老莊，整天跟人談有談無，你沒有攔。",
    "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "hs_grain_rule"
+   },
+   "text": "在黑山那些年，你跟著下山借過糧。只拿糧、不碰人，是你給自己定的規矩。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "hs_terraced"
+   },
+   "text": "在太行山裡，你帶著人在石頭縫裡開過田。山下的人說黑山的人只會搶，你沒跟他們爭過。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "hs_freed_hostage"
+   },
+   "text": "在黑山的時候，你偷偷放走過一個被綁上山的孩子。頭領到死也不知道是誰放的。",
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "hs_went_home"
+   },
+   "text": "黑山那些年，有一年你趁夜下了山，回了家。山上的人後來怎麼樣了，你只聽說過一些。",
+   "life": true
   }
  ],
  "heirText": [
@@ -4753,6 +4785,27 @@
     {
      "id": "v9_son_levied",
      "title": "送子從軍"
+    }
+   ]
+  },
+  {
+   "name": "黑山歲月",
+   "items": [
+    {
+     "id": "hs_grain_rule",
+     "title": "只拿糧"
+    },
+    {
+     "id": "hs_terraced",
+     "title": "石縫開田"
+    },
+    {
+     "id": "hs_freed_hostage",
+     "title": "放走人質"
+    },
+    {
+     "id": "hs_went_home",
+     "title": "下山回家"
     }
    ]
   }
