@@ -283,7 +283,8 @@
    ],
    "p": 0.18,
    "req": {
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    }
   },
   {
@@ -666,7 +667,8 @@
      "farmer",
      "artisan"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    }
   },
   {
@@ -776,7 +778,8 @@
    ],
    "p": 0.2,
    "req": {
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    }
   }
  ]

@@ -476,7 +476,8 @@
      70,
      90
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "eff": {
     "名": 1,
@@ -498,7 +499,8 @@
      60,
      90
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "eff": {
     "名": 1
@@ -519,7 +521,8 @@
      80,
      90
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "eff": {
     "名": 2
@@ -777,7 +780,8 @@
      88
     ],
     "cls": "clerk",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "eff": {
     "名": 1
@@ -890,7 +894,8 @@
      208,
      263
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "text": "官府又來點戶口。小吏問你的年紀，你報了，他抬頭看了你一眼，在簡上寫了一個「免」字。",
    "alt": [

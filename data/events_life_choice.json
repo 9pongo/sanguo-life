@@ -18,7 +18,8 @@
      "artisan",
      "clerk"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "textIf": [
     {
@@ -863,7 +864,8 @@
     "notFired": [
      "la_clan_dispute"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    }
   },
   {
@@ -882,7 +884,8 @@
      6,
      9
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "textIf": [
     {
@@ -1081,7 +1084,8 @@
     "鄰家的穀子吃完了，要向縣裡的豪家借三石穀，豪家說，得找個有田有屋的人作保。那家的人提著一隻雞站在你家門口，話還沒說出口，臉先紅了。"
    ],
    "req": {
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    }
   },
   {

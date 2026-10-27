@@ -80,7 +80,8 @@
      14
     ],
     "noflag": [
-     "father_dead"
+     "father_dead",
+     "xuwu"
     ],
     "cls": [
      "tenant",
@@ -422,7 +423,8 @@
      56
     ],
     "gender": "m",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "w": 3,
    "eff": {
@@ -576,7 +578,8 @@
      "習武任俠",
      "結交豪傑"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "w": 4,
    "eff": {
@@ -598,7 +601,8 @@
      40
     ],
     "focus": "遊學求師",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "w": 4,
    "eff": {

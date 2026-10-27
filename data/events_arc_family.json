@@ -825,7 +825,8 @@
      "am_wild_friend"
     ],
     "kidTag": "am_wild",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "text": "{son}在家悶了幾年，這天忽然跪在你面前，說不想一輩子窩在里中，要跟人去郡裡謀個出路。小包袱已經收拾好了，放在門邊。",
    "textIf": [
@@ -901,7 +902,8 @@
    "req": {
     "flag": "am_wild_free",
     "kidTag": "am_wild",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "text": "{son}走了兩年，這天半夜忽然翻牆回來，渾身是泥。說那夥人在鄰縣搶了一戶人家，{son}沒動手，可也在場。天亮以後，亭長就要挨家挨戶地問了。",
    "choices": [
@@ -967,7 +969,8 @@
      "am_wild_turnin"
     ],
     "kidTag": "am_wild",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "text": "{son}終究沒有走。種著那幾畝地，脾氣也磨平了。只有喝醉的時候，才會說起那年要是走了，如今會在哪裡。",
    "textIf": [
@@ -1342,7 +1345,8 @@
    "req": {
     "gender": "f",
     "married": true,
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "xuwu"
    },
    "text": "娘家的兄弟天黑後來敲門，衣裳上還沾著血。說在集上跟人起了爭執，失手打傷了人，那家說不賠錢就告到縣裡。他不敢讓{spouse}知道，只拉著你在灶邊說話。",
    "textIf": [
