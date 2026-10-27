@@ -428,7 +428,7 @@
     // 配偶（含續弦、再嫁）的名，不跟自己或家裡孩子的名重複
     function spouseName(gender) {
       const s = S();
-      const used = [s.name, ...s.children.map((c) => c.name)].map((n) => n.slice(1));
+      const used = [s.name, ...s.children.map((c) => c.name), ...(s.forbid || [])].map((n) => n.slice(1)); // 也不跟長輩同名
       let nm = randomName(gender);
       for (let k = 0; k < 12 && used.includes(nm.slice(1)); k++) nm = randomName(gender);
       return nm;
