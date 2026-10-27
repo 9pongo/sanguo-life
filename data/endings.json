@@ -450,6 +450,19 @@
    }
   },
   {
+   "id": "d4_default_early",
+   "when": "dead",
+   "chapter": 4,
+   "req": {
+    "year": [
+     209,
+     215
+    ]
+   },
+   "title": "建安年間",
+   "text": "{name}死在建安年間。赤壁那一仗打完沒幾年，天下還姓劉，誰也說不準往後會怎麼樣。"
+  },
+  {
    "id": "d4_default",
    "when": "dead",
    "chapter": 4,
