@@ -1100,7 +1100,7 @@ const DATA = /*__DATA__*/;
     const detail = `${s.name}，${gender}，${s.birthYear}年生於${s.regionName}，${s.clsName}。` +
       (e.alive ? `${s.year}年時${s.age}歲，還活著。` : `卒於${s.year}年，享年${s.age}歲。`);
     const fam = L.length > 1
-      ? `${s.surname}家${cnGen(L.length)}代人，從${L[0].born}年走到${s.year}年：${L.slice(-5).map((p) => p.name).join(' → ')}`
+      ? `${s.surname}家${cnGen(s.generation - (L[0].gen || 1) + 1)}代人，從${L[0].born}年走到${s.year}年：${L.slice(-5).map((p) => p.name).join(' → ')}`
       : `第${cnGen(s.generation)}代當家・${s.surname}家`;
     const all = e.title + kicker + s.name + e.text + detail + fam + e.cause + '黃天之下投胎到東漢末年一代一代活下去死因家族武文德名財健歲0123456789→…・，。大事依三國志後漢書晉書';
     try { await Promise.race([Promise.all([document.fonts.load(`900 80px ${SERIF}`, all), document.fonts.load(`400 30px ${SERIF}`, all)]), new Promise((r) => setTimeout(r, 2500))]); } catch (err) { /* 字型載不到就用系統字 */ }
