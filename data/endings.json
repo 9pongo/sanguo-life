@@ -266,6 +266,20 @@
    }
   },
   {
+   "id": "d3_ji_yuan",
+   "when": "dead",
+   "chapter": 3,
+   "title": "河北未定",
+   "text": "{name}死在河北，{age}歲。袁紹死了，他的兒子們為了爭位打成一團，曹操的兵一年一年往北推。你沒能等到仗打完。",
+   "req": {
+    "region": "ji",
+    "year": [
+     201,
+     204
+    ]
+   }
+  },
+  {
    "id": "d3_ji",
    "when": "dead",
    "chapter": 3,
