@@ -148,8 +148,9 @@
       if (req.nofaction && arr(req.nofaction).includes(s.faction || 'civ')) return false;
       // 身在軍中陣營的女子不上陣，但她也是那片土地上的百姓：平民的劇情同樣算她一份
       if (req.faction && !arr(req.faction).includes(s.faction || 'civ') &&
-        !(s.gender === 'f' && arr(req.faction).includes('civ') && s.faction !== 'sun' && s.faction !== 'liu')) return false;
-      // （孫、劉兩家後來各自成了國，那裡的百姓有自己的劇情，不該拿到北方平民的）
+        !(s.gender === 'f' && arr(req.faction).includes('civ') && s.faction !== 'sun' && s.faction !== 'liu' && s.faction !== 'heishan')) return false;
+      // （孫、劉兩家後來各自成了國，那裡的百姓有自己的劇情，不該拿到北方平民的；
+      //   黑山的女子住在山寨裡，里中招兵、官渡、屯田這些平民的事也輪不到她）
       if (req.chapter && !arr(req.chapter).includes(s.chapter)) return false;
       if (req.focus && !arr(req.focus).includes(s.focus)) return false;
       if (req.stat) for (const k in req.stat) if (val(k) < req.stat[k]) return false;
@@ -413,10 +414,10 @@
       for (let k = 0; k < 12 && used.includes(nm.slice(1)); k++) nm = randomName(gender);
       return nm;
     }
-    // 孩子取名：不跟兄姊同名，也不用父母的名（古人避諱），更不能跟配偶同名同姓
+    // 孩子取名：不跟兄姊同名，也不用父母、祖上的名（古人避諱），更不能跟配偶同名同姓
     function kidName(sur, cg) {
       const s = S();
-      const avoid = [s.name, s.spouse].filter(Boolean);
+      const avoid = [s.name, s.spouse, ...(s.forbid || [])].filter(Boolean);
       const bad = (nm) => s.children.some((c) => c.name === nm) || avoid.some((n) => n === nm || n.slice(1) === nm.slice(1));
       let nm = sur + randomGiven(cg);
       for (let k = 0; k < 12 && bad(nm); k++) nm = sur + randomGiven(cg);
@@ -791,6 +792,8 @@
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同
         parentName: h.via || ((h.rel === '弟' || h.rel === '妹') ? (p.parentName || null) : p.name),
         elders,
+        // 祖上幾代當家和他們的配偶：往後孩子取名都要避開
+        forbid: [...(p.forbid || []), p.name, p.spouse].filter(Boolean),
       };
       const s = g.st;
       unclashFriend(s);
@@ -918,10 +921,11 @@
         alive: true, cause: null, firstLife: true, lateStart: true,
         chapterEndings: P.chapterEndings || [], familySeen: { ...(P.familySeen || {}) },
         parentName: P.name, elders: { ...(P.elders || {}) },
+        forbid: [...(P.forbid || []), P.name, P.spouse].filter(Boolean),
       };
       const s = g.st;
       // 名字：不跟兄姊同名，也不用父母的名
-      const avoid = [P.name, P.spouse, ...older.map((c) => c.name)].filter(Boolean);
+      const avoid = [P.name, P.spouse, ...(P.forbid || []), ...older.map((c) => c.name)].filter(Boolean);
       let nm = surname + randomGiven(gender);
       for (let k = 0; k < 12 && avoid.some((n) => n === nm || n.slice(1) === nm.slice(1)); k++) nm = surname + randomGiven(gender);
       s.name = nm;
