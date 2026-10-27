@@ -109,16 +109,16 @@
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
     // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
     let histText = false;
-    function localize(t) {
-      const words = histText ? null : (data.world.regionWords || {})[S().region];
+    function localize(t, region) {
+      const words = histText ? null : (data.world.regionWords || {})[region || S().region];
       if (!words) return t;
       for (const [a, b] of words) t = t.split(a).join(b);
       return t;
     }
-    function fmt(t) {
+    function fmt(t, region) {
       if (!t) return t;
       const v = vars();
-      return localize(t.replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m)));
+      return localize(t.replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m)), region);
     }
 
     function findKid(gender, range, unwed) {
@@ -229,7 +229,7 @@
         if (s.hp !== before) delta['健'] = s.hp - before;
       }
       for (const f of arr(eff.flag)) {
-        if (!s.flags[f]) (s.flagYear || (s.flagYear = {}))[f] = s.year;
+        if (!s.flags[f]) { (s.flagYear || (s.flagYear = {}))[f] = s.year; (s.flagRegion || (s.flagRegion = {}))[f] = s.region; }
         s.flags[f] = true;
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
         const to = (data.world.relocate || {})[f];
@@ -708,7 +708,7 @@
         if (t && s.alive && e.aliveText) t = e.aliveText;                   // 活著走到最後一章
         if (t && s.alive && /你走(的|以後|之後)/.test(t)) t = null;           // 活著的人不能說「你走以後」
         if (t && e.noKid && noKid) t = e.noKid;                              // 膝下沒有孩子
-        return t ? { life: !!e.life, t: fmt(t) } : null;
+        return t ? { life: !!e.life, t: fmt(t, (s.flagRegion || {})[f]) } : null; // 麥或稻：照事情發生時住的地方
       }).filter(Boolean);
       // 日常故事（life）與歷史經歷輪流排，前三件裡兩種都看得到
       const lifeM = picked.filter((m) => m.life), histM = picked.filter((m) => !m.life), memories = [];

@@ -414,7 +414,8 @@
     "stat": {
      "文": 15
     },
-    "noflag": "jiupin_done"
+    "noflag": "jiupin_done",
+    "gender": "m"
    },
    "tag": "九品",
    "title": "中正",
