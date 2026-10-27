@@ -4032,6 +4032,12 @@
   "to_luoyang": "luoyang",
   "to_huainan": "huainan"
  },
+ "relocatePlace": {
+  "to_jingzhou": {
+   "place": "襄陽",
+   "name": "荊州襄陽"
+  }
+ },
  "firstChildSpare": 0.7,
  "nearlyLostText": [
   "那年冬天你燒了好幾天，家裡人連小草席都準備好了。後來，你又睜開了眼睛。",

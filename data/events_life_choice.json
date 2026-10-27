@@ -1472,7 +1472,10 @@
      ]
     }
    ],
-   "p": 0.17
+   "p": 0.17,
+   "req": {
+    "noflag": "lz_wall_yield"
+   }
   },
   {
    "id": "lx_handover",

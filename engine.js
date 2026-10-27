@@ -235,6 +235,9 @@
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
         const to = (data.world.relocate || {})[f];
         if (to) moveTo(to);
+        // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換
+        const pl = (data.world.relocatePlace || {})[f];
+        if (pl) { s.place = pl.place; s.regionName = pl.name; }
       }
       if (eff.region) moveTo(eff.region);
       for (const f of arr(eff.unflag)) delete s.flags[f];
@@ -338,7 +341,7 @@
           .map((c, i) => ({ c, i }))
           .filter(({ c }) => meets(c.show))
           .map(({ c, i }) => ({
-            i, t: fmt(variant(withAlt(c.t, c.tAlt), ev.id + '#' + i)), sub: fmt(subOf(c, ev.id + '#' + i)) || null,
+            i, t: fmt(tOf(c, ev.id + '#' + i)), sub: fmt(subOf(c, ev.id + '#' + i)) || null,
             ok: meets(c.req), lock: c.lock ? fmt(c.lock) : null,
           }));
         if (!opts.some((o) => o.ok)) opts[opts.length - 1].ok = true; // 保底：至少一條路
@@ -346,6 +349,11 @@
       }
     }
 
+    // 選項本身的字：同樣可以依條件換寫法（例如本來就住在荊州的人，不說「去荊州」）
+    function tOf(c, key) {
+      const ti = (c.tIf || []).findIndex((v) => meets(v.req));
+      return ti >= 0 ? variant(c.tIf[ti].t, key + 't' + ti) : variant(withAlt(c.t, c.tAlt), key);
+    }
     // 選項底下的小字：先看有沒有依條件（例如性別）換的寫法，再從幾種寫法裡輪一種
     function subOf(c, key) {
       const si = (c.subIf || []).findIndex((v) => meets(v.req));
