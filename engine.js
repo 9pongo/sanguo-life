@@ -744,7 +744,7 @@
         let t = e.text;
         if (e.minYears && since < e.minYears) t = e.short ?? null;          // 經歷之後沒活幾年
         if (t && e.beforeYear && s.year >= e.beforeYear) t = e.lateText ?? null; // 文字說的未來，已經過去了
-        if (t && s.alive && e.aliveText) t = e.aliveText;                   // 活著走到最後一章
+        if (t && s.alive && e.aliveText) t = (e.minYears && since < e.minYears && e.aliveShort) || e.aliveText;                   // 活著走到最後一章
         if (t && s.alive && /你走(的|以後|之後)/.test(t)) t = null;           // 活著的人不能說「你走以後」
         if (t && e.noKid && noKid) t = e.noKid;                              // 膝下沒有孩子
         return t ? { life: !!e.life, t: fmt(t, (s.flagRegion || {})[f]) } : null; // 麥或稻：照事情發生時住的地方
