@@ -3620,9 +3620,26 @@
   {
    "final": true,
    "req": {
-    "flag": "lz_record_true"
+    "flag": "lz_record_true",
+    "born": [
+     0,
+     179
+    ]
    },
    "text": "老了以後，縣裡來人問當年的事，你從甲子年說起，把餓過的、逃過的、死過的人都說了。記下來的人，眼睛是紅的。",
+   "pri": 1,
+   "life": true
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "lz_record_true",
+    "born": [
+     180,
+     400
+    ]
+   },
+   "text": "老了以後，縣裡來人問當年的事，你從小時候聽大人說的亂世說起，把餓過的、逃過的、死過的人都說了。記下來的人，眼睛是紅的。",
    "pri": 1,
    "life": true
   },

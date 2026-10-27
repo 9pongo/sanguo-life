@@ -223,7 +223,8 @@
      20,
      50
     ],
-    "cls": "artisan"
+    "cls": "artisan",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -265,7 +266,8 @@
      18,
      50
     ],
-    "focus": "行商走販"
+    "focus": "行商走販",
+    "nofaction": "heishan"
    },
    "w": 4,
    "eff": {
@@ -285,7 +287,8 @@
      18,
      50
     ],
-    "focus": "行商走販"
+    "focus": "行商走販",
+    "nofaction": "heishan"
    },
    "w": 4,
    "repeat": 2,
@@ -748,7 +751,8 @@
      8,
      14
     ],
-    "cls": "artisan"
+    "cls": "artisan",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -1369,7 +1373,8 @@
     "focus": [
      "習武任俠",
      "結交豪傑"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 4,
    "eff": {

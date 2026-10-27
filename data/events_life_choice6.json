@@ -502,6 +502,10 @@
     "faction": [
      "civ",
      "cao"
+    ],
+    "noregion": [
+     "wu",
+     "shu"
     ]
    }
   }

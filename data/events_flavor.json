@@ -583,7 +583,8 @@
      15,
      50
     ],
-    "focus": "行商走販"
+    "focus": "行商走販",
+    "nofaction": "heishan"
    },
    "w": 4,
    "repeat": 2,
