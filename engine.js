@@ -778,6 +778,7 @@
       for (const k of STATS) stats[k] = clamp(stats[k], 0, 100);
       const flags = { heir: true };
       if (age < 14) flags.heir_young = true; // 接手時還小，等長大了才輪到自己拿主意
+      if (p.age < 10) flags.prev_child = true; // 上一位是夭折的孩子：沒有留下家業，也沒有說過什麼話
       // 父母的生死：孩子接班，死去的上一代就是父或母；弟妹接班，父母狀態跟兄姊相同
       if (h.rel === '弟' || h.rel === '妹') {
         if (p.flags.father_dead) flags.father_dead = true;
@@ -836,7 +837,7 @@
       g.succession = null;
       g.out = [];
       emit({ type: 'heir', text: `第${cnNum(s.generation)}代　${s.name}`, gen: s.generation, rel: h.rel });
-      emit({ type: 'event', tag: '傳承', text: fmt(variant(W.heirText, 'heirText')) });
+      emit({ type: 'event', tag: '傳承', text: fmt(flags.prev_child && W.heirChildText ? variant(W.heirChildText, 'heirChild') : variant(W.heirText, 'heirText')) });
       if (h.via) emit({ type: 'event', tag: '傳承', text: fmt(variant(W.heirGrandText, 'heirGrand')) });
       if (wedText) emit({ type: 'event', tag: '成家', text: fmt(variant(wedText, 'heirWed')) });
       g.queue = [];
@@ -958,7 +959,8 @@
       for (const t of talents) { const def = W.talents.find((x) => x.id === t); if (def.eff) apply(def.eff, null); }
       const first = s.lineage[0];
       const parentRole = P.gender === 'm' ? '父親' : '母親';
-      let family = `你是${surname}家的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
+      // 當家的是母親時，孩子隨父姓，祖上卻是母親那一家的人
+      let family = `你是${surname === P.name[0] ? surname + '家' : '這一家'}的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
       const n = older.length;
       family += n ? `，你上頭還有${n === 2 ? '兩' : cnNum(n)}個哥哥姊姊。` : '，你是頭一個孩子。';
       if (first) family += `祖上${first.name}那一輩「${first.title}」的事，家裡的人常常提起。`;
