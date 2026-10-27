@@ -1015,7 +1015,15 @@
    },
    "text": "{elder}跟著劉備從涿縣一路走到成都，丟過很多次家，又重新安過很多次家。你家就是這樣在蜀地落腳的。",
    "tag": "家傳",
-   "familyOnce": true
+   "familyOnce": true,
+   "textIf": [
+    {
+     "req": {
+      "noregion": "shu"
+     },
+     "text": "{elder}年輕時跟著劉備打過黃巾、走過徐州，丟過很多次家，又重新安過很多次家。後來劉備越走越遠，你家沒有跟到最後。"
+    }
+   ]
   },
   {
    "id": "pt_follow_caocao",

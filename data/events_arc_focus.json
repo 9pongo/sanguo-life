@@ -1367,11 +1367,11 @@
      "af_xia_hid",
      "af_xia_talk"
     ],
-    "nofaction": "heishan",
     "noflag": [
      "tuntian",
      "xuwu"
-    ]
+    ],
+    "faction": "civ"
    },
    "tag": "任俠",
    "title": "門下",
@@ -1509,7 +1509,8 @@
    "recheck": true,
    "req": {
     "flag": "af_xia_guest",
-    "noflag": "tuntian"
+    "noflag": "tuntian",
+    "faction": "civ"
    },
    "tag": "任俠",
    "title": "主命",
