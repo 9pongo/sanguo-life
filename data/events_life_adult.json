@@ -531,6 +531,93 @@
    ]
   },
   {
+   "id": "la_single_meal",
+   "kind": "flavor",
+   "w": 3,
+   "req": {
+    "age": [
+     28,
+     49
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "text": "你一個人吃飯，常常懶得生火，嚼兩口冷餅就算一頓。鄰家的婦人看不過去，隔幾天就端一碗熱湯過來。",
+   "alt": [
+    "冬至那天，家家關起門來過節。你在灶上煮了一小鍋豆粥，吃到一半，聽見隔壁傳來孩子的笑聲。",
+    "你病了兩天，起不了身。第三天鄰居見你家的門一直沒開，推門進來看，替你燒了一鍋熱水。"
+   ],
+   "repeat": 3,
+   "repeatGap": 3
+  },
+  {
+   "id": "la_single_talk",
+   "kind": "flavor",
+   "w": 3,
+   "req": {
+    "age": [
+     28,
+     49
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "text": "里中的人辦喜事，把你排在一桌年輕後生中間。你喝了兩碗就推說頭暈，先走了。",
+   "alt": [
+    "媒人在你門口轉了兩回，這回沒有進來。你倒有點想叫住她，問問最近里中誰家又辦了喜事。",
+    "里中有人在背後說你這個年紀還沒成家，怕是有什麼毛病。你聽見了，也不回頭，照樣做你的事。"
+   ],
+   "repeat": 3,
+   "repeatGap": 3
+  },
+  {
+   "id": "la_single_kids",
+   "kind": "flavor",
+   "w": 3,
+   "req": {
+    "age": [
+     28,
+     49
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "eff": {
+    "德": 1
+   },
+   "text": "鄰家的孩子常往你家跑，你替他們削竹蜻蜓、編草蟈蟈。孩子的娘說，你比她還有耐心。",
+   "alt": [
+    "同族有個後生要娶親，聘禮差了一截。你把攢下的錢拿了一半出來，說不急著還。",
+    "里中的孤兒寡母沒人照應，你隔幾天就送一捆柴過去。人家問你圖什麼，你說，反正你家裡也沒人等。"
+   ],
+   "repeat": 3,
+   "repeatGap": 3
+  },
+  {
+   "id": "la_single_night",
+   "kind": "flavor",
+   "w": 3,
+   "req": {
+    "age": [
+     28,
+     49
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "text": "夜裡下雨，屋頂漏了一處。你拿盆接著，聽著水一滴一滴落進盆裡，一直坐到天亮。",
+   "alt": [
+    "你一個人修屋頂，從梯子上下來的時候，才發現沒人替你扶著梯子。",
+    "趕集回來的路上下起了雨，你在亭舍的屋簷下等雨停。同躲雨的人問你家裡幾口人，你想了一下才說：就我一個。"
+   ],
+   "repeat": 3,
+   "repeatGap": 3
+  },
+  {
    "id": "la_spouse_night",
    "kind": "flavor",
    "req": {
