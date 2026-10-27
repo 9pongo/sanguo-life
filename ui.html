@@ -562,7 +562,8 @@ const DATA = /*__DATA__*/;
       const row = h('div', 'chip-list');
       for (const e of list) {
         const ok = seen.has(e.id);
-        row.append(h('span', ok ? (e.rare ? 'rare' : '') : 'unseen', ok ? esc(e.title) + (e.rare ? '★' : '') : '？？'));
+        // 標題裡的 {place} 依住處換字（南陽的人搬到襄陽），圖鑑裡用原本的地名
+        row.append(h('span', ok ? (e.rare ? 'rare' : '') : 'unseen', ok ? esc(e.title.replace('{place}', '南陽')) + (e.rare ? '★' : '') : '？？'));
       }
       box.append(row);
     }

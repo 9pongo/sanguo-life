@@ -734,7 +734,7 @@
       for (let i = 0; i < Math.max(lifeM.length, histM.length); i++) { if (lifeM[i]) memories.push(lifeM[i].t); if (histM[i]) memories.push(histM[i].t); }
       const epilogue = shown.filter((e) => !isMemory(e)).map((e) => fmt(e.text));
       const result = {
-        id: ending.id, title: ending.title, rare: !!ending.rare, text: fmt(noKid && ending.noKid ? ending.noKid : ending.text),
+        id: ending.id, title: fmt(ending.title), rare: !!ending.rare, text: fmt(noKid && ending.noKid ? ending.noKid : ending.text),
         alive: s.alive, cause: s.cause, age: s.age, year: s.year, chapter: s.chapter,
         chapterTitle: chapterOf(s.chapter)?.title || null,
         next: s.alive && !last ? chapterOf(s.chapter + 1) : null,
