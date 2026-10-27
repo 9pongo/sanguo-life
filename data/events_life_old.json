@@ -666,7 +666,8 @@
      50,
      90
     ],
-    "married": false
+    "married": false,
+    "noflag": "has_child"
    },
    "text": "你一輩子沒有成家。里中的人叫你孤老，你也不在意，只是過年的時候，鄰家會多送一碗肉過來。",
    "alt": [

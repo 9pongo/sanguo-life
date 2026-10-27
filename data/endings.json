@@ -679,7 +679,8 @@
      60,
      200
     ],
-    "married": false
+    "married": false,
+    "noflag": "has_child"
    }
   },
   {
@@ -932,7 +933,8 @@
      60,
      200
     ],
-    "married": false
+    "married": false,
+    "noflag": "has_child"
    }
   },
   {
@@ -1060,7 +1062,8 @@
      60,
      200
     ],
-    "married": false
+    "married": false,
+    "noflag": "has_child"
    }
   },
   {
@@ -1155,7 +1158,22 @@
      280,
      299
     ],
-    "married": false
+    "married": false,
+    "noflag": "has_child"
+   }
+  },
+  {
+   "id": "d_old_single_kid",
+   "text": "{name}活了{age}歲，一輩子沒有成家。可是你走的時候，床邊有孩子守著，一聲一聲地叫你。這個家的香火，有人接下去了。",
+   "when": "dead",
+   "title": "孤身有後",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "married": false,
+    "flag": "has_child"
    }
   },
   {
