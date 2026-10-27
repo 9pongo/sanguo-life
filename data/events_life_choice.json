@@ -523,7 +523,8 @@
    "title": "借錢",
    "text": "{friend}來找你，說家裡老人病了要買藥，又欠著人家的穀子，想跟你借一千錢，等明年秋收就還。他說話的時候一直看著地上。",
    "req": {
-    "noflag": "friend_dead"
+    "noflag": "friend_dead",
+    "home": true
    },
    "choices": [
     {
@@ -1715,7 +1716,8 @@
    "recheck": true,
    "req": {
     "flag": "lx_lent",
-    "noflag": "friend_dead"
+    "noflag": "friend_dead",
+    "stayed": "lx_lent"
    },
    "tag": "人生",
    "text": "{friend}來了，背著一袋錢，說當年借的一千錢，一文不少。他家老人前年還是走了，可那一年的藥，讓老人多撐了一個冬天。",
@@ -1734,7 +1736,8 @@
    "recheck": true,
    "req": {
     "flag": "lx_lent",
-    "noflag": "friend_dead"
+    "noflag": "friend_dead",
+    "stayed": "lx_lent"
    },
    "tag": "人生",
    "text": "{friend}欠你的那一千錢，到現在也沒還。聽人說他家又遭了難，他在路上遠遠看見你，就繞到別的巷子裡去了。",
