@@ -660,6 +660,8 @@
           for (let k = 0; k < 12 && taken.includes(nm.slice(1)); k++) nm = sur + pool[Math.floor(lr() * pool.length)];
           const born = Math.min(via.born + 20 + Math.floor(lr() * 8), s.year - 16);
           list.push({ name: nm, gender: gg, born, alive: true, rel: gg === 'm' ? '孫' : '孫女', via: via.name });
+          // 列出了長孫，就等於說了這個孩子早已成家；往後輪到他以弟妹身分接家，不能變成一輩子沒成家的人
+          list.find((x) => x.name === via.name).knownWed = true;
         }
         return list;
       }
@@ -775,7 +777,7 @@
         if (p.flags[f]) { flags['p_' + f] = true; elders[f] = p.name; }
         else if (p.flags['p_' + f]) flags['p_' + f] = true;
       }
-      const siblings = h.via ? [] : heirs.filter((x) => x !== h && !x.via).map((x) => ({ name: x.name, gender: x.gender, born: x.born, alive: true, checked: false }));
+      const siblings = h.via ? [] : heirs.filter((x) => x !== h && !x.via).map((x) => ({ name: x.name, gender: x.gender, born: x.born, alive: true, checked: false, knownWed: !!(x.wed || x.knownWed) }));
       const surname = h.name[0];
       g.st = {
         name: h.name, surname, gender: h.gender, birthYear: h.born, year: p.year, age,
@@ -796,7 +798,8 @@
       s.birth = { era: era(h.born), ganzhi: ganzhi(h.born), region: W.regions.find((r) => r.id === s.region), cls: ncls, talents: talents.map((t) => W.talents.find((x) => x.id === t)), family: '' };
       // 接班時已經成年的人，大多早就成了家，這些年也添了孩子
       let wedText = null;
-      if ((h.wed && age >= 15) || (age >= 18 && R() < (age >= 25 ? (W.heirMarried ?? 0.9) : 0.6))) {
+      // 弟妹早已成家的（成過親、或曾經被列出孩子接班）一定是成了家的人。亂數照樣抽一次，舊存檔重播不走樣
+      if ((h.wed && age >= 15) || (age >= 18 && (R() < (age >= 25 ? (W.heirMarried ?? 0.9) : 0.6) || h.knownWed))) {
         s.spouse = spouseName(s.gender === 'm' ? 'f' : 'm');
         const sur = s.gender === 'm' ? s.surname : s.spouse[0];
         for (let y = h.born + 19; y < s.year && y <= h.born + 45; y++) {

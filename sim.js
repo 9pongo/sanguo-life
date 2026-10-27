@@ -258,6 +258,8 @@ for (let i = 0; i < N; i++) {
       // 上一代時已經成親的孩子，接家時必須是成了家的人
       const wedKid = dead.children.find((c) => c.name === h.name && c.alive);
       if (wedKid && wedKid.wed && !h.spouse) flagIssue('孩子成親過，接家時卻是單身', g.seed, h.name);
+      const picked = hs[pickGrand ? gi : 0];
+      if (picked && picked.knownWed && h.age >= 18 && !h.spouse) flagIssue('早已成家的弟妹接家時卻是單身', g.seed, h.name);
       if (h.parentName === dead.name && !h.flags[dead.gender === 'm' ? 'father_dead' : 'mother_dead']) flagIssue('接班人的父／母剛過世，卻沒有記為已過世', g.seed);
       continue;
     }
