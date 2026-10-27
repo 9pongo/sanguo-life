@@ -581,7 +581,7 @@
       // 出征在外的那一年，家鄉的瑣事輪不到你
       if (item.flavor && s.campaignYear === s.year) return null;
       // 里中要你出面的事（修橋、爭水、作保、收留人），人跟著隊伍在外打仗的那幾年碰不上
-      if (!ev.year && HOME_TAGS.has(ev.tag) && awayAtWar()) return null;
+      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && awayAtWar()) return null;
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
