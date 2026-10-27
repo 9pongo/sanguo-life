@@ -20,6 +20,8 @@
 
   const arr = (x) => (x == null ? [] : Array.isArray(x) ? x : [x]);
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  // 家鄉里中的瑣事：出征那一年輪不到你
+  const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '手藝']);
 
   function ganzhi(y) {
     const i = (((y - 4) % 60) + 60) % 60;
@@ -578,6 +580,8 @@
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
       // 出征在外的那一年，家鄉的瑣事輪不到你
       if (item.flavor && s.campaignYear === s.year) return null;
+      // 里中要你出面的事（修橋、爭水、作保、收留人），人跟著隊伍在外打仗的那幾年碰不上
+      if (!ev.year && HOME_TAGS.has(ev.tag) && awayAtWar()) return null;
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
@@ -653,6 +657,11 @@
       if (ev.campaign) return true;
       if (r.route && ['huangjin', 'guanjun', 'xiangyong'].includes(r.route)) return true;
       return r.gender === 'm' && !!r.faction && !arr(r.faction).includes('civ');
+    }
+    // 跟著諸侯在外打仗：男子、上過戰場、這三年內還出過征、五十歲以下
+    function awayAtWar() {
+      const s = S();
+      return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 50 && s.year - (s.campaignYear ?? -99) <= 3;
     }
     // 配偶還在身邊：成了親、沒有過世、也沒有被抓走未歸
     function spouseHere() {
