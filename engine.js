@@ -393,6 +393,18 @@
       for (let k = 0; k < pool.length && used.includes(pool[i]); k++) i = (i + 1) % pool.length;
       s.friend = s.friend[0] + pool[i];
     }
+    // 弟妹也不跟自己、父母或其他兄弟姊妹同名（史禮的弟弟又叫史禮，接班時就分不清誰是誰的爹）。同樣順著名冊往下挑，不動用亂數
+    function unclashSiblings(s, from, extra) {
+      const N = data.world.names;
+      for (let j = from; j < s.siblings.length; j++) {
+        const c = s.siblings[j], pool = c.gender === 'm' ? N.male : N.female;
+        const used = [s.name, s.parentName, ...(extra || []), ...s.siblings.filter((x, k) => k !== j).map((x) => x.name)].filter(Boolean).map((n) => n.slice(1));
+        let i = pool.indexOf(c.name.slice(1));
+        if (i < 0 || !used.includes(pool[i])) continue;
+        for (let k = 0; k < pool.length && used.includes(pool[i]); k++) i = (i + 1) % pool.length;
+        c.name = c.name[0] + pool[i];
+      }
+    }
     // 配偶（含續弦、再嫁）的名，不跟自己或家裡孩子的名重複
     function spouseName(gender) {
       const s = S();
@@ -439,6 +451,7 @@
         const sg = R() < 0.5 ? 'm' : 'f';
         s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: birthYear + 1 + Math.floor(R() * 8), alive: true });
       }
+      unclashSiblings(s, 0);
       unclashFriend(s);
       for (const t of talents) {
         const def = W.talents.find((x) => x.id === t);
@@ -915,6 +928,7 @@
         const sg = R() < 0.5 ? 'm' : 'f';
         s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: year + 1 + Math.floor(R() * 8), alive: true });
       }
+      unclashSiblings(s, older.length, [P.spouse]);
       unclashFriend(s);
       for (const t of talents) { const def = W.talents.find((x) => x.id === t); if (def.eff) apply(def.eff, null); }
       const first = s.lineage[0];
