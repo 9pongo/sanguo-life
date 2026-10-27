@@ -134,6 +134,7 @@
       const s = S();
       if (req.age && (s.age < req.age[0] || s.age > req.age[1])) return false;
       if (req.year && (s.year < req.year[0] || s.year > req.year[1])) return false;
+      if (req.born && (s.birthYear < req.born[0] || s.birthYear > req.born[1])) return false; // 出生年：甲子年以後才出生的人，沒見過黃巾
       if (req.region && !arr(req.region).includes(s.region)) return false;
       if (req.noregion && arr(req.noregion).includes(s.region)) return false;
       if (req.notFired && arr(req.notFired).some((id) => s.fired[id])) return false; // 這輩子碰過內容相近的事
@@ -959,8 +960,9 @@
       for (const t of talents) { const def = W.talents.find((x) => x.id === t); if (def.eff) apply(def.eff, null); }
       const first = s.lineage[0];
       const parentRole = P.gender === 'm' ? '父親' : '母親';
-      // 當家的是母親時，孩子隨父姓，祖上卻是母親那一家的人
-      let family = `你是${surname === P.name[0] ? surname + '家' : '這一家'}的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
+      // 哪一代是女兒當家，孩子就隨了父姓，祖上卻是別家的姓：這時只說「這一家」
+      const sameLine = surname === P.name[0] && (!first || first.name[0] === surname);
+      let family = `你是${sameLine ? surname + '家' : '這一家'}的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
       const n = older.length;
       family += n ? `，你上頭還有${n === 2 ? '兩' : cnNum(n)}個哥哥姊姊。` : '，你是頭一個孩子。';
       if (first) family += `祖上${first.name}那一輩「${first.title}」的事，家裡的人常常提起。`;

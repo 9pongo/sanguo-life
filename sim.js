@@ -49,6 +49,7 @@ function checkReq(req, where) {
   for (const k of [...Object.keys(req.bond || {}), ...Object.keys(req.bondMax || {})]) if (!data.bonds[k]) errors.push(`${where}：未知的人物 ${k}`);
   for (const k of ['child', 'son']) if (req[k] && !Array.isArray(req[k])) errors.push(`${where}：${k} 必須是 [最小年齡, 最大年齡]`);
   if (req.gen && !Array.isArray(req.gen)) errors.push(`${where}：gen 必須是 [最小, 最大]`);
+  if (req.born && !Array.isArray(req.born)) errors.push(`${where}：born 必須是 [最早, 最晚]`);
   if (Array.isArray(req.anyFlag) && req.anyFlag.length === 0) errors.push(`${where}：anyFlag 是空陣列，永遠不成立`);
 }
 function checkEff(eff, where) {
