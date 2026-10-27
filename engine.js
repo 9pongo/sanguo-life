@@ -630,7 +630,8 @@
       // 配偶也會老、會病：大致跟你同齡，死亡率比照你這個年紀
       if (s.alive && spouseHere() && s.age >= 30 && band && R() < band.p * (W.spouseMortality ?? 0.9) * (plague ? W.plagueMult : 1)) {
         apply({ flag: 'spouse_dead_old', 健: -8 }, null);
-        const pool = W.spouseDeathTexts || [];
+        // 吵翻了一直沒說開的：不寫「握著你的手」那種
+        const pool = (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || W.spouseDeathTexts || [];
         emit({ type: 'event', tag: '喪偶', text: fmt(pool[Math.floor(R() * pool.length)] || '{spouse}走了。') });
       }
       // 成了家的人，每年有一定機會添一個孩子
