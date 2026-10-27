@@ -380,7 +380,13 @@
       // 這一下沒活過去：不能再接「你第三天夜裡才爬出來」那種寫活下來的結果
       const ov = (c.outIf || []).find((v) => meets(v.req));
       const out = !s.alive && c.deathOut ? c.deathOut : ov ? variant(ov.out, ev.id + '#' + c.t + '@') : variant(withAlt(c.out, c.outAlt), ev.id + '#' + c.t);
-      if (out) emit({ type: 'event', text: out });
+      if (out) {
+        // 搬家的小字（「你家從此落腳在…」）排在選項結果後面，不要先講落腳、再講一路往南走
+        const moved = g.out.slice(g.out.indexOf(head) + 1).filter((e) => e.type === 'note' && e.tag === '遷居');
+        for (const list of [g.out, s.log]) for (const e of moved) list.splice(list.lastIndexOf(e), 1);
+        emit({ type: 'event', text: out });
+        g.out.push(...moved); s.log.push(...moved);
+      }
       let branch = null;
       if (s.alive && c.chk) {
         branch = R() < chance(c.chk) ? c.ok : c.fail;
