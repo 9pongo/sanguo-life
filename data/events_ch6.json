@@ -1976,6 +1976,12 @@
     "noflag": [
      "huaibei_done",
      "huaibei"
+    ],
+    "cls": [
+     "tenant",
+     "farmer",
+     "artisan",
+     "clerk"
     ]
    },
    "tag": "淮北",

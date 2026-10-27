@@ -838,7 +838,7 @@
       g.succession = null;
       g.out = [];
       emit({ type: 'heir', text: `第${cnNum(s.generation)}代　${s.name}`, gen: s.generation, rel: h.rel });
-      emit({ type: 'event', tag: '傳承', text: fmt(flags.prev_child && W.heirChildText ? variant(W.heirChildText, 'heirChild') : variant(W.heirText, 'heirText')) });
+      emit({ type: 'event', tag: '傳承', text: fmt(flags.prev_child && W.heirChildText ? variant(W.heirChildText, 'heirChild') : age < 8 && W.heirYoungText ? variant(W.heirYoungText, 'heirYoung') : variant(W.heirText, 'heirText')) });
       if (h.via) emit({ type: 'event', tag: '傳承', text: fmt(variant(W.heirGrandText, 'heirGrand')) });
       if (wedText) emit({ type: 'event', tag: '成家', text: fmt(variant(wedText, 'heirWed')) });
       g.queue = [];
@@ -965,7 +965,10 @@
       let family = `你是${sameLine ? surname + '家' : '這一家'}的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
       const n = older.length;
       family += n ? `，你上頭還有${n === 2 ? '兩' : cnNum(n)}個哥哥姊姊。` : '，你是頭一個孩子。';
-      if (first) family += `祖上${first.name}那一輩「${first.title}」的事，家裡的人常常提起。`;
+      // 早逝、壽終這類平常的收場，說不上是「事」
+      if (first) family += ['早逝', '疫', '大疫', '童年'].includes(first.title) ? `祖上${first.name}走得早，家裡的人說起來，總要嘆一口氣。`
+        : ['壽終', '白頭'].includes(first.title) ? `祖上${first.name}活到了白頭，家裡的人說起來，都說那是有福氣的。`
+        : `祖上${first.name}那一輩「${first.title}」的事，家裡的人常常提起。`;
       s.birth = {
         era: era(year), ganzhi: ganzhi(year), region: W.regions.find((r) => r.id === s.region), cls,
         talents: talents.map((t) => W.talents.find((x) => x.id === t)), family, late: true,

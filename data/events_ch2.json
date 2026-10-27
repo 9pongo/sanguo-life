@@ -2038,6 +2038,12 @@
     "noflag": [
      "jingzhou",
      "tuntian"
+    ],
+    "cls": [
+     "tenant",
+     "farmer",
+     "artisan",
+     "clerk"
     ]
    },
    "tag": "屯田",
@@ -2371,7 +2377,7 @@
       }
      },
      "fail": {
-      "out": "軍營的書佐翻了半天名冊，在{spouse}的名字旁邊畫了一個圈。",
+      "out": "軍營的書佐翻了半天名冊，在{spouse}的名字旁邊畫了一個圈。他從牆角一堆舊衣物裡翻出一隻草鞋，說是{spouse}留下的，讓你帶回去。",
       "eff": {
        "flag": "widowed",
        "健": -8
