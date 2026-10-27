@@ -250,7 +250,7 @@
         if (to) moveTo(to);
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換
         const pl = (data.world.relocatePlace || {})[f];
-        if (pl) { s.place = pl.place; s.regionName = pl.name; (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); }
+        if (pl && (!pl.from || pl.from === s.region) && s.place !== pl.place) { s.place = pl.place; s.regionName = pl.name; (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); if (!to) emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${pl.name}。` }); }
       }
       if (eff.region) moveTo(eff.region);
       for (const f of arr(eff.unflag)) delete s.flags[f];
