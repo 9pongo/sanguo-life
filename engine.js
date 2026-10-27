@@ -215,7 +215,7 @@
       for (const [y, , pl] of s.regionHist || []) if (r === null || y <= s.birthYear + 8) r = pl;
       return r || s.place;
     }
-    function moveTo(id) {
+    function moveTo(id, quiet) {
       const s = S();
       const r = data.world.regions.find((x) => x.id === id);
       if (!r || s.region === id) return;
@@ -223,7 +223,7 @@
       (s.regionHist || (s.regionHist = [])).push([s.year, r.id, r.place]);
       // 搬到別國的地盤：原本跟著哪一家，到了這裡都只是新來的百姓
       if (r.faction && s.year <= (r.factionUntil ?? 9999) && s.faction && s.faction !== 'civ' && s.faction !== r.faction) s.faction = 'civ';
-      emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${r.name}。` });
+      if (!quiet) emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${r.name}。` });
     }
 
     function apply(eff, entry) {
@@ -246,11 +246,12 @@
         if (!s.flags[f]) { (s.flagYear || (s.flagYear = {}))[f] = s.year; (s.flagRegion || (s.flagRegion = {}))[f] = s.region; }
         s.flags[f] = true;
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
+        // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換；跟著搬到別州的，遷居只寫落腳的那個地名
         const to = (data.world.relocate || {})[f];
-        if (to) moveTo(to);
-        // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換
         const pl = (data.world.relocatePlace || {})[f];
-        if (pl && (!pl.from || pl.from === s.region) && s.place !== pl.place) { s.place = pl.place; s.regionName = pl.name; (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); if (!to) emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${pl.name}。` }); }
+        const plOk = pl && (!pl.from || pl.from === s.region);
+        if (to) moveTo(to, plOk);
+        if (plOk && s.place !== pl.place) { s.place = pl.place; s.regionName = pl.name; (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${pl.name}。` }); }
       }
       if (eff.region) moveTo(eff.region);
       for (const f of arr(eff.unflag)) delete s.flags[f];

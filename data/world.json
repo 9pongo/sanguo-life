@@ -4067,9 +4067,14 @@
   "back_from_liaodong": "ji",
   "jiangling": "jiangling",
   "to_luoyang": "luoyang",
-  "to_huainan": "huainan"
+  "to_huainan": "huainan",
+  "xinye": "jing"
  },
  "relocatePlace": {
+  "xinye": {
+   "place": "新野",
+   "name": "荊州新野"
+  },
   "to_jingzhou": {
    "place": "襄陽",
    "name": "荊州襄陽"
