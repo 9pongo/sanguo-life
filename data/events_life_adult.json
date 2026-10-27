@@ -52,7 +52,8 @@
      18,
      50
     ],
-    "cls": "tenant"
+    "cls": "tenant",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -73,7 +74,8 @@
      18,
      50
     ],
-    "noregion": "luoyang"
+    "noregion": "luoyang",
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -229,7 +231,8 @@
     "age": [
      18,
      50
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -313,7 +316,8 @@
      18,
      50
     ],
-    "gender": "f"
+    "gender": "f",
+    "nofaction": "heishan"
    },
    "w": 3,
    "repeat": 2,
@@ -979,7 +983,8 @@
     "age": [
      18,
      50
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "text": "{place}的市上來了一班俳優，翻跟斗、走繩索，還有一個人能把刀吞進喉嚨裡。你看得忘了買鹽，空著手回了家。",
@@ -1330,7 +1335,8 @@
      22,
      50
     ],
-    "focus": "遊學求師"
+    "focus": "遊學求師",
+    "nofaction": "heishan"
    },
    "w": 4,
    "eff": {

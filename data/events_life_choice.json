@@ -426,7 +426,8 @@
    "text": "里中幾家婦人商量，要湊錢買一架好織機輪著用，織出的布一起賣給布商，賺的錢照出力多少分。她們來問你要不要入一份。",
    "req": {
     "gender": "f",
-    "married": true
+    "married": true,
+    "nofaction": "heishan"
    },
    "choices": [
     {
@@ -617,7 +618,8 @@
    "title": "分家",
    "text": "家裡人口一年比一年多，一個灶上吃飯，天天有口角。族裡長輩來主持分家，田、屋、牛三樣分成幾份，讓你先挑。",
    "req": {
-    "married": true
+    "married": true,
+    "nofaction": "heishan"
    },
    "textIf": [
     {
