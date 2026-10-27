@@ -1634,7 +1634,13 @@
      "cao"
     ],
     "region": "jing",
-    "noflag": "yanghu_tian_done"
+    "noflag": "yanghu_tian_done",
+    "cls": [
+     "tenant",
+     "farmer",
+     "artisan",
+     "clerk"
+    ]
    },
    "tag": "墾田",
    "title": "羊公的田",

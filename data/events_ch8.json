@@ -619,7 +619,13 @@
     60
    ],
    "req": {
-    "noflag": "dianke_done"
+    "noflag": "dianke_done",
+    "cls": [
+     "tenant",
+     "farmer",
+     "artisan",
+     "clerk"
+    ]
    },
    "tag": "占田",
    "title": "占田還是蔭客",
@@ -716,7 +722,13 @@
      "文": 15
     },
     "noflag": "zz_done",
-    "gender": "m"
+    "gender": "m",
+    "cls": [
+     "tenant",
+     "farmer",
+     "artisan",
+     "clerk"
+    ]
    },
    "tag": "中正",
    "title": "上品無寒門",

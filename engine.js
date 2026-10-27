@@ -966,7 +966,9 @@
       const sameLine = surname === P.name[0] && (!first || first.name[0] === surname);
       let family = `你是${sameLine ? surname + '家' : '這一家'}的第${cnNum(s.generation)}代。${parentRole}${P.name}是這一代當家的人`;
       const n = older.length;
-      family += n ? `，你上頭還有${n === 2 ? '兩' : cnNum(n)}個哥哥姊姊。` : '，你是頭一個孩子。';
+      const cnt = (k) => (k === 2 ? '兩' : cnNum(k)) + '個';
+      const nM = older.filter((x) => x.gender === 'm').length, nF = n - nM;
+      family += n ? `，你上頭還有${[nM && cnt(nM) + '哥哥', nF && cnt(nF) + '姊姊'].filter(Boolean).join('、')}。` : '，你是頭一個孩子。';
       // 早逝、壽終這類平常的收場，說不上是「事」
       if (first) family += ['早逝', '疫', '大疫', '童年'].includes(first.title) ? `祖上${first.name}走得早，家裡的人說起來，總要嘆一口氣。`
         : ['壽終', '白頭'].includes(first.title) ? `祖上${first.name}活到了白頭，家裡的人說起來，都說那是有福氣的。`

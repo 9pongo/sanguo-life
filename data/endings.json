@@ -611,6 +611,20 @@
    "text": "天下就要一統了。{name}死在統一的前夕，沒有看到那一天。"
   },
   {
+   "id": "d8_war_civ",
+   "when": "dead",
+   "chapter": 8,
+   "cause": [
+    "八王之亂",
+    "兵禍"
+   ],
+   "req": {
+    "noflag": "served"
+   },
+   "title": "亂兵",
+   "text": "{name}死在諸王混戰的那些年裡。誰的兵打過來都一樣，搶糧、拉人、燒房子，里中的人連是哪一個王的兵都分不清。"
+  },
+  {
    "id": "d8_war",
    "when": "dead",
    "chapter": 8,

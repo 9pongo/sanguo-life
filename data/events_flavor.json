@@ -424,7 +424,13 @@
     ],
     "gender": "m",
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": "xuwu",
+    "cls": [
+     "tenant",
+     "farmer",
+     "artisan",
+     "clerk"
+    ]
    },
    "w": 3,
    "eff": {
