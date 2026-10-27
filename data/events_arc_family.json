@@ -1101,7 +1101,10 @@
      ]
     }
    ],
-   "familyOnce": true
+   "familyOnce": true,
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "am_wd_away",
@@ -1113,6 +1116,9 @@
    ],
    "eff": {
     "flag": "am_wd_left"
+   },
+   "req": {
+    "nofaction": "heishan"
    }
   },
   {
@@ -1125,7 +1131,8 @@
     "anyFlag": [
      "am_wd_help",
      "am_wd_work"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "text": "你往孫家跑得勤，里中就有了閒話，說你一個人過日子，天天往寡婦門前轉，安的什麼心。孫氏聽了，好幾天不肯開門。",
    "textIf": [
@@ -1257,7 +1264,8 @@
     "anyFlag": [
      "am_wd_keep",
      "am_wd_stop"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "text": "孫氏咳了一冬，這天讓阿禾來請你。她從席下摸出一卷木牘，是家裡那幾畝田的契，說夫家的族人盯了好幾年，想託你收著，等阿禾成了人再交給他。",
    "textIf": [
@@ -1318,7 +1326,8 @@
    "recheck": true,
    "tag": "鄰里",
    "req": {
-    "flag": "am_wd_vow"
+    "flag": "am_wd_vow",
+    "nofaction": "heishan"
    },
    "text": "阿禾長大了，比你還高半個頭。你把那卷田契交還給他，他捧著看了很久，跪下磕了三個頭。這年秋收，他扛了第一袋新穀送到你家門口。",
    "alt": [
@@ -1650,7 +1659,10 @@
       "你推辭了三回，長輩們只好去找你的堂兄。堂兄接了族譜，那天請你喝了一頓酒。"
      ]
     }
-   ]
+   ],
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "am_cl_field",
@@ -1662,7 +1674,8 @@
     "anyFlag": [
      "am_cl_head",
      "am_cl_decline"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "text": "族中的祭田今年收成好，除去祭祀還剩不少。人丁多的那一房說該按人頭分；守寡的叔母家只剩兩口人，說往年都先照應孤弱。兩邊在祠堂裡吵起來，都看著你。",
    "textIf": [

@@ -62,7 +62,10 @@
      "out": "你沒去。那年你家省吃儉用，到秋天才又買了一頭小牛。"
     }
    ],
-   "p": 0.22
+   "p": 0.22,
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "lz_wall",
@@ -129,7 +132,10 @@
      "out": "里正拿著繩子量了半天，判鄰家往回挪三寸。兩邊都不太滿意，也就這樣了。"
     }
    ],
-   "p": 0.22
+   "p": 0.22,
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "lz_debt",
@@ -415,7 +421,8 @@
    "p": 0.22,
    "req": {
     "cls": "tenant",
-    "noflag": "tuntian"
+    "noflag": "tuntian",
+    "nofaction": "heishan"
    }
   },
   {

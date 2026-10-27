@@ -370,7 +370,8 @@
     "age": [
      3,
      60
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -397,7 +398,8 @@
     "cls": [
      "tenant",
      "farmer"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 3,
    "repeat": 2,
@@ -515,7 +517,8 @@
     ],
     "stat": {
      "文": 12
-    }
+    },
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {

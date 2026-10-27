@@ -321,7 +321,8 @@
      "farmer",
      "artisan",
      "clerk"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "textIf": [
     {
@@ -703,7 +704,8 @@
     "cls": [
      "tenant",
      "farmer"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "choices": [
     {
@@ -1197,7 +1199,10 @@
      }
     }
    ],
-   "p": 0.14
+   "p": 0.14,
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "lx_buyland",
@@ -1214,7 +1219,8 @@
     "stat": {
      "財": 10
     },
-    "noflag": "dianke"
+    "noflag": "dianke",
+    "nofaction": "heishan"
    },
    "textIf": [
     {
@@ -1387,7 +1393,10 @@
     "大疫過後，鄰村有戶人家只剩一個還沒斷奶的孩子，躺在空屋裡哭。族裡的人互相推，誰也不肯接。里正把孩子抱到你家門口，問你肯不肯收下。",
     "一個逃荒的婦人病死在里外的破廟裡，懷裡還抱著一個吃奶的孩子。里中的人商量了兩天，最後里正抱著孩子來敲你家的門。",
     "鄰村一對夫婦在河上翻了船，只撈上來一個還在吃奶的孩子。那家沒有別的親人，孩子被抱著一家一家地問，哭得嗓子都啞了。"
-   ]
+   ],
+   "req": {
+    "nofaction": "heishan"
+   }
   },
   {
    "id": "lx_grudge",

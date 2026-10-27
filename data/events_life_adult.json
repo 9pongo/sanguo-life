@@ -104,7 +104,8 @@
     "year": [
      184,
      207
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "note": "漢代按田畝徵收芻稿（牲口草料與禾稈），是田租之外的雜稅。",
@@ -423,7 +424,8 @@
      "tenant",
      "farmer",
      "artisan"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -606,7 +608,8 @@
     "child": [
      4,
      9
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -765,7 +768,8 @@
     "age": [
      20,
      50
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -790,7 +794,8 @@
      "farmer",
      "clerk",
      "gentry"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -818,7 +823,8 @@
     ],
     "notFired": [
      "lx_lawsuit"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -963,7 +969,8 @@
     "year": [
      184,
      207
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
@@ -1112,7 +1119,8 @@
      "qing",
      "xu"
     ],
-    "gender": "m"
+    "gender": "m",
+    "nofaction": "heishan"
    },
    "w": 3,
    "eff": {
