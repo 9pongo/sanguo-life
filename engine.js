@@ -163,6 +163,8 @@
       if (req.kidTag) { const c = (s.children || []).find((x) => x.alive && !x.away && x.tag === req.kidTag); if (!c) return false; s._kid = c.name; if (c.gender === 'm') s._son = c.name; }
       if (req.child) { const c = findKid(null, req.child, req.kidUnwed); if (!c) return false; s._kid = c.name; }
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
+      // 還住在小時候住的地方（沒有搬到別州去）
+      if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
       if (req.married === true && !spouseHere()) return false;
       if (req.married === false && s.spouse) return false;
       return true;
@@ -203,11 +205,19 @@
       if (entry) entry.death = true;
     }
 
+    // 小時候（八歲上下）住在哪裡
+    function homePlace() {
+      const s = S();
+      let r = null;
+      for (const [y, , pl] of s.regionHist || []) if (r === null || y <= s.birthYear + 8) r = pl;
+      return r || s.place;
+    }
     function moveTo(id) {
       const s = S();
       const r = data.world.regions.find((x) => x.id === id);
       if (!r || s.region === id) return;
       s.region = r.id; s.regionName = r.name; s.place = r.place;
+      (s.regionHist || (s.regionHist = [])).push([s.year, r.id, r.place]);
       // 搬到別國的地盤：原本跟著哪一家，到了這裡都只是新來的百姓
       if (r.faction && s.year <= (r.factionUntil ?? 9999) && s.faction && s.faction !== 'civ' && s.faction !== r.faction) s.faction = 'civ';
       emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${r.name}。` });
@@ -237,7 +247,7 @@
         if (to) moveTo(to);
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換
         const pl = (data.world.relocatePlace || {})[f];
-        if (pl) { s.place = pl.place; s.regionName = pl.name; }
+        if (pl) { s.place = pl.place; s.regionName = pl.name; (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); }
       }
       if (eff.region) moveTo(eff.region);
       for (const f of arr(eff.unflag)) delete s.flags[f];
@@ -447,7 +457,7 @@
       g.st = {
         name: surname + randomGiven(gender), surname, gender, birthYear, year: birthYear, age: 0,
         children: [], siblings: [], generation: 1, lineage: [],
-        region: region.id, regionName: region.name, place: region.place,
+        region: region.id, regionName: region.name, place: region.place, regionHist: [[birthYear, region.id, region.place]],
         cls: cls.id, clsName: cls.name, talents,
         stats: Object.assign({ 武: 0, 文: 0, 德: 0, 名: 0, 財: 0 }, cls.stats),
         hp: 70, flags: {}, bonds: {}, focus: null, route: null, faction: null, chapter: 1, spouse: null,
@@ -792,7 +802,7 @@
         name: h.name, surname, gender: h.gender, birthYear: h.born, year: p.year, age,
         // 兄弟姊妹接班還是同一代
         children: [], siblings, generation: (h.rel === '弟' || h.rel === '妹') ? p.generation : p.generation + (h.via ? 2 : 1), lineage: p.lineage,
-        region: p.region, regionName: p.regionName, place: p.place,
+        region: p.region, regionName: p.regionName, place: p.place, regionHist: [...(p.regionHist || [])], // 這一家歷年住過的地方：接家的人小時候住哪裡，從這裡查
         cls: clsId, clsName: ncls.name, talents, stats, hp: 70, flags, bonds: {},
         focus: null, route: null, faction: p.faction, chapter: p.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
@@ -922,7 +932,7 @@
       g.st = {
         name: '', surname, gender, birthYear: year, year, age: 0,
         children: [], siblings: [...older], generation: P.generation + 1, lineage: P.lineage.map(({ memo, ...x }) => x), // 自動跑過的祖上不是你親身活過的，不留「你」的往事
-        region: P.region, regionName: P.regionName, place: P.place,
+        region: P.region, regionName: P.regionName, place: P.place, regionHist: [[year, P.region, P.place]],
         cls: cls.id, clsName: cls.name, talents, stats,
         hp: 70, flags, bonds: {}, focus: null, route: null, faction: P.faction, chapter: P.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
