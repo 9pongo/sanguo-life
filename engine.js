@@ -827,6 +827,20 @@
       // 弟妹早已成家的（成過親、或曾經被列出孩子接班）一定是成了家的人。亂數照樣抽一次，舊存檔重播不走樣
       if ((h.wed && age >= 15) || (age >= 18 && (R() < (age >= 25 ? (W.heirMarried ?? 0.9) : 0.6) || h.knownWed))) {
         s.spouse = spouseName(s.gender === 'm' ? 'f' : 'm');
+        // 上一代列出的長孫就是這個人的孩子：先放進孩子名單（女兒接家的，配偶跟著改成孩子的姓）
+        // （孩子的名不能犯祖上的諱；長孫的名是上一代取的，沒避開更早的祖上，犯了就不帶進來）
+        let gc = !h.via && heirs.find((x) => x.via === h.name);
+        if (gc && [s.name, ...s.forbid].some((n) => n.slice(1) === gc.name.slice(1))) gc = null;
+        if (gc) {
+          // 配偶：女兒接家的改成孩子的姓；名跟姓同字（石石）、或跟孩子同名的，照出生年換一個名，不動主線亂數
+          const pool = s.gender === 'f' ? W.names.male : W.names.female;
+          const sur = s.gender === 'f' ? gc.name[0] : s.spouse[0];
+          let given = s.spouse.slice(1);
+          for (let k = 0; (given === sur || given === gc.name.slice(1)) && k < pool.length; k++) given = pool[(gc.born + k) % pool.length];
+          s.spouse = sur + given;
+          s.children.push({ name: gc.name, gender: gc.gender, born: gc.born, alive: true });
+          s.flags.has_child = true;
+        }
         const sur = s.gender === 'm' ? s.surname : s.spouse[0];
         for (let y = h.born + 19; y < s.year && y <= h.born + 45; y++) {
           if (s.children.length >= 6 || R() >= (W.heirPastChildRate ?? 0.1)) continue;
