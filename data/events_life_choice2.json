@@ -276,7 +276,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "ly_burial_paid"
+    "flag": "ly_burial_paid",
+    "stayed": "ly_burial_paid"
    },
    "tag": "人情",
    "text": "這年春耕，有個陌生的年輕人扛著犁出現在你家田頭，一聲不吭地幫你犁了三天的地。你問他是誰，他說：「那年在市上，你給過我錢葬我爹。」",

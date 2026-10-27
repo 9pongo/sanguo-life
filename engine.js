@@ -815,8 +815,8 @@
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同
         parentName: h.via || ((h.rel === '弟' || h.rel === '妹') ? (p.parentName || null) : p.name),
         elders,
-        // 祖上幾代當家和他們的配偶：往後孩子取名都要避開
-        forbid: [...(p.forbid || []), p.name, p.spouse].filter(Boolean),
+        // 祖上幾代當家和他們的配偶：往後孩子取名都要避開；孫輩接班的，親生父母和叔伯姑姑（前一位的孩子）也一樣
+        forbid: [...new Set([...(p.forbid || []), p.name, p.spouse, h.via, ...(p.children || []).map((c) => c.name)].filter((n) => n && n !== h.name))],
       };
       const s = g.st;
       unclashFriend(s);
