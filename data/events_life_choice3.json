@@ -414,10 +414,7 @@
    ],
    "p": 0.22,
    "req": {
-    "cls": [
-     "tenant",
-     "farmer"
-    ],
+    "cls": "tenant",
     "noflag": "tuntian"
    }
   },

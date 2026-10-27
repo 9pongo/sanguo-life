@@ -2507,7 +2507,10 @@
      "af_farm_tenant"
     ],
     "nofaction": "heishan",
-    "noflag": "xuwu",
+    "noflag": [
+     "xuwu",
+     "dianke"
+    ],
     "stayed": "af_farm_open"
    },
    "tag": "農事",

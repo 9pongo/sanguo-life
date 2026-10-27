@@ -1545,7 +1545,10 @@
      "luoyang",
      "huainan"
     ],
-    "noflag": "jin_hudiao_done"
+    "noflag": [
+     "jin_hudiao_done",
+     "dianke"
+    ]
    },
    "tag": "戶調",
    "title": "晉的戶調",

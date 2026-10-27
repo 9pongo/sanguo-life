@@ -848,7 +848,7 @@
    "order": 30,
    "age": [
     16,
-    60
+    45
    ],
    "req": {
     "faction": [
@@ -2502,6 +2502,10 @@
    "kind": "stage",
    "year": 251,
    "order": 45,
+   "age": [
+    14,
+    50
+   ],
    "req": {
     "faction": [
      "civ",
