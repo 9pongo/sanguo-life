@@ -1361,7 +1361,8 @@
      "af_xia_hid",
      "af_xia_talk"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "tuntian"
    },
    "tag": "任俠",
    "title": "門下",
@@ -1498,7 +1499,8 @@
    "kind": "stage",
    "recheck": true,
    "req": {
-    "flag": "af_xia_guest"
+    "flag": "af_xia_guest",
+    "noflag": "tuntian"
    },
    "tag": "任俠",
    "title": "主命",
