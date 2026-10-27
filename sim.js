@@ -95,7 +95,7 @@ for (const ev of data.events) {
     // 可能當場死的選項，結果文字卻寫成活下來：死了的時候要有另一段 deathOut
     checkText(c.deathOut, cw);
     if (c.deathOut && !(c.eff && c.eff.risk)) warns.push(`${cw}：有 deathOut 但這個選項不會當場死`);
-    if (c.eff && c.eff.risk && !c.deathOut && [c.out, ...(c.outAlt || [])].some((o) => /爬出|撿回|活下來|活了下來|逃回|回到家|回到成都|才敢出來|找到了|回來|過了門|人都還在|醒過來/.test(o || '')))
+    if (c.eff && c.eff.risk && !c.deathOut && [c.out, ...(c.outAlt || [])].some((o) => /爬出|撿回|活下來|活了下來|逃回|回到家|回到成都|才敢出來|找到了|回來|過了門|人都還在|醒過來|躲了|第二年|後來那|一個都沒少/.test(o || '')))
       errors.push(`${cw}：可能當場死，但結果寫成活下來，要補 deathOut`);
   });
   if (ev.kind !== 'flavor' && !ev.year && !ev.age) {
