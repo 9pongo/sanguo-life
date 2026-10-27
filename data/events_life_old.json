@@ -693,6 +693,72 @@
    ]
   },
   {
+   "id": "lo_single_days",
+   "kind": "flavor",
+   "w": 3,
+   "repeat": 3,
+   "repeatGap": 3,
+   "req": {
+    "age": [
+     55,
+     95
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "text": "你一個人坐在門口剝豆子，剝完一碗，起身倒進鍋裡，又坐回來剝下一碗。日頭從東邊挪到了西邊。",
+   "alt": [
+    "同族的晚輩來看你，帶了一包棗。你一天只吃三顆，說要吃到過年。",
+    "里中的孩子跑到你門口喊你一聲就跑開。這樣的把戲他們一天要玩好幾回，你每回都應。"
+   ]
+  },
+  {
+   "id": "lo_single_after",
+   "kind": "flavor",
+   "w": 3,
+   "repeat": 3,
+   "repeatGap": 3,
+   "req": {
+    "age": [
+     55,
+     95
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "text": "你跟族長說好了，等你走了，屋子和那點家當歸族裡，只求逢年過節有人給你上一炷香。族長點了頭。",
+   "alt": [
+    "你替自己挑好了墳地，就在爹娘的墳邊上。你去看過好幾回，每回都坐一會兒才走。",
+    "夜裡你醒來，屋裡靜得只聽得見自己的呼吸。你就這麼躺著，等窗紙一點一點亮起來。"
+   ]
+  },
+  {
+   "id": "lo_single_neighbor",
+   "kind": "flavor",
+   "w": 3,
+   "repeat": 3,
+   "repeatGap": 3,
+   "req": {
+    "age": [
+     55,
+     95
+    ],
+    "married": false,
+    "noflag": "has_child",
+    "nofaction": "heishan"
+   },
+   "eff": {
+    "德": 1
+   },
+   "text": "鄰家的媳婦每天煮飯時多舀一碗，讓孩子端過來。你說不用，她說：一碗飯的事。",
+   "alt": [
+    "下了一夜的雪，早上你推不開門。外面有人在剷雪，剷到你家門口，敲了兩下：還在吧？",
+    "你把年輕時攢下的幾件小東西分給了鄰家的孩子：一把小刀、一個陶哨、一塊磨得發亮的石頭。"
+   ]
+  },
+  {
    "id": "lo_spring",
    "kind": "flavor",
    "w": 2,
