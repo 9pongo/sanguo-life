@@ -90,6 +90,8 @@
         prev: (s.lineage.slice(-1)[0] || {}).name || '家裡的長輩',
         surname: s.surname, gen: cnNum(s.generation),
         son: s._son || '兒子', kid: s._kid || '孩子',
+        // 夭折的是家裡最小、還在身邊的孩子（childDie 沒指定時就是這一個）
+        young: (s.children.filter((c) => c.alive && !c.away).sort((x, y) => y.born - x.born)[0] || {}).name || '孩子',
       };
     }
     // 同一段話有好幾種寫法：這一局的種子決定從哪一種開始，同一家族再碰到就換下一種
@@ -374,6 +376,16 @@
       return pool[Math.floor(R() * pool.length)];
     }
     function randomName(gender) { return randomSurname() + randomGiven(gender); }
+    // 玩伴不跟自己、父母、兄弟姊妹同名（白承祖的玩伴叫徐承祖，讀起來像同一個人）。
+    // 撞名時順著名冊往下挑，不動用亂數，舊存檔重播不走樣
+    function unclashFriend(s) {
+      const pool = data.world.names.male;
+      const used = [s.name, s.parentName, ...s.siblings.map((x) => x.name)].filter(Boolean).map((n) => n.slice(1));
+      let i = pool.indexOf(s.friend.slice(1));
+      if (i < 0) return;
+      for (let k = 0; k < pool.length && used.includes(pool[i]); k++) i = (i + 1) % pool.length;
+      s.friend = s.friend[0] + pool[i];
+    }
     // 配偶（含續弦、再嫁）的名，不跟自己或家裡孩子的名重複
     function spouseName(gender) {
       const s = S();
@@ -420,6 +432,7 @@
         const sg = R() < 0.5 ? 'm' : 'f';
         s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: birthYear + 1 + Math.floor(R() * 8), alive: true });
       }
+      unclashFriend(s);
       for (const t of talents) {
         const def = W.talents.find((x) => x.id === t);
         if (def.eff) apply(def.eff, null);
@@ -758,6 +771,7 @@
         elders,
       };
       const s = g.st;
+      unclashFriend(s);
       for (const t of talents) { const def = W.talents.find((x) => x.id === t); if (def.eff) apply(def.eff, null); }
       s.birth = { era: era(h.born), ganzhi: ganzhi(h.born), region: W.regions.find((r) => r.id === s.region), cls: ncls, talents: talents.map((t) => W.talents.find((x) => x.id === t)), family: '' };
       // 接班時已經成年的人，大多早就成了家，這些年也添了孩子
@@ -894,6 +908,7 @@
         const sg = R() < 0.5 ? 'm' : 'f';
         s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: year + 1 + Math.floor(R() * 8), alive: true });
       }
+      unclashFriend(s);
       for (const t of talents) { const def = W.talents.find((x) => x.id === t); if (def.eff) apply(def.eff, null); }
       const first = s.lineage[0];
       const parentRole = P.gender === 'm' ? '父親' : '母親';

@@ -87,7 +87,7 @@ node build.js         # 打包；稽核有錯誤或頁面腳本有語法錯誤�
 
 ### 文字變數
 
-`{name}` `{friend}` `{region}` `{place}` `{age}` `{year}` `{era}` `{ta}`（玩家的他／她）`{self}` `{spouse}` `{child}` `{kid}` `{son}` `{parent}` `{prev}`（剛過世的上一任當家）`{elder}`（祖上傳說裡真正做過那件事的人）`{surname}` `{gen}`（第幾代，中文數字）
+`{name}` `{friend}` `{region}` `{place}` `{age}` `{year}` `{era}` `{ta}`（玩家的他／她）`{self}` `{spouse}` `{child}` `{kid}` `{son}` `{young}`（家裡最小、還在身邊的孩子，就是 `childDie: true` 會帶走的那一個）`{parent}` `{prev}`（剛過世的上一任當家）`{elder}`（祖上傳說裡真正做過那件事的人）`{surname}` `{gen}`（第幾代，中文數字）
 
 文字裡留下沒填的 `{變數}` 會被稽核抓出來。
 

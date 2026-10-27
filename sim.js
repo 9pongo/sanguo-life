@@ -29,7 +29,7 @@ const ROUTES = new Set(['huangjin', 'flee', 'guanjun', 'xiangyong', 'wubao']);
 const FACTIONS = new Set(['civ', 'cao', 'liu', 'sun', 'yuan', 'heishan']);
 const CHAPTERS = (world.chapters || []).map((c) => c.n);
 const FOCI = new Set(Object.keys(world.focus));
-const VARS = new Set(['name', 'friend', 'region', 'place', 'age', 'year', 'era', 'ta', 'self', 'spouse', 'child', 'parent', 'prev', 'surname', 'son', 'kid', 'gen', 'elder']);
+const VARS = new Set(['name', 'friend', 'region', 'place', 'age', 'year', 'era', 'ta', 'self', 'spouse', 'child', 'parent', 'prev', 'surname', 'son', 'kid', 'young', 'gen', 'elder']);
 const KINDS = new Set(['anchor', 'stage', 'bond', 'flavor']);
 const flagsSet = new Map();
 const flagsRead = new Map();
