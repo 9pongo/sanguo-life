@@ -411,7 +411,8 @@
     "faction": "civ",
     "stat": {
      "文": 30
-    }
+    },
+    "gender": "m"
    },
    "tag": "求賢",
    "title": "唯才是舉",
