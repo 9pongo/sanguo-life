@@ -2601,7 +2601,10 @@
       "財": 1,
       "健": -1,
       "德": -1,
-      "flag": "af_farm_lodged",
+      "flag": [
+       "af_farm_lodged",
+       "dianke"
+      ],
       "later": {
        "in": 5,
        "id": "af_farm_audit"

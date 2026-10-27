@@ -1161,7 +1161,11 @@
      "am_wd_help",
      "am_wd_work"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "stayed": [
+     "am_wd_help",
+     "am_wd_work"
+    ]
    },
    "text": "你往孫家跑得勤，里中就有了閒話，說你一個人過日子，天天往寡婦門前轉，安的什麼心。孫氏聽了，好幾天不肯開門。",
    "textIf": [
@@ -1294,7 +1298,11 @@
      "am_wd_keep",
      "am_wd_stop"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "stayed": [
+     "am_wd_keep",
+     "am_wd_stop"
+    ]
    },
    "text": "孫氏咳了一冬，這天讓阿禾來請你。她從席下摸出一卷木牘，是家裡那幾畝田的契，說夫家的族人盯了好幾年，想託你收著，等阿禾成了人再交給他。",
    "textIf": [
@@ -1356,7 +1364,8 @@
    "tag": "鄰里",
    "req": {
     "flag": "am_wd_vow",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "stayed": "am_wd_vow"
    },
    "text": "阿禾長大了，比你還高半個頭。你把那卷田契交還給他，他捧著看了很久，跪下磕了三個頭。這年秋收，他扛了第一袋新穀送到你家門口。",
    "alt": [

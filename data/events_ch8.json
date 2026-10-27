@@ -619,7 +619,10 @@
     60
    ],
    "req": {
-    "noflag": "dianke_done",
+    "noflag": [
+     "dianke_done",
+     "dianke"
+    ],
     "cls": [
      "tenant",
      "farmer",
