@@ -239,6 +239,11 @@
       for (const f of arr(eff.unflag)) delete s.flags[f];
       if (eff.route) s.route = eff.route;
       if (eff.faction) s.faction = eff.faction;
+      // 屯田是曹家的制度：跟了劉、孫兩家，或搬到蜀、吳、江陵，就不再是屯田戶（子孫也不是）
+      {
+        const NT = data.world.noTuntian || {};
+        if (arr(NT.factions).includes(s.faction) || arr(NT.regions).includes(s.region)) for (const f of arr(NT.flags)) delete s.flags[f];
+      }
       if (eff.focus) s.focus = eff.focus;
       if (eff.spouse) s.spouse = eff.spouse === '@random' ? spouseName(s.gender === 'm' ? 'f' : 'm') : eff.spouse;
       if (eff.injure) {

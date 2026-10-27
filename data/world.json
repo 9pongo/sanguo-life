@@ -5014,5 +5014,20 @@
     "把米放"
    ]
   ]
+ },
+ "noTuntian": {
+  "flags": [
+   "tuntian",
+   "tuntian_long"
+  ],
+  "factions": [
+   "liu",
+   "sun"
+  ],
+  "regions": [
+   "shu",
+   "wu",
+   "jiangling"
+  ]
  }
 }
