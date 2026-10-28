@@ -169,7 +169,8 @@
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
-      // 同一州裡落腳的地方不同（南陽的襄陽、新野，碰不上宛城城裡的事）
+      // 同一州裡落腳的地方不同（南陽的襄陽、新野，碰不上宛城城裡的事）；接家的孩子沒有上一代逃難時記下的旗標，看的是現在住在哪裡
+      if (req.place && !arr(req.place).includes(s.place)) return false;
       if (req.noplace && arr(req.noplace).includes(s.place)) return false;
       if (req.homeAcross !== undefined && homeAcross() !== req.homeAcross) return false;
       // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）

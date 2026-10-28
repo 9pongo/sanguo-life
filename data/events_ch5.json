@@ -1162,7 +1162,10 @@
      "yu",
      "jing"
     ],
-    "noflag": "jiangling"
+    "noflag": "jiangling",
+    "noplace": [
+     "襄陽"
+    ]
    },
    "tag": "大疫",
    "title": "宛許大疫",
