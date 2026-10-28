@@ -289,6 +289,7 @@
         if (arr(NT.factions).includes(s.faction) || arr(NT.regions).includes(s.region)) for (const f of arr(NT.flags)) delete s.flags[f];
       }
       if (eff.focus) s.focus = eff.focus;
+      if (eff.campaignEnd) delete s.campaignYear; // 脫下軍服：往後不再算跟著隊伍在外
       if (eff.spouse) {
         s.spouse = eff.spouse === '@random' ? spouseName(s.gender === 'm' ? 'f' : 'm') : eff.spouse;
         // 換了一個人：前一個配偶被抓走、出門在外、冷戰的那些事，跟這一個無關
@@ -611,10 +612,12 @@
         const away = awayAtWar();
         if (e.camp && !away) return false;
         if (away && !e.camp && !e.year && !String(e.req?.flag || '').startsWith('p_')) return false;
+        if (away && e.homeOnly) return false; // 有年份的小事，寫的是家裡的日子，人在外也碰不上
       }
       // 沒入官府織室的那幾年，碰到的是織室裡的事
       if (e.nubi && !S().flags.guan_nubi) return false;
       if (S().flags.guan_nubi && !e.nubi && !e.year && !String(e.req?.flag || '').startsWith('p_')) return false;
+      if (S().flags.guan_nubi && e.homeOnly) return false;
       if (e.p != null && R() >= e.p) return false; // 稀有小事：每年只有 p 的機會進候選
       return meets(e.req);
     }
@@ -706,7 +709,7 @@
     // 上陣打仗的劇情：黃巾、官軍、義勇的路線卡，以及各家軍中限男子的卡
     function isCampaign(ev) {
       const r = ev.req || {};
-      if (ev.campaign) return true;
+      if (ev.campaign != null) return !!ev.campaign;
       if (r.route && ['huangjin', 'guanjun', 'xiangyong'].includes(r.route)) return true;
       return r.gender === 'm' && !!r.faction && !arr(r.faction).includes('civ');
     }

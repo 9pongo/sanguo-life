@@ -883,7 +883,8 @@
      "eff": {
       "健": 4,
       "財": 2,
-      "flag": "demob"
+      "flag": "demob",
+      "campaignEnd": true
      },
      "out": "你把軍服交了回去，扛著行李回了家。握慣了刀的手，握起鋤頭來有點不習慣。"
     },
@@ -897,11 +898,13 @@
      "lock": "名額太少，輪不到你",
      "eff": {
       "名": 2,
-      "flag": "wuli"
+      "flag": "wuli",
+      "campaignEnd": true
      },
      "out": "一百個人管一整個郡。尚書山濤說這樣不妥，萬一有事，地方上就沒有兵可用了。沒有人聽他的。"
     }
-   ]
+   ],
+   "campaign": false
   },
   {
    "id": "v7_limi",

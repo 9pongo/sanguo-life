@@ -56,7 +56,7 @@ function checkEff(eff, where) {
   if (!eff) return;
   for (const k of Object.keys(eff)) {
     if (STAT_KEYS.has(k)) continue;
-    if (!['flag', 'unflag', 'route', 'faction', 'focus', 'spouse', 'injure', 'bond', 'later', 'die', 'risk', 'hpCause', 'child', 'childDie', 'childAway', 'region', 'tagKid', 'kidWed', 'kidOut'].includes(k)) errors.push(`${where}：未知的效果欄位 ${k}`);
+    if (!['flag', 'unflag', 'route', 'faction', 'focus', 'spouse', 'injure', 'bond', 'later', 'die', 'risk', 'hpCause', 'child', 'childDie', 'childAway', 'region', 'tagKid', 'kidWed', 'kidOut', 'campaignEnd'].includes(k)) errors.push(`${where}：未知的效果欄位 ${k}`);
   }
   for (const f of arr(eff.flag)) add(flagsSet, f, where);
   if (eff.route && !ROUTES.has(eff.route)) errors.push(`${where}：未知的路線 ${eff.route}`);
