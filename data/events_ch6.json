@@ -82,7 +82,8 @@
      "out": "宮殿蓋好以後，你沒有回去。你在城南租了一間小屋，把家人也接了過來。洛陽的街很寬，可是物價貴得嚇人。",
      "show": {
       "region": "yu",
-      "noflag": "tuntian"
+      "noflag": "tuntian",
+      "away": false
      }
     },
     {

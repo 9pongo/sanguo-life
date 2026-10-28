@@ -112,7 +112,7 @@
     }
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
     // 寫到家裡還有別人的句子（家裡人、一家人、晚輩們）：一個人過日子的時候，挑別的寫法；每一種都提到家人，就照原樣
-    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子|屋裡的呼吸聲/;
+    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子|屋裡的呼吸聲|屋裡有人在打呼/;
     const homeText = (list) => { if (!Array.isArray(list) || !aloneNow()) return list; const f = list.filter((t) => !HOUSEHOLD.test(t)); return f.length ? f : list; };
     // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
     let histText = false;
@@ -175,6 +175,8 @@
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
+      if (req.alone !== undefined && aloneNow() !== req.alone) return false; // 沒配偶、沒孩子、爹娘也都不在
+      if (req.away !== undefined && awayAtWar() !== req.away) return false; // 人還跟著隊伍在外
       // 同一州裡落腳的地方不同（南陽的襄陽、新野，碰不上宛城城裡的事）；接家的孩子沒有上一代逃難時記下的旗標，看的是現在住在哪裡
       if (req.place && !arr(req.place).includes(s.place)) return false;
       if (req.noplace && arr(req.noplace).includes(s.place)) return false;

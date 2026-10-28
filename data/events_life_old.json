@@ -766,7 +766,7 @@
    "eff": {
     "健": -2
    },
-   "text": "{spouse}走了以後，你還是每天做兩個人的飯。吃不完的那一碗放在灶上，第二天自己吃掉。",
+   "text": "{spouse}走了以後，吃飯的時候你還是習慣多擺一副碗筷。擺好了才想起來，又默默收了回去。",
    "alt": [
     "夜裡翻身，你習慣伸手去摸旁邊的席子，摸到的是空的。",
     "你把{spouse}的舊衣裳拆了，改成一件短襦。穿在身上，好像還有那個人的味道。"
@@ -790,7 +790,8 @@
      90
     ],
     "married": false,
-    "noflag": "has_child"
+    "noflag": "has_child",
+    "alone": true
    },
    "text": "你一輩子沒有成家。里中的人叫你孤老，你也不在意，只是過年的時候，鄰家會多送一碗肉過來。",
    "alt": [
@@ -811,7 +812,8 @@
     ],
     "married": false,
     "noflag": "has_child",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "alone": true
    },
    "text": "你一個人坐在門口剝豆子，剝完一碗，起身倒進鍋裡，又坐回來剝下一碗。日頭從東邊挪到了西邊。",
    "alt": [
@@ -832,7 +834,8 @@
     ],
     "married": false,
     "noflag": "has_child",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "alone": true
    },
    "text": "你跟族長說好了，等你走了，屋子和那點家當歸族裡，只求逢年過節有人給你上一炷香。族長點了頭。",
    "alt": [
@@ -853,7 +856,8 @@
     ],
     "married": false,
     "noflag": "has_child",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "alone": true
    },
    "eff": {
     "德": 1
