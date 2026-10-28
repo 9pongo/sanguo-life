@@ -327,7 +327,9 @@
     "away": false,
     "noflag": [
      "official",
-     "official_late"
+     "official_late",
+     "tuntian",
+     "dianke"
     ]
    },
    "textIf": [
@@ -636,7 +638,10 @@
      "tuntian",
      "dianke"
     ],
-    "nocls": "gentry",
+    "nocls": [
+     "gentry",
+     "tenant"
+    ],
     "settledFor": 10
    },
    "textIf": [
@@ -1130,7 +1135,8 @@
      "dianke",
      "tuntian",
      "fled_tuntian"
-    ]
+    ],
+    "nocls": "tenant"
    }
   },
   {
@@ -1294,7 +1300,9 @@
     "homeAcross": false,
     "noflag": [
      "tuntian"
-    ]
+    ],
+    "tombAcross": false,
+    "settledFor": 5
    }
   },
   {

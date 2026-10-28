@@ -1935,7 +1935,7 @@
    "req": {
     "flag": "qzb_family"
    },
-   "text": "你跟著青州黃巾進了兗州。男人們被編成了青州兵，你們這些婦孺跟在兵營後頭，一路走，一路埋人。"
+   "text": "你跟著青州黃巾進了兗州。男人們被編成了青州兵，你們這些婦孺被遣回了原籍。回北海的路上，你一路走，一路埋人。"
   },
   {
    "final": true,
@@ -2186,9 +2186,20 @@
   {
    "final": true,
    "req": {
-    "flag": "zhangchang"
+    "flag": "zhangchang",
+    "anyFlag": [
+     "p_huangjin_survivor"
+    ]
    },
    "text": "你頭上綁過紅巾。你說，一百二十年前祖先綁的是黃巾，顏色不一樣，日子差不多。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "zhangchang",
+    "noflag": "p_huangjin_survivor"
+   },
+   "text": "你頭上綁過紅巾。那時候大家都說有聖人出世，你也信了一回。"
   },
   {
    "final": true,

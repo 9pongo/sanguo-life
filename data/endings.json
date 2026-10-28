@@ -80,6 +80,17 @@
    "chapter": 1
   },
   {
+   "id": "d_gj_sick",
+   "when": "dead",
+   "req": {
+    "route": "guanjun"
+   },
+   "cause": "病故",
+   "title": "病卒",
+   "text": "仗打完了，{name}卻病倒了，沒能等到論功行賞。名冊上那個名字旁邊，只記了「病卒」兩個字。",
+   "chapter": 1
+  },
+  {
    "id": "d_gj",
    "when": "dead",
    "req": {
@@ -339,6 +350,25 @@
    "text": "合肥一戰，張遼名震江東。{name}死在那一天的晨光裡，沒有人記得是哪一邊先倒下的。"
   },
   {
+   "id": "d4_luo_young",
+   "when": "dead",
+   "chapter": 4,
+   "req": {
+    "age": [
+     14,
+     39
+    ]
+   },
+   "cause": [
+    "雒城",
+    "定軍山",
+    "潼關",
+    "江陵"
+   ],
+   "title": "死在遠方",
+   "text": "{name}跟著隊伍走了很遠的路，最後死在離{place}很遠很遠的地方，才{age}歲。"
+  },
+  {
    "id": "d4_luo",
    "when": "dead",
    "chapter": 4,
@@ -570,6 +600,20 @@
    "cause": "陰平",
    "title": "陰平",
    "text": "{name}從陰平的山崖上摔了下去。鄧艾滅了蜀，名字寫進了史書；摔下山崖的人，沒有。"
+  },
+  {
+   "id": "d6_jail",
+   "when": "dead",
+   "chapter": 6,
+   "cause": "刑殺",
+   "req": {
+    "faction": [
+     "sun",
+     "liu"
+    ]
+   },
+   "title": "下獄",
+   "text": "{name}沒有活著從官府出來。那些年大獄一場接一場，牽連進去的，有大臣，也有像你這樣的百姓。"
   },
   {
    "id": "d6e_war_wu",
@@ -2242,6 +2286,17 @@
    },
    "title": "寄人籬下",
    "text": "{name}跟著劉備在河北寄人籬下。他說，等雲長回來，咱們就走。"
+  },
+  {
+   "id": "a2_liu_xiapi",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "liu",
+    "flag": "lb_house"
+   },
+   "title": "丟了下邳",
+   "text": "{name}一家是在下邳跟上劉備的。後來劉備丟了下邳、丟了徐州，每丟一次，他都說還會再站起來。你信了。"
   },
   {
    "id": "a2_liu",

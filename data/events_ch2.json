@@ -332,7 +332,8 @@
     "anyFlag": [
      "huangjin_survivor",
      "rejoined"
-    ]
+    ],
+    "noflag": "qzb_family"
    },
    "tag": "因果",
    "eff": {
@@ -1450,6 +1451,43 @@
    ]
   },
   {
+   "id": "yuan_baoqiu",
+   "kind": "stage",
+   "year": 195,
+   "order": 30,
+   "req": {
+    "faction": "yuan",
+    "gender": "m"
+   },
+   "tag": "鮑丘",
+   "title": "鮑丘",
+   "text": "公孫瓚殺了幽州牧劉虞。劉虞的舊部鮮于輔、閻柔招來烏桓、鮮卑幾萬騎兵替他報仇，袁紹派麴義帶兵北上會合，在鮑丘跟公孫瓚的大軍打了一仗。",
+   "note": "《後漢書·公孫瓚傳》：（興平二年）輔與（袁）紹將麴義合兵十萬，共攻瓚。破瓚於鮑丘，斬首二萬餘級。瓚遂保易京。",
+   "choices": [
+    {
+     "t": "跟著麴義的先登營衝陣",
+     "eff": {
+      "名": 2,
+      "武": 2,
+      "risk": {
+       "base": 0.15,
+       "stat": "武",
+       "k": -0.002,
+       "cause": "戰死"
+      }
+     },
+     "out": "烏桓騎兵從兩翼包上來，你們從正面衝。一仗打完，鮑丘水邊的屍首有兩萬多具，公孫瓚退回易京，從此不敢出城。"
+    },
+    {
+     "t": "在後頭押糧車",
+     "eff": {
+      "健": 1
+     },
+     "out": "你押著糧車走了一個月，到鮑丘的時候仗已經打完了。河灘上全是烏桓人在剝死人的衣服。"
+    }
+   ]
+  },
+  {
    "id": "yuan_yijing",
    "kind": "stage",
    "year": 199,
@@ -1944,7 +1982,7 @@
      "lock": "你和黃巾沒有交情",
      "eff": {
       "flag": "qzb_family",
-      "faction": "cao",
+      "faction": "civ",
       "risk": {
        "base": 0.08,
        "cause": "兵禍"
@@ -2202,7 +2240,8 @@
      "qing",
      "xu"
     ],
-    "noflag": "guandu_fled"
+    "noflag": "guandu_fled",
+    "nocls": "gentry"
    },
    "tag": "官渡",
    "title": "徵發",
@@ -2366,7 +2405,8 @@
    "req": {
     "gender": "f",
     "married": true,
-    "faction": "civ"
+    "faction": "civ",
+    "nocls": "gentry"
    },
    "tag": "徵兵",
    "title": "{spouse}",

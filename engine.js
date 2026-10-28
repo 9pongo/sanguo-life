@@ -184,6 +184,7 @@
       if (req.place && !arr(req.place).includes(s.place)) return false;
       if (req.noplace && arr(req.noplace).includes(s.place)) return false;
       if (req.homeAcross !== undefined && homeAcross() !== req.homeAcross) return false;
+      if (req.tombAcross !== undefined && tombAcross() !== req.tombAcross) return false;
       // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）
       // 在這一帶住了夠久：搬來的年份不晚於 settled（晚年才搬來的人，沒見過這裡從前的事）；settledIn 列出算作同一帶的州
       if (req.settled != null) { const h = s.regionHist || []; let i = h.length; const near = arr(req.settledIn || s.region); while (i > 0 && near.includes(h[i - 1][1])) i--; if (i < h.length && h[i][0] > req.settled) return false; }
@@ -192,6 +193,7 @@
       if (req.settledFor != null) { const h = s.regionHist || []; if (h.length && s.year - h[h.length - 1][0] < req.settledFor) return false; } // 搬來這裡至少住了幾年
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.flagFor) for (const [f, n] of Object.entries(req.flagFor)) { const y = (s.flagYear || {})[f]; if (s.flags[f] && y !== undefined && s.year - y < n) return false; } // 拿到這個旗標至少過了幾年
+      if (req.flagWithin && !Object.entries(req.flagWithin).some(([f, n]) => { const y = (s.flagYear || {})[f]; return s.flags[f] && y !== undefined && s.year - y < n; })) return false; // 其中一個旗標是這幾年才拿到的
       if (req.wedFor != null && s.spouseYear != null && s.year - s.spouseYear < req.wedFor) return false; // 成親至少幾年
       if (req.brother != null && (s.siblings || []).some((x) => x.gender === 'm' && x.alive) !== req.brother) return false;
       if (req.married === true && !spouseHere()) return false;
@@ -204,6 +206,7 @@
       const e = Object.assign({ age: s.age, year: s.year }, entry);
       if (e.text) e.text = fmt(e.text);
       if (e.tag) e.tag = fmt(e.tag);
+      if (e.text) for (const c of s.children || []) if (c.alive && e.text.includes(c.name)) c.seen = s.year; // 這兩年事情裡還提到名字的孩子，接家時不會突然不在了
       g.out.push(e);
       s.log.push(e);
       return e;
@@ -246,6 +249,17 @@
       const s = S();
       let hr = null;
       for (const [y, r] of s.regionHist || []) if (hr === null || y <= s.birthYear + 8) hr = r;
+      return across(hr);
+    }
+    // 祖墳在國界的另一邊，或是一家人搬走五十年以上、老家早就斷了音信：捎不來信，也回不去修墳
+    function tombAcross() {
+      const s = S(), h = s.regionHist || [];
+      if (!h.length || s.place === h[0][2]) return false;
+      const left = (h.find((x) => x[2] !== h[0][2]) || [])[0];
+      return across(h[0][1]) || (left !== undefined && s.year - left >= 50);
+    }
+    function across(hr) {
+      const s = S();
       if (!hr || hr === s.region) return false;
       // 劉焉、劉璋父子閉了斜谷；赤壁以後南北就隔著江
       const y = s.year;
@@ -429,9 +443,10 @@
     function resolve(c, ev, label) {
       const s = S();
       const head = emit({ type: 'choice', id: ev.id, text: label || c.t, title: ev.title ? fmt(ev.title) : null });
+      const ov0 = (c.outIf || []).find((v) => meets(v.req)), at0 = s.region + '/' + s.place; // 這個選項搬了家：看的是搬走以前住在哪裡
       apply(c.eff, head);
       // 這一下沒活過去：不能再接「你第三天夜裡才爬出來」那種寫活下來的結果
-      const ov = (c.outIf || []).find((v) => meets(v.req));
+      const ov = at0 !== s.region + '/' + s.place ? ov0 : (c.outIf || []).find((v) => meets(v.req));
       const out = !s.alive && c.deathOut ? c.deathOut : ov ? variant(ov.out, ev.id + '#' + c.t + '@') : variant(homeText(withAlt(c.out, c.outAlt)), ev.id + '#' + c.t);
       if (out) {
         // 搬家的小字（「你家從此落腳在…」）排在選項結果後面，不要先講落腳、再講一路往南走
@@ -726,8 +741,8 @@
         const pool = (awayAtWar() && W.spouseDeathTextsAway) || (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || W.spouseDeathTexts || [];
         emit({ type: 'event', tag: '喪偶', text: fmt(pool[Math.floor(R() * pool.length)] || '{spouse}走了。') });
       }
-      // 成了家的人，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多）
-      if (s.alive && spouseHere() && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2) * (s.age > 40 ? 0.3 : 1)) {
+      // 成了家的人，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多；人跟著隊伍在外，只有告假回家的時候）
+      if (s.alive && spouseHere() && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2) * (s.age > 40 ? 0.3 : 1) * (awayAtWar() ? 0.4 : 1)) {
         apply({ child: true }, null);
         emit({ type: 'event', tag: '添丁', text: fmt(variant(W.childText, 'childText')) });
       }
@@ -778,7 +793,8 @@
         c.checked = true;
         const age = s.year - c.born;
         const p = age < 5 ? 0.82 : age >= 60 ? Math.max(0.05, 1 - (age - 55) * 0.07) : 0.8;
-        c.alive = R() < p;
+        const r = R(); // 亂數照抽，舊存檔重播才不走樣
+        c.alive = c.seen >= s.year - 2 || r < p;
         return c.alive;
       });
     }
@@ -916,6 +932,7 @@
         flags[p.gender === 'm' ? 'father_dead' : 'mother_dead'] = true;
         // 另一位家長就是上一代的配偶
         if (p.flags.widowed || p.flags.spouse_dead_old || !p.spouse || (p.flags.spouse_taken && !p.flags.spouse_returned)) flags[p.gender === 'm' ? 'mother_dead' : 'father_dead'] = true; // 被抓走沒回來的，也不在了
+        else if (p.gender === 'f') flags.father_in = true; // 上一代是母親當家，父親是後來搬進這個家的：縣署裡的差事不是他的
       }
       for (const f of W.inheritFlags || []) if (p.flags[f]) flags[f] = true;
       // 逃出屯營、當年就被追回處斬的人，家裡人還留在屯裡

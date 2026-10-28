@@ -11,6 +11,9 @@
     "cls": [
      "tenant",
      "farmer"
+    ],
+    "noflag": [
+     "tuntian"
     ]
    },
    "w": 3,
@@ -54,7 +57,11 @@
      50
     ],
     "cls": "tenant",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": [
+     "tuntian",
+     "tuntian_freed"
+    ]
    },
    "w": 3,
    "eff": {
@@ -998,7 +1005,10 @@
     ],
     "cls": "clerk",
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": [
+     "xuwu",
+     "dianke"
+    ]
    },
    "w": 3,
    "eff": {

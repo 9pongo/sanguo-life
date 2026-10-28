@@ -114,7 +114,8 @@
    "req": {
     "bond": {
      "caocao": 1
-    }
+    },
+    "noflag": "with_sunjian"
    },
    "who": "曹操",
    "tag": "濟南",
@@ -343,7 +344,8 @@
     "bond": {
      "sunjian": 1
     },
-    "gender": "m"
+    "gender": "m",
+    "noflag": "jinan"
    },
    "who": "孫堅",
    "tag": "孫堅",
