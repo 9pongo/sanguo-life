@@ -394,7 +394,10 @@
    "req": {
     "faction": "cao",
     "gender": "m",
-    "noflag": "paid_levy"
+    "noflag": [
+     "paid_levy",
+     "wu_porter"
+    ]
    },
    "tag": "伐吳",
    "title": "勢如破竹",

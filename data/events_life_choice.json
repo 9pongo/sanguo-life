@@ -322,7 +322,9 @@
      "artisan",
      "clerk"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noregion": "luoyang",
+    "away": false
    },
    "textIf": [
     {
@@ -345,7 +347,7 @@
      "subAlt": [
       "城裡的錢好賺，也好花。"
      ],
-     "out": "你跟著他走了兩天的路，第一次看見那麼高的城牆。",
+     "out": "你跟著他走了兩天的路，進了郡城。城裡的街一條接一條，你頭幾天出門都要記著路口的樹。",
      "outAlt": [
       "城門口的人比你一輩子見過的還多。你在城南的大通鋪裡住了下來。"
      ],
@@ -622,7 +624,12 @@
    "text": "家裡人口一年比一年多，一個灶上吃飯，天天有口角。族裡長輩來主持分家，田、屋、牛三樣分成幾份，讓你先挑。",
    "req": {
     "married": true,
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": [
+     "tuntian",
+     "dianke"
+    ],
+    "nocls": "gentry"
    },
    "textIf": [
     {
@@ -1248,7 +1255,10 @@
    "p": 0.14,
    "req": {
     "nofaction": "heishan",
-    "homeAcross": false
+    "homeAcross": false,
+    "noflag": [
+     "tuntian"
+    ]
    }
   },
   {
@@ -1462,13 +1472,18 @@
    "textIf": [
     {
      "req": {
-      "flag": "lx_water_fought"
+      "flag": "lx_water_fought",
+      "stayed": "lx_water_fought"
      },
      "text": "當年在渠口跟你打過一架的上游那人，如今病得起不了身。他託人帶話來，說想在走之前見你一面。"
     },
     {
      "req": {
       "anyFlag": [
+       "lz_wall_right",
+       "lz_wall_feud"
+      ],
+      "stayed": [
        "lz_wall_right",
        "lz_wall_feud"
       ]
@@ -1548,7 +1563,12 @@
    "p": 0.17,
    "req": {
     "noflag": "lz_wall_yield",
-    "settledFor": 12
+    "settledFor": 12,
+    "flagFor": {
+     "lz_wall_right": 10,
+     "lz_wall_feud": 10,
+     "lx_water_fought": 10
+    }
    }
   },
   {

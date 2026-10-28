@@ -360,7 +360,8 @@
     "age": [
      45,
      80
-    ]
+    ],
+    "home": true
    },
    "eff": {
     "健": -2
@@ -1420,7 +1421,10 @@
      ],
      "outAlt": [
       "你們在北邊親戚家擠了半年。到了年底，聽說關羽兵敗被殺，你們又搬回了家。"
-     ]
+     ],
+     "show": {
+      "noflag": "tuntian"
+     }
     },
     {
      "t": "照常過日子",
@@ -1480,7 +1484,10 @@
      24,
      200
     ],
-    "away": false
+    "away": false,
+    "kidWed": true,
+    "home": true,
+    "settledFor": 20
    },
    "eff": {
     "德": 1
@@ -1549,7 +1556,10 @@
      "you",
      "xu"
     ],
-    "noflag": "tuntian"
+    "noflag": [
+     "tuntian",
+     "dianke"
+    ]
    },
    "tag": "戶調",
    "title": "戶調",
@@ -1567,7 +1577,10 @@
      ],
      "outAlt": [
       "織機一夜沒停。絹交上去的那天，家裡的女人們手都抬不起來了。"
-     ]
+     ],
+     "show": {
+      "alone": false
+     }
     },
     {
      "t": "拿糧去市上換絹",

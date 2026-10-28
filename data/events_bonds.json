@@ -605,7 +605,10 @@
    "order": 31,
    "req": {
     "gender": "f",
-    "flag": "sun_house"
+    "flag": "sun_house",
+    "noflag": "huangjin_survivor",
+    "noroute": "huangjin",
+    "married": false
    },
    "who": "孫堅",
    "tag": "孫堅",
@@ -638,7 +641,10 @@
    "order": 31,
    "req": {
     "gender": "f",
-    "flag": "sun_house"
+    "flag": "sun_house",
+    "noflag": "huangjin_survivor",
+    "noroute": "huangjin",
+    "married": false
    },
    "who": "孫堅",
    "tag": "孫堅",

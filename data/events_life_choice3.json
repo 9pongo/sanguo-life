@@ -714,14 +714,14 @@
    "p": 0.2,
    "req": {
     "cls": [
-     "tenant",
      "farmer",
      "artisan"
     ],
     "nofaction": "heishan",
     "noflag": [
      "xuwu",
-     "tuntian"
+     "tuntian",
+     "dianke"
     ]
    }
   },

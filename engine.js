@@ -112,7 +112,7 @@
     }
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
     // 寫到家裡還有別人的句子（家裡人、一家人、晚輩們）：一個人過日子的時候，挑別的寫法；每一種都提到家人，就照原樣
-    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子|屋裡的呼吸聲|屋裡有人在打呼/;
+    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子|屋裡的呼吸聲|屋裡有人在打呼|身上(蓋了|多了)一件衣/;
     const homeText = (list) => { if (!Array.isArray(list) || !aloneNow()) return list; const f = list.filter((t) => !HOUSEHOLD.test(t)); return f.length ? f : list; };
     // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
     let histText = false;
@@ -154,6 +154,7 @@
       if (req.anyFlag && !arr(req.anyFlag).some((f) => s.flags[f])) return false;
       if (req.noflag && arr(req.noflag).some((f) => s.flags[f])) return false;
       if (req.route && !arr(req.route).includes(s.route)) return false;
+      if (req.noroute && arr(req.noroute).includes(s.route)) return false;
       // 身在官府管不到的地方（黑山的山寨）：碰不到亭長、縣吏、徭役、戶等這些事
       if (req.nofaction && arr(req.nofaction).includes(s.faction || 'civ')) return false;
       // 身在軍中陣營的女子不上陣，但她也是那片土地上的百姓：平民的劇情同樣算她一份
@@ -186,6 +187,7 @@
       if (req.settled != null) { const h = s.regionHist || []; let i = h.length; const near = arr(req.settledIn || s.region); while (i > 0 && near.includes(h[i - 1][1])) i--; if (i < h.length && h[i][0] > req.settled) return false; }
       if (req.settledFor != null) { const h = s.regionHist || []; if (h.length && s.year - h[h.length - 1][0] < req.settledFor) return false; } // 搬來這裡至少住了幾年
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
+      if (req.flagFor) for (const [f, n] of Object.entries(req.flagFor)) { const y = (s.flagYear || {})[f]; if (s.flags[f] && y !== undefined && s.year - y < n) return false; } // 拿到這個旗標至少過了幾年
       if (req.married === true && !spouseHere()) return false;
       if (req.married === false && s.spouse) return false;
       return true;
@@ -273,6 +275,7 @@
       }
       for (const f of arr(eff.flag)) {
         if (!s.flags[f]) { (s.flagYear || (s.flagYear = {}))[f] = s.year; (s.flagRegion || (s.flagRegion = {}))[f] = s.region; }
+        if (f === 'fled_tuntian' && !s.flags[f]) (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); // 逃出屯營另找地方落腳：算是新搬來的
         s.flags[f] = true;
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換；跟著搬到別州的，遷居只寫落腳的那個地名
@@ -483,6 +486,8 @@
       const used = [s.name, ...s.children.map((c) => c.name), ...(s.forbid || [])].map((n) => n.slice(1)); // 也不跟長輩同名
       let nm = randomName(gender);
       for (let k = 0; k < 12 && used.includes(nm.slice(1)); k++) nm = randomName(gender);
+      // 同姓不婚：抽到跟自己同姓的，順著姓氏名冊往下換一個（不動用亂數，只有原本同姓的那幾局會不一樣）
+      if (nm[0] === s.name[0]) { const L = data.world.names.surnames; nm = L[(L.indexOf(nm[0]) + 1) % L.length] + nm.slice(1); }
       return nm;
     }
     // 孩子取名：不跟兄姊同名，也不用父母、祖上的名（古人避諱），更不能跟配偶同名同姓
@@ -693,7 +698,7 @@
       if (s.alive && spouseHere() && s.age >= 30 && band && R() < band.p * (W.spouseMortality ?? 0.9) * (plague ? W.plagueMult : 1)) {
         apply({ flag: 'spouse_dead_old', 健: -8 }, null);
         // 吵翻了一直沒說開的：不寫「握著你的手」那種
-        const pool = (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || W.spouseDeathTexts || [];
+        const pool = (awayAtWar() && W.spouseDeathTextsAway) || (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || W.spouseDeathTexts || [];
         emit({ type: 'event', tag: '喪偶', text: fmt(pool[Math.floor(R() * pool.length)] || '{spouse}走了。') });
       }
       // 成了家的人，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多）
@@ -717,7 +722,7 @@
     // 上陣打仗的劇情：黃巾、官軍、義勇的路線卡，以及各家軍中限男子的卡
     function isCampaign(ev) {
       const r = ev.req || {};
-      if (ev.campaign != null) return !!ev.campaign;
+      if (ev.campaign != null) return ev.campaign === 'm' ? S().gender === 'm' : !!ev.campaign;
       if (r.route && ['huangjin', 'guanjun', 'xiangyong'].includes(r.route)) return true;
       return r.gender === 'm' && !!r.faction && !arr(r.faction).includes('civ');
     }
@@ -761,7 +766,7 @@
           const gg = lr() < 0.5 ? 'm' : 'f', N = W.names;
           const sur = via.gender === 'm' ? via.name[0] : N.surnames[Math.floor(lr() * N.surnames.length)];
           const pool = gg === 'm' ? N.male : N.female;
-          const taken = [s.name, s.spouse, ...own.map((c) => c.name)].filter(Boolean).map((x) => x.slice(1));
+          const taken = [s.name, s.spouse, ...s.children.map((c) => c.name), ...(s.forbid || [])].filter(Boolean).map((x) => x.slice(1)); // 也不跟祖上、早走的叔伯姑姑同名
           let nm = sur + pool[Math.floor(lr() * pool.length)];
           for (let k = 0; k < 12 && taken.includes(nm.slice(1)); k++) nm = sur + pool[Math.floor(lr() * pool.length)];
           const born = Math.min(via.born + 20 + Math.floor(lr() * 8), s.year - 16);
@@ -876,9 +881,11 @@
       } else {
         flags[p.gender === 'm' ? 'father_dead' : 'mother_dead'] = true;
         // 另一位家長就是上一代的配偶
-        if (p.flags.widowed || p.flags.spouse_dead_old || !p.spouse) flags[p.gender === 'm' ? 'mother_dead' : 'father_dead'] = true;
+        if (p.flags.widowed || p.flags.spouse_dead_old || !p.spouse || (p.flags.spouse_taken && !p.flags.spouse_returned)) flags[p.gender === 'm' ? 'mother_dead' : 'father_dead'] = true; // 被抓走沒回來的，也不在了
       }
       for (const f of W.inheritFlags || []) if (p.flags[f]) flags[f] = true;
+      // 逃出屯營、當年就被追回處斬的人，家裡人還留在屯裡
+      if (p.flags.fled_tuntian && (p.flagYear || {}).fled_tuntian === p.year) flags.tuntian = true;
       // 祖上的事：記住是誰做的。上一任當家親自做的寫他的名字，更早以前的就只說「家裡的長輩」
       const elders = {};
       for (const f of W.parentFlags || []) {
