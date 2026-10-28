@@ -950,7 +950,10 @@
      "lx_lawsuit"
     ],
     "nofaction": "heishan",
-    "settledFor": 10
+    "settledFor": 10,
+    "noflag": [
+     "tuntian"
+    ]
    },
    "w": 2,
    "eff": {

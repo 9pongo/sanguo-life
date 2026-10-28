@@ -525,7 +525,10 @@
    "title": "借錢",
    "text": "{friend}來找你，說家裡老人病了要買藥，又欠著人家的穀子，想跟你借一千錢，等明年秋收就還。他說話的時候一直看著地上。",
    "req": {
-    "noflag": "friend_dead",
+    "noflag": [
+     "friend_dead",
+     "friend_hj_other"
+    ],
     "home": true
    },
    "choices": [
@@ -886,7 +889,10 @@
      "la_clan_dispute"
     ],
     "nofaction": "heishan",
-    "noflag": "xuwu",
+    "noflag": [
+     "xuwu",
+     "tuntian"
+    ],
     "settledFor": 15
    }
   },

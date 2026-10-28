@@ -659,7 +659,13 @@
      "out": "你跟他爹娘說，自己學得淺，替他們打聽了一個縣裡的師傅。"
     }
    ],
-   "p": 0.2
+   "p": 0.2,
+   "req": {
+    "noflag": [
+     "af_med_taught",
+     "af_med_halftaught"
+    ]
+   }
   },
   {
    "id": "lz_appr_grown",

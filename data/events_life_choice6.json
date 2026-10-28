@@ -157,7 +157,8 @@
     "noregion": [
      "wu"
     ],
-    "noflag": "dianke_done"
+    "noflag": "dianke_done",
+    "nocls": "gentry"
    }
   },
   {

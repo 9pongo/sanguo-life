@@ -1348,7 +1348,25 @@
         "id": "af_xia_patron"
        }
       },
-      "out": "你被打得爬不起來，在路邊躺了半夜，才被{friend}找到背回家。"
+      "out": "你被打得爬不起來，在路邊躺了半夜，才被{friend}找到背回家。",
+      "outIf": [
+       {
+        "req": {
+         "anyFlag": [
+          "friend_dead",
+          "friend_hj_other",
+          "friend_with_you"
+         ]
+        },
+        "out": "你被打得爬不起來，在路邊躺了半夜，才被過路的人認出來，背回了家。"
+       },
+       {
+        "req": {
+         "home": false
+        },
+        "out": "你被打得爬不起來，在路邊躺了半夜，才被過路的人認出來，背回了家。"
+       }
+      ]
      }
     },
     {
@@ -1372,6 +1390,60 @@
      "out": "{friend}陪你提著酒去賠了不是。豪強家的管事喝了酒，說年輕人火氣大，這事就算了。",
      "outAlt": [
       "你花了幾匹布、一罈酒。往後在市上碰見那個奴客，彼此點個頭就過去了。"
+     ],
+     "tIf": [
+      {
+       "req": {
+        "anyFlag": [
+         "friend_dead",
+         "friend_hj_other",
+         "friend_with_you"
+        ]
+       },
+       "t": "托人去說和"
+      },
+      {
+       "req": {
+        "home": false
+       },
+       "t": "托人去說和"
+      }
+     ],
+     "subIf": [
+      {
+       "req": {
+        "anyFlag": [
+         "friend_dead",
+         "friend_hj_other",
+         "friend_with_you"
+        ]
+       },
+       "sub": "找個認得豪強家管事的人，擺一桌酒就了了。"
+      },
+      {
+       "req": {
+        "home": false
+       },
+       "sub": "找個認得豪強家管事的人，擺一桌酒就了了。"
+      }
+     ],
+     "outIf": [
+      {
+       "req": {
+        "anyFlag": [
+         "friend_dead",
+         "friend_hj_other",
+         "friend_with_you"
+        ]
+       },
+       "out": "你托里中一位老人陪著，提著酒去賠了不是。豪強家的管事喝了酒，說年輕人火氣大，這事就算了。"
+      },
+      {
+       "req": {
+        "home": false
+       },
+       "out": "你托里中一位老人陪著，提著酒去賠了不是。豪強家的管事喝了酒，說年輕人火氣大，這事就算了。"
+      }
      ]
     },
     {
@@ -2307,7 +2379,8 @@
     "noflag": [
      "tuntian",
      "dianke"
-    ]
+    ],
+    "nocls": "gentry"
    },
    "text": "村外河灣有一片荒地，長滿了蘆葦和荊棘，好些年沒人要。開出來要好幾年才見收成，可往後就是自家的田了。",
    "alt": [
@@ -2802,7 +2875,8 @@
       "財": -3,
       "健": -1,
       "德": 1,
-      "flag": "af_farm_moved"
+      "flag": "af_farm_moved",
+      "unflag": "dianke"
      },
      "out": "你帶著家人連夜走了，在幾十里外的鄉里落了戶，從頭租地種。",
      "outAlt": [

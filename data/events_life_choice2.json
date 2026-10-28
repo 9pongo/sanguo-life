@@ -416,7 +416,10 @@
     "一場暴雨過後，里口那座木橋只剩下兩根歪歪的樁子。孩子們上學、大人趕集都得趟水。里正說要修一座石墩的橋，按戶出錢出工，有人已經在嘀咕了。"
    ],
    "req": {
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": [
+     "xuwu"
+    ]
    }
   },
   {
@@ -542,7 +545,10 @@
    ],
    "req": {
     "nofaction": "heishan",
-    "settledFor": 10
+    "settledFor": 10,
+    "noflag": [
+     "tuntian"
+    ]
    }
   },
   {

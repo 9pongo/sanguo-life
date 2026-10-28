@@ -148,6 +148,7 @@
       if (req.notFired && arr(req.notFired).some((id) => s.fired[id])) return false; // 這輩子碰過內容相近的事
       if (req.cls && !arr(req.cls).includes(s.cls)) return false;
       if (req.nocls && arr(req.nocls).includes(s.cls)) return false; // 有部曲、田莊的人家，碰不上窮人家的小事
+      if (req.cls && s.flags.tuntian && arr(req.cls).every((c) => c === 'artisan')) return false; // 屯田戶種的是官田，不再碰到手藝人家的事
       if (req.gender && s.gender !== req.gender) return false;
       if (req.talent && !arr(req.talent).some((t) => s.talents.includes(t))) return false;
       if (req.flag && !arr(req.flag).every((f) => s.flags[f])) return false;
@@ -187,6 +188,7 @@
       // 在這一帶住了夠久：搬來的年份不晚於 settled（晚年才搬來的人，沒見過這裡從前的事）；settledIn 列出算作同一帶的州
       if (req.settled != null) { const h = s.regionHist || []; let i = h.length; const near = arr(req.settledIn || s.region); while (i > 0 && near.includes(h[i - 1][1])) i--; if (i < h.length && h[i][0] > req.settled) return false; }
       if (req.justMoved !== undefined && ((s.regionHist || []).length > 1 && s.regionHist[s.regionHist.length - 1][0] === s.year) !== req.justMoved) return false; // 這一年剛搬家
+      if (req.movedWithin != null) { const h = s.regionHist || []; if (!(h.length > 1 && s.year - h[h.length - 1][0] < req.movedWithin)) return false; } // 搬來這裡還不到幾年
       if (req.settledFor != null) { const h = s.regionHist || []; if (h.length && s.year - h[h.length - 1][0] < req.settledFor) return false; } // 搬來這裡至少住了幾年
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.flagFor) for (const [f, n] of Object.entries(req.flagFor)) { const y = (s.flagYear || {})[f]; if (s.flags[f] && y !== undefined && s.year - y < n) return false; } // 拿到這個旗標至少過了幾年
@@ -279,7 +281,7 @@
       }
       for (const f of arr(eff.flag)) {
         if (!s.flags[f]) { (s.flagYear || (s.flagYear = {}))[f] = s.year; (s.flagRegion || (s.flagRegion = {}))[f] = s.region; }
-        if (f === 'fled_tuntian' && !s.flags[f]) (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); // 逃出屯營另找地方落腳：算是新搬來的
+        if (['fled_tuntian', 'xuwu'].includes(f) && !s.flags[f]) (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); // 逃出屯營另找地方落腳、躲進徐無山：算是新搬來的
         s.flags[f] = true;
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換；跟著搬到別州的，遷居只寫落腳的那個地名
@@ -738,6 +740,7 @@
     function awayAtWar() {
       const s = S();
       if (s.flags.ex_wu && (s.campaignYear ?? -99) <= (s.flagYear || {}).ex_wu) return false; // 吳亡那年降了晉，隊伍就散了
+      if (s.year === 190 && s.gender === 'm' && ['follow_caocao', 'follow_liubei', 'follow_sunjian'].some((f) => s.flags[f])) return true; // 189 年跟著上了路：190 年開春就在隊伍裡了（排定的家鄉後續可能比編進隊伍那一則先到）
       return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 58 && s.year - (s.campaignYear ?? -99) <= 3;
     }
     // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了、也沒有還沒長大的弟妹
@@ -764,7 +767,10 @@
     }
     function findHeirs() {
       const s = S();
-      const own = survivors(s.children).sort((a, b) => a.born - b.born);
+      let own = survivors(s.children).sort((a, b) => a.born - b.born);
+      // 跟著人出去闖、還沒回來的孩子，家裡還有別的孩子在，就不接這個家
+      const home = own.filter((c) => !(c.outUntil > s.year));
+      if (home.length) own = home;
       if (own.length) {
         const list = own.map((c) => ({ ...c, rel: c.gender === 'm' ? '子' : '女' }));
         // 長子女上了年紀，也可以把家交給長孫。名字、年紀用另一條亂數算，不動主線亂數，舊存檔重播不走樣
@@ -911,7 +917,7 @@
         cls: clsId, clsName: ncls.name, talents, stats, hp: 70, flags, bonds: {},
         // 劉備還沒有自己的地盤（入蜀以前）：上一代跟著他打仗死了，留下的孩子還小，只是家鄉的百姓，不會跟著隊伍走
         // 跟孫家的人家不在江東：接家的人自己沒跟過孫家，就是家鄉的百姓
-        focus: null, route: null, faction: p.faction === 'liu' && p.year < 214 && age < 14 || p.faction === 'sun' && !['wu', 'jiangling'].includes(p.region) ? 'civ' : p.faction, chapter: p.chapter, spouse: null,
+        focus: null, route: null, faction: p.faction === 'liu' && p.year < 214 && age < 14 || p.faction === 'cao' && p.year < 196 && age < 14 || p.faction === 'sun' && !['wu', 'jiangling'].includes(p.region) ? 'civ' : p.faction, chapter: p.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
         alive: true, cause: null, chapterEndings: p.chapterEndings, familySeen: { ...(p.familySeen || {}) },
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同

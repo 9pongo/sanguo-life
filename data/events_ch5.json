@@ -331,7 +331,11 @@
    "year": 231,
    "order": 20,
    "req": {
-    "faction": "liu"
+    "faction": "liu",
+    "age": [
+     15,
+     55
+    ]
    },
    "tag": "祁山",
    "title": "木牛",

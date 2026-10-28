@@ -2056,7 +2056,8 @@
      "t": "把孩子送去大戶人家當奴婢",
      "req": {
       "flag": "has_child",
-      "noflag": "big_wubao"
+      "noflag": "big_wubao",
+      "nocls": "gentry"
      },
      "lock": "你沒有孩子",
      "eff": {

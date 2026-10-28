@@ -1969,6 +1969,17 @@
    "chapter": 1
   },
   {
+   "id": "a_wubao_guest",
+   "when": "alive",
+   "req": {
+    "route": "wubao",
+    "cls": "clerk"
+   },
+   "title": "借塢",
+   "text": "{name}一家在大族的塢堡裡躲過了甲子年。塢主的名冊和糧簿，是你父親一筆一筆記的。",
+   "chapter": 1
+  },
+  {
    "id": "a_wubao",
    "when": "alive",
    "req": {
@@ -3031,7 +3042,7 @@
     "gender": "f"
    },
    "title": "部曲家眷",
-   "text": "{name}跟著孫家的部曲，從長沙到了江東。孫堅死了快三十年，家裡的人還常說起他那頂紅頭巾。"
+   "text": "{name}家是孫家部曲的家眷。孫堅死了快三十年，營裡的老人還常說起他那頂紅頭巾。"
   },
   {
    "id": "a4_sun",
@@ -4493,7 +4504,8 @@
    "when": "alive",
    "chapter": 8,
    "req": {
-    "flag": "wuzhu"
+    "flag": "wuzhu",
+    "stayed": "wuzhu"
    },
    "title": "塢主",
    "text": "{name}當了塢主，守著幾百口人。天下又回到了一百多年前的樣子：官府管不了，只能靠自己。你家從黃巾那年活到現在，靠的就是這個。"
