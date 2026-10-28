@@ -738,10 +738,10 @@
       if (s.flags.ex_wu && (s.campaignYear ?? -99) <= (s.flagYear || {}).ex_wu) return false; // 吳亡那年降了晉，隊伍就散了
       return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 50 && s.year - (s.campaignYear ?? -99) <= 3;
     }
-    // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了
+    // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了、也沒有還沒長大的弟妹
     function aloneNow() {
       const s = S(), f = s.flags;
-      return !spouseHere() && !(s.children || []).some((c) => c.alive) && !!f.father_dead && !!f.mother_dead;
+      return !spouseHere() && !(s.children || []).some((c) => c.alive) && !!f.father_dead && !!f.mother_dead && !(s.siblings || []).some((c) => c.alive && !c.away && c.born <= s.year && s.year - c.born < 20);
     }
     // 配偶還在身邊：成了親、沒有過世、也沒有被抓走未歸
     function spouseHere() {
@@ -908,7 +908,8 @@
         region: p.region, regionName: p.regionName, place: p.place, regionHist: [...(p.regionHist || [])], // 這一家歷年住過的地方：接家的人小時候住哪裡，從這裡查
         cls: clsId, clsName: ncls.name, talents, stats, hp: 70, flags, bonds: {},
         // 劉備還沒有自己的地盤（入蜀以前）：上一代跟著他打仗死了，留下的孩子還小，只是家鄉的百姓，不會跟著隊伍走
-        focus: null, route: null, faction: p.faction === 'liu' && p.year < 214 && age < 14 ? 'civ' : p.faction, chapter: p.chapter, spouse: null,
+        // 跟孫家的人家不在江東：接家的人自己沒跟過孫家，就是家鄉的百姓
+        focus: null, route: null, faction: p.faction === 'liu' && p.year < 214 && age < 14 || p.faction === 'sun' && !['wu', 'jiangling'].includes(p.region) ? 'civ' : p.faction, chapter: p.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
         alive: true, cause: null, chapterEndings: p.chapterEndings, familySeen: { ...(p.familySeen || {}) },
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同

@@ -1257,7 +1257,8 @@
      "xu"
     ],
     "gender": "m",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "nocls": "gentry"
    },
    "w": 3,
    "eff": {
