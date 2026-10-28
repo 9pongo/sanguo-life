@@ -726,7 +726,8 @@
     "夜裡你咳嗽，{spouse}起來給你倒水。你們都老了，誰照顧誰，也分不清了。"
    ],
    "repeat": 2,
-   "repeatGap": 6
+   "repeatGap": 6,
+   "spouseHome": true
   },
   {
    "id": "lo_spouse_quarrel",
@@ -745,7 +746,8 @@
     "你和{spouse}為了晚飯吃什麼爭了半天，最後誰也沒贏，煮了一鍋粥。喝著喝著，兩個人都笑了。"
    ],
    "repeat": 2,
-   "repeatGap": 6
+   "repeatGap": 6,
+   "spouseHome": true
   },
   {
    "id": "lo_widow",

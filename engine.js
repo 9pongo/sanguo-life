@@ -417,7 +417,11 @@
         branch = R() < chance(c.chk) ? c.ok : c.fail;
       }
       if (branch && s.alive) {
-        const e = branch.out ? emit({ type: 'event', text: variant(withAlt(branch.out, branch.outAlt), ev.id + '#' + c.t + (branch === c.ok ? '+' : '-')) }) : head;
+        const key = ev.id + '#' + c.t + (branch === c.ok ? '+' : '-');
+        // 同一個結果換個時候發生，寫法和結果都不同（例如屯田開始以前，找到的人還不在屯營裡）
+        const bv = (branch.outIf || []).find((v) => meets(v.req));
+        if (bv) branch = { ...branch, out: bv.out, outAlt: null, eff: bv.eff ?? branch.eff };
+        const e = branch.out ? emit({ type: 'event', text: variant(withAlt(branch.out, branch.outAlt), key) }) : head;
         apply(branch.eff, e);
       }
       const next = (branch && branch.next) || c.next;
@@ -591,6 +595,8 @@
       if (e.familyOnce && (s.familySeen || {})[e.id]) return false;
       if (e.year && !(s.year >= e.year[0] && s.year <= e.year[1])) return false;
       if (e.year && !e.familyRepeat && ancestorsSaw(e.id)) return false;
+      // 跟{spouse}在家裡一起過日子的小事：人跟著隊伍在外打仗的那幾年碰不上
+      if (e.spouseHome && awayAtWar()) return false;
       if (e.p != null && R() >= e.p) return false; // 稀有小事：每年只有 p 的機會進候選
       return meets(e.req);
     }
