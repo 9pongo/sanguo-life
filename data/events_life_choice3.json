@@ -229,7 +229,13 @@
       "德": -3,
       "flag": "lz_debt_land"
      },
-     "out": "那家人把最後一塊地抵給了你。他們搬走的那天，里中沒有人跟你說話。"
+     "out": "那家人把最後一塊地抵給了你。他們搬走的那天，里中沒有人跟你說話。",
+     "show": {
+      "noflag": [
+       "dianke",
+       "tuntian"
+      ]
+     }
     }
    ],
    "p": 0.2
@@ -464,7 +470,8 @@
      "tuntian_freed",
      "zhantian_self"
     ],
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "settledFor": 5
    }
   },
   {

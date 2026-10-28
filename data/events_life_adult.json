@@ -225,7 +225,8 @@
      50
     ],
     "cls": "artisan",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "settledFor": 5
    },
    "w": 3,
    "eff": {

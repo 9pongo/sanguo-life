@@ -945,7 +945,10 @@
       "你提著酒去找{friend}。{friend}答應了，第二天就把{son}叫去，一連幾個月，天天跟在身邊。"
      ],
      "show": {
-      "noflag": "friend_dead",
+      "noflag": [
+       "friend_dead",
+       "friend_hj_other"
+      ],
       "home": true
      }
     }
@@ -1509,7 +1512,8 @@
     "noflag": [
      "xuwu",
      "heir"
-    ]
+    ],
+    "home": true
    },
    "text": "娘家的兄弟天黑後來敲門，衣裳上還沾著血。說在集上跟人起了爭執，失手打傷了人，那家說不賠錢就告到縣裡。他不敢讓{spouse}知道，只拉著你在灶邊說話。",
    "textIf": [

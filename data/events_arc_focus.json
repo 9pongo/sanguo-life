@@ -2821,7 +2821,8 @@
       "財": -4,
       "德": 2,
       "名": 1,
-      "flag": "af_farm_confess"
+      "flag": "af_farm_confess",
+      "unflag": "af_farm_lodged"
      },
      "out": "你自己去縣裡報了戶，補交了好幾年的稅。家裡的倉空了，可夜裡睡得安穩。",
      "outAlt": [
@@ -2876,7 +2877,10 @@
       "健": -1,
       "德": 1,
       "flag": "af_farm_moved",
-      "unflag": "dianke"
+      "unflag": [
+       "dianke",
+       "af_farm_lodged"
+      ]
      },
      "out": "你帶著家人連夜走了，在幾十里外的鄉里落了戶，從頭租地種。",
      "outAlt": [

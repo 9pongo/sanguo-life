@@ -247,7 +247,11 @@
       let hr = null;
       for (const [y, r] of s.regionHist || []) if (hr === null || y <= s.birthYear + 8) hr = r;
       if (!hr || hr === s.region) return false;
-      const state = (r) => (['wu', 'jiangling'].includes(r) && s.year >= 220 && s.year < 280 ? 'wu' : r === 'shu' && s.year >= 214 && s.year < 263 ? 'shu' : 'wei');
+      // 劉焉、劉璋父子閉了斜谷；赤壁以後南北就隔著江
+      const y = s.year;
+      const state = (r) => r === 'jiangling' ? (y >= 209 && y < 220 ? 'shu' : y >= 220 && y < 280 ? 'wu' : 'wei')
+        : r === 'wu' ? (y >= 208 && y < 280 ? 'wu' : 'wei')
+        : r === 'shu' ? (y >= 191 && y < 263 ? 'shu' : 'wei') : 'wei';
       return state(hr) !== state(s.region);
     }
     function moveTo(id, quiet) {
@@ -464,7 +468,17 @@
       const pool = gender === 'm' ? N.male : N.female;
       return pool[Math.floor(R() * pool.length)];
     }
-    function randomName(gender) { return randomSurname() + randomGiven(gender); }
+    // 抽到書裡寫到的人名、地名、年號，順著名冊往下換一個（不動用亂數）
+    function unfamous(nm, gender) {
+      const N = data.world.names, av = N.avoid || [];
+      if (!av.includes(nm)) return nm;
+      const pool = gender === 'm' ? N.male : N.female;
+      let i = pool.indexOf(nm.slice(1));
+      if (i < 0) return nm;
+      for (let k = 0; k < pool.length && av.includes(nm[0] + pool[i]); k++) i = (i + 1) % pool.length;
+      return nm[0] + pool[i];
+    }
+    function randomName(gender) { return unfamous(randomSurname() + randomGiven(gender), gender); }
     // 玩伴不跟自己、父母、兄弟姊妹同名（白承祖的玩伴叫徐承祖，讀起來像同一個人）。
     // 撞名時順著名冊往下挑，不動用亂數，舊存檔重播不走樣
     function unclashFriend(s) {
@@ -502,8 +516,9 @@
       const s = S();
       const avoid = [s.name, s.spouse, ...(s.forbid || [])].filter(Boolean);
       const bad = (nm) => s.children.some((c) => c.name === nm) || avoid.some((n) => n === nm || n.slice(1) === nm.slice(1));
-      let nm = sur + randomGiven(cg);
-      for (let k = 0; k < 12 && bad(nm); k++) nm = sur + randomGiven(cg);
+      // 先換掉書裡寫到的名字再查撞名，換過的名字也不能跟父母、配偶撞
+      let nm = unfamous(sur + randomGiven(cg), cg);
+      for (let k = 0; k < 12 && bad(nm); k++) nm = unfamous(sur + randomGiven(cg), cg);
       return nm;
     }
 
@@ -520,7 +535,7 @@
       }
       const surname = randomSurname();
       g.st = {
-        name: surname + randomGiven(gender), surname, gender, birthYear, year: birthYear, age: 0,
+        name: unfamous(surname + randomGiven(gender), gender), surname, gender, birthYear, year: birthYear, age: 0,
         children: [], siblings: [], generation: 1, lineage: [],
         region: region.id, regionName: region.name, place: region.place, regionHist: [[birthYear, region.id, region.place]],
         cls: cls.id, clsName: cls.name, talents,
@@ -533,7 +548,7 @@
       const nSib = 1 + Math.floor(R() * 3);
       for (let i = 0; i < nSib; i++) {
         const sg = R() < 0.5 ? 'm' : 'f';
-        s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: birthYear + 1 + Math.floor(R() * 8), alive: true });
+        s.siblings.push({ name: unfamous(surname + randomGiven(sg), sg), gender: sg, born: birthYear + 1 + Math.floor(R() * 8), alive: true });
       }
       unclashSiblings(s, 0);
       unclashFriend(s);
@@ -741,6 +756,8 @@
       const s = S();
       if (s.flags.ex_wu && (s.campaignYear ?? -99) <= (s.flagYear || {}).ex_wu) return false; // 吳亡那年降了晉，隊伍就散了
       if (s.year === 190 && s.gender === 'm' && ['follow_caocao', 'follow_liubei', 'follow_sunjian'].some((f) => s.flags[f])) return true; // 189 年跟著上了路：190 年開春就在隊伍裡了（排定的家鄉後續可能比編進隊伍那一則先到）
+      if (s.year === 190 && s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && s.age <= 58) return true; // 190 年投了諸侯：按了手印就跟著隊伍走了（第一場仗還沒打，家鄉的事也碰不上）
+      if (s.gender === 'm' && s.faction === 'cao' && s.flags.ex_heishan && s.age <= 58 && s.year - ((s.flagYear || {}).ex_heishan ?? -99) <= 3) return true; // 跟著張燕下山編進了曹軍：頭幾年人在營裡
       return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 58 && s.year - (s.campaignYear ?? -99) <= 3;
     }
     // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了、也沒有還沒長大的弟妹
@@ -821,6 +838,8 @@
       // 個人往事（不分章的 final 後記）與天下的收尾分開，介面先放往事、最後放天下
       const isMemory = (e) => e.final && e.chapter == null;
       const noKid = !s.children.some((c) => c.alive);
+      // 孩子都還小（收養來的、晚生的），說不上「孫子在床邊」
+      const noGrand = noKid || !s.children.some((c) => c.alive && s.year - c.born >= 18);
       // 往事只算這輩子親身經歷的：從上一代繼承來的旗標沒有取得的年份
       const fy = s.flagYear || {};
       // pri 高的排前面（故事線的結局比零碎小事更像「這一生」），同級照資料順序
@@ -833,7 +852,7 @@
         if (t && e.beforeYear && s.year >= e.beforeYear) t = e.lateText ?? null; // 文字說的未來，已經過去了
         if (t && s.alive && e.aliveText) t = (e.minYears && since < e.minYears && e.aliveShort) || e.aliveText;                   // 活著走到最後一章
         if (t && s.alive && /你走(的|以後|之後)/.test(t)) t = null;           // 活著的人不能說「你走以後」
-        if (t && e.noKid && noKid) t = e.noKid;                              // 膝下沒有孩子
+        if (t && e.noKid && (noKid || (noGrand && /孫/.test(t)))) t = e.noKid;                              // 膝下沒有孩子
         return t ? { life: !!e.life, t: fmt(t, (s.flagRegion || {})[f]) } : null; // 麥或稻：照事情發生時住的地方
       }).filter(Boolean);
       // 日常故事（life）與歷史經歷輪流排，前三件裡兩種都看得到
@@ -841,7 +860,7 @@
       for (let i = 0; i < Math.max(lifeM.length, histM.length); i++) { if (lifeM[i]) memories.push(lifeM[i].t); if (histM[i]) memories.push(histM[i].t); }
       const epilogue = shown.filter((e) => !isMemory(e)).map((e) => fmt(e.text));
       const result = {
-        id: ending.id, title: fmt(ending.title), rare: !!ending.rare, text: fmt(noKid && ending.noKid ? ending.noKid : ending.text),
+        id: ending.id, title: fmt(ending.title), rare: !!ending.rare, text: fmt(ending.noKid && (noKid || (noGrand && /孫/.test(ending.text))) ? ending.noKid : ending.text),
         alive: s.alive, cause: s.cause, age: s.age, year: s.year, chapter: s.chapter,
         chapterTitle: chapterOf(s.chapter)?.title || null,
         next: s.alive && !last ? chapterOf(s.chapter + 1) : null,
@@ -1073,14 +1092,14 @@
       const s = g.st;
       // 名字：不跟兄姊同名，也不用父母的名
       const avoid = [P.name, P.spouse, ...(P.forbid || []), ...older.map((c) => c.name)].filter(Boolean);
-      let nm = surname + randomGiven(gender);
-      for (let k = 0; k < 12 && avoid.some((n) => n === nm || n.slice(1) === nm.slice(1)); k++) nm = surname + randomGiven(gender);
+      let nm = unfamous(surname + randomGiven(gender), gender);
+      for (let k = 0; k < 12 && avoid.some((n) => n === nm || n.slice(1) === nm.slice(1)); k++) nm = unfamous(surname + randomGiven(gender), gender);
       s.name = nm;
       // 往後還會有弟妹（接家時的備援）
       const nYoung = Math.floor(R() * 3);
       for (let i = 0; i < nYoung; i++) {
         const sg = R() < 0.5 ? 'm' : 'f';
-        s.siblings.push({ name: surname + randomGiven(sg), gender: sg, born: year + 1 + Math.floor(R() * 8), alive: true });
+        s.siblings.push({ name: unfamous(surname + randomGiven(sg), sg), gender: sg, born: year + 1 + Math.floor(R() * 8), alive: true });
       }
       unclashSiblings(s, older.length, [P.spouse]);
       unclashFriend(s);

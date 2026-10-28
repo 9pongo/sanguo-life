@@ -3079,7 +3079,8 @@
      "cao"
     ],
     "region": "jing",
-    "noflag": "xinye_done"
+    "noflag": "xinye_done",
+    "nocls": "gentry"
    },
    "tag": "新野",
    "title": "王昶屯田",
