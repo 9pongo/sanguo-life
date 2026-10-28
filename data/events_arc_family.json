@@ -240,7 +240,10 @@
      "eff": {
       "名": -1,
       "健": -2,
-      "flag": "am_rift_apart",
+      "flag": [
+       "am_rift_apart",
+       "am_cold"
+      ],
       "later": {
        "in": 4,
        "id": "am_rift_ill"
@@ -348,7 +351,8 @@
      "eff": {
       "德": 1,
       "健": 3,
-      "flag": "am_rift_talked"
+      "flag": "am_rift_talked",
+      "unflag": "am_cold"
      },
      "out": "你說起那年吵的那一架。{spouse}笑了，說早忘了，你還記著做什麼。",
      "outAlt": [

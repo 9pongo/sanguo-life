@@ -1697,12 +1697,19 @@
    "final": true,
    "req": {
     "flag": "dianke",
+    "region": "you"
+   },
+   "text": "你家在大族的莊園裡當了一輩子佃客。後來北方大亂，莊主帶著全莊的人往遼西投了慕容部，你家也跟著走了。"
+  },
+  {
+   "final": true,
+   "req": {
+    "flag": "dianke",
     "region": [
      "ji",
      "qing",
      "yu",
      "jing",
-     "you",
      "xu"
     ],
     "noflag": "jiangling"
@@ -2831,7 +2838,7 @@
    "req": {
     "flag": "lx_guar_lost"
    },
-   "text": "你替人作過保，那家人還不上穀子，連夜逃走了。你拿自家的穀子去賠，可下回有人求你，你還是按了指印。",
+   "text": "你替人作過保，那家人還不上穀子，連夜逃走了。你拿自家的穀子去賠，賠完了，倉裡空了一半。",
    "pri": 1,
    "life": true
   },

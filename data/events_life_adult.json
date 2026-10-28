@@ -482,7 +482,8 @@
      20,
      50
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "w": 3,
    "eff": {
@@ -526,7 +527,8 @@
      20,
      50
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "w": 2,
    "eff": {
@@ -637,7 +639,8 @@
      22,
      50
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "w": 2,
    "repeat": 2,
@@ -1209,7 +1212,8 @@
      "you",
      "ji"
     ],
-    "nocls": "gentry"
+    "nocls": "gentry",
+    "nofaction": "heishan"
    },
    "w": 2,
    "eff": {
@@ -1631,6 +1635,30 @@
       "{friend}託一個販貨的人捎來一封信，說家裡都好，孩子也大了。信是請人代寫的，最後一行歪歪扭扭的，是他自己添的：什麼時候回來看看。"
      ]
     }
+   ]
+  },
+  {
+   "id": "la_spouse_cold",
+   "kind": "flavor",
+   "req": {
+    "age": [
+     22,
+     85
+    ],
+    "married": true,
+    "flag": "am_cold",
+    "noflag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   },
+   "w": 3,
+   "repeat": 3,
+   "text": "你和{spouse}一個在屋裡、一個在院子裡，從早到晚說不上三句話。鄰家的人來串門，坐一會兒就覺得不自在，早早告辭了。",
+   "alt": [
+    "{spouse}出門前把要辦的事託鄰家捎話給你，自己一聲不吭地走了。你們住在同一間屋子裡，像是隔著一條河。",
+    "過年祭祖，你和{spouse}並排跪著磕頭，起身以後各自走開。里中的人都說你們家規矩好，只有你知道是怎麼回事。",
+    "夜裡你聽見{spouse}在隔壁咳嗽，咳了很久。你起身倒了一碗水，走到門口，又放回了灶上。"
    ]
   }
  ]

@@ -715,7 +715,8 @@
      50,
      90
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "eff": {
     "健": 1
@@ -737,7 +738,8 @@
      50,
      85
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "text": "你和{spouse}為了一點小事拌了嘴，一整天誰也不理誰。晚飯的時候，{spouse}還是把碗裡的肉撥到你碗裡。",
    "alt": [

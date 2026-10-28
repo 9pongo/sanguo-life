@@ -111,6 +111,9 @@
       return list[(h + n) % list.length];
     }
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
+    // 寫到家裡還有別人的句子（家裡人、一家人、晚輩們）：一個人過日子的時候，挑別的寫法；每一種都提到家人，就照原樣
+    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子/;
+    const homeText = (list) => { if (!Array.isArray(list) || !aloneNow()) return list; const f = list.filter((t) => !HOUSEHOLD.test(t)); return f.length ? f : list; };
     // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
     let histText = false;
     function localize(t, region) {
@@ -364,7 +367,7 @@
       // 同一件小事在家族裡第二次發生時，換一種寫法
       // 同一件人生大事（接家、四十、六十）每一代都會碰到：依時代與家境換一段開場
       const tvi = (ev.textIf || []).findIndex((v) => meets(v.req));
-      const text = tvi >= 0 ? variant(ev.textIf[tvi].text, ev.id + '@' + tvi) : variant(withAlt(ev.text, ev.alt), ev.id);
+      const text = tvi >= 0 ? variant(ev.textIf[tvi].text, ev.id + '@' + tvi) : variant(homeText(withAlt(ev.text, ev.alt)), ev.id);
       // 家族記得每件事發生過幾次、最近一次是哪一年：後代少碰重複的事
       {
         const fam = s.familySeen || (s.familySeen = {});
@@ -407,7 +410,7 @@
       apply(c.eff, head);
       // 這一下沒活過去：不能再接「你第三天夜裡才爬出來」那種寫活下來的結果
       const ov = (c.outIf || []).find((v) => meets(v.req));
-      const out = !s.alive && c.deathOut ? c.deathOut : ov ? variant(ov.out, ev.id + '#' + c.t + '@') : variant(withAlt(c.out, c.outAlt), ev.id + '#' + c.t);
+      const out = !s.alive && c.deathOut ? c.deathOut : ov ? variant(ov.out, ev.id + '#' + c.t + '@') : variant(homeText(withAlt(c.out, c.outAlt)), ev.id + '#' + c.t);
       if (out) {
         // 搬家的小字（「你家從此落腳在…」）排在選項結果後面，不要先講落腳、再講一路往南走
         const moved = g.out.slice(g.out.indexOf(head) + 1).filter((e) => e.type === 'note' && e.tag === '遷居');
@@ -590,6 +593,7 @@
 
     function okFlavor(e) {
       const s = S();
+      if (!e.textIf && aloneNow() && [e.text, ...(e.alt || [])].every((t) => HOUSEHOLD.test(t))) return false;
       if (!e.repeat && s.fired[e.id]) return false;
       if (e.repeat && s.fired[e.id] >= e.repeat) return false;
       // 可重複的小事：同一個人碰過以後，至少隔 repeatGap 年才會再碰到
@@ -706,6 +710,11 @@
     function awayAtWar() {
       const s = S();
       return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 50 && s.year - (s.campaignYear ?? -99) <= 3;
+    }
+    // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了
+    function aloneNow() {
+      const s = S(), f = s.flags;
+      return !spouseHere() && !(s.children || []).some((c) => c.alive) && !!f.father_dead && !!f.mother_dead;
     }
     // 配偶還在身邊：成了親、沒有過世、也沒有被抓走未歸
     function spouseHere() {

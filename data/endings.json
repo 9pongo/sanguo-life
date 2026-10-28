@@ -712,7 +712,8 @@
      60,
      200
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    }
   },
   {
@@ -1008,7 +1009,8 @@
     "year": [
      249,
      263
-    ]
+    ],
+    "noflag": "am_cold"
    }
   },
   {
@@ -1132,7 +1134,8 @@
     "year": [
      275,
      280
-    ]
+    ],
+    "noflag": "am_cold"
    }
   },
   {
@@ -1249,7 +1252,8 @@
      280,
      299
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    }
   },
   {
@@ -2134,6 +2138,17 @@
    "text": "{name}一家跟著曹營走了十年。男人在前頭打仗，你在後頭縫衣、舂米、等消息。十年前曹操只有五千人，現在他是北方的主人。"
   },
   {
+   "id": "a2_cao_home",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "cao",
+    "noflag": "served"
+   },
+   "title": "官渡之後",
+   "text": "{name}一家跟著曹操。十年前他只有五千人，官渡一仗打完，他成了北方的主人。"
+  },
+  {
    "id": "a2_cao",
    "when": "alive",
    "chapter": 2,
@@ -2162,6 +2177,17 @@
    },
    "title": "坑邊",
    "text": "那天晚上，七萬多人被推進坑裡。{name}在蘆葦裡躲到天亮，聽著那邊的聲音一點一點停下來。"
+  },
+  {
+   "id": "a2_yuan_home",
+   "when": "alive",
+   "chapter": 2,
+   "req": {
+    "faction": "yuan",
+    "noflag": "served"
+   },
+   "title": "袁家之敗",
+   "text": "{name}一家跟著袁家。官渡一仗，河北的子弟死了七八萬，逃回來的兵連鞋都沒有。袁紹從此一病不起，四世三公的袁家，就要散了。"
   },
   {
    "id": "a2_yuan",
@@ -2488,6 +2514,17 @@
    },
    "title": "曹營家眷",
    "text": "{name}是曹營的家眷。男人們平了河北、北征了烏桓，又在赤壁輸了一場。你數著回來的人，一年比一年少。"
+  },
+  {
+   "id": "a3_cao_home",
+   "when": "alive",
+   "chapter": 3,
+   "req": {
+    "faction": "cao",
+    "noflag": "served"
+   },
+   "title": "曹家天下",
+   "text": "{name}一家跟著曹家。這些年曹軍平了河北，北征了烏桓，最後在赤壁輸了一場。家裡的人說，北方是曹家的，可是天下還不是。"
   },
   {
    "id": "a3_cao",
