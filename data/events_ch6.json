@@ -556,7 +556,8 @@
    ],
    "req": {
     "faction": "cao",
-    "gender": "m"
+    "gender": "m",
+    "region": "luoyang"
    },
    "tag": "高平陵",
    "title": "洛陽城門",

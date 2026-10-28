@@ -112,7 +112,7 @@
     }
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
     // 寫到家裡還有別人的句子（家裡人、一家人、晚輩們）：一個人過日子的時候，挑別的寫法；每一種都提到家人，就照原樣
-    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子/;
+    const HOUSEHOLD = /家裡人|一家人|家裡的(年輕|後生|孩子)|全家|家裡照規矩|晚輩們|一家子|屋裡的呼吸聲/;
     const homeText = (list) => { if (!Array.isArray(list) || !aloneNow()) return list; const f = list.filter((t) => !HOUSEHOLD.test(t)); return f.length ? f : list; };
     // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
     let histText = false;
@@ -372,7 +372,7 @@
       // 同一件小事在家族裡第二次發生時，換一種寫法
       // 同一件人生大事（接家、四十、六十）每一代都會碰到：依時代與家境換一段開場
       const tvi = (ev.textIf || []).findIndex((v) => meets(v.req));
-      const text = tvi >= 0 ? variant(ev.textIf[tvi].text, ev.id + '@' + tvi) : variant(homeText(withAlt(ev.text, ev.alt)), ev.id);
+      const text = tvi >= 0 ? variant(homeText(ev.textIf[tvi].text), ev.id + '@' + tvi) : variant(homeText(withAlt(ev.text, ev.alt)), ev.id);
       // 家族記得每件事發生過幾次、最近一次是哪一年：後代少碰重複的事
       {
         const fam = s.familySeen || (s.familySeen = {});
