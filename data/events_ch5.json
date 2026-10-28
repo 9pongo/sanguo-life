@@ -1560,7 +1560,8 @@
    ],
    "req": {
     "faction": "sun",
-    "noregion": "jiangling"
+    "noregion": "jiangling",
+    "away": false
    },
    "tag": "山越",
    "title": "門口的人",

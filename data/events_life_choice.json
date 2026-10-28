@@ -1581,6 +1581,13 @@
     },
     {
      "req": {
+      "flag": "lz_wall_ruled",
+      "stayed": "lz_wall_ruled"
+     },
+     "text": "當年為了半尺牆基請里正來量，那家鄰人嫌判得不公，從此跟你家見了面都不說話。如今他病得起不了身，託人帶話來，說想在走之前見你一面。"
+    },
+    {
+     "req": {
       "home": false,
       "ancestral": true
      },
@@ -1663,7 +1670,8 @@
     "flagFor": {
      "lz_wall_right": 10,
      "lz_wall_feud": 10,
-     "lx_water_fought": 10
+     "lx_water_fought": 10,
+     "lz_wall_ruled": 10
     }
    }
   },

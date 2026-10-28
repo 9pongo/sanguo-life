@@ -1331,6 +1331,33 @@
    }
   },
   {
+   "id": "d7e_old_lone_early",
+   "when": "dead",
+   "chapter": 7,
+   "req": {
+    "year": [
+     264,
+     274
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ],
+    "noregion": "wu",
+    "nofaction": "sun",
+    "flagFor": {
+     "widowed": 25,
+     "spouse_dead_old": 25
+    }
+   },
+   "title": "隔江獨老",
+   "text": "{name}活了{age}歲。{spouse}走了幾十年，你一個人把日子過了下來，看著蜀漢亡了，長江對岸的吳國卻還在。"
+  },
+  {
    "id": "d7e_old_lone",
    "when": "dead",
    "chapter": 7,
@@ -1352,6 +1379,31 @@
    },
    "title": "兩國之間獨老",
    "text": "{name}活了{age}歲。{spouse}先走了好幾年。你一個人看著蜀漢亡了，長江對岸的吳國卻還在。"
+  },
+  {
+   "id": "d7_old_lone_early",
+   "text": "{name}活了{age}歲。{spouse}走了幾十年，你一個人等到了天下快要一統的消息。你說，可惜{spouse}沒聽到。",
+   "when": "dead",
+   "chapter": 7,
+   "title": "獨守多年",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ],
+    "year": [
+     275,
+     279
+    ],
+    "flagFor": {
+     "widowed": 25,
+     "spouse_dead_old": 25
+    }
+   }
   },
   {
    "id": "d7_old_lone",
@@ -2104,6 +2156,18 @@
    },
    "title": "塢主",
    "text": "{name}的塢堡裡住著幾百口人。亂世裡，這樣的塢堡就是一個小小的國。",
+   "chapter": 1
+  },
+  {
+   "id": "a_wubao_guest_nf",
+   "when": "alive",
+   "req": {
+    "route": "wubao",
+    "cls": "clerk",
+    "flag": "father_dead"
+   },
+   "title": "叩塢",
+   "text": "{name}一家在大族的塢堡裡躲過了甲子年。你父親那時已經不在了，塢主看在他管了半輩子戶籍的情分上，才開的塢門。",
    "chapter": 1
   },
   {

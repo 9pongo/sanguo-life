@@ -314,10 +314,12 @@
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換；跟著搬到別州的，遷居只寫落腳的那個地名
         // 也可以照原本住的地方分開寫：{ jiangling: 'jing', '*': 'xu' }（從江陵逃的往襄陽）
         const r0 = (data.world.relocate || {})[f];
-        const to = r0 && typeof r0 === 'object' ? (r0[s.region] ?? r0['*']) : r0;
+        const home = r0 === '@home' ? ((s.regionHist || [])[0] || [])[1] : null; // 回老家：這一家最早落腳、祖墳所在的地方
+        const to = home || (r0 && typeof r0 === 'object' ? (r0[s.region] ?? r0['*']) : r0);
         const pl = (data.world.relocatePlace || {})[f];
         const plOk = pl && (!pl.from || pl.from === s.region);
-        if (to) moveTo(to, plOk);
+        if (home && home === s.region) { const r = data.world.regions.find((x) => x.id === home); if (r && s.place !== r.place) { s.place = r.place; s.regionName = r.name; s.regionHist.push([s.year, r.id, r.place]); emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${r.name}。` }); } } // 老家跟現在同一州（例如涿郡人逃到遼東）：只換地名
+        else if (to) moveTo(to, plOk);
         if (plOk && s.place !== pl.place) { s.place = pl.place; s.regionName = pl.name; (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${pl.name}。` }); }
       }
       if (eff.region) moveTo(eff.region);
@@ -365,7 +367,7 @@
       }
       // 標記剛剛條件挑中的那個兒子（或孩子），之後的消息要落在同一個人身上
       if (eff.tagKid) {
-        const nm = s._son || s._kid;
+        const nm = s._tagKid || s._son || s._kid;
         const c = s.children.find((x) => x.name === nm && x.alive);
         if (c) c.tag = eff.tagKid;
       }
@@ -406,6 +408,8 @@
       const s = S();
       histText = !!ev.year;
       s.fired[ev.id] = (s.fired[ev.id] || 0) + 1;
+      // 這件事的條件挑中的是哪個孩子（tagKid 要標在他身上）：同一年先前別件事挑過的兒子不算
+      { const r0 = ev.req || {}; s._tagKid = r0.son ? s._son : (r0.child || r0.kidTag) ? s._kid : null; }
       if (ev.kind !== 'flavor' && isCampaign(ev)) {
         s.campaignYear = s.year;
         if (!s.flags.served) { s.flags.served = true; (s.flagYear || (s.flagYear = {})).served = s.year; } // 這輩子上過戰場
@@ -788,6 +792,7 @@
       if (s.flags.ex_wu && (s.campaignYear ?? -99) <= (s.flagYear || {}).ex_wu) return false; // 吳亡那年降了晉，隊伍就散了
       if (s.year === 190 && s.gender === 'm' && ['follow_caocao', 'follow_liubei', 'follow_sunjian'].some((f) => s.flags[f])) return true; // 189 年跟著上了路：190 年開春就在隊伍裡了（排定的家鄉後續可能比編進隊伍那一則先到）
       if (s.year === 190 && s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && s.age <= 58) return true; // 190 年投了諸侯：按了手印就跟著隊伍走了（第一場仗還沒打，家鄉的事也碰不上）
+      if (s.flags.jinan && s.year >= 185 && s.year <= 188) return true; // 跟著曹操去了濟南（後來陪他回譙縣、上洛陽）：那幾年人不在家鄉，里中修橋、辦喜事都碰不上
       if (s.gender === 'm' && s.faction === 'cao' && s.flags.ex_heishan && s.age <= 58 && s.year - ((s.flagYear || {}).ex_heishan ?? -99) <= 3) return true; // 跟著張燕下山編進了曹軍：頭幾年人在營裡
       return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 58 && s.year - (s.campaignYear ?? -99) <= 3;
     }
@@ -938,6 +943,9 @@
       if (age < 14) flags.heir_young = true; // 接手時還小，等長大了才輪到自己拿主意
       if (age < 5) flags.heir_baby = true; // 接手時還不記事：上一代說過什麼、教過什麼，都不記得
       if (p.age < 10) flags.prev_child = true; // 上一位是夭折的孩子：沒有留下家業，也沒有說過什麼話
+      if (p.flags.served || p.flags.mil_house) flags.mil_house = true; // 祖上有人當過兵：魏的士家、吳蜀的兵戶，子孫到了年紀照樣進營
+      if (p.flags.served && p.gender === 'm') flags.prev_served = true; // 上一位當了大半輩子的兵：留下的是刀和草鞋，不是扁擔
+      if (p.age < 20) flags.prev_young = true; // 上一位走的時候還年輕：沒有用了好些年的舊物、也沒有常掛在嘴邊的話
       // 父母的生死：孩子接班，死去的上一代就是父或母；弟妹接班，父母狀態跟兄姊相同
       if (h.rel === '弟' || h.rel === '妹') {
         if (p.flags.father_dead) flags.father_dead = true;

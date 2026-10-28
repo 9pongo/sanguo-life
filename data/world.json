@@ -1442,8 +1442,8 @@
    "req": {
     "flag": "back_from_liaodong"
    },
-   "text": "你家從遼東回到了冀州老家。你走的時候，在祖墳前多種了一棵柏樹。",
-   "aliveText": "你家從遼東回到了冀州老家，在祖墳前種了一棵柏樹。"
+   "text": "你家從遼東回到了老家。你走的時候，在祖墳前多種了一棵柏樹。",
+   "aliveText": "你家從遼東回到了老家，在祖墳前種了一棵柏樹。"
   },
   {
    "final": true,
@@ -2639,7 +2639,7 @@
      "am_kw_bend"
     ]
    },
-   "text": "孩子結親以後，親家仗著家大，嫌你家回的禮太粗。你把攢了兩年的細布都包了送去，往後的禮也從沒斷過。孩子在那邊吃穿不愁，說話卻一直小心翼翼。",
+   "text": "孩子結親以後，親家仗著家大，嫌你家回的禮太粗。你照親家的意思添了厚禮送去，往後的禮也從沒斷過。孩子在那邊吃穿不愁，說話卻一直小心翼翼。",
    "pri": 1,
    "life": true
   },
@@ -3955,7 +3955,7 @@
  ],
  "heirText": [
   "{prev}走了。{name}接下了這個家。",
-  "{prev}入了土。從這天起，這個家由{name}來撐。",
+  "{prev}的喪事辦完了。從這天起，這個家由{name}來撐。",
   "送走了{prev}，家裡的人都看著{name}。這個家，往後就是{name}的了。",
   "{prev}的牌位擺上了供桌。{name}在牌位前磕了三個頭，接下了這個家。"
  ],
@@ -3965,7 +3965,7 @@
  ],
  "heirYoungText": [
   "{prev}走的時候，{name}還小，是大人扶著在靈前磕的頭。往後這個家，要等{name}長大。",
-  "{prev}出殯那天，{name}還小，看著滿屋子的人，不知道大家為什麼哭。這個家，往後要等{name}來撐。"
+  "給{prev}辦喪事那天，{name}還小，看著滿屋子的人，不知道大家為什麼哭。這個家，往後要等{name}來撐。"
  ],
  "inheritFlags": [
   "jingzhou",
@@ -4163,11 +4163,12 @@
   "to_jingzhou": "jing",
   "south": "wu",
   "liaodong": "you",
-  "back_from_liaodong": "ji",
+  "back_from_liaodong": "@home",
   "jiangling": "jiangling",
   "to_luoyang": "luoyang",
   "to_huainan": "huainan",
-  "xinye": "jing"
+  "xinye": "jing",
+  "go_luoyang": "luoyang"
  },
  "relocatePlace": {
   "xinye": {

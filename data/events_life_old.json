@@ -523,7 +523,8 @@
     ]
    },
    "eff": {
-    "財": -1
+    "財": -1,
+    "flag": "lo_shroud_done"
    },
    "text": "你讓家裡人替你縫好了壽衣，疊好收在箱子裡。有時候你會打開看一看，摸一摸那塊布。",
    "alt": [
@@ -535,7 +536,8 @@
      "req": {
       "anyFlag": [
        "ly_coffin_fine",
-       "ly_coffin_plain"
+       "ly_coffin_plain",
+       "ly_coffin_none"
       ]
      },
      "text": [
