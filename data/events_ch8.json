@@ -1461,7 +1461,10 @@
     "stat": {
      "名": 30
     },
-    "noflag": "wuzhu_done"
+    "noflag": [
+     "wuzhu_done",
+     "dianke"
+    ]
    },
    "tag": "塢堡",
    "title": "推為塢主",
