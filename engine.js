@@ -238,6 +238,8 @@
       const r = data.world.regions.find((x) => x.id === id);
       if (!r || s.region === id) return;
       s.region = r.id; s.regionName = r.name; s.place = r.place;
+      // 佃客綁在莊主的田上：離開了那片莊園，就不再是誰家的佃客
+      delete s.flags.dianke;
       (s.regionHist || (s.regionHist = [])).push([s.year, r.id, r.place]);
       // 搬到別國的地盤：原本跟著哪一家，到了這裡都只是新來的百姓
       if (r.faction && s.year <= (r.factionUntil ?? 9999) && s.faction && s.faction !== 'civ' && s.faction !== r.faction) s.faction = 'civ';
@@ -823,6 +825,7 @@
       for (const k of STATS) stats[k] = clamp(stats[k], 0, 100);
       const flags = { heir: true };
       if (age < 14) flags.heir_young = true; // 接手時還小，等長大了才輪到自己拿主意
+      if (age < 5) flags.heir_baby = true; // 接手時還不記事：上一代說過什麼、教過什麼，都不記得
       if (p.age < 10) flags.prev_child = true; // 上一位是夭折的孩子：沒有留下家業，也沒有說過什麼話
       // 父母的生死：孩子接班，死去的上一代就是父或母；弟妹接班，父母狀態跟兄姊相同
       if (h.rel === '弟' || h.rel === '妹') {

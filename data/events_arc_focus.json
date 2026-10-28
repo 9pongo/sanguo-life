@@ -264,6 +264,7 @@
    "id": "af_med_plague",
    "kind": "stage",
    "recheck": true,
+   "homeOnly": true,
    "req": {
     "anyFlag": [
      "af_med_rich",

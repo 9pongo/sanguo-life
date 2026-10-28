@@ -136,7 +136,7 @@ for (const f of world.inheritFlags || []) add(flagsRead, f, '傳承');
 // 引擎直接讀的旗標（spouseHere：配偶是否在身邊）
 for (const f of ['widowed', 'spouse_dead_old', 'spouse_taken', 'spouse_returned']) add(flagsRead, f, '引擎');
 for (const f of [...Object.keys(world.relocate || {}), ...Object.keys(world.relocatePlace || {})]) add(flagsRead, f, '搬家');
-add(flagsSet, 'heir', '傳承'); add(flagsSet, 'has_child', '引擎'); add(flagsSet, 'heir_young', '引擎'); add(flagsSet, 'prev_child', '引擎'); add(flagsSet, 'served', '引擎');
+add(flagsSet, 'heir', '傳承'); add(flagsSet, 'has_child', '引擎'); add(flagsSet, 'heir_young', '引擎'); add(flagsSet, 'prev_child', '引擎'); add(flagsSet, 'heir_baby', '引擎'); add(flagsSet, 'served', '引擎');
 for (const [f, where] of flagsRead) if (!flagsSet.has(f) && !f.startsWith('_')) errors.push(`旗標「${f}」被讀取卻從沒被設定（${where[0]}）`);
 {
   const inh = new Set([...(world.inheritFlags || []), 'heir', 'has_child']);

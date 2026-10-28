@@ -3492,7 +3492,10 @@
      6,
      80
     ],
-    "noflag": "prev_child"
+    "noflag": [
+     "prev_child",
+     "heir_baby"
+    ]
    },
    "eff": {
     "德": 1
