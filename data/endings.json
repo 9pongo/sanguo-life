@@ -784,6 +784,23 @@
    "text": "{name}死在蜀地，{age}歲。丞相在漢中練兵，年年北伐，蜀地的人家，差不多家家都有人在軍中。"
   },
   {
+   "id": "d5_jiangdong_early",
+   "when": "dead",
+   "chapter": 5,
+   "req": {
+    "region": [
+     "wu",
+     "jiangling"
+    ],
+    "year": [
+     0,
+     228
+    ]
+   },
+   "title": "吳王",
+   "text": "{name}死在吳國，{age}歲。孫權受了魏國封的吳王，住在武昌，年號卻是自己定的。你不太關心這些，只記得那幾年的稻子長得好。"
+  },
+  {
    "id": "d5_jiangdong",
    "when": "dead",
    "chapter": 5,

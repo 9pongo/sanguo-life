@@ -1049,7 +1049,8 @@
    ],
    "req": {
     "faction": "sun",
-    "gender": "m"
+    "gender": "m",
+    "region": "wu"
    },
    "tag": "華里",
    "title": "青蓋入洛陽",
