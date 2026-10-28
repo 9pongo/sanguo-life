@@ -776,10 +776,10 @@
         const pool = (awayAtWar() && W.spouseDeathTextsAway) || (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || (s.spouseYear != null && s.year - s.spouseYear < 8 && W.spouseDeathTextsShort) || W.spouseDeathTexts || [];
         emit({ type: 'event', tag: '喪偶', text: fmt(pool[Math.floor(R() * pool.length)] || '{spouse}走了。') });
       }
-      // 成了家的人，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多；人跟著隊伍在外，只有告假回家的時候）
-      if (s.alive && spouseHere() && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2) * (s.age > 40 ? 0.3 : 1) * (awayAtWar() ? 0.4 : 1)) {
+      // 成了家的人，從成親的第二年起，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多；人跟著隊伍在外，只有告假回家的時候）
+      if (s.alive && spouseHere() && s.year !== s.spouseYear && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2) * (s.age > 40 ? 0.3 : 1) * (awayAtWar() ? 0.4 : 1)) {
         apply({ child: true }, null);
-        emit({ type: 'event', tag: '添丁', text: fmt(variant(W.childText, 'childText')) });
+        emit({ type: 'event', tag: '添丁', text: fmt(awayAtWar() && W.childTextAway ? variant(W.childTextAway, 'childTextAway') : variant(W.childText, 'childText')) });
       }
       if (s.alive && s.age >= 1) s.hp = clamp(s.hp + (s.age < 40 ? 2 : -1), 0, 100);
     }

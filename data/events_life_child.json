@@ -465,7 +465,8 @@
     "cls": [
      "clerk",
      "gentry"
-    ]
+    ],
+    "noflag": "lunyu_done"
    },
    "w": 2,
    "eff": {
@@ -744,7 +745,8 @@
      18
     ],
     "gender": "m",
-    "married": false
+    "married": false,
+    "alone": false
    },
    "w": 2,
    "eff": {

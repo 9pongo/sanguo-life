@@ -3489,6 +3489,22 @@
    "text": "{name}這些年替樊城送過糧、修過城。去年關羽水淹七軍，你站在城頭看過那一片大水。今年冬天，里正說漢朝沒了，從今以後是魏朝。"
   },
   {
+   "id": "a4_jing_gentry",
+   "when": "alive",
+   "chapter": 4,
+   "req": {
+    "region": "jing",
+    "faction": [
+     "civ",
+     "cao"
+    ],
+    "noflag": "jiangling",
+    "cls": "gentry"
+   },
+   "title": "{place}莊上",
+   "text": "{name}住在{place}。去年宛城的侯音造反，曹仁打進城，殺了很多人。今年冬天，郡裡來人說漢朝沒了，從今以後是魏朝。莊上的佃戶只想知道，明年的租會不會少一點。"
+  },
+  {
    "id": "a4_jing",
    "when": "alive",
    "chapter": 4,
