@@ -416,10 +416,12 @@
      18,
      200
     ],
-    "kidWed": true
+    "kidWed": true,
+    "noflag": "had_grandkid"
    },
    "eff": {
-    "健": 2
+    "健": 2,
+    "flag": "had_grandkid"
    },
    "text": "你抱上了孫子。小傢伙的手抓著你的頭髮不放，扯得你直叫。",
    "alt": [

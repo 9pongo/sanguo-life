@@ -797,7 +797,11 @@
     "stat": {
      "文": 15
     },
-    "noflag": "zz_done",
+    "noflag": [
+     "zz_done",
+     "p_v9_bribed_zhongzheng",
+     "p_v9_no_bribe"
+    ],
     "gender": "m",
     "cls": [
      "tenant",

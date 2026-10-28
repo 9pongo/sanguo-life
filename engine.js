@@ -23,7 +23,7 @@
   // 家鄉里中的瑣事：出征那一年輪不到你
   const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '田裡', '手藝', '讀書', '學醫']);
   // 家裡的事（夫妻口角、孩子闖禍、生病有人守著）跟著全家搬，可是人跟著隊伍在外的那幾年碰不上
-  const AWAY_TAGS = new Set([...HOME_TAGS, '家事', '家裡']);
+  const AWAY_TAGS = new Set([...HOME_TAGS, '家事', '家裡', '晚年']); // 晚年：備壽材、交代後事，都是在家裡的事
 
   function ganzhi(y) {
     const i = (((y - 4) % 60) + 60) % 60;
@@ -138,7 +138,7 @@
     function findKid(gender, range, unwed) {
       const s = S();
       return (s.children || [])
-        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed === true && c.wed) && !(unwed === 'wed' && !(c.wed || c.knownWed)))
+        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed === true && c.wed) && !(unwed === 'wed' && !(c.wed || c.knownWed)) && !(unwed === 'wed' && s.year - (c.wedYear ?? -99) < 3))
         .filter((c) => { const a = s.year - c.born; return a >= range[0] && a <= (range[1] ?? 200); })
         .sort((x, y) => x.born - y.born)[0] || null;
     }
@@ -334,6 +334,8 @@
       if (eff.spouse) {
         s.spouse = eff.spouse === '@random' ? spouseName(s.gender === 'm' ? 'f' : 'm') : eff.spouse;
         s.spouseYear = s.year;
+        // 當家的女兒成親，是對方搬進這個家（招婿）：往後生的孩子跟著這個家姓
+        if (s.gender === 'f' && s.flags.heir) s.flags.zhui = true; else delete s.flags.zhui;
         // 換了一個人：前一個配偶被抓走、出門在外、冷戰的那些事，跟這一個無關
         for (const k of ['spouse_taken', 'spouse_returned', 'spouse_away', 'hid_spouse', 'am_cold', 'spouse_legless', 'am_rift_soft', 'am_rift_cold', 'am_rift_mend', 'am_rift_apart', 'am_rift_talked', 'am_rift_held']) delete s.flags[k];
       }
@@ -354,8 +356,8 @@
       }
       if (eff.later) for (const l of arr(eff.later)) s.scheduled.push({ year: s.year + l.in, id: l.id, at: s.region + '/' + (s.place || '') });
       if (eff.child) {
-        // 孩子跟父姓：自己是男的跟自己姓，自己是女的跟配偶姓
-        const sur = s.gender === 'm' ? s.surname : (s.spouse ? s.spouse[0] : s.surname);
+        // 孩子跟父姓：自己是男的跟自己姓，自己是女的跟配偶姓（招婿進門的，跟這個家姓）
+        const sur = s.gender === 'm' || s.flags.zhui ? s.surname : (s.spouse ? s.spouse[0] : s.surname);
         const cg = R() < 0.5 ? 'm' : 'f';
         const nm = kidName(sur, cg);
         s.children.push({ name: nm, gender: cg, born: s.year, alive: true });
@@ -370,7 +372,7 @@
       // 孩子成親：記下來，這個孩子日後接家時就是已經成了家的人
       if (eff.kidWed) {
         const c = s.children.find((x) => x.name === s._kid && x.alive);
-        if (c) c.wed = true;
+        if (c) { c.wed = true; c.wedYear = s.year; }
       }
       if (eff.childDie) {
         // 沒指定是哪一個，就是家裡年紀最小、還在身邊的那個
@@ -636,7 +638,8 @@
       const picked = [];
       for (let i = 0; i < n; i++) {
         // 同一組的小事一年只會有一件（例如豐收和蝗災不會同一年發生）
-        const pool = flavorPool.filter((e) => !picked.includes(e) && !(e.group && picked.some((x) => x.group === e.group)) && okFlavor(e));
+        const elderDue = s.elderBorn != null && s.year - s.elderBorn >= 82 ? 'f_' + s.elderParent : null;
+        const pool = flavorPool.filter((e) => e.id !== elderDue && !picked.includes(e) && !(e.group && picked.some((x) => x.group === e.group)) && okFlavor(e));
         // 祖上經歷過的小事，接班人比較少再碰上一模一樣的
         const fam = S().familySeen || {};
         const ev = pickWeighted(R, pool, (e) => (e.w ?? 1) * (fam[e.id] ? (data.world.familyRepeatWeight ?? 0.35) : 1));
@@ -698,7 +701,9 @@
       if (item.flavor && !item.force && s.flags.guan_nubi && !ev.nubi && !ev.year) return null; // 年初排好的小事，這一年人進了織室就作罷
       if (item.flavor && ev.camp && !awayAtWar()) return null; // 軍中的小事，這一年隊伍散了、人回了家就作罷
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
+      if (item.force && /^f_(father|mother)$/.test(item.id) && s.flags[item.id.slice(2) + '_dead']) return null; // 這一年已經寫過過世了
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
+      if (ev.id === 'c3_age40' && s.heirYear === s.year && s.fired.st_heir_focus) return null; // 接家那年已經問過往後怎麼過
       if (ev.kind !== 'flavor' && isCampaign(ev) && (s.age > 55 || s.age < 15) && !ev.req?.age) return null; // 五十五歲以上的老兵、十五歲以下的孩子不跟著隊伍出征
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
@@ -745,11 +750,11 @@
           die(cause, entry);
         }
       }
-      // 配偶也會老、會病：大致跟你同齡，死亡率比照你這個年紀
-      if (s.alive && spouseHere() && s.age >= 30 && band && R() < band.p * (W.spouseMortality ?? 0.9) * (plague ? W.plagueMult : 1)) {
+      // 配偶也會老、會病：大致跟你同齡，死亡率比照你這個年紀（當年才成親的，那一年不會走；成親沒幾年的，另有寫法）
+      if (s.alive && spouseHere() && s.age >= 30 && band && R() < band.p * (W.spouseMortality ?? 0.9) * (plague ? W.plagueMult : 1) && s.spouseYear !== s.year) {
         apply({ flag: 'spouse_dead_old', 健: -8 }, null);
         // 吵翻了一直沒說開的：不寫「握著你的手」那種
-        const pool = (awayAtWar() && W.spouseDeathTextsAway) || (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || W.spouseDeathTexts || [];
+        const pool = (awayAtWar() && W.spouseDeathTextsAway) || (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || (s.spouseYear != null && s.year - s.spouseYear < 8 && W.spouseDeathTextsShort) || W.spouseDeathTexts || [];
         emit({ type: 'event', tag: '喪偶', text: fmt(pool[Math.floor(R() * pool.length)] || '{spouse}走了。') });
       }
       // 成了家的人，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多；人跟著隊伍在外，只有告假回家的時候）
@@ -970,7 +975,7 @@
         alive: true, cause: null, chapterEndings: p.chapterEndings, familySeen: { ...(p.familySeen || {}) },
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同
         parentName: h.via || ((h.rel === '弟' || h.rel === '妹') ? (p.parentName || null) : p.name),
-        elders,
+        elders, heirYear: p.year + 1,
         // 還活著的那一位家長（上一代的配偶），年紀當作跟上一代差不多
         elderBorn: h.via || h.rel === '弟' || h.rel === '妹' ? null : p.birthYear, elderParent: p.gender === 'm' ? 'mother' : 'father',
         // 祖上幾代當家和他們的配偶：往後孩子取名都要避開；孫輩接班的，親生父母和叔伯姑姑（前一位的孩子）也一樣
@@ -1090,7 +1095,7 @@
     function bornAsChildOf(P) {
       const W = data.world;
       const gender = R() < 0.5 ? 'm' : 'f';
-      const surname = P.gender === 'm' ? P.surname : P.spouse[0];
+      const surname = P.gender === 'm' || P.flags?.zhui ? P.surname : P.spouse[0];
       const cls = W.classes.find((c) => c.id === P.cls);
       const talents = [];
       while (talents.length < 2) {

@@ -870,6 +870,27 @@
    }
   },
   {
+   "id": "d5_old_lone_early",
+   "text": "{name}活了{age}歲。年紀輕輕，身邊那個人就先走了，往後的幾十年，你一個人把日子撐了下來。換了誰當皇帝，田還是要自己種，飯還是要自己煮。",
+   "when": "dead",
+   "chapter": 5,
+   "title": "獨撐一生",
+   "req": {
+    "age": [
+     60,
+     200
+    ],
+    "anyFlag": [
+     "widowed",
+     "spouse_dead_old"
+    ],
+    "flagFor": {
+     "widowed": 25,
+     "spouse_dead_old": 25
+    }
+   }
+  },
+  {
    "id": "d5_old_lone",
    "text": "{name}活了{age}歲。陪了你半輩子的人先走了，你又一個人過了好些年。換了誰當皇帝，田還是要自己種，飯還是要自己煮。",
    "when": "dead",

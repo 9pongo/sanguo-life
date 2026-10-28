@@ -948,7 +948,9 @@
      "show": {
       "noflag": [
        "friend_dead",
-       "friend_hj_other"
+       "friend_hj_other",
+       "lx_lend_gone",
+       "lx_lend_refused"
       ],
       "home": true
      }
@@ -1286,6 +1288,14 @@
    },
    "text": "你往孫家跑得勤，里中就有了閒話，說你一個人過日子，天天往寡婦門前轉，安的什麼心。孫氏聽了，好幾天不肯開門。",
    "textIf": [
+    {
+     "req": {
+      "gender": "f",
+      "married": true,
+      "flag": "heir"
+     },
+     "text": "你常往孫家送東西，里中的婦人就說起閒話，說你一個婦人當家，拿家裡的米貼外人。族中的長輩也拐彎抹角地問了一句，這個家到底誰在做主。"
+    },
     {
      "req": {
       "gender": "f",

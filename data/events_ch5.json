@@ -1738,7 +1738,8 @@
    "req": {
     "faction": "cao",
     "region": "ji",
-    "noflag": "luoyang_move_done"
+    "noflag": "luoyang_move_done",
+    "nocls": "gentry"
    },
    "tag": "遷民",
    "title": "充實河南",
