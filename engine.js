@@ -22,6 +22,8 @@
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   // 家鄉里中的瑣事：出征那一年輪不到你
   const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '手藝', '讀書', '學醫']);
+  // 家裡的事（夫妻口角、孩子闖禍、生病有人守著）跟著全家搬，可是人跟著隊伍在外的那幾年碰不上
+  const AWAY_TAGS = new Set([...HOME_TAGS, '家事', '家裡']);
 
   function ganzhi(y) {
     const i = (((y - 4) % 60) + 60) % 60;
@@ -142,6 +144,7 @@
       if (req.noregion && arr(req.noregion).includes(s.region)) return false;
       if (req.notFired && arr(req.notFired).some((id) => s.fired[id])) return false; // 這輩子碰過內容相近的事
       if (req.cls && !arr(req.cls).includes(s.cls)) return false;
+      if (req.nocls && arr(req.nocls).includes(s.cls)) return false; // 有部曲、田莊的人家，碰不上窮人家的小事
       if (req.gender && s.gender !== req.gender) return false;
       if (req.talent && !arr(req.talent).some((t) => s.talents.includes(t))) return false;
       if (req.flag && !arr(req.flag).every((f) => s.flags[f])) return false;
@@ -601,6 +604,9 @@
         if (e.camp && !away) return false;
         if (away && !e.camp && !e.year && !String(e.req?.flag || '').startsWith('p_')) return false;
       }
+      // 沒入官府織室的那幾年，碰到的是織室裡的事
+      if (e.nubi && !S().flags.guan_nubi) return false;
+      if (S().flags.guan_nubi && !e.nubi && !e.year && !String(e.req?.flag || '').startsWith('p_')) return false;
       if (e.p != null && R() >= e.p) return false; // 稀有小事：每年只有 p 的機會進候選
       return meets(e.req);
     }
@@ -610,9 +616,9 @@
       if (!ev) return null;
       const s = S();
       // 里中要你出面的事（修橋、爭水、作保、收留人），人跟著隊伍在外打仗、或上了黑山住在山寨裡的那幾年碰不上
-      // （寫給山寨的劇情除外；家鄉那邊排定的後續也一樣，人不在就作罷）
-      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) &&
-        (awayAtWar() || (s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')))) return null;
+      // 沒入官府織室的那幾年也一樣（寫給山寨的劇情除外；家鄉那邊排定的後續也一樣，人不在就作罷）
+      if (!ev.year && (AWAY_TAGS.has(ev.tag) || ev.homeOnly) && (awayAtWar() || s.flags.guan_nubi)) return null;
+      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')) return null;
       // 排定以後全家搬走了（例如鉅鹿的仇家、鄰里的後續），搬到新地方就碰不上了
       if (item.at && item.at !== s.region + '/' + (s.place || '') && !ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly)) return null;
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次

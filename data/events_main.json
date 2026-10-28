@@ -3647,7 +3647,10 @@
      "widowed",
      "spouse_dead_old"
     ],
-    "noflag": "remarried_done"
+    "noflag": [
+     "remarried_done",
+     "guan_nubi"
+    ]
    },
    "tag": "再嫁",
    "title": "再嫁",
