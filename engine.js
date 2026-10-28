@@ -21,7 +21,7 @@
   const arr = (x) => (x == null ? [] : Array.isArray(x) ? x : [x]);
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   // 家鄉里中的瑣事：出征那一年輪不到你
-  const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '手藝']);
+  const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '手藝', '讀書', '學醫']);
 
   function ganzhi(y) {
     const i = (((y - 4) % 60) + 60) % 60;
@@ -595,8 +595,12 @@
       if (e.familyOnce && (s.familySeen || {})[e.id]) return false;
       if (e.year && !(s.year >= e.year[0] && s.year <= e.year[1])) return false;
       if (e.year && !e.familyRepeat && ancestorsSaw(e.id)) return false;
-      // 跟{spouse}在家裡一起過日子的小事：人跟著隊伍在外打仗的那幾年碰不上
-      if (e.spouseHome && awayAtWar()) return false;
+      // 人跟著隊伍在外打仗的那幾年，家鄉的日常輪不到你，碰到的是軍中的小事；時代的消息、祖上的傳說照常聽得到
+      {
+        const away = awayAtWar();
+        if (e.camp && !away) return false;
+        if (away && !e.camp && !e.year && !String(e.req?.flag || '').startsWith('p_')) return false;
+      }
       if (e.p != null && R() >= e.p) return false; // 稀有小事：每年只有 p 的機會進候選
       return meets(e.req);
     }

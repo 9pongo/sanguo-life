@@ -808,8 +808,7 @@
    "eff": {
     "健": -3
    },
-   "text": "你又夢見了那條河。醒來時天還沒亮，{spouse}握著你的手，什麼也沒問。",
-   "spouseHome": true
+   "text": "你又夢見了那條河。醒來時天還沒亮，{spouse}握著你的手，什麼也沒問。"
   },
   {
    "id": "f_refugee_kid",
@@ -1330,6 +1329,229 @@
    "text": "{elder}認識嵇康，見過他在柳樹下打鐵，常說那個人彈起琴來，連打鐵的聲音都停了。",
    "tag": "家傳",
    "familyOnce": true
+  },
+  {
+   "id": "camp_night_watch",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "輪到你守夜。營火一堆一堆燒到天邊，你數著數著，不知道哪一堆底下坐著同鄉。"
+  },
+  {
+   "id": "camp_rations",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "軍糧又減了。一天兩頓改成一頓，粥稀得照得見人影。伍長說，前頭的人吃得更少。"
+  },
+  {
+   "id": "camp_boots",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "走了一個月的路，草鞋磨穿了三雙。你跟同伍的人學著用麻繩打鞋，打得歪歪扭扭，總算能穿。"
+  },
+  {
+   "id": "camp_letter",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "營裡有個識字的老兵替人寫信，一封十個錢。你說了半天，他只寫了一行：平安，勿念。"
+  },
+  {
+   "id": "camp_letter_home",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "req": {
+    "married": true,
+    "noflag": [
+     "widowed",
+     "spouse_dead_old"
+    ]
+   },
+   "text": "同鄉的人從家裡回來，捎來一句話：{spouse}說家裡都好，叫你別掛念。你聽了，一晚上沒睡著。"
+  },
+  {
+   "id": "camp_kid_news",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "req": {
+    "child": [
+     1,
+     4
+    ]
+   },
+   "text": "家裡捎信來，說{kid}會叫人了，第一個叫的是你的名字。你把那片木牘揣在懷裡，揣了好些天。"
+  },
+  {
+   "id": "camp_sick",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "營裡鬧了一場痢疾，一個帳篷裡倒了一半的人。你拉了七天的肚子，爬起來的時候，旁邊的鋪位空了兩個。"
+  },
+  {
+   "id": "camp_dice",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "夜裡有人在帳篷後頭擲骰子賭錢。你看了一會兒，輸了半個月的餉，從此再也不碰了。"
+  },
+  {
+   "id": "camp_drill",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "天不亮就操練，練到太陽偏西。你的手臂腫了好幾天，什長說，等你不覺得疼了，才算是個兵。"
+  },
+  {
+   "id": "camp_deserter",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "營裡抓到兩個逃兵，綁在轅門外示眾三天。第四天早上，轅門外只剩兩根木樁。"
+  },
+  {
+   "id": "camp_flag",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "行軍的時候，你走在一面舊旗子後面。旗上的字你不認得，可那面旗子往哪裡走，你就往哪裡走。"
+  },
+  {
+   "id": "camp_rain",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "連著下了半個月的雨，營地成了一片爛泥。鎧甲生了鏽，弓弦泡軟了，夜裡睡覺，身子底下都是水。"
+  },
+  {
+   "id": "camp_cold",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "冬天紮營在河邊，夜裡冷得睡不著。你和同伍的人背靠著背坐了一夜，天亮的時候，誰也沒說話。"
+  },
+  {
+   "id": "camp_wound",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "你在一場小仗裡被長矛劃了一道口子。軍醫拿燒紅的刀燙了一下，你咬著一根木棍，咬斷了。"
+  },
+  {
+   "id": "camp_dead_friend",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "同伍的一個人在前天的仗裡沒回來。你把他留下的一雙草鞋收了起來，想著哪天路過他的家鄉，捎回去。"
+  },
+  {
+   "id": "camp_ration_steal",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "營裡丟了幾袋糧，管糧的吏說是你們這一伍偷的。後來查出是他自己賣了。他挨了軍棍，你們的糧也沒補回來。"
+  },
+  {
+   "id": "camp_song",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "夜裡營中有人唱家鄉的歌，一個接一個跟著唱。唱到後來，什長罵了一聲，自己也跟著哼了起來。"
+  },
+  {
+   "id": "camp_horse",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "你被派去餵馬。那匹馬比你吃得還好，你偷偷抓了一把豆子嚼，被馬伕看見了，他也沒說什麼。"
+  },
+  {
+   "id": "camp_digging",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "整整一個月都在挖壕溝、築營壘。你說當兵怎麼比種地還累，旁邊的人說，種地好歹是自家的地。"
+  },
+  {
+   "id": "camp_march",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "急行軍一天走了一百多里，有人走著走著就倒在路邊。你不敢回頭看，只盯著前頭那人的腳後跟。"
+  },
+  {
+   "id": "camp_village",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "部隊經過一個空村子，人都跑光了，灶裡的灰還是溫的。你在一戶人家的門檻上坐了一會兒，想起了自家的門檻。"
+  },
+  {
+   "id": "camp_reward",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "打了勝仗，營裡分賞。你分到一匹布、半袋鹽。你把布疊好壓在包袱底下，說要帶回家。"
+  },
+  {
+   "id": "camp_officer",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "新來的校尉很兇，動不動就打人。可是那回營裡斷了糧，是他把自己的那份分給了傷兵。"
+  },
+  {
+   "id": "camp_fear",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "前頭傳來消息，說明天要打一場大仗。那一夜營裡很靜，你聽見有人在暗地裡哭，也聽見有人在磨刀。"
+  },
+  {
+   "id": "camp_young",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "營裡新來了一批兵，最小的那個看起來才十四五歲。他夜裡尿了鋪，被人笑了好幾天，你替他把褥子拿出去曬了。"
+  },
+  {
+   "id": "camp_old_soldier",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "營裡有個老兵打了二十年的仗，身上的疤比你吃過的飯還多。他說，當兵的不怕死，就怕死了沒人知道你叫什麼。"
+  },
+  {
+   "id": "camp_hometown",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "你在營裡碰到一個同鄉，兩個人說了一夜家鄉的事：哪條河、哪座橋、哪家的狗最兇。說到後來，兩個人都不說話了。"
+  },
+  {
+   "id": "camp_garrison",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "這一年沒有打仗，部隊駐在城外屯田。你又拿起了鋤頭，鋤著鋤著，覺得這片地跟家裡的也差不多。"
+  },
+  {
+   "id": "camp_hunger_horse",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "糧車沒跟上來，營裡殺了幾匹傷馬。你分到一塊馬肉，嚼了半天嚼不爛，還是全吞了下去。"
+  },
+  {
+   "id": "camp_count",
+   "kind": "flavor",
+   "w": 3,
+   "camp": true,
+   "text": "點名的時候，什長念到一個名字，沒有人應。他停了一下，接著往下念。"
   }
  ]
 }
