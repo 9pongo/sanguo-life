@@ -977,12 +977,30 @@
    "text": "{name}活了{age}歲。丞相死了以後，蜀國又撐了快三十年。你走的時候，北伐還在打，成都的錦還在織。"
   },
   {
-   "id": "d6e_old_pair",
+   "id": "d6e_old_pair_ming",
    "when": "dead",
    "chapter": 6,
    "req": {
     "year": [
      235,
+     238
+    ],
+    "age": [
+     60,
+     200
+    ],
+    "married": true
+   },
+   "title": "明帝朝偕老",
+   "text": "{name}活了{age}歲。你看著魏明帝在洛陽蓋了一座又一座宮殿，搬土的民夫一年也沒停過。最後那天，{spouse}握著你的手，說：這輩子，你沒讓我餓過一頓。"
+  },
+  {
+   "id": "d6e_old_pair",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     239,
      248
     ],
     "age": [

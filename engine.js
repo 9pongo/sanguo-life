@@ -289,7 +289,11 @@
         if (arr(NT.factions).includes(s.faction) || arr(NT.regions).includes(s.region)) for (const f of arr(NT.flags)) delete s.flags[f];
       }
       if (eff.focus) s.focus = eff.focus;
-      if (eff.spouse) s.spouse = eff.spouse === '@random' ? spouseName(s.gender === 'm' ? 'f' : 'm') : eff.spouse;
+      if (eff.spouse) {
+        s.spouse = eff.spouse === '@random' ? spouseName(s.gender === 'm' ? 'f' : 'm') : eff.spouse;
+        // 換了一個人：前一個配偶被抓走、出門在外、冷戰的那些事，跟這一個無關
+        for (const k of ['spouse_taken', 'spouse_returned', 'spouse_away', 'hid_spouse', 'am_cold']) delete s.flags[k];
+      }
       if (eff.injure) {
         s.injuries.push(fmt(eff.injure));
         emit({ type: 'note', text: '你受了傷：' + fmt(eff.injure) });

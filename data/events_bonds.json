@@ -824,7 +824,11 @@
      "civ",
      "cao"
     ],
-    "noflag": "cc_house_done"
+    "noflag": [
+     "cc_house_done",
+     "af_xia_guest",
+     "tuntian"
+    ]
    },
    "who": "曹操",
    "tag": "曹操",
