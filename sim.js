@@ -37,7 +37,7 @@ const add = (m, f, where) => { if (!m.has(f)) m.set(f, []); m.get(f).push(where)
 
 function checkReq(req, where) {
   if (!req) return;
-  for (const f of [...arr(req.flag), ...arr(req.anyFlag), ...arr(req.noflag)]) add(flagsRead, f, where);
+  for (const f of [...arr(req.flag), ...arr(req.anyFlag), ...arr(req.noflag), ...arr(req.notAll), ...Object.keys(req.flagFor || {}), ...Object.keys(req.flagWithin || {})]) add(flagsRead, f, where);
   for (const r of [...arr(req.region), ...arr(req.noregion)]) if (!REGIONS.has(r)) errors.push(`${where}：未知的州郡 ${r}`);
   for (const id of arr(req.notFired)) if (!ids.has(id)) errors.push(`${where}：notFired 指向不存在的事件 ${id}`);
   for (const c of arr(req.cls)) if (!CLASSES.has(c)) errors.push(`${where}：未知的家世 ${c}`);
@@ -56,7 +56,7 @@ function checkEff(eff, where) {
   if (!eff) return;
   for (const k of Object.keys(eff)) {
     if (STAT_KEYS.has(k)) continue;
-    if (!['flag', 'unflag', 'route', 'faction', 'focus', 'spouse', 'injure', 'bond', 'later', 'die', 'risk', 'hpCause', 'child', 'childDie', 'childAway', 'region', 'tagKid', 'kidWed', 'kidOut', 'campaignEnd'].includes(k)) errors.push(`${where}：未知的效果欄位 ${k}`);
+    if (!['flag', 'unflag', 'route', 'faction', 'focus', 'spouse', 'injure', 'bond', 'later', 'die', 'risk', 'hpCause', 'child', 'childDie', 'childAway', 'region', 'tagKid', 'kidWed', 'kidOut', 'kidHouse', 'campaignEnd'].includes(k)) errors.push(`${where}：未知的效果欄位 ${k}`);
   }
   for (const f of arr(eff.flag)) add(flagsSet, f, where);
   if (eff.route && !ROUTES.has(eff.route)) errors.push(`${where}：未知的路線 ${eff.route}`);
@@ -136,7 +136,7 @@ for (const f of world.inheritFlags || []) add(flagsRead, f, '傳承');
 // 引擎直接讀的旗標（spouseHere：配偶是否在身邊）
 for (const f of ['widowed', 'spouse_dead_old', 'spouse_taken', 'spouse_returned']) add(flagsRead, f, '引擎');
 for (const f of [...Object.keys(world.relocate || {}), ...Object.keys(world.relocatePlace || {})]) add(flagsRead, f, '搬家');
-add(flagsSet, 'heir', '傳承'); add(flagsSet, 'has_child', '引擎'); add(flagsSet, 'heir_young', '引擎'); add(flagsSet, 'prev_child', '引擎'); add(flagsSet, 'heir_baby', '引擎'); add(flagsSet, 'served', '引擎'); add(flagsSet, 'father_in', '引擎'); add(flagsSet, 'mil_house', '引擎'); add(flagsSet, 'prev_served', '引擎'); add(flagsSet, 'prev_young', '引擎');
+add(flagsSet, 'heir', '傳承'); add(flagsSet, 'has_child', '引擎'); add(flagsSet, 'heir_young', '引擎'); add(flagsSet, 'prev_child', '引擎'); add(flagsSet, 'heir_baby', '引擎'); add(flagsSet, 'served', '引擎'); add(flagsSet, 'father_in', '引擎'); add(flagsSet, 'mil_house', '引擎'); add(flagsSet, 'prev_served', '引擎'); add(flagsSet, 'prev_young', '引擎'); add(flagsSet, 'prev_fell', '引擎');
 for (const [f, where] of flagsRead) if (!flagsSet.has(f) && !f.startsWith('_')) errors.push(`旗標「${f}」被讀取卻從沒被設定（${where[0]}）`);
 {
   const inh = new Set([...(world.inheritFlags || []), 'heir', 'has_child']);

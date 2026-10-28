@@ -1,6 +1,17 @@
 {
  "endings": [
   {
+   "id": "d_moving_alone",
+   "when": "dead",
+   "cause": "兵禍",
+   "req": {
+    "justMoved": true,
+    "alone": true
+   },
+   "title": "半路",
+   "text": "{name}收拾了能帶的東西，一個人上路去{place}，半路碰上了亂兵，沒有走到。"
+  },
+  {
    "id": "d_moving",
    "when": "dead",
    "cause": "兵禍",
@@ -83,7 +94,11 @@
    "id": "d_gj_sick",
    "when": "dead",
    "req": {
-    "route": "guanjun"
+    "route": "guanjun",
+    "year": [
+     184,
+     184
+    ]
    },
    "cause": "病故",
    "title": "病卒",
@@ -94,7 +109,11 @@
    "id": "d_gj",
    "when": "dead",
    "req": {
-    "route": "guanjun"
+    "route": "guanjun",
+    "year": [
+     184,
+     184
+    ]
    },
    "title": "無名的官軍",
    "text": "論功行賞的名冊上，{name}的名字旁邊畫了一個小圈。那是陣亡的記號。",
@@ -404,7 +423,8 @@
     "year": [
      220,
      220
-    ]
+    ],
+    "noflag": "am_cold"
    }
   },
   {
@@ -422,7 +442,8 @@
     "year": [
      184,
      219
-    ]
+    ],
+    "noflag": "am_cold"
    }
   },
   {
@@ -439,7 +460,11 @@
     "anyFlag": [
      "widowed",
      "spouse_dead_old"
-    ]
+    ],
+    "flagFor": {
+     "widowed": 3,
+     "spouse_dead_old": 3
+    }
    }
   },
   {
@@ -508,7 +533,11 @@
    "title": "銅雀臺",
    "text": "{name}死在冀州，{age}歲。曹操在鄴城西北築了銅雀臺，你去鄴城的時候遠遠看過一眼，台上的燈火徹夜不熄。",
    "req": {
-    "region": "ji"
+    "region": "ji",
+    "year": [
+     211,
+     220
+    ]
    }
   },
   {
@@ -904,7 +933,11 @@
     "anyFlag": [
      "widowed",
      "spouse_dead_old"
-    ]
+    ],
+    "flagFor": {
+     "widowed": 3,
+     "spouse_dead_old": 3
+    }
    }
   },
   {
@@ -1163,7 +1196,8 @@
      60,
      200
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "title": "明帝朝偕老",
    "text": "{name}活了{age}歲。你看著魏明帝在洛陽蓋了一座又一座宮殿，搬土的民夫一年也沒停過。最後那天，{spouse}握著你的手，說：這輩子，你沒讓我餓過一頓。"
@@ -1181,7 +1215,8 @@
      60,
      200
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    },
    "title": "偕老明帝朝",
    "text": "{name}活了{age}歲。你看著魏明帝蓋了一座又一座宮殿，又看著八歲的小皇帝登基。最後那天，{spouse}握著你的手，說：這輩子，你沒讓我餓過一頓。"
@@ -1219,7 +1254,11 @@
     "anyFlag": [
      "widowed",
      "spouse_dead_old"
-    ]
+    ],
+    "flagFor": {
+     "widowed": 3,
+     "spouse_dead_old": 3
+    }
    }
   },
   {
@@ -1306,7 +1345,8 @@
     ],
     "married": true,
     "noregion": "wu",
-    "nofaction": "sun"
+    "nofaction": "sun",
+    "noflag": "am_cold"
    },
    "title": "兩國之間偕老",
    "text": "{name}活了{age}歲。蜀漢亡了，吳國還在長江對岸，天下還是兩個朝廷。最後那天，{spouse}替你換上乾淨的衣服，說：這輩子，總算沒白過。"
@@ -1375,7 +1415,11 @@
      "spouse_dead_old"
     ],
     "noregion": "wu",
-    "nofaction": "sun"
+    "nofaction": "sun",
+    "flagFor": {
+     "widowed": 3,
+     "spouse_dead_old": 3
+    }
    },
    "title": "兩國之間獨老",
    "text": "{name}活了{age}歲。{spouse}先走了好幾年。你一個人看著蜀漢亡了，長江對岸的吳國卻還在。"
@@ -1423,7 +1467,11 @@
     "year": [
      275,
      279
-    ]
+    ],
+    "flagFor": {
+     "widowed": 3,
+     "spouse_dead_old": 3
+    }
    }
   },
   {
@@ -1444,7 +1492,11 @@
     "year": [
      280,
      280
-    ]
+    ],
+    "flagFor": {
+     "widowed": 3,
+     "spouse_dead_old": 3
+    }
    }
   },
   {
@@ -1608,7 +1660,8 @@
      300,
      400
     ],
-    "married": true
+    "married": true,
+    "noflag": "am_cold"
    }
   },
   {
@@ -2164,7 +2217,10 @@
    "req": {
     "route": "wubao",
     "cls": "clerk",
-    "flag": "father_dead"
+    "flag": "father_dead",
+    "flagFor": {
+     "father_dead": 5
+    }
    },
    "title": "叩塢",
    "text": "{name}一家在大族的塢堡裡躲過了甲子年。你父親那時已經不在了，塢主看在他管了半輩子戶籍的情分上，才開的塢門。",
@@ -2983,7 +3039,10 @@
    "when": "alive",
    "chapter": 3,
    "req": {
-    "flag": "widowed"
+    "flag": "widowed",
+    "flagFor": {
+     "widowed": 3
+    }
    },
    "title": "未亡人",
    "text": "{name}一個人過了好些年。門後那只草鞋，你一直沒有取下來。"
@@ -3421,7 +3480,10 @@
      "cao"
     ],
     "flag": "fan_porter",
-    "noflag": "jiangling"
+    "noflag": [
+     "jiangling",
+     "fled_219"
+    ]
    },
    "title": "樊城城頭",
    "text": "{name}這些年替樊城送過糧、修過城。去年關羽水淹七軍，你站在城頭看過那一片大水。今年冬天，里正說漢朝沒了，從今以後是魏朝。"

@@ -279,7 +279,8 @@
     ],
     "focus": "行商走販",
     "nofaction": "heishan",
-    "noflag": "tuntian"
+    "noflag": "tuntian",
+    "nocls": "gentry"
    },
    "w": 4,
    "eff": {
@@ -301,7 +302,8 @@
     ],
     "focus": "行商走販",
     "nofaction": "heishan",
-    "noflag": "tuntian"
+    "noflag": "tuntian",
+    "nocls": "gentry"
    },
    "w": 4,
    "repeat": 2,
@@ -327,7 +329,8 @@
     "noflag": [
      "xuwu",
      "tuntian"
-    ]
+    ],
+    "nocls": "gentry"
    },
    "w": 3,
    "eff": {
@@ -476,7 +479,10 @@
      "artisan"
     ],
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": [
+     "xuwu",
+     "dianke"
+    ]
    },
    "w": 2,
    "eff": {

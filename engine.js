@@ -111,6 +111,7 @@
       if (!uk) return list[(h + n) % list.length];
       // 同一件事換了開場（textIf）以後，不要又挑到上回已經寫過的那一句
       const used = fam['!' + uk] || (fam['!' + uk] = []);
+      if (list.every((x) => used.includes(x))) used.splice(0, used.length - 1); // 每一種都寫過了：從頭再輪一遍，只是別緊接著又寫上一回那一句
       let t = list[(h + n) % list.length];
       for (let i = 0; i < list.length && used.includes(t); i++) t = list[(h + n + i) % list.length];
       used.push(t);
@@ -138,7 +139,7 @@
     function findKid(gender, range, unwed) {
       const s = S();
       return (s.children || [])
-        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed === true && c.wed) && !(unwed === 'wed' && !(c.wed || c.knownWed)) && !(unwed === 'wed' && s.year - (c.wedYear ?? -99) < 3))
+        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed === true && c.wed) && !(unwed === 'stay' && c.gender === 'f' && c.wed) && !(unwed === 'wed' && !(c.wed || c.knownWed)) && !(unwed === 'wed' && s.year - (c.wedYear ?? -99) < 3))
         .filter((c) => { const a = s.year - c.born; return a >= range[0] && a <= (range[1] ?? 200); })
         .sort((x, y) => x.born - y.born)[0] || null;
     }
@@ -160,10 +161,12 @@
       if (req.flag && !arr(req.flag).every((f) => s.flags[f])) return false;
       if (req.anyFlag && !arr(req.anyFlag).some((f) => s.flags[f])) return false;
       if (req.noflag && arr(req.noflag).some((f) => s.flags[f])) return false;
+      if (req.notAll && arr(req.notAll).every((f) => s.flags[f])) return false; // 這幾個旗標不能全都有（例如爹娘不能都不在了）
       if (req.route && !arr(req.route).includes(s.route)) return false;
       if (req.noroute && arr(req.noroute).includes(s.route)) return false;
       // 身在官府管不到的地方（黑山的山寨）：碰不到亭長、縣吏、徭役、戶等這些事
       if (req.nofaction && arr(req.nofaction).includes(s.faction || 'civ')) return false;
+      if (req.nofaction && s.flags.xuwu && arr(req.nofaction).includes('heishan')) return false; // 躲進徐無山的那幾年也一樣：山裡沒有官府、亭長，也沒有縣裡的市集
       // 身在軍中陣營的女子不上陣，但她也是那片土地上的百姓：平民的劇情同樣算她一份
       if (req.faction && !arr(req.faction).includes(s.faction || 'civ') &&
         !(s.gender === 'f' && arr(req.faction).includes('civ') && s.faction !== 'sun' && s.faction !== 'liu' && s.faction !== 'heishan')) return false;
@@ -286,7 +289,7 @@
       delete s.flags.dianke;
       (s.regionHist || (s.regionHist = [])).push([s.year, r.id, r.place]);
       // 搬到別國的地盤：原本跟著哪一家，到了這裡都只是新來的百姓
-      if (r.faction && s.year <= (r.factionUntil ?? 9999) && s.faction && s.faction !== 'civ' && s.faction !== r.faction) s.faction = 'civ';
+      if (r.faction && s.year >= (r.factionFrom ?? 0) && s.year <= (r.factionUntil ?? 9999) && s.faction && s.faction !== 'civ' && s.faction !== r.faction) s.faction = 'civ';
       if (!quiet) emit({ type: 'note', tag: '遷居', text: `你家從此落腳在${r.name}。` });
     }
 
@@ -310,6 +313,7 @@
         if (!s.flags[f]) { (s.flagYear || (s.flagYear = {}))[f] = s.year; (s.flagRegion || (s.flagRegion = {}))[f] = s.region; }
         if (['fled_tuntian', 'xuwu'].includes(f) && !s.flags[f]) (s.regionHist || (s.regionHist = [])).push([s.year, s.region, s.place]); // 逃出屯營另找地方落腳、躲進徐無山：算是新搬來的
         s.flags[f] = true;
+        if (['official', 'official_late'].includes(f) && ['tenant', 'farmer', 'artisan'].includes(s.cls)) s.cls = 'clerk'; // 出來做了官：往後算吏家，不再碰佃戶、種地人家的事
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換；跟著搬到別州的，遷居只寫落腳的那個地名
         // 也可以照原本住的地方分開寫：{ jiangling: 'jing', '*': 'xu' }（從江陵逃的往襄陽）
@@ -371,6 +375,12 @@
         const c = s.children.find((x) => x.name === nm && x.alive);
         if (c) c.tag = eff.tagKid;
       }
+      // 把家交給了這個孩子：日後接家，名單上這個孩子排在頭一個
+      if (eff.kidHouse) {
+        const nm = s._tagKid || s._kid;
+        const c = s.children.find((x) => x.name === nm && x.alive);
+        if (c) { for (const x of s.children) delete x.house; c.house = true; }
+      }
       // 孩子成親：記下來，這個孩子日後接家時就是已經成了家的人
       if (eff.kidWed) {
         const c = s.children.find((x) => x.name === s._kid && x.alive);
@@ -398,7 +408,10 @@
       if (eff.die) die(eff.die, entry);
       if (eff.risk && s.alive) {
         const p = chance(eff.risk);
-        if (R() < p) die(eff.risk.cause, entry);
+        if (R() < p) {
+          die(eff.risk.cause, entry);
+          if (!s.alive) s.fell = true; // 死在選項裡（戰場、路上）：人沒有回到家
+        }
       }
       if (s.hp <= 0 && s.alive) die(eff.hpCause || '傷病交加', entry);
     }
@@ -703,13 +716,15 @@
       // 出征在外的那一年，家鄉的瑣事輪不到你（年邁的家長過世也一樣，留到明年再說）
       if (item.flavor && s.campaignYear === s.year) return null;
       if (item.flavor && !item.force && s.flags.guan_nubi && !ev.nubi && !ev.year) return null; // 年初排好的小事，這一年人進了織室就作罷
+      if (item.flavor && ev.nubi && !s.flags.guan_nubi) return null; // 織室裡的小事，這一年人放出來了就作罷
       if (item.flavor && ev.camp && !awayAtWar()) return null; // 軍中的小事，這一年隊伍散了、人回了家就作罷
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force && /^f_(father|mother)$/.test(item.id) && s.flags[item.id.slice(2) + '_dead']) return null; // 這一年已經寫過過世了
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
       if (ev.id === 'c3_age40' && s.heirYear === s.year && s.fired.st_heir_focus) return null; // 接家那年已經問過往後怎麼過
-      if (ev.kind !== 'flavor' && isCampaign(ev) && (s.age > 55 || s.age < 15) && !ev.req?.age) return null; // 五十五歲以上的老兵、十五歲以下的孩子不跟著隊伍出征
+      if (ev.kind !== 'flavor' && isCampaign(ev) && (s.age > 55 || (s.age < 15 && !(ev.year === 184 && ev.req?.route))) && !ev.req?.age) return null; // 五十五歲以上的老兵、十五歲以下的孩子不跟著隊伍出征
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
+      if (s.flags.guan_nubi && ev.kind === 'stage' && ev.year && ev.choices && !ev.nubi && !arr(ev.req?.flag).includes('guan_nubi')) return null; // 人在織室裡：外頭的事輪不到你拿主意
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
       if (ev.choices && !ev.age && !r.age && !r.son && !r.child && r.married == null && s.age < (data.world.minChoiceAge ?? 14)) return null;
@@ -843,6 +858,8 @@
           // 列出了長孫，就等於說了這個孩子早已成家；往後輪到他以弟妹身分接家，不能變成一輩子沒成家的人
           list.find((x) => x.name === via.name).knownWed = true;
         }
+        const hi = list.findIndex((x) => x.house);
+        if (hi > 0) list.unshift(list.splice(hi, 1)[0]);
         return list;
       }
       const sib = survivors(s.siblings).sort((a, b) => a.born - b.born);
@@ -907,7 +924,7 @@
       s.chapterEndings = (s.chapterEndings || []).concat([{ chapter: s.chapter, id: result.id, title: result.title, name: s.name }]);
       if (personEnded) s.lineage = s.lineage.concat([{ gen: s.generation, name: s.name, gender: s.gender, born: s.birthYear, died: s.alive ? null : s.year, age: s.age, cause: s.cause, title: result.title, memo: memories[0] }]); // 家譜上每一代留一句往事
       result.lineage = s.lineage;
-      if (!s.alive && heirs.length) { result.heirs = heirs.map((h) => ({ name: h.name, gender: h.gender, age: s.year - h.born, rel: h.rel, via: h.via })); g.succession = { result, heirs }; return; }
+      if (!s.alive && heirs.length) { result.heirs = heirs.map((h) => ({ name: h.name, gender: h.gender, age: s.year - h.born, rel: h.rel, via: h.via, house: !!h.house })); g.succession = { result, heirs }; return; }
       if (last) { result.extinct = !s.alive; g.ended = result; } else g.interlude = result;
     }
 
@@ -944,7 +961,8 @@
       if (age < 5) flags.heir_baby = true; // 接手時還不記事：上一代說過什麼、教過什麼，都不記得
       if (p.age < 10) flags.prev_child = true; // 上一位是夭折的孩子：沒有留下家業，也沒有說過什麼話
       if (p.flags.served || p.flags.mil_house) flags.mil_house = true; // 祖上有人當過兵：魏的士家、吳蜀的兵戶，子孫到了年紀照樣進營
-      if (p.flags.served && p.gender === 'm') flags.prev_served = true; // 上一位當了大半輩子的兵：留下的是刀和草鞋，不是扁擔
+      if (p.flags.served && p.fell) flags.prev_fell = true; // 上一位死在外頭：刀和草鞋沒有帶回家
+      else if (p.flags.served && p.gender === 'm') flags.prev_served = true; // 上一位當了大半輩子的兵：留下的是刀和草鞋，不是扁擔
       if (p.age < 20) flags.prev_young = true; // 上一位走的時候還年輕：沒有用了好些年的舊物、也沒有常掛在嘴邊的話
       // 父母的生死：孩子接班，死去的上一代就是父或母；弟妹接班，父母狀態跟兄姊相同
       if (h.rel === '弟' || h.rel === '妹') {
