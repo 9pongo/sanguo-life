@@ -585,7 +585,8 @@
      50
     ],
     "focus": "行商走販",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "tuntian"
    },
    "w": 4,
    "repeat": 2,

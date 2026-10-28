@@ -1543,7 +1543,8 @@
    ],
    "p": 0.17,
    "req": {
-    "noflag": "lz_wall_yield"
+    "noflag": "lz_wall_yield",
+    "settledFor": 12
    }
   },
   {

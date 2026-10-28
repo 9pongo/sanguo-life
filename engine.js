@@ -184,6 +184,7 @@
       // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）
       // 在這一帶住了夠久：搬來的年份不晚於 settled（晚年才搬來的人，沒見過這裡從前的事）；settledIn 列出算作同一帶的州
       if (req.settled != null) { const h = s.regionHist || []; let i = h.length; const near = arr(req.settledIn || s.region); while (i > 0 && near.includes(h[i - 1][1])) i--; if (i < h.length && h[i][0] > req.settled) return false; }
+      if (req.settledFor != null) { const h = s.regionHist || []; if (h.length && s.year - h[h.length - 1][0] < req.settledFor) return false; } // 搬來這裡至少住了幾年
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.married === true && !spouseHere()) return false;
       if (req.married === false && s.spouse) return false;

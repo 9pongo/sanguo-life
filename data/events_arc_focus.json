@@ -570,7 +570,8 @@
    "title": "頭一趟",
    "req": {
     "focus": "行商走販",
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "noflag": "tuntian"
    },
    "text": "跟著別人跑了幾年腿，你攢下了一點本錢。這年春天，你想自己挑一條路走一趟，賺了算自己的，賠了也是自己的。",
    "alt": [
@@ -700,7 +701,10 @@
      "af_trade_caravan"
     ],
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": [
+     "xuwu",
+     "tuntian"
+    ]
    },
    "tag": "行商",
    "title": "過關",
@@ -831,7 +835,8 @@
      "af_trade_paid",
      "af_trade_argued",
      "af_trade_detour"
-    ]
+    ],
+    "noflag": "tuntian"
    },
    "tag": "行商",
    "title": "押貨",

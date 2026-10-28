@@ -459,7 +459,11 @@
    "p": 0.22,
    "req": {
     "cls": "tenant",
-    "noflag": "tuntian",
+    "noflag": [
+     "tuntian",
+     "tuntian_freed",
+     "zhantian_self"
+    ],
     "nofaction": "heishan"
    }
   },
