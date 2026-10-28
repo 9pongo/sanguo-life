@@ -176,6 +176,7 @@
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
+      if (req.ancestral !== undefined && (s.place === ((s.regionHist || [])[0] || [])[2]) !== req.ancestral) return false; // 住在這一家最早落腳、祖墳所在的地方
       if (req.alone !== undefined && aloneNow() !== req.alone) return false; // 沒配偶、沒孩子、爹娘也都不在
       if (req.away !== undefined && awayAtWar() !== req.away) return false; // 人還跟著隊伍在外
       // 同一州裡落腳的地方不同（南陽的襄陽、新野，碰不上宛城城裡的事）；接家的孩子沒有上一代逃難時記下的旗標，看的是現在住在哪裡
@@ -188,6 +189,8 @@
       if (req.settledFor != null) { const h = s.regionHist || []; if (h.length && s.year - h[h.length - 1][0] < req.settledFor) return false; } // 搬來這裡至少住了幾年
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.flagFor) for (const [f, n] of Object.entries(req.flagFor)) { const y = (s.flagYear || {})[f]; if (s.flags[f] && y !== undefined && s.year - y < n) return false; } // 拿到這個旗標至少過了幾年
+      if (req.wedFor != null && s.spouseYear != null && s.year - s.spouseYear < req.wedFor) return false; // 成親至少幾年
+      if (req.brother != null && (s.siblings || []).some((x) => x.gender === 'm' && x.alive) !== req.brother) return false;
       if (req.married === true && !spouseHere()) return false;
       if (req.married === false && s.spouse) return false;
       return true;
@@ -298,8 +301,9 @@
       if (eff.campaignEnd) delete s.campaignYear; // 脫下軍服：往後不再算跟著隊伍在外
       if (eff.spouse) {
         s.spouse = eff.spouse === '@random' ? spouseName(s.gender === 'm' ? 'f' : 'm') : eff.spouse;
+        s.spouseYear = s.year;
         // 換了一個人：前一個配偶被抓走、出門在外、冷戰的那些事，跟這一個無關
-        for (const k of ['spouse_taken', 'spouse_returned', 'spouse_away', 'hid_spouse', 'am_cold']) delete s.flags[k];
+        for (const k of ['spouse_taken', 'spouse_returned', 'spouse_away', 'hid_spouse', 'am_cold', 'spouse_legless', 'am_rift_soft', 'am_rift_cold', 'am_rift_mend', 'am_rift_apart', 'am_rift_talked', 'am_rift_held']) delete s.flags[k];
       }
       if (eff.injure) {
         s.injuries.push(fmt(eff.injure));
@@ -647,6 +651,8 @@
       if (item.at && item.at !== s.region + '/' + (s.place || '') && !ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly)) return null;
       // 出征在外的那一年，家鄉的瑣事輪不到你（年邁的家長過世也一樣，留到明年再說）
       if (item.flavor && s.campaignYear === s.year) return null;
+      if (item.flavor && !item.force && s.flags.guan_nubi && !ev.nubi && !ev.year) return null; // 年初排好的小事，這一年人進了織室就作罷
+      if (item.flavor && ev.camp && !awayAtWar()) return null; // 軍中的小事，這一年隊伍散了、人回了家就作罷
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
@@ -729,6 +735,7 @@
     // 跟著諸侯在外打仗：男子、上過戰場、這三年內還出過征、五十歲以下
     function awayAtWar() {
       const s = S();
+      if (s.flags.ex_wu && (s.campaignYear ?? -99) <= (s.flagYear || {}).ex_wu) return false; // 吳亡那年降了晉，隊伍就散了
       return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 50 && s.year - (s.campaignYear ?? -99) <= 3;
     }
     // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了
