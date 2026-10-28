@@ -127,7 +127,7 @@
     function findKid(gender, range, unwed) {
       const s = S();
       return (s.children || [])
-        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed && c.wed))
+        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed === true && c.wed) && !(unwed === 'wed' && !(c.wed || c.knownWed)))
         .filter((c) => { const a = s.year - c.born; return a >= range[0] && a <= (range[1] ?? 200); })
         .sort((x, y) => x.born - y.born)[0] || null;
     }
@@ -165,7 +165,7 @@
       // 子女：在某個年齡範圍內、還活著、沒有送走的孩子（son 只看兒子）
       // 故事線的後續：認當初用 tagKid 標記的那個孩子，不靠年齡猜（家裡有好幾個同齡上下的孩子時才不會認錯人）
       if (req.kidTag) { const c = (s.children || []).find((x) => x.alive && !x.away && x.tag === req.kidTag); if (!c) return false; s._kid = c.name; if (c.gender === 'm') s._son = c.name; }
-      if (req.child) { const c = findKid(null, req.child, req.kidUnwed); if (!c) return false; s._kid = c.name; }
+      if (req.child) { const c = findKid(null, req.child, req.kidUnwed || (req.kidWed && 'wed')); if (!c) return false; s._kid = c.name; }
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
@@ -654,8 +654,8 @@
         const pool = (s.flags.am_rift_apart && !s.flags.am_rift_talked && W.spouseDeathTextsCold) || W.spouseDeathTexts || [];
         emit({ type: 'event', tag: '喪偶', text: fmt(pool[Math.floor(R() * pool.length)] || '{spouse}走了。') });
       }
-      // 成了家的人，每年有一定機會添一個孩子
-      if (s.alive && spouseHere() && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2)) {
+      // 成了家的人，每年有一定機會添一個孩子（夫妻都過了四十，機會小得多）
+      if (s.alive && spouseHere() && s.age >= 16 && s.age <= 45 && s.children.length < 6 && R() < (W.childChance ?? 0.2) * (s.age > 40 ? 0.3 : 1)) {
         apply({ child: true }, null);
         emit({ type: 'event', tag: '添丁', text: fmt(variant(W.childText, 'childText')) });
       }

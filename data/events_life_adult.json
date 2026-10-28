@@ -1579,7 +1579,10 @@
      "friend_hj_other",
      "friend_with_you"
     ],
-    "home": true
+    "home": true,
+    "notFired": [
+     "lx_lend"
+    ]
    },
    "w": 3,
    "eff": {
