@@ -629,7 +629,9 @@
     "nofaction": "heishan",
     "noflag": [
      "xuwu",
-     "dianke"
+     "dianke",
+     "tuntian",
+     "fled_tuntian"
     ]
    },
    "alt": [

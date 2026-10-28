@@ -1106,7 +1106,10 @@
    ],
    "req": {
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": [
+     "xuwu",
+     "dianke"
+    ]
    }
   },
   {

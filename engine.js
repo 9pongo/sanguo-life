@@ -297,7 +297,7 @@
           }
         }
       }
-      if (eff.later) for (const l of arr(eff.later)) s.scheduled.push({ year: s.year + l.in, id: l.id });
+      if (eff.later) for (const l of arr(eff.later)) s.scheduled.push({ year: s.year + l.in, id: l.id, at: s.region + '/' + (s.place || '') });
       if (eff.child) {
         // 孩子跟父姓：自己是男的跟自己姓，自己是女的跟配偶姓
         const sur = s.gender === 'm' ? s.surname : (s.spouse ? s.spouse[0] : s.surname);
@@ -532,7 +532,7 @@
       const s = S();
       const q = [];
       // 因果：多年前排下的事
-      for (const sc of s.scheduled.filter((x) => x.year === s.year)) q.push({ id: sc.id, force: true });
+      for (const sc of s.scheduled.filter((x) => x.year === s.year)) q.push({ id: sc.id, force: true, at: sc.at });
       s.scheduled = s.scheduled.filter((x) => x.year !== s.year);
       // 主線、羈絆、人生階段：照順序，執行時才判斷條件
       const due = scheduledPool
@@ -601,6 +601,8 @@
       // （寫給山寨的劇情除外；家鄉那邊排定的後續也一樣，人不在就作罷）
       if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) &&
         (awayAtWar() || (s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')))) return null;
+      // 排定以後全家搬走了（例如鉅鹿的仇家、鄰里的後續），搬到新地方就碰不上了
+      if (item.at && item.at !== s.region + '/' + (s.place || '') && !ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly)) return null;
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
       // 出征在外的那一年，家鄉的瑣事輪不到你
