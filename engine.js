@@ -590,6 +590,11 @@
         if (ev) picked.push(ev);
       }
       for (const e of picked) q.push({ id: e.id, flavor: true });
+      // 還活著的那一位家長年過八十二，這一年走了；接家的人還小，就只記下來
+      // 排在這一年最後；人跟著隊伍在外的那一年，留到明年
+      if (s.elderBorn != null && !s.flags[s.elderParent + '_dead'] && s.year - s.elderBorn >= 82) {
+        if (s.age >= 18) q.push({ id: 'f_' + s.elderParent, force: true, flavor: true }); else s.flags[s.elderParent + '_dead'] = true;
+      }
       return q;
     }
 
@@ -635,10 +640,10 @@
       if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')) return null;
       // 排定以後全家搬走了（例如鉅鹿的仇家、鄰里的後續），搬到新地方就碰不上了
       if (item.at && item.at !== s.region + '/' + (s.place || '') && !ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly)) return null;
+      // 出征在外的那一年，家鄉的瑣事輪不到你（年邁的家長過世也一樣，留到明年再說）
+      if (item.flavor && s.campaignYear === s.year) return null;
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
-      // 出征在外的那一年，家鄉的瑣事輪不到你
-      if (item.flavor && s.campaignYear === s.year) return null;
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
@@ -871,7 +876,7 @@
       } else {
         flags[p.gender === 'm' ? 'father_dead' : 'mother_dead'] = true;
         // 另一位家長就是上一代的配偶
-        if (p.flags.widowed || p.flags.spouse_dead_old) flags[p.gender === 'm' ? 'mother_dead' : 'father_dead'] = true;
+        if (p.flags.widowed || p.flags.spouse_dead_old || !p.spouse) flags[p.gender === 'm' ? 'mother_dead' : 'father_dead'] = true;
       }
       for (const f of W.inheritFlags || []) if (p.flags[f]) flags[f] = true;
       // 祖上的事：記住是誰做的。上一任當家親自做的寫他的名字，更早以前的就只說「家裡的長輩」
@@ -895,6 +900,8 @@
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同
         parentName: h.via || ((h.rel === '弟' || h.rel === '妹') ? (p.parentName || null) : p.name),
         elders,
+        // 還活著的那一位家長（上一代的配偶），年紀當作跟上一代差不多
+        elderBorn: h.via || h.rel === '弟' || h.rel === '妹' ? null : p.birthYear, elderParent: p.gender === 'm' ? 'mother' : 'father',
         // 祖上幾代當家和他們的配偶：往後孩子取名都要避開；孫輩接班的，親生父母和叔伯姑姑（前一位的孩子）也一樣
         forbid: [...new Set([...(p.forbid || []), p.name, p.spouse, h.via, ...(p.children || []).map((c) => c.name)].filter((n) => n && n !== h.name))],
       };

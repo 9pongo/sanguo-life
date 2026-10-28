@@ -695,7 +695,12 @@
    "id": "d_flee",
    "when": "dead",
    "req": {
-    "route": "flee"
+    "route": "flee",
+    "nofaction": "heishan",
+    "year": [
+     184,
+     186
+    ]
    },
    "title": "死在路上",
    "text": "{name}死在逃難的路上。同行的人在路邊挖了一個淺坑，插了一根樹枝當記號。",

@@ -72,7 +72,10 @@
      "eff": {
       "財": 1,
       "德": -1,
-      "flag": "am_rift_cold",
+      "flag": [
+       "am_rift_cold",
+       "am_cold"
+      ],
       "later": {
        "in": 2,
        "id": "am_rift_cold"
@@ -119,7 +122,10 @@
      "fail": {
       "eff": {
        "財": -1,
-       "flag": "am_rift_cold",
+       "flag": [
+        "am_rift_cold",
+        "am_cold"
+       ],
        "later": {
         "in": 2,
         "id": "am_rift_cold"
@@ -210,7 +216,8 @@
       "later": {
        "in": 4,
        "id": "am_rift_ill"
-      }
+      },
+      "unflag": "am_cold"
      },
      "out": "你提著一隻雞去了{spouse}的娘家。岳家的人沒給你好臉色，{spouse}卻收拾了包袱跟你回來，一路上兩人都沒說話。",
      "outAlt": [
@@ -291,7 +298,8 @@
        "later": {
         "in": 4,
         "id": "am_rift_ill"
-       }
+       },
+       "unflag": "am_cold"
       },
       "out": "長輩兩邊各說了幾句重話，又各給了一個台階。那天晚上，{spouse}默默把你的鞋放回了席邊。",
       "outAlt": [
@@ -301,7 +309,10 @@
      "fail": {
       "eff": {
        "名": -1,
-       "flag": "am_rift_apart",
+       "flag": [
+        "am_rift_apart",
+        "am_cold"
+       ],
        "later": {
         "in": 4,
         "id": "am_rift_ill"
@@ -516,6 +527,14 @@
      "out": "親事定了。兩家都不寬裕，酒席只擺了三桌，倒是吃到天黑還沒散。",
      "outAlt": [
       "{kid}成親那天沒什麼排場。新人給你磕頭時，你看見兩人偷偷相視一笑。"
+     ],
+     "outIf": [
+      {
+       "req": {
+        "cls": "gentry"
+       },
+       "out": "親事定了。兩家門第相當，酒席照著禮辦，不鋪張。新人給你磕頭時，你看見兩人偷偷相視一笑。"
+      }
      ]
     },
     {
@@ -548,6 +567,12 @@
         "faction": "heishan"
        },
        "out": "{kid}紅著臉說出一個名字，是寨裡一戶人家的孩子。你託媒婆去說，竟就成了。"
+      },
+      {
+       "req": {
+        "cls": "gentry"
+       },
+       "out": "{kid}想了很久，說不要那家大族，要門第相當的那一家，說那家的孩子讀過書，說話有分寸。你點點頭，託媒人去說了。"
       }
      ]
     }
@@ -1708,7 +1733,8 @@
     }
    ],
    "req": {
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "settledFor": 10
    }
   },
   {

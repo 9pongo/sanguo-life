@@ -878,7 +878,8 @@
      "la_clan_dispute"
     ],
     "nofaction": "heishan",
-    "noflag": "xuwu"
+    "noflag": "xuwu",
+    "settledFor": 15
    }
   },
   {
@@ -1265,7 +1266,10 @@
     "stat": {
      "財": 10
     },
-    "noflag": "dianke",
+    "noflag": [
+     "dianke",
+     "tuntian"
+    ],
     "nofaction": "heishan"
    },
    "textIf": [
