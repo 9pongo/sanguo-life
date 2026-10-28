@@ -867,6 +867,13 @@
      "farmer",
      "artisan",
      "clerk"
+    ],
+    "noflag": [
+     "friend_with_you"
+    ],
+    "notFired": [
+     "la_friend_reunion",
+     "lx_lend"
     ]
    },
    "alt": [

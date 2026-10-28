@@ -2027,7 +2027,10 @@
      "eff": {
       "名": 2,
       "財": 2,
-      "flag": "af_study_teacher",
+      "flag": [
+       "af_study_teacher",
+       "af_study_nushi"
+      ],
       "later": {
        "in": 5,
        "id": "af_study_teach_end"
@@ -2232,7 +2235,8 @@
     },
     {
      "req": {
-      "gender": "f"
+      "gender": "f",
+      "flag": "af_study_nushi"
      },
      "text": "你教過的女孩，好幾個已經嫁了人。這年有一個託人捎信來，信是她自己寫的，字跡端端正正，說她在婆家也教起了孩子。"
     }

@@ -112,8 +112,9 @@
     // 南方種稻：住在 regionWords 列出的地方，非史實的事件把麥換成稻（有年份的時代大事照史料寫，不換）
     let histText = false;
     function localize(t, region) {
-      const words = histText ? null : (data.world.regionWords || {})[region || S().region];
-      if (!words) return t;
+      if (histText) return t;
+      // 住在黑山山寨裡的：里中、里門這些說法換成寨裡、寨門
+      const words = [...((data.world.regionWords || {})[region || S().region] || []), ...((data.world.factionWords || {})[S().faction] || [])];
       for (const [a, b] of words) t = t.split(a).join(b);
       return t;
     }
@@ -126,7 +127,7 @@
     function findKid(gender, range, unwed) {
       const s = S();
       return (s.children || [])
-        .filter((c) => c.alive && !c.away && (!gender || c.gender === gender) && !(unwed && c.wed))
+        .filter((c) => c.alive && !c.away && !(c.outUntil > s.year) && (!gender || c.gender === gender) && !(unwed && c.wed))
         .filter((c) => { const a = s.year - c.born; return a >= range[0] && a <= (range[1] ?? 200); })
         .sort((x, y) => x.born - y.born)[0] || null;
     }
@@ -168,7 +169,10 @@
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
+      if (req.homeAcross !== undefined && homeAcross() !== req.homeAcross) return false;
       // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）
+      // 在這一帶住了夠久：搬來的年份不晚於 settled（晚年才搬來的人，沒見過這裡從前的事）；settledIn 列出算作同一帶的州
+      if (req.settled != null) { const h = s.regionHist || []; let i = h.length; const near = arr(req.settledIn || s.region); while (i > 0 && near.includes(h[i - 1][1])) i--; if (i < h.length && h[i][0] > req.settled) return false; }
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.married === true && !spouseHere()) return false;
       if (req.married === false && s.spouse) return false;
@@ -216,6 +220,15 @@
       let r = null;
       for (const [y, , pl] of s.regionHist || []) if (r === null || y <= s.birthYear + 8) r = pl;
       return r || s.place;
+    }
+    // 小時候住的地方跟現在隔著國界（吳、蜀還在的那些年）：老家的事傳不過來，人也回不去
+    function homeAcross() {
+      const s = S();
+      let hr = null;
+      for (const [y, r] of s.regionHist || []) if (hr === null || y <= s.birthYear + 8) hr = r;
+      if (!hr || hr === s.region) return false;
+      const state = (r) => (['wu', 'jiangling'].includes(r) && s.year >= 220 && s.year < 280 ? 'wu' : r === 'shu' && s.year >= 214 && s.year < 263 ? 'shu' : 'wei');
+      return state(hr) !== state(s.region);
     }
     function moveTo(id, quiet) {
       const s = S();
@@ -309,6 +322,11 @@
           : youngest();
         if (c) c.alive = false;
         if (!s.children.some((x) => x.alive)) delete s.flags.has_child;
+      }
+      // 孩子出門在外幾年（跟人去闖、去郡裡謀生）：這幾年家裡的事不會找上這個孩子
+      if (eff.kidOut) {
+        const c = s.children.find((x) => x.name === (s._son || s._kid) && x.alive);
+        if (c) c.outUntil = s.year + eff.kidOut;
       }
       if (eff.childAway) {
         const c = s.children.filter((x) => x.alive && !x.away).pop();
@@ -582,6 +600,8 @@
       if (item.flavor && s.campaignYear === s.year) return null;
       // 里中要你出面的事（修橋、爭水、作保、收留人），人跟著隊伍在外打仗的那幾年碰不上
       if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && awayAtWar()) return null;
+      // 上了黑山住在山寨裡的，同樣碰不到里中、族裡這些事（寫給山寨的劇情除外）
+      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')) return null;
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
@@ -825,7 +845,8 @@
         children: [], siblings, generation: (h.rel === '弟' || h.rel === '妹') ? p.generation : p.generation + (h.via ? 2 : 1), lineage: p.lineage,
         region: p.region, regionName: p.regionName, place: p.place, regionHist: [...(p.regionHist || [])], // 這一家歷年住過的地方：接家的人小時候住哪裡，從這裡查
         cls: clsId, clsName: ncls.name, talents, stats, hp: 70, flags, bonds: {},
-        focus: null, route: null, faction: p.faction, chapter: p.chapter, spouse: null,
+        // 劉備還沒有自己的地盤（入蜀以前）：上一代跟著他打仗死了，留下的孩子還小，只是家鄉的百姓，不會跟著隊伍走
+        focus: null, route: null, faction: p.faction === 'liu' && p.year < 214 && age < 14 ? 'civ' : p.faction, chapter: p.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
         alive: true, cause: null, chapterEndings: p.chapterEndings, familySeen: { ...(p.familySeen || {}) },
         // 孩子接班：父母就是前一位；弟妹接班：父母跟前一位相同
@@ -969,7 +990,7 @@
         children: [], siblings: [...older], generation: P.generation + 1, lineage: P.lineage.map(({ memo, ...x }) => x), // 自動跑過的祖上不是你親身活過的，不留「你」的往事
         region: P.region, regionName: P.regionName, place: P.place, regionHist: [[year, P.region, P.place]],
         cls: cls.id, clsName: cls.name, talents, stats,
-        hp: 70, flags, bonds: {}, focus: null, route: null, faction: P.faction, chapter: P.chapter, spouse: null,
+        hp: 70, flags, bonds: {}, focus: null, route: null, faction: P.faction === 'liu' && year < 214 ? 'civ' : P.faction, chapter: P.chapter, spouse: null,
         friend: randomName('m'), injuries: [], fired: {}, scheduled: [], choices: [], log: [],
         alive: true, cause: null, firstLife: true, lateStart: true,
         chapterEndings: P.chapterEndings || [], familySeen: { ...(P.familySeen || {}) },

@@ -1241,7 +1241,8 @@
    ],
    "p": 0.14,
    "req": {
-    "nofaction": "heishan"
+    "nofaction": "heishan",
+    "homeAcross": false
    }
   },
   {
