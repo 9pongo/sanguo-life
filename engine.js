@@ -169,6 +169,8 @@
       if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
+      // 同一州裡落腳的地方不同（南陽的襄陽、新野，碰不上宛城城裡的事）
+      if (req.noplace && arr(req.noplace).includes(s.place)) return false;
       if (req.homeAcross !== undefined && homeAcross() !== req.homeAcross) return false;
       // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）
       // 在這一帶住了夠久：搬來的年份不晚於 settled（晚年才搬來的人，沒見過這裡從前的事）；settledIn 列出算作同一帶的州
