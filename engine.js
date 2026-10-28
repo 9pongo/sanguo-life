@@ -100,7 +100,7 @@
     }
     // 同一段話有好幾種寫法：這一局的種子決定從哪一種開始，同一家族再碰到就換下一種
     // 不動用亂數，所以加寫法不會讓舊存檔重播走樣
-    function variant(list, key) {
+    function variant(list, key, uk) {
       if (!Array.isArray(list)) return list;
       if (list.length < 2) return list[0];
       const s = S(), fam = s.familySeen || (s.familySeen = {});
@@ -108,7 +108,13 @@
       fam[k] = n + 1;
       let h = 2166136261 >>> 0;
       for (const ch of seed + ':' + key) h = Math.imul(h ^ ch.codePointAt(0), 16777619) >>> 0;
-      return list[(h + n) % list.length];
+      if (!uk) return list[(h + n) % list.length];
+      // 同一件事換了開場（textIf）以後，不要又挑到上回已經寫過的那一句
+      const used = fam['!' + uk] || (fam['!' + uk] = []);
+      let t = list[(h + n) % list.length];
+      for (let i = 0; i < list.length && used.includes(t); i++) t = list[(h + n + i) % list.length];
+      used.push(t);
+      return t;
     }
     const withAlt = (base, alt) => (alt && alt.length ? [base, ...alt] : base);
     // 寫到家裡還有別人的句子（家裡人、一家人、晚輩們）：一個人過日子的時候，挑別的寫法；每一種都提到家人，就照原樣
@@ -174,10 +180,11 @@
       // 故事線的後續：認當初用 tagKid 標記的那個孩子，不靠年齡猜（家裡有好幾個同齡上下的孩子時才不會認錯人）
       if (req.kidTag) { const c = (s.children || []).find((x) => x.alive && !x.away && x.tag === req.kidTag); if (!c) return false; s._kid = c.name; if (c.gender === 'm') s._son = c.name; }
       if (req.child) { const c = findKid(null, req.child, req.kidUnwed || (req.kidWed && 'wed')); if (!c) return false; s._kid = c.name; }
-      if (req.son) { const c = findKid('m', req.son); if (!c) return false; s._son = c.name; }
+      if (req.son) { const c = findKid('m', req.son, req.kidUnwed || (req.kidWed && 'wed')); if (!c) return false; s._son = c.name; }
       // 還住在小時候住的地方（沒有搬到別州去）
       if (req.home !== undefined && (s.place === homePlace()) !== req.home) return false;
       if (req.ancestral !== undefined && (s.place === ((s.regionHist || [])[0] || [])[2]) !== req.ancestral) return false; // 住在這一家最早落腳、祖墳所在的地方
+      if (req.elderSib !== undefined && (s.siblings || []).some((c) => c.alive && !c.away && s.year - c.born >= 18) !== req.elderSib) return false; // 家裡還有成了年的哥哥姊姊
       if (req.alone !== undefined && aloneNow() !== req.alone) return false; // 沒配偶、沒孩子、爹娘也都不在
       if (req.away !== undefined && awayAtWar() !== req.away) return false; // 人還跟著隊伍在外
       // 同一州裡落腳的地方不同（南陽的襄陽、新野，碰不上宛城城裡的事）；接家的孩子沒有上一代逃難時記下的旗標，看的是現在住在哪裡
@@ -216,6 +223,8 @@
     function chance(c) {
       if (c == null) return 1;
       if (typeof c === 'number') return c;
+      // 「活下來就一定是這個結果」（base 1、沒有 fail）：不能被上限 0.97 卡掉，落得一個什麼都沒寫的結局
+      if (c.base >= 1 && !c.stat && !c.bond) return 1;
       let p = c.base ?? 0.5;
       if (c.stat) p += (c.k ?? 0.01) * val(c.stat);
       if (c.bond) p += (c.bk ?? 0.1) * (S().bonds[c.bond] || 0);
@@ -303,7 +312,9 @@
         s.flags[f] = true;
         // 搬家：帶上這些旗標，住處就跟著換（子孫也住在新的地方）
         // 同一個州裡換了地方（例如南陽、潁川的人逃到襄陽）：地名跟著換；跟著搬到別州的，遷居只寫落腳的那個地名
-        const to = (data.world.relocate || {})[f];
+        // 也可以照原本住的地方分開寫：{ jiangling: 'jing', '*': 'xu' }（從江陵逃的往襄陽）
+        const r0 = (data.world.relocate || {})[f];
+        const to = r0 && typeof r0 === 'object' ? (r0[s.region] ?? r0['*']) : r0;
         const pl = (data.world.relocatePlace || {})[f];
         const plOk = pl && (!pl.from || pl.from === s.region);
         if (to) moveTo(to, plOk);
@@ -403,7 +414,7 @@
       // 同一件小事在家族裡第二次發生時，換一種寫法
       // 同一件人生大事（接家、四十、六十）每一代都會碰到：依時代與家境換一段開場
       const tvi = (ev.textIf || []).findIndex((v) => meets(v.req));
-      const text = tvi >= 0 ? variant(homeText(ev.textIf[tvi].text), ev.id + '@' + tvi) : variant(homeText(withAlt(ev.text, ev.alt)), ev.id);
+      const text = tvi >= 0 ? variant(homeText(ev.textIf[tvi].text), ev.id + '@' + tvi, ev.id) : variant(homeText(withAlt(ev.text, ev.alt)), ev.id, ev.textIf && ev.id);
       // 家族記得每件事發生過幾次、最近一次是哪一年：後代少碰重複的事
       {
         const fam = s.familySeen || (s.familySeen = {});
@@ -688,7 +699,7 @@
       if (item.flavor && ev.camp && !awayAtWar()) return null; // 軍中的小事，這一年隊伍散了、人回了家就作罷
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
-      if (ev.kind !== 'flavor' && isCampaign(ev) && s.age > 55 && !ev.req?.age) return null; // 五十五歲以上的老兵不再跟著隊伍出征
+      if (ev.kind !== 'flavor' && isCampaign(ev) && (s.age > 55 || s.age < 15) && !ev.req?.age) return null; // 五十五歲以上的老兵、十五歲以下的孩子不跟著隊伍出征
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
@@ -934,6 +945,7 @@
         if (p.flags.widowed || p.flags.spouse_dead_old || !p.spouse || (p.flags.spouse_taken && !p.flags.spouse_returned)) flags[p.gender === 'm' ? 'mother_dead' : 'father_dead'] = true; // 被抓走沒回來的，也不在了
         else if (p.gender === 'f') flags.father_in = true; // 上一代是母親當家，父親是後來搬進這個家的：縣署裡的差事不是他的
       }
+      if (clsId !== p.cls || h.via) flags.father_in = true; // 家世是這一代才提上來的、或是長孫接班：爹沒在縣署當過差
       for (const f of W.inheritFlags || []) if (p.flags[f]) flags[f] = true;
       // 逃出屯營、當年就被追回處斬的人，家裡人還留在屯裡
       if (p.flags.fled_tuntian && (p.flagYear || {}).fled_tuntian === p.year) flags.tuntian = true;

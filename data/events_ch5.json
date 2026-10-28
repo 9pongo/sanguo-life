@@ -453,7 +453,8 @@
       "flag": [
        "jiupin_done",
        "official_late"
-      ]
+      ],
+      "faction": "civ"
      },
      "out": "中正給了你四品。你在郡裡當了個小吏。有人說，這個法子再過幾十年，就只剩下世家子弟能上品了。",
      "tAlt": [
@@ -626,7 +627,8 @@
      16,
      70
     ],
-    "nocls": "gentry"
+    "nocls": "gentry",
+    "noflag": "official_late"
    },
    "eff": {
     "健": -1

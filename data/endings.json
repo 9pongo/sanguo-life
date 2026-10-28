@@ -602,6 +602,14 @@
    "text": "{name}從陰平的山崖上摔了下去。鄧艾滅了蜀，名字寫進了史書；摔下山崖的人，沒有。"
   },
   {
+   "id": "d6_shu_draft",
+   "when": "dead",
+   "chapter": 6,
+   "cause": "藏丁",
+   "title": "柴堆後面",
+   "text": "{name}是被點兵的官差打死的。那些年姜維年年北伐，蜀中的人家藏兒子、藏丈夫，被翻出來的不只一家。"
+  },
+  {
    "id": "d6_jail",
    "when": "dead",
    "chapter": 6,
@@ -614,6 +622,20 @@
    },
    "title": "下獄",
    "text": "{name}沒有活著從官府出來。那些年大獄一場接一場，牽連進去的，有大臣，也有像你這樣的百姓。"
+  },
+  {
+   "id": "d6_jail_wei",
+   "when": "dead",
+   "chapter": 6,
+   "cause": "刑殺",
+   "req": {
+    "year": [
+     235,
+     248
+    ]
+   },
+   "title": "官府手裡",
+   "text": "{name}死在官府手裡。那些年洛陽的宮殿一座一座蓋起來，律令也一條比一條嚴，被抓去的人，很少有回來的。"
   },
   {
    "id": "d6e_war_wu",
@@ -734,6 +756,14 @@
    }
   },
   {
+   "id": "d7_yinhu",
+   "when": "dead",
+   "chapter": 7,
+   "cause": "隱戶",
+   "title": "隱戶",
+   "text": "{name}是因為少報了兩口人，死在縣裡的。占田令頒下來那年，藏人口的人家很多，被鄰里告發的只是少數。"
+  },
+  {
    "id": "d7_wu",
    "when": "dead",
    "chapter": 7,
@@ -743,6 +773,14 @@
    ],
    "title": "長江",
    "text": "天下就要一統了。{name}死在統一的前夕，沒有看到那一天。"
+  },
+  {
+   "id": "d8_yinhu",
+   "when": "dead",
+   "chapter": 8,
+   "cause": "隱戶",
+   "title": "少報的兩口人",
+   "text": "{name}是因為少報了兩口人，死在縣裡的。占田令頒下來那幾年，藏人口的人家很多，被鄰里告發的只是少數。"
   },
   {
    "id": "d8_zhangchang",
@@ -1645,12 +1683,26 @@
    "text": "{name}死在天下三分的那些年，{age}歲。你家在哪一國，你就是哪一國的人，可是你從來沒想過這件事。"
   },
   {
-   "id": "d6e_default_wu",
+   "id": "d6e_default_wu0",
    "when": "dead",
    "chapter": 6,
    "req": {
     "year": [
      235,
+     241
+    ],
+    "faction": "sun"
+   },
+   "title": "校事",
+   "text": "{name}死在孫權晚年，{age}歲。那些年孫權讓校事呂壹查問百官，大臣們見了他都繞著走；里中的日子還是照舊。"
+  },
+  {
+   "id": "d6e_default_wu",
+   "when": "dead",
+   "chapter": 6,
+   "req": {
+    "year": [
+     242,
      248
     ],
     "faction": "sun"
@@ -2338,7 +2390,8 @@
    "chapter": 2,
    "req": {
     "faction": "cao",
-    "gender": "f"
+    "gender": "f",
+    "alone": false
    },
    "title": "曹營家眷",
    "text": "{name}一家跟著曹營走了十年。男人在前頭打仗，你在後頭縫衣、舂米、等消息。十年前曹操只有五千人，現在他是北方的主人。"
@@ -2716,7 +2769,8 @@
    "chapter": 3,
    "req": {
     "faction": "cao",
-    "gender": "f"
+    "gender": "f",
+    "alone": false
    },
    "title": "曹營家眷",
    "text": "{name}是曹營的家眷。男人們平了河北、北征了烏桓，又在赤壁輸了一場。你數著回來的人，一年比一年少。"
@@ -3089,7 +3143,8 @@
    "chapter": 4,
    "req": {
     "faction": "cao",
-    "gender": "f"
+    "gender": "f",
+    "alone": false
    },
    "title": "受禪",
    "text": "{name}看著曹丕登壇受禪。你家的男人跟著他父親打了半輩子的仗，到頭來，換了一個國號。"

@@ -936,7 +936,8 @@
      "sub": "要長命，要富貴。",
      "eff": {
       "德": 1,
-      "flag": "ly_name_lucky"
+      "flag": "ly_name_lucky",
+      "kidWed": true
      },
      "out": "你想了三天，取了一個又長命又富貴的名字。{kid}笑著說，太大了，孩子撐不住。你說撐得住。"
     },
@@ -948,7 +949,8 @@
      "sub": "讓孩子記得自己從哪裡來。",
      "eff": {
       "名": 1,
-      "flag": "ly_name_ancestor"
+      "flag": "ly_name_ancestor",
+      "kidWed": true
      },
      "out": "你從{prev}的名字裡取了一個字。抱著孩子的時候，你在他耳邊把這個字的來歷說了一遍，孩子睡著了。",
      "outIf": [
@@ -974,7 +976,8 @@
      "sub": "你老了，名字該年輕人來取。",
      "eff": {
       "健": 1,
-      "flag": "ly_name_theirs"
+      "flag": "ly_name_theirs",
+      "kidWed": true
      },
      "out": "你說，你們自己取吧。{kid}取了一個你從沒想過的名字。你唸了幾遍，覺得也挺好聽。"
     }

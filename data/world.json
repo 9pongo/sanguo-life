@@ -3037,7 +3037,7 @@
    "req": {
     "flag": "lx_loom_bad"
    },
-   "text": "你拿陪嫁的銀釵換錢，跟里中婦人合買了一架織機，最後鬧得不歡而散。那對銀釵，你想了好些年。",
+   "text": "你拿壓箱底的銀釵換錢，跟里中婦人合買了一架織機，最後鬧得不歡而散。那對銀釵，你想了好些年。",
    "life": true
   },
   {
@@ -4153,7 +4153,10 @@
   "to_wu": "wu",
   "with_ce": "wu",
   "shu": "shu",
-  "fled_wu": "xu",
+  "fled_wu": {
+   "jiangling": "jing",
+   "*": "xu"
+  },
   "jingzhou": "jing",
   "to_jingzhou": "jing",
   "south": "wu",
@@ -4181,6 +4184,11 @@
   "liaodong": {
    "place": "襄平",
    "name": "遼東襄平"
+  },
+  "fled_wu": {
+   "from": "jiangling",
+   "place": "襄陽",
+   "name": "荊州襄陽"
   }
  },
  "firstChildSpare": 0.7,
