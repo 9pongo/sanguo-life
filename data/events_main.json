@@ -2922,7 +2922,8 @@
     "anyFlag": [
      "huangjin_survivor",
      "hidden"
-    ]
+    ],
+    "nofaction": "heishan"
    },
    "tag": "黃巾",
    "title": "黃巾復起",

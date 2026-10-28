@@ -594,14 +594,14 @@
       const ev = byId[item.id];
       if (!ev) return null;
       const s = S();
+      // 里中要你出面的事（修橋、爭水、作保、收留人），人跟著隊伍在外打仗、或上了黑山住在山寨裡的那幾年碰不上
+      // （寫給山寨的劇情除外；家鄉那邊排定的後續也一樣，人不在就作罷）
+      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) &&
+        (awayAtWar() || (s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')))) return null;
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
       // 出征在外的那一年，家鄉的瑣事輪不到你
       if (item.flavor && s.campaignYear === s.year) return null;
-      // 里中要你出面的事（修橋、爭水、作保、收留人），人跟著隊伍在外打仗的那幾年碰不上
-      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && awayAtWar()) return null;
-      // 上了黑山住在山寨裡的，同樣碰不到里中、族裡這些事（寫給山寨的劇情除外）
-      if (!ev.year && (HOME_TAGS.has(ev.tag) || ev.homeOnly) && s.faction === 'heishan' && !arr((ev.req || {}).faction).includes('heishan')) return null;
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
