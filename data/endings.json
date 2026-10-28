@@ -1,6 +1,16 @@
 {
  "endings": [
   {
+   "id": "d_moving",
+   "when": "dead",
+   "cause": "兵禍",
+   "req": {
+    "justMoved": true
+   },
+   "title": "半路",
+   "text": "{name}帶著一家人去{place}，半路碰上了亂兵。家裡的人後來在{place}落了腳，{name}沒有走到。"
+  },
+  {
    "id": "d_infant_heir",
    "when": "dead",
    "req": {
@@ -689,6 +699,17 @@
    ],
    "title": "長江",
    "text": "天下就要一統了。{name}死在統一的前夕，沒有看到那一天。"
+  },
+  {
+   "id": "d8_zhangchang",
+   "when": "dead",
+   "chapter": 8,
+   "cause": "兵禍",
+   "req": {
+    "flag": "zhangchang"
+   },
+   "title": "紅巾",
+   "text": "{name}跟著張昌，頭上綁了紅巾。張昌敗得很快，{name}沒有回來。家裡的人後來很少提起這件事。"
   },
   {
    "id": "d8_war_civ",
@@ -3930,7 +3951,7 @@
     "flag": "fan241"
    },
    "title": "樊城",
-   "text": "{name}替樊城的守軍送過柴。南陽在魏吳之間夾了幾十年，你家也在這裡住了幾十年。"
+   "text": "{name}替樊城的守軍送過柴。{place}在魏吳之間夾了幾十年，你家也在這裡住了幾十年。"
   },
   {
    "id": "a6_wangletter",
@@ -4222,7 +4243,8 @@
     "anyFlag": [
      "wuchang",
      "zhaoming"
-    ]
+    ],
+    "noflag": "fled_wu"
    },
    "title": "孫皓",
    "text": "{name}被孫皓折騰了十幾年：搬去武昌、搬回建業、進山伐木。吳國亡的那天，你沒有哭。"

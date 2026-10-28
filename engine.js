@@ -21,7 +21,7 @@
   const arr = (x) => (x == null ? [] : Array.isArray(x) ? x : [x]);
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   // 家鄉里中的瑣事：出征那一年輪不到你
-  const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '手藝', '讀書', '學醫']);
+  const HOME_TAGS = new Set(['鄰里', '人情', '族裡', '宗族', '日常', '官府', '任俠', '行商', '農事', '田裡', '手藝', '讀書', '學醫']);
   // 家裡的事（夫妻口角、孩子闖禍、生病有人守著）跟著全家搬，可是人跟著隊伍在外的那幾年碰不上
   const AWAY_TAGS = new Set([...HOME_TAGS, '家事', '家裡']);
 
@@ -186,6 +186,7 @@
       // 拿到這個旗標以後沒有搬過家（例如自己開的那塊地，搬走了就不再是你家的）
       // 在這一帶住了夠久：搬來的年份不晚於 settled（晚年才搬來的人，沒見過這裡從前的事）；settledIn 列出算作同一帶的州
       if (req.settled != null) { const h = s.regionHist || []; let i = h.length; const near = arr(req.settledIn || s.region); while (i > 0 && near.includes(h[i - 1][1])) i--; if (i < h.length && h[i][0] > req.settled) return false; }
+      if (req.justMoved !== undefined && ((s.regionHist || []).length > 1 && s.regionHist[s.regionHist.length - 1][0] === s.year) !== req.justMoved) return false; // 這一年剛搬家
       if (req.settledFor != null) { const h = s.regionHist || []; if (h.length && s.year - h[h.length - 1][0] < req.settledFor) return false; } // 搬來這裡至少住了幾年
       if (req.stayed) for (const f of arr(req.stayed)) { const y = (s.flagYear || {})[f]; if (y !== undefined && (s.regionHist || []).some(([yy]) => yy > y)) return false; }
       if (req.flagFor) for (const [f, n] of Object.entries(req.flagFor)) { const y = (s.flagYear || {})[f]; if (s.flags[f] && y !== undefined && s.year - y < n) return false; } // 拿到這個旗標至少過了幾年
@@ -655,6 +656,7 @@
       if (item.flavor && ev.camp && !awayAtWar()) return null; // 軍中的小事，這一年隊伍散了、人回了家就作罷
       // 排定的後續通常不再看條件；標了 recheck 的（例如幾年後再來說媒），到時候還要再確認一次
       if (item.force) return ev.recheck && !meets(ev.req) ? null : ev;
+      if (ev.kind !== 'flavor' && isCampaign(ev) && s.age > 55 && !ev.req?.age) return null; // 五十五歲以上的老兵不再跟著隊伍出征
       if (ev.kind !== 'flavor' && s.fired[ev.id] && !ev.repeat) return null;
       // 要你拿主意的劇情卡，沒寫年齡就當作是給大人的（年幼的接班人不會被問要不要上陣）
       const r = ev.req || {};
@@ -732,11 +734,11 @@
       if (r.route && ['huangjin', 'guanjun', 'xiangyong'].includes(r.route)) return true;
       return r.gender === 'm' && !!r.faction && !arr(r.faction).includes('civ');
     }
-    // 跟著諸侯在外打仗：男子、上過戰場、這三年內還出過征、五十歲以下
+    // 跟著諸侯在外打仗：男子、上過戰場、這三年內還出過征、五十八歲以下（五十五歲以後就不再跟著出征）
     function awayAtWar() {
       const s = S();
       if (s.flags.ex_wu && (s.campaignYear ?? -99) <= (s.flagYear || {}).ex_wu) return false; // 吳亡那年降了晉，隊伍就散了
-      return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 50 && s.year - (s.campaignYear ?? -99) <= 3;
+      return s.gender === 'm' && ['liu', 'cao', 'sun', 'yuan'].includes(s.faction) && !!s.flags.served && s.age <= 58 && s.year - (s.campaignYear ?? -99) <= 3;
     }
     // 一個人過日子：沒有配偶在身邊、沒有活著的孩子、爹娘也都不在了、也沒有還沒長大的弟妹
     function aloneNow() {
