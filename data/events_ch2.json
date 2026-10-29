@@ -331,7 +331,8 @@
     "region": "qing",
     "anyFlag": [
      "huangjin_survivor",
-     "rejoined"
+     "rejoined",
+     "taiping_member"
     ],
     "noflag": "qzb_family"
    },
@@ -341,7 +342,18 @@
     "名": 1,
     "flag": "qzb_old"
    },
-   "text": "投降的黃巾隊伍裡，有人認出了你，大喊你的名字。那是當年在北海一起綁黃巾的弟兄。你們現在穿的是同一種軍服了。"
+   "text": "投降的黃巾隊伍裡，有人認出了你，大喊你的名字。那是當年在北海一起綁黃巾的弟兄。你們現在穿的是同一種軍服了。",
+   "textIf": [
+    {
+     "req": {
+      "noflag": [
+       "huangjin_survivor",
+       "rejoined"
+      ]
+     },
+     "text": "投降的黃巾隊伍裡，有人認出了你，大喊你的名字。那是當年在北海一起跪在祭酒跟前、喝過同一碗符水的人。你們現在穿的是同一種軍服了。"
+    }
+   ]
   },
   {
    "id": "cao_xuzhou",

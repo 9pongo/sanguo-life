@@ -38,7 +38,7 @@ const add = (m, f, where) => { if (!m.has(f)) m.set(f, []); m.get(f).push(where)
 function checkReq(req, where) {
   if (!req) return;
   for (const f of [...arr(req.flag), ...arr(req.anyFlag), ...arr(req.noflag), ...arr(req.notAll), ...Object.keys(req.flagFor || {}), ...Object.keys(req.flagWithin || {})]) add(flagsRead, f, where);
-  for (const r of [...arr(req.region), ...arr(req.noregion)]) if (!REGIONS.has(r)) errors.push(`${where}：未知的州郡 ${r}`);
+  for (const r of [...arr(req.region), ...arr(req.noregion), ...Object.keys(req.noregionBefore || {})]) if (!REGIONS.has(r)) errors.push(`${where}：未知的州郡 ${r}`);
   for (const id of arr(req.notFired)) if (!ids.has(id)) errors.push(`${where}：notFired 指向不存在的事件 ${id}`);
   for (const c of arr(req.cls)) if (!CLASSES.has(c)) errors.push(`${where}：未知的家世 ${c}`);
   for (const r of arr(req.route)) if (!ROUTES.has(r)) errors.push(`${where}：未知的路線 ${r}`);

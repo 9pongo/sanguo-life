@@ -2557,7 +2557,12 @@
     "age": [
      10,
      80
-    ]
+    ],
+    "noregionBefore": {
+     "wu": 280,
+     "jiangling": 280,
+     "shu": 263
+    }
    },
    "eff": {
     "財": 1

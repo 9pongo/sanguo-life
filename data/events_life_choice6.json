@@ -72,7 +72,12 @@
     ],
     "noregion": [
      "shu"
-    ]
+    ],
+    "noregionBefore": {
+     "wu": 280,
+     "jiangling": 280,
+     "shu": 263
+    }
    },
    "textIf": [
     {

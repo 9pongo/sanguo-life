@@ -441,7 +441,12 @@
     },
     "noflag": "jiupin_done",
     "gender": "m",
-    "away": false
+    "away": false,
+    "noregionBefore": {
+     "wu": 280,
+     "jiangling": 280,
+     "shu": 263
+    }
    },
    "tag": "九品",
    "title": "中正",

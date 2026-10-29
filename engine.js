@@ -152,6 +152,7 @@
       if (req.born && (s.birthYear < req.born[0] || s.birthYear > req.born[1])) return false; // 出生年：甲子年以後才出生的人，沒見過黃巾
       if (req.region && !arr(req.region).includes(s.region)) return false;
       if (req.noregion && arr(req.noregion).includes(s.region)) return false;
+      if (req.noregionBefore && s.year < (req.noregionBefore[s.region] ?? -Infinity)) return false; // 住在這一帶、這一年以前碰不上（例如吳、蜀亡國以前沒有九品中正）
       if (req.notFired && arr(req.notFired).some((id) => s.fired[id])) return false; // 這輩子碰過內容相近的事
       if (req.cls && !arr(req.cls).includes(s.cls)) return false;
       if (req.nocls && arr(req.nocls).includes(s.cls)) return false; // 有部曲、田莊的人家，碰不上窮人家的小事
